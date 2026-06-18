@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #080b12;
+  color: #e5edf8;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(82, 240, 184, 0.13), transparent 27rem),
+    radial-gradient(circle at 88% 8%, rgba(103, 216, 255, 0.12), transparent 26rem),
+    linear-gradient(180deg, #080b12 0%, #101723 46%, #080b12 100%);
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .panel {
+    @apply rounded-lg border border-line bg-panel/80 shadow-glow backdrop-blur;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-mint;
+  }
+
+  .button-primary {
+    @apply inline-flex min-h-11 items-center justify-center rounded-md bg-mint px-4 py-2 text-sm font-bold text-ink transition hover:bg-sky focus:outline-none focus:ring-2 focus:ring-mint focus:ring-offset-2 focus:ring-offset-ink;
+  }
+
+  .button-secondary {
+    @apply inline-flex min-h-11 items-center justify-center rounded-md border border-line px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-mint hover:text-mint focus:outline-none focus:ring-2 focus:ring-mint focus:ring-offset-2 focus:ring-offset-ink;
+  }
+}
