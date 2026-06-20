@@ -15,7 +15,14 @@ export const posts = Array.from({ length: 100 }, (_, index) => {
   const topic = topics[index % topics.length];
   const category = blogCategories[index % blogCategories.length];
   const number = index + 1;
+  const body = [
+      `Teams use ${topic} to make faster planning decisions without waiting for a full finance model.`,
+      "The strongest approach is to define the input, document the assumption, and revisit the metric after real operating data changes.",
+      "Use this article as a placeholder content template for future editorial expansion, search intent mapping, and internal link planning."
+    ];
   return {
+    published: false,
+    wordCount: body.join(" ").split(/\s+/).length,
     slug: `${topic.replaceAll(" ", "-")}-guide-${number}`,
     title: `${topic.replace(/\b\w/g, (c) => c.toUpperCase())}: Practical Guide ${number}`,
     description: `A practical operating guide for ${topic}, with examples, formulas, and internal calculator links.`,
@@ -29,11 +36,7 @@ export const posts = Array.from({ length: 100 }, (_, index) => {
       { question: `Why does ${topic} matter?`, answer: `${topic} helps teams convert assumptions into decisions that can be reviewed and improved.` },
       { question: "Which calculator should I use with this guide?", answer: "Use the related calculator block below to model the numbers discussed in this article." }
     ],
-    body: [
-      `Teams use ${topic} to make faster planning decisions without waiting for a full finance model.`,
-      "The strongest approach is to define the input, document the assumption, and revisit the metric after real operating data changes.",
-      "Use this article as a placeholder content template for future editorial expansion, search intent mapping, and internal link planning."
-    ]
+    body
   };
 });
 

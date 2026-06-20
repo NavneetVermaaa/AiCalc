@@ -9,7 +9,7 @@ const routes = [
   ...categories.map((item) => ({ path: `/calculators/${item.id}`, priority: "0.9" })),
   ...calculators.map((item) => ({ path: `/calculator/${item.slug}`, priority: "0.9" })),
   ...blogCategories.map((item) => ({ path: `/blog/category/${item.id}`, priority: "0.7" })),
-  ...posts.map((item) => ({ path: `/blog/${item.slug}`, priority: "0.6" }))
+  ...posts.filter((item) => item.published && item.wordCount > 1000).map((item) => ({ path: `/blog/${item.slug}`, priority: "0.6" }))
 ];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
