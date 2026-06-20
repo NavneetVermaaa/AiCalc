@@ -1,5 +1,6 @@
 import { BarChart3, Menu, Search } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
+import { BRAND } from "../config/brand";
 
 const nav = [
   ["AI", "/calculators/ai"],
@@ -16,9 +17,9 @@ export default function Layout({ children }) {
       </a>
       <header className="sticky top-0 z-40 border-b border-line/80 bg-ink/88 backdrop-blur-xl">
         <div className="container-page flex h-16 items-center justify-between gap-4">
-          <Link to="/" className="flex items-center gap-3 text-lg font-black text-white" aria-label="AI Calc Pro home">
+          <Link to="/" className="flex items-center gap-3 text-lg font-black text-white" aria-label={`${BRAND.name} home`}>
             <span className="grid h-9 w-9 place-items-center rounded-md bg-mint text-ink"><BarChart3 size={20} /></span>
-            AI Calc Pro
+            {BRAND.name}
           </Link>
           <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
             {nav.map(([label, to]) => (
@@ -37,8 +38,8 @@ export default function Layout({ children }) {
       <footer className="border-t border-line bg-ink">
         <div className="container-page grid gap-8 py-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <p className="text-xl font-black text-white">AI Calc Pro</p>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-400">SEO-first calculators and founder-focused guides for AI, startup, and marketing planning.</p>
+            <p className="text-xl font-black text-white">{BRAND.name}</p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-400">{BRAND.description}</p>
           </div>
           {nav.slice(0, 3).map(([label, to]) => <Link key={to} to={to} className="text-sm font-semibold text-slate-300 hover:text-mint">{label} Calculators</Link>)}
         </div>

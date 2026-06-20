@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        <Suspense fallback={<div className="min-h-screen bg-ink p-8 text-slate-200">Loading AI Calc Pro...</div>}>
+        <Suspense fallback={<div className="min-h-screen bg-ink p-8 text-slate-200">Loading Calcio...</div>}>
           <Routes>
             <Route element={<App />}>
               <Route index element={<Home />} />

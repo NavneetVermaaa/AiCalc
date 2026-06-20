@@ -6,7 +6,7 @@ export const internalLinkMap = {
 
 export const siteUrl = import.meta.env.VITE_SITE_URL || "https://aicalcpro.com";
 export const organization = {
-  name: "AI Calc Pro",
+  name: "Calcio",
   url: siteUrl,
   logo: `${siteUrl}/favicon.svg`,
   sameAs: ["https://www.linkedin.com/company/ai-calc-pro"]

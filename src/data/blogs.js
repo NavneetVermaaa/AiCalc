@@ -22,7 +22,7 @@ export const posts = Array.from({ length: 100 }, (_, index) => {
     category: category.id,
     categoryTitle: category.title,
     date: `2026-${String((index % 12) + 1).padStart(2, "0")}-${String((index % 27) + 1).padStart(2, "0")}`,
-    author: "AI Calc Pro Editorial",
+    author: "Calcio Editorial",
     readingTime: 5 + (index % 7),
     tags: [topic, category.title, "calculator"],
     faq: [

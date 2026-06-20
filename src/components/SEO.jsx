@@ -1,9 +1,10 @@
 import { Helmet } from "react-helmet-async";
 import { siteUrl } from "../data/internalLinks";
+import { BRAND } from "../config/brand";
 
 export default function SEO({ title, description, path = "/", type = "website", schema = [] }) {
   const canonical = `${siteUrl}${path}`;
-  const fullTitle = title.includes("AI Calc Pro") ? title : `${title} | AI Calc Pro`;
+  const fullTitle = title.includes(BRAND.name) ? title : `${title} | ${BRAND.name}`;
   const gaId = import.meta.env.VITE_GA_MEASUREMENT_ID;
   const adsenseClient = import.meta.env.VITE_ADSENSE_CLIENT;
 
@@ -16,7 +17,7 @@ export default function SEO({ title, description, path = "/", type = "website", 
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content={type} />
-      <meta property="og:site_name" content="AI Calc Pro" />
+      <meta property="og:site_name" content={BRAND.name} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />

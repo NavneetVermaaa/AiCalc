@@ -10,7 +10,7 @@ export default function BlogListPage() {
 
   return (
     <>
-      <SEO title="AI Calc Pro Blog" description="Guides for AI costs, startup finance, SaaS metrics, and marketing calculator strategy." path="/blog" />
+      <SEO title="Calcio Blog" description="Guides for AI costs, startup finance, SaaS metrics, and marketing calculator strategy." path="/blog" />
       <section className="container-page py-12">
         <p className="eyebrow">Content hub</p>
         <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">Blog</h1>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Gauge, LineChart, Rocket } from "lucide-react";
 import SEO from "../components/SEO.jsx";
 import CardLink from "../components/CardLink.jsx";
+import { BRAND } from "../config/brand";
 import { calculators, categories } from "../data/calculators.js";
 import { organizationSchema, webApplicationSchema } from "../utils/schema.js";
 
@@ -11,18 +12,18 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="AI Calc Pro - AI, Startup, and Marketing Calculators"
-        description="Free SEO-first calculators for OpenAI costs, AI ROI, runway, CAC, LTV, ROAS, CPC, CPM, and conversion planning."
+        title={`${BRAND.name} – Free Business, AI & Marketing Calculators`}
+        description={`${BRAND.name} provides free AI, startup, finance and marketing calculators with practical guides, formulas, examples and business insights.`}
         schema={[organizationSchema, webApplicationSchema]}
       />
       <section className="container-page grid min-h-[calc(100vh-4rem)] items-center gap-10 py-12 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
-          <p className="eyebrow">Founder-grade calculator platform</p>
-          <h1 className="mt-4 max-w-4xl text-5xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">AI Calc Pro</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">Plan AI spend, startup runway, and marketing performance with fast calculators built for operators who need clean numbers and searchable content.</p>
+          <p className="eyebrow">{BRAND.name}</p>
+          <h1 className="mt-4 max-w-4xl text-5xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">{BRAND.tagline}</h1>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">Free AI, Startup, Finance and Marketing calculators built to help businesses make better decisions.</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/calculators/ai" className="button-primary">Explore calculators <ArrowRight size={17} /></Link>
-            <Link to="/blog" className="button-secondary">Read guides</Link>
+            <Link to="/calculators/ai" className="button-primary">Explore Calculators <ArrowRight size={17} /></Link>
+            <Link to="#categories" className="button-secondary">Browse Categories</Link>
           </div>
         </div>
         <div className="grid gap-3">
@@ -37,7 +38,7 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <section className="container-page py-12">
+      <section id="categories" className="container-page py-12">
         <div className="grid gap-5 md:grid-cols-3">
           {categories.map((category) => {
             const Icon = iconMap[category.id];

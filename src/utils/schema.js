@@ -9,9 +9,10 @@ export const organizationSchema = {
 export const webApplicationSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "AI Calc Pro",
+  name: "Calcio",
   url: siteUrl,
   applicationCategory: "BusinessApplication",
+  description: "Free business calculator platform for startups, marketers, founders and growth teams.",
   operatingSystem: "Web",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
 };
