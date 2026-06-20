@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aicalcpro.com/sitemap.xml
+Sitemap: https://ai-calc-one.vercel.app/sitemap.xml

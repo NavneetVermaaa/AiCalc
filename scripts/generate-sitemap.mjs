@@ -2,7 +2,7 @@ import { writeFileSync } from "node:fs";
 import { calculators, categories } from "../src/data/calculators.js";
 import { blogCategories, posts } from "../src/data/blogs.js";
 
-const siteUrl = process.env.VITE_SITE_URL || "https://aicalcpro.com";
+const siteUrl = process.env.VITE_SITE_URL || "https://ai-calc-one.vercel.app";
 const routes = [
   { path: "/", priority: "1.0" },
   { path: "/blog", priority: "0.8" },

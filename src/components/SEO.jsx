@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
-import { siteUrl } from "../data/internalLinks";
+import { SITE_URL } from "../config/site";
 import { BRAND } from "../config/brand";
 
 export default function SEO({ title, description, path = "/", type = "website", schema = [] }) {
-  const canonical = `${siteUrl}${path}`;
+  const canonical = `${SITE_URL}${path}`;
   const fullTitle = title.includes(BRAND.name) ? title : `${title} | ${BRAND.name}`;
   const gaId = import.meta.env.VITE_GA_MEASUREMENT_ID;
   const adsenseClient = import.meta.env.VITE_ADSENSE_CLIENT;

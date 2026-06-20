@@ -1,4 +1,6 @@
-import { organization, siteUrl } from "../data/internalLinks";
+import { SITE_URL } from "../config/site";
+import { organization } from "../data/internalLinks";
+const siteUrl = SITE_URL;
 
 export const organizationSchema = {
   "@context": "https://schema.org",
