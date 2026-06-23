@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { SITE_URL } from "../config/site";
 import { BRAND } from "../config/brand";
 
-export default function SEO({ title, description, path = "/", type = "website", schema = [] }) {
+export default function SEO({ title, description, path = "/", type = "website", schema = [], noindex }) {
   const canonical = `${SITE_URL}${path}`;
   const fullTitle = title.includes(BRAND.name) ? title : `${title} | ${BRAND.name}`;
   const adsenseClient = import.meta.env.VITE_ADSENSE_CLIENT;
@@ -11,6 +11,7 @@ export default function SEO({ title, description, path = "/", type = "website", 
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+      <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow"} />
       <link rel="canonical" href={canonical} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />

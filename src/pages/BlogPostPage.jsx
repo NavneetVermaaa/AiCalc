@@ -2,7 +2,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import SEO from "../components/SEO.jsx";
 import FAQ from "../components/FAQ.jsx";
 import CardLink from "../components/CardLink.jsx";
-import { getPost, relatedPosts } from "../data/blogs.js";
+import { getPost, getPublishedRelatedPosts } from "../data/blogs.js";
 import { calculators } from "../data/calculators.js";
 import { articleSchema, faqSchema } from "../utils/schema.js";
 
@@ -10,13 +10,13 @@ export default function BlogPostPage() {
   const { slug } = useParams();
   const post = getPost(slug);
   if (!post) return <Navigate to="/404" replace />;
-  const related = relatedPosts(post);
+  const related = getPublishedRelatedPosts(post);
   const suggestedCalculators = calculators.filter((_, index) => index % 3 === post.title.length % 3).slice(0, 3);
   const toc = ["Overview", "How to use the metric", "Examples", "FAQ"];
 
   return (
     <>
-      <SEO title={post.title} description={post.description} path={`/blog/${post.slug}`} type="article" schema={[articleSchema(post), faqSchema(post.faq)]} />
+      <SEO title={post.title} description={post.description} path={`/blog/${post.slug}`} type="article" schema={[articleSchema(post), faqSchema(post.faq)]} noindex={!post.published} />
       <article className="container-page grid gap-8 py-12 lg:grid-cols-[260px_1fr]">
         <aside className="panel h-fit p-5 lg:sticky lg:top-24">
           <p className="eyebrow">{post.readingTime} min read</p>

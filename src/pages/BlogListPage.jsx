@@ -2,10 +2,11 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO.jsx";
 import CardLink from "../components/CardLink.jsx";
-import { blogCategories, posts } from "../data/blogs.js";
+import { blogCategories, getPublishedPosts } from "../data/blogs.js";
 
 export default function BlogListPage() {
   const [query, setQuery] = useState("");
+  const posts = getPublishedPosts();
   const filtered = useMemo(() => posts.filter((post) => `${post.title} ${post.description} ${post.tags.join(" ")}`.toLowerCase().includes(query.toLowerCase())).slice(0, 24), [query]);
 
   return (

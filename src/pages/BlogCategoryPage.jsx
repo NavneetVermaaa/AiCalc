@@ -1,13 +1,13 @@
 import { Navigate, useParams } from "react-router-dom";
 import SEO from "../components/SEO.jsx";
 import CardLink from "../components/CardLink.jsx";
-import { blogCategories, postsByCategory } from "../data/blogs.js";
+import { blogCategories, getPublishedPostsByCategory } from "../data/blogs.js";
 
 export default function BlogCategoryPage() {
   const { category: categoryId } = useParams();
   const category = blogCategories.find((item) => item.id === categoryId);
   if (!category) return <Navigate to="/404" replace />;
-  const items = postsByCategory(category.id).slice(0, 36);
+  const items = getPublishedPostsByCategory(category.id).slice(0, 36);
 
   return (
     <>
