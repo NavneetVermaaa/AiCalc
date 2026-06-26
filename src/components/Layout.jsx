@@ -42,6 +42,13 @@ export default function Layout({ children }) {
             <p className="mt-3 max-w-xl text-sm leading-6 text-slate-400">{BRAND.description}</p>
           </div>
           {nav.slice(0, 3).map(([label, to]) => <Link key={to} to={to} className="text-sm font-semibold text-slate-300 hover:text-mint">{label} Calculators</Link>)}
+          <div className="flex flex-col gap-2 md:col-span-1">
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Company</p>
+            <Link to="/about" className="text-sm text-slate-300 hover:text-mint">About</Link>
+            <Link to="/contact" className="text-sm text-slate-300 hover:text-mint">Contact</Link>
+            <Link to="/privacy-policy" className="text-sm text-slate-300 hover:text-mint">Privacy Policy</Link>
+            <Link to="/terms" className="text-sm text-slate-300 hover:text-mint">Terms of Service</Link>
+          </div>
         </div>
       </footer>
     </div>

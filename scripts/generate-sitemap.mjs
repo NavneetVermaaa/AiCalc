@@ -6,6 +6,10 @@ const siteUrl = process.env.VITE_SITE_URL || "https://ai-calc-one.vercel.app";
 const routes = [
   { path: "/", priority: "1.0" },
   { path: "/blog", priority: "0.8" },
+  { path: "/about", priority: "0.7" },
+  { path: "/contact", priority: "0.7" },
+  { path: "/privacy-policy", priority: "0.5" },
+  { path: "/terms", priority: "0.5" },
   ...categories.map((item) => ({ path: `/calculators/${item.id}`, priority: "0.9" })),
   ...calculators.map((item) => ({ path: `/calculator/${item.slug}`, priority: "0.9" })),
   ...blogCategories.map((item) => ({ path: `/blog/category/${item.id}`, priority: "0.7" })),
