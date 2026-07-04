@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ai-calc-one.vercel.app/sitemap.xml
+Sitemap: https://calciocalc.com/sitemap.xml

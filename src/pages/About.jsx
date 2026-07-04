@@ -5,7 +5,7 @@ import { BRAND } from "../config/brand";
 import { calculators } from "../data/calculators.js";
 import { organizationSchema } from "../utils/schema.js";
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://ai-calc-one.vercel.app";
+const SITE_URL = import.meta.env.VITE_SITE_URL || "https://calciocalc.com";
 
 const aboutPageSchema = {
   "@context": "https://schema.org",
