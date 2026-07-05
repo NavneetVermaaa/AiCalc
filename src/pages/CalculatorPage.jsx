@@ -5,6 +5,7 @@ import CalculatorTool from "../components/CalculatorTool.jsx";
 import FAQ from "../components/FAQ.jsx";
 import CardLink from "../components/CardLink.jsx";
 import { calculatorsByCategory, getCalculator, getCategory } from "../data/calculators.js";
+import { internalLinkMap } from "../data/internalLinks.js";
 import { breadcrumbSchema, faqSchema, webApplicationSchema } from "../utils/schema.js";
 
 export default function CalculatorPage() {
@@ -18,6 +19,9 @@ export default function CalculatorPage() {
     { name: category.title, path: `/calculators/${category.id}` },
     { name: calculator.title, path: `/calculator/${calculator.slug}` }
   ];
+
+  const linkedSlugs = internalLinkMap[calculator.category] || [];
+  const relatedLinks = linkedSlugs.filter((s) => s !== calculator.slug).map((s) => getCalculator(s)).filter(Boolean);
 
   return (
     <>
@@ -36,23 +40,92 @@ export default function CalculatorPage() {
       <CalculatorTool calculator={calculator} />
       <section className="container-page grid gap-6 py-10 lg:grid-cols-3">
         <article className="panel p-6 lg:col-span-2">
-          <h2 className="text-2xl font-black text-white">Description</h2>
-          <p className="mt-4 leading-7 text-slate-300">Use this calculator to turn planning assumptions into a decision-ready estimate. It is designed for quick scenario work, SEO landing pages, and internal planning conversations.</p>
-          <h2 className="mt-8 text-2xl font-black text-white">Formula explanation</h2>
+          {calculator.whatIsIt && (
+            <>
+              <h2 className="text-2xl font-black text-white">What is the {calculator.title}?</h2>
+              <p className="mt-4 leading-7 text-slate-300">{calculator.whatIsIt}</p>
+            </>
+          )}
+
+          {calculator.howItWorks && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">How does it work?</h2>
+              <p className="mt-4 leading-7 text-slate-300">{calculator.howItWorks}</p>
+            </>
+          )}
+
+          <h2 className="mt-8 text-2xl font-black text-white">Formula</h2>
           <p className="mt-4 rounded-md border border-line bg-ink p-4 font-mono text-sm leading-6 text-slate-300">{calculator.formula}</p>
-          <h2 className="mt-8 text-2xl font-black text-white">Examples</h2>
-          <ul className="mt-4 grid gap-3 text-slate-300">{calculator.examples.map((item) => <li key={item}>- {item}</li>)}</ul>
-          <h2 className="mt-8 text-2xl font-black text-white">Use cases</h2>
-          <ul className="mt-4 grid gap-3 text-slate-300">{calculator.useCases.map((item) => <li key={item}>- {item}</li>)}</ul>
-          <h2 className="mt-8 text-2xl font-black text-white">SEO content area</h2>
-          <p className="mt-4 leading-7 text-slate-300">{calculator.title} pages should target high-intent queries, include examples with numbers, answer objections in FAQ content, and link users toward adjacent planning calculators.</p>
+
+          {calculator.stepByStep && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Step-by-step example</h2>
+              <p className="mt-4 leading-7 text-slate-300">{calculator.stepByStep}</p>
+            </>
+          )}
+
+          {calculator.realWorldExample && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Real-world example</h2>
+              <div className="mt-4 rounded-md border border-line bg-ink p-4 leading-7 text-slate-300">
+                <p>{calculator.realWorldExample}</p>
+              </div>
+            </>
+          )}
+
+          {calculator.whenToUse && calculator.whenToUse.length > 0 && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">When should you use it?</h2>
+              <ul className="mt-4 grid gap-3 text-slate-300">
+                {calculator.whenToUse.map((item) => <li key={item}>- {item}</li>)}
+              </ul>
+            </>
+          )}
+
+          {calculator.benefits && calculator.benefits.length > 0 && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Benefits</h2>
+              <ul className="mt-4 grid gap-3 text-slate-300">
+                {calculator.benefits.map((item) => <li key={item}>- {item}</li>)}
+              </ul>
+            </>
+          )}
+
+          {calculator.commonMistakes && calculator.commonMistakes.length > 0 && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Common mistakes</h2>
+              <ul className="mt-4 grid gap-3 text-slate-300">
+                {calculator.commonMistakes.map((item) => <li key={item}>- {item}</li>)}
+              </ul>
+            </>
+          )}
+
+          {calculator.examples && calculator.examples.length > 0 && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Examples</h2>
+              <ul className="mt-4 grid gap-3 text-slate-300">
+                {calculator.examples.map((item) => <li key={item}>- {item}</li>)}
+              </ul>
+            </>
+          )}
+
+          {calculator.useCases && calculator.useCases.length > 0 && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Use cases</h2>
+              <ul className="mt-4 grid gap-3 text-slate-300">
+                {calculator.useCases.map((item) => <li key={item}>- {item}</li>)}
+              </ul>
+            </>
+          )}
         </article>
         <aside className="panel h-fit p-6">
           <h2 className="text-xl font-black text-white">Internal links</h2>
           <div className="mt-4 grid gap-3">
             <Link className="button-secondary" to={`/calculators/${category.id}`}>{category.title}</Link>
+            {relatedLinks.slice(0, 3).map((item) => (
+              <Link key={item.slug} className="button-secondary" to={`/calculator/${item.slug}`}>{item.title}</Link>
+            ))}
             <Link className="button-secondary" to="/blog">Related guides</Link>
-            <Link className="button-secondary" to="/">Home</Link>
           </div>
         </aside>
       </section>

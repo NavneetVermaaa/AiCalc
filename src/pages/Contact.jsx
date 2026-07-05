@@ -54,8 +54,8 @@ export default function Contact() {
             <MessageSquare className="text-mint" size={26} />
             <h2 className="mt-4 text-xl font-bold text-white">LinkedIn</h2>
             <p className="mt-3 text-sm leading-6 text-slate-400">Follow us for updates, tips, and new calculator releases.</p>
-            <a href="https://www.linkedin.com/company/ai-calc-pro" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 font-bold text-mint hover:text-sky">
-              @ai-calc-pro <ArrowRight size={16} />
+            <a href="https://www.linkedin.com/company/calcio-tools" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 font-bold text-mint hover:text-sky">
+              @calcio-tools <ArrowRight size={16} />
             </a>
           </div>
         </div>

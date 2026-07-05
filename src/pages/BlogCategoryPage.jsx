@@ -1,17 +1,25 @@
 import { Navigate, useParams } from "react-router-dom";
 import SEO from "../components/SEO.jsx";
+import Breadcrumbs from "../components/Breadcrumbs.jsx";
 import CardLink from "../components/CardLink.jsx";
 import { blogCategories, getPublishedPostsByCategory } from "../data/blogs.js";
+import { breadcrumbSchema } from "../utils/schema.js";
 
 export default function BlogCategoryPage() {
   const { category: categoryId } = useParams();
   const category = blogCategories.find((item) => item.id === categoryId);
   if (!category) return <Navigate to="/404" replace />;
   const items = getPublishedPostsByCategory(category.id).slice(0, 36);
+  const crumbs = [
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    { name: category.title, path: `/blog/category/${category.id}` }
+  ];
 
   return (
     <>
-      <SEO title={`${category.title} Articles`} description={category.description} path={`/blog/category/${category.id}`} />
+      <SEO title={`${category.title} Articles`} description={category.description} path={`/blog/category/${category.id}`} schema={[breadcrumbSchema(crumbs)]} />
+      <Breadcrumbs items={crumbs} />
       <section className="container-page py-12">
         <p className="eyebrow">Blog category</p>
         <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">{category.title}</h1>

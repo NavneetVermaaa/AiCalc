@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#080b12"/>
+      <stop offset="46%" stop-color="#101723"/>
+      <stop offset="100%" stop-color="#080b12"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="18%" cy="0%" r="45%">
+      <stop offset="0%" stop-color="rgba(82, 240, 184, 0.13)"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="88%" cy="8%" r="40%">
+      <stop offset="0%" stop-color="rgba(103, 216, 255, 0.12)"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <rect x="80" y="60" width="80" height="80" rx="16" fill="#52f0b8"/>
+  <path d="M100 100h40M106 100v40M124 100v40M108 120h24" stroke="#080b12" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <circle cx="162" cy="62" r="14" fill="#67d8ff"/>
+  <text x="185" y="115" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="52" fill="#ffffff">Calcio</text>
+  <text x="80" y="230" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="38" fill="#ffffff">Calculate Smarter. Grow Faster.</text>
+  <text x="80" y="290" font-family="Inter, system-ui, sans-serif" font-weight="400" font-size="22" fill="#94a3b8">Free AI, startup, finance and marketing calculators</text>
+  <rect x="80" y="340" width="320" height="70" rx="12" fill="none" stroke="#223044" stroke-width="2"/>
+  <text x="100" y="370" font-family="Inter, system-ui, sans-serif" font-weight="600" font-size="20" fill="#52f0b8">OpenAI Cost Calculator</text>
+  <text x="100" y="395" font-family="Inter, system-ui, sans-serif" font-weight="400" font-size="14" fill="#64748b">Estimate monthly OpenAI API spend</text>
+  <rect x="430" y="340" width="300" height="70" rx="12" fill="none" stroke="#223044" stroke-width="2"/>
+  <text x="450" y="370" font-family="Inter, system-ui, sans-serif" font-weight="600" font-size="20" fill="#52f0b8">Burn Rate Calculator</text>
+  <text x="450" y="395" font-family="Inter, system-ui, sans-serif" font-weight="400" font-size="14" fill="#64748b">Calculate monthly net burn</text>
+  <rect x="760" y="340" width="260" height="70" rx="12" fill="none" stroke="#223044" stroke-width="2"/>
+  <text x="780" y="370" font-family="Inter, system-ui, sans-serif" font-weight="600" font-size="20" fill="#52f0b8">ROAS Calculator</text>
+  <text x="780" y="395" font-family="Inter, system-ui, sans-serif" font-weight="400" font-size="14" fill="#64748b">Return on ad spend</text>
+  <text x="80" y="470" font-family="Inter, system-ui, sans-serif" font-weight="500" font-size="18" fill="#475569">calciocalc.com</text>
+  <rect x="460" y="570" width="280" height="8" rx="4" fill="#223044"/>
+  <rect x="460" y="570" width="140" height="8" rx="4" fill="#52f0b8"/>
+</svg>

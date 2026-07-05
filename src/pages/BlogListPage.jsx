@@ -3,6 +3,15 @@ import { Link } from "react-router-dom";
 import SEO from "../components/SEO.jsx";
 import CardLink from "../components/CardLink.jsx";
 import { blogCategories, getPublishedPosts } from "../data/blogs.js";
+import { SITE_URL } from "../config/site";
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  name: "Calcio Blog",
+  description: "Guides for AI costs, startup finance, SaaS metrics, and marketing calculator strategy.",
+  url: `${SITE_URL}/blog`
+};
 
 export default function BlogListPage() {
   const [query, setQuery] = useState("");
@@ -11,7 +20,7 @@ export default function BlogListPage() {
 
   return (
     <>
-      <SEO title="Calcio Blog" description="Guides for AI costs, startup finance, SaaS metrics, and marketing calculator strategy." path="/blog" />
+      <SEO title="Calcio Blog" description="Guides for AI costs, startup finance, SaaS metrics, and marketing calculator strategy." path="/blog" schema={[blogSchema]} />
       <section className="container-page py-12">
         <p className="eyebrow">Content hub</p>
         <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">Blog</h1>

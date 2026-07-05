@@ -5,5 +5,8 @@
   "display": "standalone",
   "background_color": "#080b12",
   "theme_color": "#080b12",
-  "description": "SEO-first calculators for AI, startup, and marketing teams."
+  "description": "SEO-first calculators for AI, startup, and marketing teams.",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
 }
