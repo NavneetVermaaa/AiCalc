@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Mail, MessageSquare } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import SEO from "../components/SEO.jsx";
 import { BRAND } from "../config/brand";
 import { SITE_URL } from "../config/site";
@@ -17,7 +17,7 @@ const contactPageSchema = {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
-      email: "calcio.tools@gmail.com",
+      email: "navneet.v0000001@gmail.com",
       url: `${SITE_URL}/contact`
     }
   }
@@ -41,21 +41,13 @@ export default function Contact() {
       </section>
 
       <section className="container-page py-12 lg:py-16">
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="mx-auto max-w-lg">
           <div className="panel p-6">
             <Mail className="text-mint" size={26} />
             <h2 className="mt-4 text-xl font-bold text-white">Email us</h2>
             <p className="mt-3 text-sm leading-6 text-slate-400">For support, feature requests, or general inquiries.</p>
-            <a href="mailto:calcio.tools@gmail.com" className="mt-4 inline-flex items-center gap-2 font-bold text-mint hover:text-sky">
-              calcio.tools@gmail.com <ArrowRight size={16} />
-            </a>
-          </div>
-          <div className="panel p-6">
-            <MessageSquare className="text-mint" size={26} />
-            <h2 className="mt-4 text-xl font-bold text-white">LinkedIn</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-400">Follow us for updates, tips, and new calculator releases.</p>
-            <a href="https://www.linkedin.com/company/calcio-tools" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 font-bold text-mint hover:text-sky">
-              @calcio-tools <ArrowRight size={16} />
+            <a href="mailto:navneet.v0000001@gmail.com" className="mt-4 inline-flex items-center gap-2 font-bold text-mint hover:text-sky">
+              navneet.v0000001@gmail.com <ArrowRight size={16} />
             </a>
           </div>
         </div>
