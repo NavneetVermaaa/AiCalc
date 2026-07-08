@@ -50,7 +50,7 @@ export default function Layout({ children }) {
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <Link to="/blog" className="button-secondary hidden sm:inline-flex"><Search size={16} /> Search</Link>
+            <Link to="/search" className="button-secondary hidden sm:inline-flex"><Search size={16} /> Search</Link>
             <button
               onClick={() => setMobileOpen((prev) => !prev)}
               className="button-secondary md:hidden"

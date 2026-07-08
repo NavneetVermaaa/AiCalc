@@ -250,6 +250,312 @@ export const calculators = [
     ]
   },
   {
+    ...calc(
+      "revenue-growth-rate-calculator",
+      "startup",
+      "Revenue Growth Rate Calculator",
+      "Measure how quickly revenue is increasing or declining over time.",
+      [
+        { name: "previousRevenue", label: "Previous revenue", value: 100000 },
+        { name: "currentRevenue", label: "Current revenue", value: 125000 }
+      ],
+      (v) => {
+        const previousRevenue = Math.max(Number(v.previousRevenue) || 0, 0);
+        const currentRevenue = Math.max(Number(v.currentRevenue) || 0, 0);
+        if (previousRevenue <= 0) return 0;
+        const result = ((currentRevenue - previousRevenue) / previousRevenue) * 100;
+        return Number.isFinite(result) ? result : 0;
+      },
+      "((current revenue - previous revenue) / previous revenue) x 100",
+      "Revenue growth %",
+      "%"
+    ),
+    whatIsIt: "The Revenue Growth Rate Calculator shows how quickly a startup's revenue is increasing or decreasing over a defined period. It converts the change between two revenue periods into a percentage so you can compare performance across quarters or years.",
+    howItWorks: "Enter the prior period's revenue and the current period's revenue. The calculator subtracts the older value from the newer value, divides by the older value, and multiplies by 100 to express the result as a percentage.",
+    stepByStep: "Pull the previous and current revenue figures from your bookkeeping or analytics records. Subtract the prior revenue from the current revenue to find the absolute change. Divide that difference by the previous revenue and multiply by 100 for the growth rate.",
+    realWorldExample: "A startup that earned $100,000 last period and $125,000 this period has a revenue growth rate of 25%. That means revenue increased by one-quarter over the comparison period.",
+    whenToUse: [
+      "Reviewing monthly or quarterly growth trends",
+      "Comparing performance across different growth periods",
+      "Supporting board updates and investor reporting",
+      "Tracking whether revenue growth is accelerating or slowing"
+    ],
+    benefits: [
+      "Shows growth in a simple percentage that is easy to compare",
+      "Helps founders spot momentum changes early",
+      "Supports forecasting and goal-setting conversations"
+    ],
+    commonMistakes: [
+      "Comparing revenue periods with different business models or seasonality",
+      "Using net revenue without removing refunds or returns",
+      "Forgetting that a low base period can create a very high growth percentage"
+    ],
+    useCases: [
+      "Quarterly founder reviews",
+      "Investor update decks",
+      "Sales and marketing planning"
+    ],
+    faqs: [
+      { question: "What is Revenue Growth?", answer: "Revenue growth measures the increase or decrease in revenue between two periods. It shows whether a business is expanding, contracting, or holding steady." },
+      { question: "How often should it be calculated?", answer: "Most startups review revenue growth monthly or quarterly. Annual reviews are also useful for high-level trend analysis and board reporting." },
+      { question: "What is considered good growth?", answer: "Good growth depends on stage and market. Early-stage startups often aim for rapid growth, while mature companies may target steadier, more sustainable expansion." }
+    ]
+  },
+  {
+    ...calc(
+      "gross-margin-calculator",
+      "startup",
+      "Gross Margin Calculator",
+      "Calculate the percentage of revenue left after covering direct production or service costs.",
+      [
+        { name: "revenue", label: "Revenue", value: 500000 },
+        { name: "cogs", label: "Cost of goods sold", value: 200000 }
+      ],
+      (v) => {
+        const revenue = Math.max(Number(v.revenue) || 0, 0);
+        const cogs = Math.max(Number(v.cogs) || 0, 0);
+        if (revenue <= 0) return 0;
+        const result = ((revenue - cogs) / revenue) * 100;
+        return Number.isFinite(result) ? Math.min(100, result) : 0;
+      },
+      "((revenue - COGS) / revenue) x 100",
+      "Gross margin %",
+      "%"
+    ),
+    whatIsIt: "The Gross Margin Calculator measures how much of each dollar of revenue remains after direct costs are paid. It is a core startup metric for pricing, product economics, and profitability analysis.",
+    howItWorks: "Enter your total revenue and cost of goods sold. The calculator subtracts COGS from revenue, then divides by revenue to show the margin percentage.",
+    stepByStep: "Collect total revenue from sales or subscriptions. Add all direct costs required to deliver the product or service. Subtract COGS from revenue and divide by revenue to get the gross margin percentage.",
+    realWorldExample: "A business generating $500,000 in revenue with $200,000 in COGS has a gross margin of 60%. That means 60% of revenue remains after direct production costs.",
+    whenToUse: [
+      "Reviewing pricing and unit economics",
+      "Comparing product lines or customer segments",
+      "Preparing investor or board materials",
+      "Evaluating whether margins are strong enough to scale"
+    ],
+    benefits: [
+      "Shows whether pricing covers the cost of delivery",
+      "Helps identify margin erosion before it becomes severe",
+      "Supports better product and packaging decisions"
+    ],
+    commonMistakes: [
+      "Mixing operating expenses into COGS",
+      "Ignoring discounted or returned revenue",
+      "Assuming a high gross margin always means strong profit"
+    ],
+    useCases: [
+      "Pricing analysis",
+      "Product profitability reviews",
+      "Investor diligence"
+    ],
+    faqs: [
+      { question: "Difference between Gross Margin and Profit Margin", answer: "Gross margin focuses on revenue after direct costs, while profit margin includes all operating expenses, interest, and taxes. Profit margin is generally lower than gross margin." },
+      { question: "Healthy gross margin", answer: "Healthy gross margin varies by industry. Software and digital services often have high margins, while physical goods businesses usually operate with lower margins due to production and shipping costs." },
+      { question: "How to improve margin", answer: "You can improve margin by raising prices, reducing production costs, improving supplier terms, or increasing sales mix toward higher-margin offerings." }
+    ]
+  },
+  {
+    ...calc(
+      "net-profit-margin-calculator",
+      "startup",
+      "Net Profit Margin Calculator",
+      "Measure the percentage of revenue that becomes net profit after all costs are accounted for.",
+      [
+        { name: "revenue", label: "Revenue", value: 800000 },
+        { name: "netProfit", label: "Net profit", value: 160000 }
+      ],
+      (v) => {
+        const revenue = Math.max(Number(v.revenue) || 0, 0);
+        const netProfit = Math.max(Number(v.netProfit) || 0, 0);
+        if (revenue <= 0) return 0;
+        const result = (netProfit / revenue) * 100;
+        return Number.isFinite(result) ? result : 0;
+      },
+      "(net profit / revenue) x 100",
+      "Net profit %",
+      "%"
+    ),
+    whatIsIt: "The Net Profit Margin Calculator shows what percentage of revenue remains after all operating costs, taxes, and expenses are paid. It is one of the clearest indicators of a startup's overall profitability.",
+    howItWorks: "Enter total revenue and net profit. The calculator divides net profit by revenue and multiplies by 100 to produce a percentage.",
+    stepByStep: "Gather your total revenue and net profit figures from your income statement. Divide net profit by revenue. Multiply the result by 100 to express margin as a percentage.",
+    realWorldExample: "If a startup brings in $800,000 in revenue and retains $160,000 as net profit, its net profit margin is 20%. That means 20 cents of every revenue dollar becomes profit.",
+    whenToUse: [
+      "Assessing overall profitability",
+      "Comparing financial performance across periods",
+      "Supporting fundraising and investor discussions",
+      "Setting targets for sustainable growth"
+    ],
+    benefits: [
+      "Shows how efficiently the business turns revenue into profit",
+      "Helps founders understand true operating leverage",
+      "Makes profitability trends easy to communicate"
+    ],
+    commonMistakes: [
+      "Using operating profit instead of net profit",
+      "Ignoring taxes, one-time charges, or unusual expenses",
+      "Comparing margins across businesses with very different cost structures"
+    ],
+    useCases: [
+      "Financial reporting",
+      "Board reviews",
+      "Investor messaging"
+    ],
+    faqs: [
+      { question: "What is Net Margin?", answer: "Net margin is the percentage of revenue that remains as net profit after all expenses, taxes, and one-time costs are deducted." },
+      { question: "Good net margin", answer: "A good net margin depends on the business model. Software businesses often target double-digit net margins, while retail and physical-goods companies may operate with lower margins." },
+      { question: "How investors use it", answer: "Investors use net margin to judge efficiency, scalability, and whether the company can convert revenue into durable profits over time." }
+    ]
+  },
+  {
+    ...calc(
+      "churn-rate-calculator",
+      "startup",
+      "Churn Rate Calculator",
+      "Estimate the percentage of customers lost over a period of time.",
+      [
+        { name: "customersAtStart", label: "Customers at start", value: 1000 },
+        { name: "customersLost", label: "Customers lost", value: 55 }
+      ],
+      (v) => {
+        const customersAtStart = Math.max(Number(v.customersAtStart) || 0, 0);
+        const customersLost = Math.max(Number(v.customersLost) || 0, 0);
+        if (customersAtStart <= 0) return 0;
+        const result = (customersLost / customersAtStart) * 100;
+        return Number.isFinite(result) ? Math.min(100, result) : 0;
+      },
+      "(customers lost / customers at start) x 100",
+      "Customer churn %",
+      "%"
+    ),
+    whatIsIt: "The Churn Rate Calculator shows the percentage of customers a business loses during a period, such as monthly or annually. It is essential for subscription businesses because retention directly drives growth and unit economics.",
+    howItWorks: "Enter the number of customers you had at the start of the period and how many customers you lost during that period. The calculator turns that relationship into a percentage.",
+    stepByStep: "Identify the customer count at the start of the reporting period. Count the customers lost over that period. Divide customers lost by the starting count and multiply by 100 to get the churn rate.",
+    realWorldExample: "A SaaS company starts the month with 1,000 customers and loses 55 during the month. Its monthly churn rate is 5.5%, meaning about 5.5% of the customer base was lost during that month.",
+    whenToUse: [
+      "Tracking retention health monthly",
+      "Reviewing product onboarding and support issues",
+      "Comparing cohorts across time periods",
+      "Preparing SaaS growth or investor reports"
+    ],
+    benefits: [
+      "Highlights retention problems quickly",
+      "Supports more accurate forecasting",
+      "Helps prioritize customer success and product fixes"
+    ],
+    commonMistakes: [
+      "Using the wrong denominator by comparing against ending customers",
+      "Ignoring seasonality in customer behavior",
+      "Treating one-time churn spikes as permanent trends"
+    ],
+    useCases: [
+      "Subscription analytics",
+      "Customer success reviews",
+      "SaaS forecasting"
+    ],
+    faqs: [
+      { question: "Good SaaS churn", answer: "Good churn varies by business model and price point. Monthly churn below 3% is often strong for SMB SaaS, while enterprise software can tolerate somewhat higher churn if account values are large." },
+      { question: "Monthly vs annual churn", answer: "Monthly churn reflects short-term retention, while annual churn captures longer-term customer retention. Many companies track both to understand the full retention picture." },
+      { question: "Reducing churn", answer: "Churn can often be reduced by improving onboarding, increasing product value, enhancing support, and resolving customer pain points before renewal time." }
+    ]
+  },
+  {
+    ...calc(
+      "mrr-calculator",
+      "startup",
+      "MRR Calculator",
+      "Calculate monthly recurring revenue from customer count and average subscription value.",
+      [
+        { name: "customers", label: "Customers", value: 250 },
+        { name: "averageMonthlySubscription", label: "Average monthly subscription", value: 49 }
+      ],
+      (v) => {
+        const customers = Math.max(Number(v.customers) || 0, 0);
+        const averageMonthlySubscription = Math.max(Number(v.averageMonthlySubscription) || 0, 0);
+        return customers * averageMonthlySubscription;
+      },
+      "customers x average monthly subscription",
+      "Monthly recurring revenue",
+      "$"
+    ),
+    whatIsIt: "The MRR Calculator estimates recurring monthly revenue by multiplying your customer count by the average monthly subscription value. It is one of the most important metrics for recurring-revenue businesses.",
+    howItWorks: "Enter the number of customers and the average monthly subscription price. The calculator multiplies them to estimate your monthly recurring revenue.",
+    stepByStep: "Count the customers included in the period. Determine the average monthly subscription amount per customer. Multiply the two numbers to estimate MRR.",
+    realWorldExample: "A SaaS company with 250 customers paying an average of $49 per month has $12,250 in monthly recurring revenue. That figure represents recurring revenue expected each month.",
+    whenToUse: [
+      "Forecasting monthly revenue",
+      "Reviewing SaaS growth trends",
+      "Supporting investor or board updates",
+      "Tracking expansion and contraction in recurring revenue"
+    ],
+    benefits: [
+      "Provides a stable view of recurring income",
+      "Makes growth planning more accurate",
+      "Highlights how customer count and pricing changes affect revenue"
+    ],
+    commonMistakes: [
+      "Mixing one-time fees into recurring revenue",
+      "Ignoring discounts or plan differences",
+      "Using average annual contract value instead of monthly subscription value"
+    ],
+    useCases: [
+      "SaaS planning",
+      "Recurring revenue forecasting",
+      "Investor reporting"
+    ],
+    faqs: [
+      { question: "Difference between MRR and ARR", answer: "MRR is monthly recurring revenue, while ARR is annual recurring revenue. ARR is usually MRR multiplied by 12, which makes it easier to compare annual revenue expectations." },
+      { question: "How SaaS companies use MRR", answer: "SaaS companies use MRR to track recurring revenue growth, evaluate pricing changes, and estimate the impact of churn and expansion on future revenue." },
+      { question: "Why investors monitor MRR", answer: "Investors monitor MRR because it shows the health of recurring revenue, the predictability of future cash flow, and the pace of customer growth." }
+    ]
+  },
+  {
+    ...calc(
+      "arr-calculator",
+      "startup",
+      "ARR Calculator",
+      "Convert monthly recurring revenue into annual recurring revenue.",
+      [
+        { name: "monthlyRecurringRevenue", label: "Monthly recurring revenue", value: 12250 }
+      ],
+      (v) => {
+        const monthlyRecurringRevenue = Math.max(Number(v.monthlyRecurringRevenue) || 0, 0);
+        return monthlyRecurringRevenue * 12;
+      },
+      "monthly recurring revenue x 12",
+      "Annual recurring revenue",
+      "$"
+    ),
+    whatIsIt: "The ARR Calculator multiplies monthly recurring revenue by 12 to estimate annual recurring revenue. It is a key SaaS metric for understanding the annualized value of recurring subscriptions.",
+    howItWorks: "Enter your monthly recurring revenue. The calculator multiplies that number by 12 to estimate your annual recurring revenue.",
+    stepByStep: "Take your monthly recurring revenue from the MRR metric. Multiply it by 12 to estimate annual recurring revenue. Use that number for planning, valuation, and annual budgeting.",
+    realWorldExample: "A company with $12,250 in monthly recurring revenue has $147,000 in annual recurring revenue. That annualized number serves as a simplified forecast of recurring revenue over a year.",
+    whenToUse: [
+      "Annual forecasting",
+      "Investor conversations",
+      "Budgeting and planning",
+      "Comparing recurring revenue across periods"
+    ],
+    benefits: [
+      "Turns recurring revenue into an annualized planning metric",
+      "Makes SaaS growth easier to communicate",
+      "Supports valuation and budget discussions"
+    ],
+    commonMistakes: [
+      "Using one-time revenue in the input",
+      "Forgetting to use recurring revenue only",
+      "Comparing ARR to total revenue without adjusting for non-recurring income"
+    ],
+    useCases: [
+      "SaaS valuation",
+      "Annual planning",
+      "Recurring revenue reporting"
+    ],
+    faqs: [
+      { question: "ARR vs Revenue", answer: "ARR reflects annualized recurring revenue, while total revenue includes one-time, non-recurring, and usage-based revenue. ARR is a narrower planning metric for recurring businesses." },
+      { question: "ARR vs MRR", answer: "ARR is simply MRR multiplied by 12. The difference is time horizon: MRR is monthly, ARR is annualized." },
+      { question: "Importance for SaaS", answer: "ARR helps SaaS companies communicate recurring revenue growth, forecast future cash flow, and demonstrate business predictability to investors and lenders." }
+    ]
+  },
+  {
     ...calc("burn-rate-calculator", "startup", "Burn Rate Calculator", "Calculate monthly net burn from cash inflows and outflows.", [
       { name: "expenses", label: "Monthly expenses", value: 85000 },
       { name: "revenue", label: "Monthly revenue", value: 22000 }

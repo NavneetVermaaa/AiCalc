@@ -11,6 +11,7 @@ const CalculatorPage = lazy(() => import("./pages/CalculatorPage.jsx"));
 const BlogListPage = lazy(() => import("./pages/BlogListPage.jsx"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage.jsx"));
 const BlogCategoryPage = lazy(() => import("./pages/BlogCategoryPage.jsx"));
+const SearchPage = lazy(() => import("./pages/SearchPage.jsx"));
 const About = lazy(() => import("./pages/About.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.jsx"));
@@ -33,6 +34,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="search" element={<SearchPage />} />
               <Route path="terms" element={<Terms />} />
               <Route path="*" element={<NotFound />} />
             </Route>
