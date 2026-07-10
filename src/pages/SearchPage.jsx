@@ -14,7 +14,8 @@ export default function SearchPage() {
       (calc) =>
         calc.title.toLowerCase().includes(q) ||
         calc.description.toLowerCase().includes(q) ||
-        calc.slug.toLowerCase().includes(q)
+        calc.slug.toLowerCase().includes(q) ||
+        (calc.keywords && calc.keywords.some((k) => k.toLowerCase().includes(q)))
     );
   }, [query]);
 

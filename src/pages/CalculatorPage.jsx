@@ -5,7 +5,7 @@ import CalculatorTool from "../components/CalculatorTool.jsx";
 import FAQ from "../components/FAQ.jsx";
 import CardLink from "../components/CardLink.jsx";
 import { calculatorsByCategory, getCalculator, getCategory } from "../data/calculators.js";
-import { internalLinkMap } from "../data/internalLinks.js";
+import { getInternalLinks } from "../data/internalLinks.js";
 import { breadcrumbSchema, faqSchema, webApplicationSchema } from "../utils/schema.js";
 
 export default function CalculatorPage() {
@@ -20,7 +20,7 @@ export default function CalculatorPage() {
     { name: calculator.title, path: `/calculator/${calculator.slug}` }
   ];
 
-  const linkedSlugs = internalLinkMap[calculator.category] || [];
+  const linkedSlugs = getInternalLinks(calculator);
   const relatedLinks = linkedSlugs.filter((s) => s !== calculator.slug).map((s) => getCalculator(s)).filter(Boolean);
 
   return (

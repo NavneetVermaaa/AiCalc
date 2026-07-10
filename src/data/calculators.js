@@ -11,7 +11,8 @@ const calc = (id, category, title, description, fields, compute, formula, result
   unit,
   examples: [],
   useCases: [],
-  faqs: []
+  faqs: [],
+  keywords: []
 });
 
 export const categories = [
@@ -712,6 +713,531 @@ export const calculators = [
       { question: "What if my break-even point seems too high?", answer: "If your break-even units are unrealistic for your market size, you have three options: reduce fixed costs, increase your price, or lower variable costs through better supplier agreements or manufacturing efficiency. Recalculate each time you make a change." }
     ]
   },
+
+  {
+    ...calc(
+      "customer-retention-rate-calculator",
+      "startup",
+      "Customer Retention Rate Calculator",
+      "Calculate the percentage of customers retained over a specific period of time.",
+      [
+        { name: "customersAtStart", label: "Customers at start", value: 1000 },
+        { name: "newCustomers", label: "New customers", value: 200 },
+        { name: "customersAtEnd", label: "Customers at end", value: 1050 }
+      ],
+      (v) => {
+        const customersAtStart = Math.max(Number(v.customersAtStart) || 0, 0);
+        const newCustomers = Math.max(Number(v.newCustomers) || 0, 0);
+        const customersAtEnd = Math.max(Number(v.customersAtEnd) || 0, 0);
+        if (customersAtStart <= 0) return 0;
+        const result = ((customersAtEnd - newCustomers) / customersAtStart) * 100;
+        return Number.isFinite(result) ? Math.min(100, Math.max(0, result)) : 0;
+      },
+      "((customers at end - new customers) / customers at start) x 100",
+      "Customer retention %",
+      "%"
+    ),
+    whatIsIt: "The Customer Retention Rate Calculator measures the percentage of customers a business keeps over a given period. It accounts for new customers acquired during the period and focuses on how many of the original customer base remained at the end. Retention rate is a critical health metric for subscription and recurring-revenue businesses.",
+    howItWorks: "Enter the number of customers at the start of the period, the number of new customers acquired during the period, and the total customers at the end of the period. The calculator subtracts new customers from the ending count to isolate retained customers, then divides by the starting count and multiplies by 100 to express retention as a percentage.",
+    stepByStep: "Record your customer count at the beginning of the measurement period. Track every new customer added during that period. Count total customers at the end of the period. Subtract new customers from the ending count to find retained customers. Divide retained customers by the starting count and multiply by 100 to get the retention rate.",
+    realWorldExample: "A SaaS company starts the quarter with 1,000 customers, acquires 200 new customers, and ends with 1,050 customers. The retention rate is 85%, meaning 85% of the original customer base remained through the quarter. The 15% churn represents 150 customers lost during the period.",
+    whenToUse: [
+      "Monthly or quarterly retention reviews with the management team",
+      "Evaluating the impact of onboarding improvements on customer stickiness",
+      "Comparing retention across different customer segments or cohorts",
+      "Reporting customer health metrics to investors and board members"
+    ],
+    benefits: [
+      "Reveals how effectively the business keeps customers over time",
+      "Helps identify retention issues before they become revenue problems",
+      "Provides a clear benchmark for customer success initiatives"
+    ],
+    commonMistakes: [
+      "Including new customers in the retained count, which inflates the rate",
+      "Using different time periods for start and end counts, skewing the result",
+      "Treating one-time seasonal dips as permanent retention problems"
+    ],
+    useCases: [
+      "Subscription retention analysis",
+      "Customer success performance reviews",
+      "Cohort-based retention tracking"
+    ],
+    faqs: [
+      { question: "What is a good customer retention rate for SaaS?", answer: "A monthly retention rate above 95% (or annual above 90%) is considered strong for most SaaS businesses. Rates vary by segment: enterprise software often achieves higher retention than SMB. Compare against your industry and business model benchmarks for an accurate assessment." },
+      { question: "How does retention differ from churn?", answer: "Retention rate and churn rate are complementary metrics. Retention is the percentage of customers kept, while churn is the percentage lost. If retention is 85%, churn is 15%. Tracking both provides a complete picture of customer movement." },
+      { question: "What actions improve customer retention?", answer: "Common retention levers include improving the onboarding experience, increasing product engagement through feature adoption, providing proactive customer support, and regularly communicating product value through success touches and business reviews." }
+    ]
+  },
+  {
+    ...calc(
+      "customer-lifetime-calculator",
+      "startup",
+      "Customer Lifetime Calculator",
+      "Calculate the average duration a customer continues using your product or service.",
+      [
+        { name: "averageLifespan", label: "Average customer lifespan in years", value: 5 }
+      ],
+      (v) => {
+        const years = Math.max(Number(v.averageLifespan) || 0, 0);
+        return years;
+      },
+      "average customer lifespan",
+      "Customer lifetime",
+      " years"
+    ),
+    whatIsIt: "The Customer Lifetime Calculator measures the average duration a customer remains with your business. Customer lifetime is a fundamental input for calculating Customer Lifetime Value and understanding how long it takes to recoup acquisition costs. Longer customer lifetimes generally indicate stronger product-market fit and higher long-term profitability.",
+    howItWorks: "Enter the average number of years a customer continues using your product or service. The calculator returns that number as the customer lifetime. This figure can be derived from historical cohort data or estimated based on your churn rate by taking the inverse of annual churn.",
+    stepByStep: "Review historical customer data to determine the average length of customer relationships. Segment by customer type if lifetimes vary significantly across cohorts. Enter the average lifespan in years. Use this number alongside ARPA and margin to calculate Customer Lifetime Value for your business.",
+    realWorldExample: "A SaaS company finds that the average customer stays for 5 years before churning. This 5-year customer lifetime, combined with an ARPA of $180 per month and 82% gross margin, produces an LTV of $8,856. The 5-year benchmark helps the team set acquisition budget targets and evaluate long-term business health.",
+    whenToUse: [
+      "Calculating Customer Lifetime Value for investor reporting",
+      "Setting maximum allowable customer acquisition costs",
+      "Comparing customer longevity across different market segments",
+      "Forecasting long-term revenue and profitability"
+    ],
+    benefits: [
+      "Provides the time dimension needed for accurate LTV calculations",
+      "Helps teams understand the long-term value of retention efforts",
+      "Enables data-driven decisions about acquisition spend"
+    ],
+    commonMistakes: [
+      "Using average lifespan without adjusting for customer segment differences",
+      "Assuming past lifetimes will persist when market conditions may change",
+      "Confusing contract length with actual customer lifetime"
+    ],
+    useCases: [
+      "LTV modeling and unit economics",
+      "Customer segmentation analysis",
+      "Acquisition budget planning"
+    ],
+    faqs: [
+      { question: "How is customer lifetime calculated from churn rate?", answer: "Customer lifetime is approximately 1 divided by the annual churn rate. For example, a 20% annual churn rate implies an average customer lifetime of 5 years. This relationship makes lifetime a useful proxy for understanding retention performance." },
+      { question: "What is a good customer lifetime for SaaS?", answer: "Good customer lifetime varies by business model. Enterprise SaaS often sees lifetimes of 5-10 years, while SMB SaaS may see 2-4 years. The key benchmark is whether the lifetime is long enough to generate an LTV that exceeds CAC by at least 3x." },
+      { question: "Does customer lifetime include the onboarding period?", answer: "Yes. Customer lifetime measures from the date of first payment to the date of churn. The onboarding period is included as part of the relationship. Short lifetimes often indicate poor onboarding or insufficient early value delivery." }
+    ]
+  },
+  {
+    ...calc(
+      "payback-period-calculator",
+      "startup",
+      "Payback Period Calculator",
+      "Calculate how long it takes to recover the cost of acquiring a customer.",
+      [
+        { name: "cac", label: "Customer acquisition cost", value: 333 },
+        { name: "monthlyGrossProfit", label: "Monthly gross profit per customer", value: 180 }
+      ],
+      (v) => {
+        const cac = Math.max(Number(v.cac) || 0, 0);
+        const monthlyGrossProfit = Math.max(Number(v.monthlyGrossProfit) || 0, 0);
+        if (monthlyGrossProfit <= 0) return 0;
+        const result = cac / monthlyGrossProfit;
+        return Number.isFinite(result) ? result : 0;
+      },
+      "CAC / monthly gross profit per customer",
+      "Payback period",
+      " months"
+    ),
+    whatIsIt: "The Payback Period Calculator measures how many months it takes for a customer to generate enough gross profit to cover their acquisition cost. It divides CAC by the monthly gross profit a customer generates. A shorter payback period means faster recovery of acquisition investments and healthier cash flow dynamics.",
+    howItWorks: "Enter the Customer Acquisition Cost representing total sales and marketing spend divided by new customers. Enter the monthly gross profit per customer calculated as average monthly revenue per customer minus the cost to serve them. The calculator divides CAC by monthly gross profit to show the months needed to recover the acquisition cost.",
+    stepByStep: "Calculate your blended or channel-specific CAC from your sales and marketing data. Determine the average monthly gross profit per customer by subtracting service and support costs from monthly revenue. Divide CAC by monthly gross profit to find the payback period. Shorter periods indicate more capital-efficient growth.",
+    realWorldExample: "A SaaS company with a CAC of $333 and a monthly gross profit of $180 per customer has a payback period of 1.85 months. This means the company recovers its acquisition cost in less than 2 months, freeing up capital to reinvest in further growth. Payback under 12 months is generally considered healthy.",
+    whenToUse: [
+      "Evaluating the efficiency of sales and marketing spend",
+      "Comparing unit economics across different customer segments",
+      "Assessing whether the business model generates cash efficiently",
+      "Supporting fundraising discussions with unit economic data"
+    ],
+    benefits: [
+      "Reveals how quickly acquisition investments turn into profit",
+      "Helps identify which customer segments deliver the fastest payback",
+      "Provides a clear cash efficiency metric for operational planning"
+    ],
+    commonMistakes: [
+      "Using revenue instead of gross profit, which understates the payback period",
+      "Ignoring ongoing service and support costs in the monthly profit calculation",
+      "Comparing payback periods across segments with different churn profiles"
+    ],
+    useCases: [
+      "Unit economic analysis",
+      "Sales and marketing efficiency reviews",
+      "Cash flow planning and forecasting"
+    ],
+    faqs: [
+      { question: "What is a good payback period for a SaaS business?", answer: "A payback period under 12 months is generally considered healthy for SaaS. Periods under 6 months indicate excellent capital efficiency. Periods above 18 months suggest the business model may need adjustment through higher pricing, lower CAC, or better margin." },
+      { question: "How does payback period relate to LTV and CAC?", answer: "Payback period, LTV, and CAC are closely related unit economics. While LTV to CAC ratio shows overall return, payback period focuses on cash recovery timing. A business can have a good LTV to CAC ratio but a dangerously long payback period if growth is capital-intensive." },
+      { question: "Can payback period be negative?", answer: "No. Payback period is always positive because both CAC and monthly gross profit are positive values. If monthly gross profit is zero or negative, the payback period is undefined because the customer never generates enough profit to cover acquisition costs." }
+    ]
+  },
+  {
+    ...calc(
+      "gross-profit-calculator",
+      "startup",
+      "Gross Profit Calculator",
+      "Calculate the difference between revenue and the cost of goods sold.",
+      [
+        { name: "revenue", label: "Revenue", value: 500000 },
+        { name: "cogs", label: "Cost of goods sold", value: 200000 }
+      ],
+      (v) => {
+        const revenue = Math.max(Number(v.revenue) || 0, 0);
+        const cogs = Math.max(Number(v.cogs) || 0, 0);
+        return revenue - cogs;
+      },
+      "revenue - cost of goods sold",
+      "Gross profit",
+      "$"
+    ),
+    whatIsIt: "The Gross Profit Calculator shows the absolute dollar amount remaining after subtracting the direct costs of producing goods or delivering services. Unlike gross margin which expresses efficiency as a percentage, gross profit tells you the actual cash available to cover operating expenses and generate net profit. It is a core line item on every income statement.",
+    howItWorks: "Enter your total revenue from sales, subscriptions, or services. Enter your total cost of goods sold including materials, labor, hosting, and fulfillment. The calculator subtracts COGS from revenue to produce your gross profit in dollars. A positive gross profit means you are producing above cost, while a negative gross profit signals a fundamental pricing problem.",
+    stepByStep: "Pull your total revenue figure from your accounting system for the period. Identify all direct costs associated with delivering your product or service. Subtract total COGS from total revenue to find gross profit. Use this figure to calculate gross margin percentage and to understand how much revenue is available for operating expenses.",
+    realWorldExample: "An ecommerce business generates $500,000 in revenue and incurs $200,000 in product costs, shipping, and fulfillment. Their gross profit is $300,000. This means $300,000 is available to cover marketing, salaries, rent, and other operating expenses before calculating net profit.",
+    whenToUse: [
+      "Preparing monthly or quarterly income statements",
+      "Evaluating the financial impact of pricing changes",
+      "Comparing profitability across product lines or business units",
+      "Assessing whether revenue growth is translating into actual profit dollars"
+    ],
+    benefits: [
+      "Shows the dollar amount available to cover operating expenses",
+      "Helps identify when revenue growth is not translating to profit growth",
+      "Provides a clear baseline for operating expense budgeting"
+    ],
+    commonMistakes: [
+      "Including operating expenses like marketing or rent in COGS",
+      "Excluding shipping and fulfillment costs from COGS for physical products",
+      "Not adjusting COGS for inventory changes, leading to distorted profit figures"
+    ],
+    useCases: [
+      "Income statement preparation",
+      "Product line profitability analysis",
+      "Financial reporting and planning"
+    ],
+    faqs: [
+      { question: "What is the difference between gross profit and net profit?", answer: "Gross profit subtracts only direct production costs from revenue. Net profit subtracts all operating expenses including marketing, salaries, rent, taxes, and interest. Gross profit shows product-level profitability, while net profit shows overall business profitability." },
+      { question: "Can gross profit be negative?", answer: "Yes. If COGS exceeds revenue, gross profit is negative. This means you are selling products or services for less than they cost to produce. A negative gross profit is unsustainable and requires immediate attention through pricing increases or cost reduction." },
+      { question: "How do subscription businesses calculate COGS?", answer: "For SaaS and subscription businesses, COGS typically includes cloud hosting fees, customer support costs, payment processing fees, and any third-party API costs. Salaries for engineering and product development are generally considered operating expenses, not COGS." }
+    ]
+  },
+  {
+    ...calc(
+      "ebitda-calculator",
+      "startup",
+      "EBITDA Calculator",
+      "Measure earnings before interest, taxes, depreciation, and amortization.",
+      [
+        { name: "revenue", label: "Revenue", value: 1000000 },
+        { name: "operatingExpenses", label: "Operating expenses", value: 700000 },
+        { name: "depreciation", label: "Depreciation", value: 50000 },
+        { name: "amortization", label: "Amortization", value: 30000 }
+      ],
+      (v) => {
+        const revenue = Math.max(Number(v.revenue) || 0, 0);
+        const operatingExpenses = Math.max(Number(v.operatingExpenses) || 0, 0);
+        const depreciation = Math.max(Number(v.depreciation) || 0, 0);
+        const amortization = Math.max(Number(v.amortization) || 0, 0);
+        const result = revenue - operatingExpenses + depreciation + amortization;
+        return Number.isFinite(result) ? result : 0;
+      },
+      "revenue - operating expenses + depreciation + amortization",
+      "EBITDA",
+      "$"
+    ),
+    whatIsIt: "The EBITDA Calculator measures earnings before interest, taxes, depreciation, and amortization. EBITDA is widely used by investors and analysts to evaluate a company's operating performance by focusing on profitability from core operations. It strips out financing decisions, tax environments, and non-cash accounting charges to provide a cleaner view of operational efficiency.",
+    howItWorks: "Enter your total revenue, total operating expenses, depreciation expense, and amortization expense. The calculator subtracts operating expenses from revenue to get operating income, then adds back depreciation and amortization since these are non-cash charges. The result is EBITDA, which represents cash earnings from operations before capital structure and tax considerations.",
+    stepByStep: "Gather revenue and operating expense figures from your income statement. Identify depreciation and amortization from your fixed asset and intangible asset schedules. Start with revenue, subtract operating expenses, then add back depreciation and amortization. The resulting EBITDA figure is commonly used in valuation multiples and lender covenant calculations.",
+    realWorldExample: "A manufacturing company reports $1,000,000 in revenue, $700,000 in operating expenses, $50,000 in depreciation, and $30,000 in amortization. Their EBITDA is $380,000. An acquirer evaluating the company at a 6x EBITDA multiple would value the business at approximately $2,280,000.",
+    whenToUse: [
+      "Preparing financial statements for investor or lender review",
+      "Calculating valuation multiples for fundraising or acquisition",
+      "Comparing operating performance across companies with different capital structures",
+      "Evaluating whether core operations are generating sufficient cash"
+    ],
+    benefits: [
+      "Provides a standardized view of operating profitability",
+      "Removes non-cash charges that can distort earnings comparisons",
+      "Widely used in valuation and debt covenant calculations"
+    ],
+    commonMistakes: [
+      "Excluding necessary operating expenses like R&D or marketing to inflate EBITDA",
+      "Confusing EBITDA with free cash flow, which also accounts for capex and working capital",
+      "Using EBITDA alone without considering debt service and capital expenditure requirements"
+    ],
+    useCases: [
+      "Financial valuation and M&A analysis",
+      "Lender reporting and covenant compliance",
+      "Peer comparison and benchmarking"
+    ],
+    faqs: [
+      { question: "What is a good EBITDA margin?", answer: "EBITDA margin varies significantly by industry. Software companies often achieve EBITDA margins of 20-40%, while manufacturing and retail typically range from 10-20%. Compare your margin against industry benchmarks for a meaningful assessment of operating efficiency." },
+      { question: "How is EBITDA different from net income?", answer: "Net income includes interest, taxes, depreciation, and amortization, while EBITDA excludes all four. EBITDA provides a clearer view of operational performance, while net income reflects the full impact of financing decisions, tax strategy, and non-cash charges." },
+      { question: "Why do investors use EBITDA for valuation?", answer: "Investors use EBITDA because it normalizes for differences in capital structure, tax rates, and accounting policies across companies. Valuation multiples based on EBITDA allow for more direct comparisons of operating performance between potential acquisition targets." }
+    ]
+  },
+  {
+    ...calc(
+      "cash-burn-ratio-calculator",
+      "startup",
+      "Cash Burn Ratio Calculator",
+      "Measure how many months your startup can sustain operations with current cash reserves.",
+      [
+        { name: "cashBalance", label: "Cash balance", value: 750000 },
+        { name: "monthlyBurn", label: "Monthly burn", value: 63000 }
+      ],
+      (v) => {
+        const cashBalance = Math.max(Number(v.cashBalance) || 0, 0);
+        const monthlyBurn = Math.max(Number(v.monthlyBurn) || 0, 0);
+        if (monthlyBurn <= 0) return 0;
+        const result = cashBalance / monthlyBurn;
+        return Number.isFinite(result) ? result : 0;
+      },
+      "cash balance / monthly burn",
+      "Cash burn ratio",
+      " months"
+    ),
+    whatIsIt: "The Cash Burn Ratio Calculator measures how many months a startup can continue operating before exhausting its cash reserves. It divides the current cash balance by the monthly net burn rate. This metric, also called runway multiple, is the single most important cash health indicator for early-stage and growth-stage companies.",
+    howItWorks: "Enter your current cash balance including all bank accounts and liquid investments. Enter your monthly net burn rate the amount by which expenses exceed revenue each month. The calculator divides cash by burn to show how many months of operations remain at the current spending level.",
+    stepByStep: "Total all cash held in checking, savings, and money market accounts. Calculate monthly net burn by subtracting revenue from total monthly expenses. Divide cash balance by monthly burn to determine how many months the company can operate. Track this number monthly and flag any downward trend.",
+    realWorldExample: "A startup with $750,000 in the bank and a monthly net burn of $63,000 has a cash burn ratio of approximately 11.9 months. If the team reduces burn to $50,000 per month, the ratio extends to 15 months, providing more time to reach profitability or secure the next funding round.",
+    whenToUse: [
+      "Monthly cash health reviews with the executive team",
+      "Determining the urgency and timing of the next fundraising round",
+      "Evaluating the impact of cost-cutting measures on financial runway",
+      "Reporting cash position and projections to the board of directors"
+    ],
+    benefits: [
+      "Provides a clear timeline for critical financial decisions",
+      "Helps prevent the most common cause of startup failure running out of cash",
+      "Enables data-driven conversations about spending discipline and growth trade-offs"
+    ],
+    commonMistakes: [
+      "Using gross burn instead of net burn, which understates the cash consumption rate",
+      "Assuming burn rate stays constant when it often increases with headcount growth",
+      "Not maintaining a minimum cash buffer for unexpected expenses or market changes"
+    ],
+    useCases: [
+      "Cash management and treasury planning",
+      "Fundraising timeline determination",
+      "Board reporting and investor updates"
+    ],
+    faqs: [
+      { question: "What is a healthy cash burn ratio for a startup?", answer: "Most investors consider a cash burn ratio of 12-18 months healthy. Above 18 months may indicate excessive fundraising, while below 6 months signals urgent action is needed. The ideal ratio depends on your stage, revenue growth rate, and path to profitability." },
+      { question: "How does the cash burn ratio differ from runway?", answer: "The cash burn ratio and runway measure the same concept: months of operation remaining. Runway is calculated similarly using cash divided by monthly burn. The terms are often used interchangeably in startup financial planning." },
+      { question: "What actions extend the cash burn ratio?", answer: "You can extend the ratio by reducing operating expenses, increasing revenue to lower net burn, or raising additional capital. Common expense reductions include headcount adjustments, renegotiating vendor contracts, and deferring non-critical projects." }
+    ]
+  },
+  {
+    ...calc(
+      "revenue-per-employee-calculator",
+      "startup",
+      "Revenue Per Employee Calculator",
+      "Measure how much revenue your company generates per employee.",
+      [
+        { name: "annualRevenue", label: "Annual revenue", value: 2000000 },
+        { name: "employees", label: "Number of employees", value: 50 }
+      ],
+      (v) => {
+        const annualRevenue = Math.max(Number(v.annualRevenue) || 0, 0);
+        const employees = Math.max(Number(v.employees) || 0, 0);
+        if (employees <= 0) return 0;
+        const result = annualRevenue / employees;
+        return Number.isFinite(result) ? result : 0;
+      },
+      "annual revenue / number of employees",
+      "Revenue per employee",
+      "$"
+    ),
+    whatIsIt: "The Revenue Per Employee Calculator measures how efficiently a company generates revenue relative to its workforce size. It divides total annual revenue by the total number of employees. This metric is widely used to compare operational efficiency across companies and industries, with higher values indicating more productive or automated operations.",
+    howItWorks: "Enter your company's total annual revenue from the most recent fiscal year. Enter the total number of full-time equivalent employees. The calculator divides revenue by employee count to produce revenue per employee. A higher figure suggests greater operational efficiency, though optimal values vary significantly by industry and business model.",
+    stepByStep: "Pull your annual revenue from your income statement or financial records. Count all full-time equivalent employees including contractors who work consistently. Divide annual revenue by total headcount to calculate revenue per employee. Compare this metric against industry benchmarks to assess your company's efficiency relative to peers.",
+    realWorldExample: "A SaaS company with $2,000,000 in annual revenue and 50 employees generates $40,000 in revenue per employee. If the industry average for SaaS companies of similar size is $60,000, the company may have room to improve operational efficiency or may be earlier in its growth trajectory with a larger team building the product.",
+    whenToUse: [
+      "Benchmarking operational efficiency against industry peers",
+      "Evaluating the ROI of new hires and team expansion plans",
+      "Preparing financial presentations for investors or board meetings",
+      "Assessing whether headcount growth is translating into proportional revenue growth"
+    ],
+    benefits: [
+      "Provides a clear efficiency benchmark for workforce planning",
+      "Helps identify when headcount is growing faster than revenue",
+      "Supports data-driven conversations about hiring and productivity"
+    ],
+    commonMistakes: [
+      "Excluding contractors and part-time staff from the headcount calculation",
+      "Comparing revenue per employee across industries without adjusting for business models",
+      "Using trailing revenue with current headcount, creating a mismatch in the measurement period"
+    ],
+    useCases: [
+      "Operational efficiency benchmarking",
+      "Workforce planning and budgeting",
+      "Investor and board reporting"
+    ],
+    faqs: [
+      { question: "What is a good revenue per employee for SaaS?", answer: "Revenue per employee in SaaS typically ranges from $100,000 to $200,000 for established companies. Early-stage SaaS companies may show lower figures due to upfront investment in product development before revenue scales. Public SaaS companies often exceed $300,000 per employee." },
+      { question: "How does revenue per employee relate to profitability?", answer: "Higher revenue per employee generally correlates with better profitability because the revenue must support fewer people. However, it is not a direct profitability measure since it does not account for other costs like cloud infrastructure, marketing spend, or cost of goods sold." },
+      { question: "Should I include contractors in the employee count?", answer: "Yes. For an accurate comparison, include full-time equivalent contractors and outsourced staff who contribute meaningfully to operations. Excluding them inflates the metric and gives a misleading picture of true operational efficiency." }
+    ]
+  },
+  {
+    ...calc(
+      "arpu-calculator",
+      "startup",
+      "Average Revenue Per User Calculator",
+      "Calculate the average revenue generated per user over a specific period.",
+      [
+        { name: "monthlyRevenue", label: "Monthly revenue", value: 50000 },
+        { name: "users", label: "Users", value: 10000 }
+      ],
+      (v) => {
+        const monthlyRevenue = Math.max(Number(v.monthlyRevenue) || 0, 0);
+        const users = Math.max(Number(v.users) || 0, 0);
+        if (users <= 0) return 0;
+        const result = monthlyRevenue / users;
+        return Number.isFinite(result) ? result : 0;
+      },
+      "monthly revenue / users",
+      "ARPU",
+      "$"
+    ),
+    whatIsIt: "The Average Revenue Per User Calculator measures the amount of revenue generated per user over a defined period. ARPU is a core metric for subscription businesses, marketplaces, and any company with a user-based revenue model. It helps teams understand pricing effectiveness, user tier performance, and overall revenue per customer relationship.",
+    howItWorks: "Enter your total monthly revenue from all sources including subscriptions, usage fees, and one-time charges. Enter the total number of active users during the same period. The calculator divides revenue by users to determine the average revenue each user contributes. A rising ARPU indicates successful upselling or pricing power.",
+    stepByStep: "Total all revenue generated during the measurement month from your billing system. Count all active users who generated revenue or had access to paid features during that month. Divide monthly revenue by total users to calculate ARPU. Track this number monthly to identify trends in monetization and user behavior.",
+    realWorldExample: "A SaaS platform generates $50,000 in monthly revenue from 10,000 active users. Their ARPU is $5.00 per user per month. If they introduce a premium tier and ARPU rises to $6.50 over the next quarter, the pricing change is successfully increasing per-user revenue without losing subscriber count.",
+    whenToUse: [
+      "Monitoring per-user revenue trends month over month",
+      "Evaluating the impact of pricing changes on average revenue",
+      "Comparing monetization across different user segments or geographies",
+      "Reporting key SaaS metrics to leadership and investors"
+    ],
+    benefits: [
+      "Reveals how effectively the business monetizes its user base",
+      "Helps identify opportunities for tiered pricing or upsell strategies",
+      "Provides a clear metric for tracking pricing power over time"
+    ],
+    commonMistakes: [
+      "Including non-revenue-generating users in the denominator, understating ARPU",
+      "Mixing monthly and annual revenue without normalizing to the same period",
+      "Ignoring usage-based revenue that can cause ARPU to fluctuate significantly"
+    ],
+    useCases: [
+      "SaaS monetization analysis",
+      "Pricing strategy evaluation",
+      "User segment performance reporting"
+    ],
+    faqs: [
+      { question: "What is a good ARPU for a SaaS business?", answer: "Good ARPU varies widely by market and business model. Enterprise SaaS often targets ARPU above $100 per month, while consumer SaaS may aim for $5 to $20 per month. The key is whether ARPU supports a healthy LTV to CAC ratio given your churn and margin profile." },
+      { question: "How does ARPU differ from ARPA?", answer: "ARPU (Average Revenue Per User) divides revenue by all users including free tiers, while ARPA (Average Revenue Per Account) divides revenue by paying customers only. ARPA is typically higher than ARPU because it excludes non-paying users from the denominator." },
+      { question: "Can ARPU decrease while total revenue grows?", answer: "Yes. If user growth outpaces revenue growth, ARPU will decline even as total revenue increases. This often happens during freemium or land-and-expand strategies. Monitor ARPU alongside total revenue to ensure user growth is not diluting per-user revenue." }
+    ]
+  },
+  {
+    ...calc(
+      "quick-ratio-calculator",
+      "startup",
+      "SaaS Quick Ratio Calculator",
+      "Measure the ratio of new and expansion MRR to churned and contraction MRR.",
+      [
+        { name: "newMrr", label: "New MRR", value: 10000 },
+        { name: "expansionMrr", label: "Expansion MRR", value: 3000 },
+        { name: "churnedMrr", label: "Churned MRR", value: 4000 },
+        { name: "contractionMrr", label: "Contraction MRR", value: 1000 }
+      ],
+      (v) => {
+        const newMrr = Math.max(Number(v.newMrr) || 0, 0);
+        const expansionMrr = Math.max(Number(v.expansionMrr) || 0, 0);
+        const churnedMrr = Math.max(Number(v.churnedMrr) || 0, 0);
+        const contractionMrr = Math.max(Number(v.contractionMrr) || 0, 0);
+        const denominator = churnedMrr + contractionMrr;
+        if (denominator <= 0 && newMrr + expansionMrr > 0) return 999;
+        if (denominator <= 0) return 0;
+        const result = (newMrr + expansionMrr) / denominator;
+        return Number.isFinite(result) ? result : 0;
+      },
+      "(new MRR + expansion MRR) / (churned MRR + contraction MRR)",
+      "Quick ratio",
+      "x"
+    ),
+    whatIsIt: "The SaaS Quick Ratio Calculator measures the ratio of revenue growth from new and expansion MRR relative to revenue lost from churned and contraction MRR. A quick ratio above 4 is considered excellent, meaning the company is growing MRR four times faster than it is losing it. This metric is widely tracked by SaaS investors and leadership teams.",
+    howItWorks: "Enter your new MRR from newly acquired customers, expansion MRR from upgrades and cross-sells, churned MRR from customers who canceled, and contraction MRR from downgrades. The calculator adds new and expansion MRR, adds churned and contraction MRR, then divides growth by loss to produce the quick ratio.",
+    stepByStep: "Pull new and expansion MRR from your billing system's monthly reconciliation. Calculate churned and contraction MRR from cancellation and downgrade records. Add new and expansion to get total MRR growth. Add churned and contraction to get total MRR loss. Divide growth by loss to find your quick ratio.",
+    realWorldExample: "A SaaS company reports $10,000 in new MRR, $3,000 in expansion MRR, $4,000 in churned MRR, and $1,000 in contraction MRR. Their quick ratio is 2.6 ($13,000 growth divided by $5,000 loss). This means they are growing MRR 2.6 times faster than they are losing it. A ratio above 4 is ideal for most SaaS businesses.",
+    whenToUse: [
+      "Monthly SaaS growth health reviews with the executive team",
+      "Evaluating whether growth is outpacing churn at a sustainable rate",
+      "Comparing growth efficiency across different time periods or segments",
+      "Reporting SaaS growth metrics to investors and board members"
+    ],
+    benefits: [
+      "Provides a single number that captures both growth and retention performance",
+      "Helps identify when growth is masking underlying retention problems",
+      "Enables quick comparison of growth health across periods and segments"
+    ],
+    commonMistakes: [
+      "Including one-time revenue in recurring revenue calculations",
+      "Not separating churned MRR from contraction MRR in the analysis",
+      "Ignoring the quick ratio trend and focusing only on the current month value"
+    ],
+    useCases: [
+      "SaaS growth health monitoring",
+      "Investor reporting and board presentations",
+      "Recurring revenue performance analysis"
+    ],
+    faqs: [
+      { question: "What is a good SaaS quick ratio?", answer: "A quick ratio above 4 is considered excellent, meaning the company is growing MRR more than 4x faster than losing it. A ratio between 2 and 4 is healthy. Below 2 indicates that growth is barely outpacing churn, and below 1 means the company is shrinking." },
+      { question: "How often should the quick ratio be calculated?", answer: "The quick ratio should be calculated monthly alongside other core SaaS metrics. Monthly tracking reveals trends and seasonality. If your business has significant seasonal variations, compare the same month year over year for a more accurate trend assessment." },
+      { question: "What is the difference between quick ratio and net MRR growth rate?", answer: "The quick ratio focuses on the balance between growth and loss drivers, while net MRR growth rate measures the percentage change in total MRR. Both are valuable: quick ratio shows the efficiency of growth, while net MRR growth rate shows the magnitude of growth." }
+    ]
+  },
+  {
+    ...calc(
+      "rule-of-40-calculator",
+      "startup",
+      "Rule of 40 Calculator",
+      "Evaluate SaaS business health by combining revenue growth rate and profit margin.",
+      [
+        { name: "revenueGrowth", label: "Revenue growth %", value: 30 },
+        { name: "profitMargin", label: "Profit margin %", value: 15 }
+      ],
+      (v) => {
+        const revenueGrowth = Math.max(Number(v.revenueGrowth) || 0, 0);
+        const profitMargin = Math.max(Number(v.profitMargin) || 0, 0);
+        const result = revenueGrowth + profitMargin;
+        return Number.isFinite(result) ? result : 0;
+      },
+      "revenue growth % + profit margin %",
+      "Rule of 40",
+      "%"
+    ),
+    whatIsIt: "The Rule of 40 Calculator measures SaaS business health by adding revenue growth percentage to profit margin percentage. The rule states that a healthy SaaS company should have a combined growth rate and profit margin of at least 40%. It balances the trade-off between growth and profitability, acknowledging that high-growth companies may operate at lower margins.",
+    howItWorks: "Enter your revenue growth rate as a percentage and your profit margin as a percentage. The calculator adds both figures together. If the sum is 40 or higher, the company passes the Rule of 40 threshold. A result above 40 indicates strong business health, while below 40 suggests the company may need to improve growth or profitability.",
+    stepByStep: "Calculate your year-over-year revenue growth percentage from your financial data. Determine your profit margin percentage from your income statement. Add the two percentages together. If the total is 40 or above, the business meets the Rule of 40 standard. Use this metric to track progress toward financial health goals.",
+    realWorldExample: "A SaaS company growing at 30% annually with a 15% profit margin scores 45 on the Rule of 40, exceeding the 40-point threshold. This signals healthy business performance. A different company growing at 50% with a negative 20% margin scores 30, indicating they may need to focus on improving profitability despite strong growth.",
+    whenToUse: [
+      "Quarterly business health assessments for the management team",
+      "Evaluating the balance between growth investment and profitability",
+      "Preparing financial metrics for investor updates and board meetings",
+      "Benchmarking company performance against SaaS industry standards"
+    ],
+    benefits: [
+      "Provides a single, intuitive health score for SaaS businesses",
+      "Acknowledges the valid trade-off between growth and profitability",
+      "Widely recognized and accepted by SaaS investors and analysts"
+    ],
+    commonMistakes: [
+      "Using gross margin instead of profit margin in the calculation",
+      "Comparing the rule across companies with very different business models",
+      "Assuming 40 is a hard threshold when context and stage also matter"
+    ],
+    useCases: [
+      "SaaS business health evaluation",
+      "Investor communication and board reporting",
+      "Strategic planning and goal setting"
+    ],
+    faqs: [
+      { question: "What does a Rule of 40 score below 40 mean?", answer: "A score below 40 suggests the company is either growing too slowly, not profitable enough, or struggling with both. Early-stage companies often score below 40 due to heavy growth investment. The key is to have a credible path to reaching 40 as the business matures." },
+      { question: "Can the Rule of 40 apply to non-SaaS businesses?", answer: "The Rule of 40 was developed for SaaS companies but has been adopted by other subscription and recurring-revenue models. For non-recurring businesses, different health metrics may be more appropriate. The rule is most meaningful for companies with predictable recurring revenue streams." },
+      { question: "How do high-growth startups score on the Rule of 40?", answer: "High-growth startups often sacrifice profitability for growth, scoring below 40. A company growing 80% with a negative 30% margin scores 50 and still passes. The rule acknowledges that rapid growth justifies lower near-term profitability as long as the combined score meets the threshold." }
+    ]
+  },
   {
     ...calc("roas-calculator", "marketing", "ROAS Calculator", "Measure return on ad spend from campaign revenue and media spend.", [
       { name: "revenue", label: "Campaign revenue", value: 120000 },
@@ -834,6 +1360,456 @@ export const calculators = [
       { question: "What is a good conversion rate for ecommerce?", answer: "The average ecommerce conversion rate is 2-3% globally. Top-performing sites achieve 5-7%. Conversion rates vary significantly by industry, traffic source, and device type. Mobile rates tend to be lower than desktop rates." },
       { question: "How much traffic do I need for reliable conversion data?", answer: "For statistically significant results, aim for at least 100 conversions per variation in an A/B test. For general tracking, monthly data with at least 1,000 visitors provides a reasonable baseline. Smaller sample sizes have high variance and can be misleading." },
       { question: "What is a quick way to improve conversion rate?", answer: "Common quick wins include improving page load speed, simplifying forms, adding trust signals (reviews, security badges), clarifying your value proposition above the fold, and using strong CTAs. A/B test each change to measure its actual impact." }
+    ]
+  },
+  {
+    ...calc("ctr-calculator", "marketing", "CTR Calculator", "Calculate your click-through rate from ad clicks and impressions.", [
+      { name: "clicks", label: "Clicks", value: 2500 },
+      { name: "impressions", label: "Impressions", value: 100000 }
+    ], (v) => (v.clicks / Math.max(v.impressions, 1)) * 100, "(clicks / impressions) x 100", "Click-through rate", "%"),
+    whatIsIt: "The CTR Calculator measures your click-through rate by dividing total ad clicks by total impressions. CTR is one of the most important quality indicators in paid advertising. It tells you how compelling your ad creative, copy, and targeting are to your audience. A higher CTR generally leads to better Quality Scores on Google Ads and lower costs per click.",
+    howItWorks: "You enter the total number of clicks your ad or campaign received and the total number of impressions served. The calculator divides clicks by impressions and multiplies by 100 to express the result as a percentage. The percentage tells you how often people who see your ad end up clicking on it.",
+    stepByStep: "Pull your click and impression data from Google Ads, Meta Ads Manager, LinkedIn Campaign Manager, or your analytics platform. Enter the total clicks for the period you are analyzing. Enter the total impressions served during that same period. The calculator returns your CTR percentage. Compare your result against industry benchmarks to assess ad relevance and audience targeting effectiveness.",
+    realWorldExample: "A Google Ads campaign receives 2,500 clicks from 100,000 impressions. The CTR is 2.5%. For search ads, the average CTR across industries is approximately 3-5%. A 2.5% display or social CTR would be strong. Compare your CTR against your specific channel and industry benchmarks for an accurate performance assessment.",
+    whenToUse: [
+      "Reviewing ad creative performance after launching new campaigns",
+      "Comparing CTR across different ad platforms and audience segments",
+      "Evaluating the impact of ad copy refreshes on audience engagement",
+      "Reporting campaign health metrics to stakeholders or clients"
+    ],
+    benefits: [
+      "Reveals how relevant your ads are to your target audience",
+      "Directly impacts Quality Score and cost efficiency on Google Ads",
+      "Provides early signal of campaign performance before conversion data stabilizes"
+    ],
+    commonMistakes: [
+      "Comparing CTR across different ad formats without adjusting for format benchmarks",
+      "Optimizing for CTR alone without considering conversion rate and cost per conversion",
+      "Using served impressions instead of viewable impressions for display campaigns"
+    ],
+    faqs: [
+      { question: "What is a good CTR for Google Search ads?", answer: "Average search CTR varies by industry. Legal services average around 2-3%, ecommerce around 2-4%, and B2B around 2-3%. Top-of-page positions earn significantly higher CTR than lower positions. Use Google Ads benchmarks for your specific industry as your comparison point." },
+      { question: "How does CTR affect Google Ads Quality Score?", answer: "CTR is the most significant component of Quality Score. A higher CTR signals to Google that your ad is relevant to the search query. A high Quality Score can reduce your cost per click by 30-50% compared to a low Quality Score, making CTR optimization directly tied to campaign profitability." },
+      { question: "What is the difference between CTR and conversion rate?", answer: "CTR measures the percentage of impressions that result in clicks. Conversion rate measures the percentage of clicks that result in a desired action like a purchase or signup. Both metrics matter: CTR shows ad relevance, while conversion rate shows landing page and offer effectiveness." }
+    ],
+    keywords: [
+      "ctr",
+      "click through rate",
+      "click-through rate",
+      "google ads ctr",
+      "facebook ads ctr",
+      "display ad ctr",
+      "ppc ctr benchmark",
+      "ad click rate",
+      "marketing ctr",
+      "paid search ctr",
+      "social media ctr",
+      "ctr marketing"
+    ]
+  },
+  {
+    ...calc("cpa-calculator", "marketing", "CPA Calculator", "Find your cost per acquisition from advertising spend and conversions.", [
+      { name: "advertisingCost", label: "Advertising cost", value: 5000 },
+      { name: "conversions", label: "Conversions", value: 150 }
+    ], (v) => v.advertisingCost / Math.max(v.conversions, 1), "advertising cost / conversions", "CPA", "$"),
+    whatIsIt: "The CPA Calculator computes your Cost Per Acquisition by dividing total advertising spend by the number of conversions generated. CPA is a core performance metric for direct response campaigns across search, social, and display. It tells you exactly how much each customer or lead costs, enabling profitability analysis and budget optimization at the campaign level.",
+    howItWorks: "Enter the total amount spent on your advertising campaign including platform costs, creative production, and management fees. Enter the number of conversions attributed to that campaign. The calculator divides total spend by total conversions to produce your average cost per acquisition. A lower CPA indicates more efficient conversion of ad spend into customers.",
+    stepByStep: "Total every dollar spent on the campaign including ad platform bids, creative assets, landing page costs, and any agency fees. Count the conversions attributed to the campaign within your chosen attribution window. Divide total spend by total conversions to find your CPA. Compare this number against your customer lifetime value to determine if your acquisition costs are sustainable.",
+    realWorldExample: "A Facebook lead generation campaign spends $5,000 and generates 150 conversions. The CPA is $33.33 per conversion. If each customer generates $120 in lifetime value, the acquisition cost is healthy at less than 30% of LTV. A CPA above $60 would mean the campaign is spending more than half the customer's lifetime value to acquire them.",
+    whenToUse: [
+      "Evaluating the profitability of individual campaigns across channels",
+      "Setting target CPAs for automated bidding strategies in Google Ads",
+      "Comparing acquisition efficiency across different audience segments",
+      "Determining whether to scale, optimize, or pause underperforming campaigns"
+    ],
+    benefits: [
+      "Provides a clear dollar figure for every conversion your campaigns generate",
+      "Enables direct comparison of acquisition efficiency across channels and campaigns",
+      "Helps set data-driven budgets based on customer profitability rather than vanity metrics"
+    ],
+    commonMistakes: [
+      "Using an attribution window that is too short, missing delayed conversions",
+      "Including brand-building spend in CPA calculations meant for direct response campaigns",
+      "Comparing CPA across channels without normalizing for conversion value or average order size"
+    ],
+    faqs: [
+      { question: "What is a good CPA for ecommerce?", answer: "A good CPA depends on your average order value and margin. A common rule of thumb is that CPA should not exceed 30% of your customer's first purchase value. For a $100 AOV ecommerce store, a CPA under $30 is generally healthy. For high-ticket items, higher CPAs are acceptable." },
+      { question: "How is CPA different from CAC?", answer: "CPA (Cost Per Acquisition) typically refers to the cost of a single conversion from a specific campaign or channel. CAC (Customer Acquisition Cost) is a broader metric that includes all sales and marketing costs across all channels. CPA is campaign-specific, while CAC is business-wide." },
+      { question: "Can CPA vary by campaign objective?", answer: "Yes. Awareness campaigns naturally have higher CPAs because they target cold audiences. Retargeting campaigns typically have lower CPAs because they reach people already familiar with your brand. Always compare CPA within the same funnel stage for meaningful analysis." }
+    ],
+    keywords: [
+      "cpa",
+      "cost per acquisition",
+      "cost per conversion",
+      "campaign cost per acquisition",
+      "facebook ads cpa",
+      "google ads cpa",
+      "cpa benchmark",
+      "conversion cost",
+      "acquisition cost",
+      "marketing cpa",
+      "ppc cpa",
+      "lead gen cpa"
+    ]
+  },
+  {
+    ...calc("cpl-calculator", "marketing", "CPL Calculator", "Measure your cost per lead from marketing spend and lead volume.", [
+      { name: "marketingSpend", label: "Marketing spend", value: 8000 },
+      { name: "leads", label: "Leads", value: 200 }
+    ], (v) => v.marketingSpend / Math.max(v.leads, 1), "marketing spend / leads", "CPL", "$"),
+    whatIsIt: "The CPL Calculator measures your Cost Per Lead by dividing total marketing spend by the number of leads generated. CPL is a fundamental metric for B2B marketers, content marketers, and any business that relies on lead generation. It helps you evaluate the efficiency of your lead sources and optimize budget allocation across channels that feed your sales pipeline.",
+    howItWorks: "Enter your total marketing spend including ad costs, content production, landing page tools, and distribution. Enter the number of leads generated during the same period. The calculator divides spend by leads to produce your average cost per lead. Tracking CPL by channel reveals which sources deliver the most cost-effective leads for your sales team.",
+    stepByStep: "Sum all marketing costs for the period including paid ads, content creation, email marketing tools, landing page software, and contractor fees. Count all qualified leads generated from those activities. Divide total spend by total leads to calculate your average CPL. Segment by channel to identify which sources deliver the lowest CPL and highest lead quality.",
+    realWorldExample: "A B2B SaaS company spends $8,000 on LinkedIn ads, content syndication, and webinars in a month, generating 200 leads. The CPL is $40. If 20% of leads convert to customers with an average LTV of $2,000, the $40 CPL is highly efficient. A CPL above $100 would signal the need to optimize targeting or try different lead generation channels.",
+    whenToUse: [
+      "Evaluating the efficiency of different lead generation channels and campaigns",
+      "Setting target CPLs for paid social, search, and content marketing initiatives",
+      "Calculating the downstream ROI of lead generation against sales conversion rates",
+      "Reporting marketing-sourced pipeline value to leadership and sales teams"
+    ],
+    benefits: [
+      "Reveals which lead sources deliver the lowest cost per qualified lead",
+      "Helps align marketing spend with sales capacity and pipeline targets",
+      "Provides a clear efficiency metric for content and paid lead generation strategies"
+    ],
+    commonMistakes: [
+      "Counting unqualified leads in the denominator, which artificially lowers CPL",
+      "Excluding content production and distribution costs from the marketing spend total",
+      "Comparing CPL across channels without adjusting for lead quality and conversion rates"
+    ],
+    faqs: [
+      { question: "What is a good CPL for B2B marketing?", answer: "Good CPL varies significantly by industry and target account value. For enterprise B2B, CPLs of $50-200 are common. For SMB B2B, $20-50 is typical. The key benchmark is whether the CPL allows your target LTV to CAC ratio of 3:1 or higher when combined with your sales conversion rate." },
+      { question: "How does CPL differ from CPA?", answer: "CPL measures the cost of generating a lead, which is an early-stage conversion. CPA measures the cost of acquiring a customer, which is a final-stage conversion. CPL is typically much lower than CPA because many leads never become customers. Both metrics are needed for a complete funnel view." },
+      { question: "Should I track CPL by channel or by campaign?", answer: "Both. Channel-level CPL helps with budget allocation across platforms like LinkedIn, Google, and Meta. Campaign-level CPL reveals which specific offers, creatives, and landing pages perform best within each channel. Segmenting both ways provides the most actionable optimization data." }
+    ],
+    keywords: [
+      "cpl",
+      "cost per lead",
+      "lead generation cost",
+      "b2b lead cost",
+      "linkedin lead cost",
+      "facebook lead cost",
+      "google lead cost",
+      "marketing cpl",
+      "lead acquisition cost",
+      "cost per prospect",
+      "cpl benchmark",
+      "lead gen marketing"
+    ]
+  },
+  {
+    ...calc("cost-per-install-calculator", "marketing", "Cost Per Install Calculator", "Calculate your cost per app install from mobile ad campaign data.", [
+      { name: "campaignCost", label: "Campaign cost", value: 10000 },
+      { name: "installs", label: "Installs", value: 2500 }
+    ], (v) => v.campaignCost / Math.max(v.installs, 1), "campaign cost / installs", "CPI", "$"),
+    whatIsIt: "The Cost Per Install Calculator measures the average cost of acquiring a single app install through mobile advertising campaigns. CPI is the primary success metric for mobile user acquisition (UA) teams on iOS and Android. It helps app marketers evaluate ad network performance, optimize creative sets, and manage campaign budgets against install volume targets.",
+    howItWorks: "Enter your total campaign cost including ad platform spend, creative production, and any UA tool or agency fees. Enter the number of installs attributed to the campaign within your chosen attribution window. The calculator divides total cost by total installs to produce your average CPI. Lower CPI indicates more efficient install generation, though post-install engagement metrics also matter for true UA success.",
+    stepByStep: "Sum all costs associated with your UA campaign including ad network spend, video creative production, attribution tool costs, and any managed service fees. Count the installs attributed to the campaign from your MMP (Adjust, Branch, AppsFlyer). Divide total cost by total installs to find your CPI. Compare against your target CPI and industry benchmarks for your app category.",
+    realWorldExample: "A mobile game runs a UA campaign spending $10,000 across TikTok and Meta, generating 2,500 installs. The CPI is $4.00. If the average player generates $6.00 in in-app purchases within 30 days, the campaign is profitable with a 1.5x short-term ROAS. A CPI above $8 would make it difficult to achieve positive returns given the average player value.",
+    whenToUse: [
+      "Evaluating the efficiency of user acquisition campaigns across ad networks",
+      "Comparing CPI across different creative formats and audience segments",
+      "Setting target CPIs for campaign budget allocation and bid management",
+      "Reporting UA performance to product and executive stakeholders"
+    ],
+    benefits: [
+      "Provides a standardized cost metric for comparing UA channels and campaigns",
+      "Helps identify the most efficient ad networks and creative combinations for installs",
+      "Enables data-driven scaling decisions based on unit economics rather than install volume"
+    ],
+    commonMistakes: [
+      "Not accounting for organic installs that get incorrectly attributed to paid campaigns",
+      "Comparing CPI across different geographies without adjusting for regional cost differences",
+      "Focusing solely on CPI without measuring post-install retention and in-app purchase value"
+    ],
+    faqs: [
+      { question: "What is a good CPI for mobile apps?", answer: "Good CPI varies by app category and geography. Hyper-casual games often see CPIs under $1, while gaming apps average $2-5. Finance and shopping apps can have CPIs of $5-10 due to higher user value. Compare against your app category benchmarks and ensure your LTV exceeds CPI by at least 3x." },
+      { question: "How does CPI differ from CPA?", answer: "CPI measures the cost of a single app install, while CPA measures the cost of a specific in-app action like a purchase or registration. CPI is a top-of-funnel metric for UA, while CPA is a bottom-of-funnel metric for monetization. Both are needed for complete mobile marketing analysis." },
+      { question: "What attribution window should I use for CPI?", answer: "Most mobile marketers use a 24-hour click-to-install window for organic view-through attribution and a 7-day click-through window. Longer windows capture more installs but may include organic users. Shorter windows are more conservative. Choose a window that aligns with your app category norms." }
+    ],
+    keywords: [
+      "cpi",
+      "cost per install",
+      "app install cost",
+      "mobile ua cost",
+      "ios install cost",
+      "android install cost",
+      "user acquisition cost",
+      "app marketing cpi",
+      "mobile ad cost per install",
+      "install campaign cost",
+      "app store installs",
+      "ua campaign"
+    ]
+  },
+  {
+    ...calc("marketing-roi-calculator", "marketing", "Marketing ROI Calculator", "Measure the return on investment from your marketing campaigns and activities.", [
+      { name: "revenue", label: "Revenue", value: 50000 },
+      { name: "marketingCost", label: "Marketing cost", value: 12000 }
+    ], (v) => ((v.revenue - v.marketingCost) / Math.max(v.marketingCost, 1)) * 100, "((revenue - marketing cost) / marketing cost) x 100", "Marketing ROI", "%"),
+    whatIsIt: "The Marketing ROI Calculator measures the return generated from marketing activities relative to their cost. Marketing ROI, also called ROMI, is the definitive metric for evaluating whether your marketing spend is delivering positive financial results. It accounts for both the revenue generated and the full cost of the marketing effort, giving you a percentage that reflects true campaign profitability.",
+    howItWorks: "Enter the total revenue attributed to your marketing activities and the total cost of those activities including ad spend, creative production, tools, and team costs. The calculator subtracts marketing cost from revenue to find net profit, divides by cost, and multiplies by 100 to express the result as a percentage. A positive ROI means your marketing generated more revenue than it cost.",
+    stepByStep: "Collect the revenue directly attributable to your marketing campaigns from your analytics or CRM platform. Total all costs including ad platform fees, creative production, marketing tools, agency fees, and any allocated team costs. Subtract costs from revenue, divide by costs, and multiply by 100. Use this percentage to compare the efficiency of different campaigns, channels, and time periods.",
+    realWorldExample: "An ecommerce brand runs a holiday campaign generating $50,000 in revenue with $12,000 in total marketing costs. The marketing ROI is 316.67%, meaning every dollar spent returned $3.17 in profit after costs. A campaign with a marketing ROI below 100% is generating less profit than the cost required to run it, signaling a need for optimization or reallocation.",
+    whenToUse: [
+      "Evaluating overall marketing program effectiveness for quarterly business reviews",
+      "Comparing ROI across different channels to inform budget allocation decisions",
+      "Building business cases for marketing investment increases or decreases",
+      "Reporting marketing's financial contribution to executive leadership and board members"
+    ],
+    benefits: [
+      "Provides a clear financial answer to whether marketing spend is generating positive returns",
+      "Enables apples-to-apples comparison of performance across different channels and campaigns",
+      "Helps marketing teams communicate their value in the financial language executives understand"
+    ],
+    commonMistakes: [
+      "Using last-touch attribution when multi-touch attribution would provide a fairer picture",
+      "Excluding operational costs like team salaries and tool subscriptions from the cost total",
+      "Comparing marketing ROI across channels with different attribution models and conversion windows"
+    ],
+    faqs: [
+      { question: "What is a good marketing ROI percentage?", answer: "A marketing ROI above 100% means your campaigns are generating more profit than they cost. Most businesses target 200-500% ROI for established campaigns. Early-stage or brand-building campaigns may operate at lower ROI while building audience. Any campaign consistently below 100% should be reviewed for optimization or replacement." },
+      { question: "How is marketing ROI different from ROAS?", answer: "ROAS (Return on Ad Spend) measures revenue per dollar of ad spend only, while marketing ROI measures profit relative to total marketing cost including creative, tools, and team. ROAS is a narrower channel-level metric, while marketing ROI is a broader program-level metric. Marketing ROI is more comprehensive but harder to calculate precisely." },
+      { question: "Should I include brand-building campaigns in marketing ROI?", answer: "Brand-building campaigns are harder to measure with direct ROI because their impact is long-term and indirect. Consider measuring them separately with brand lift surveys, share of voice, and branded search volume rather than forcing them into a direct ROI calculation designed for performance campaigns." }
+    ],
+    keywords: [
+      "marketing roi",
+      "romi",
+      "return on marketing investment",
+      "campaign roi",
+      "marketing effectiveness",
+      "marketing profitability",
+      "marketing spend roi",
+      "campaign performance",
+      "marketing metrics roi",
+      "digital marketing roi",
+      "b2b marketing roi",
+      "ecommerce roi"
+    ]
+  },
+  {
+    ...calc("email-open-rate-calculator", "marketing", "Email Open Rate Calculator", "Calculate the percentage of delivered emails that recipients open.", [
+      { name: "emailsOpened", label: "Emails opened", value: 8500 },
+      { name: "emailsDelivered", label: "Emails delivered", value: 50000 }
+    ], (v) => (v.emailsOpened / Math.max(v.emailsDelivered, 1)) * 100, "(emails opened / emails delivered) x 100", "Open rate", "%"),
+    whatIsIt: "The Email Open Rate Calculator measures the percentage of delivered emails that were opened by recipients. Open rate is one of the most closely watched email marketing metrics because it reflects subject line effectiveness, sender reputation, and audience engagement. A healthy open rate indicates that your subscribers recognize your brand and find your subject lines compelling enough to open.",
+    howItWorks: "Enter the total number of emails that were successfully delivered to recipients' inboxes excluding bounces. Enter the number of those emails that were opened including both unique opens and total opens depending on your reporting preference. The calculator divides opens by delivered emails and multiplies by 100 to express the result as a percentage of your list that engaged with your subject line.",
+    stepByStep: "Pull your email campaign report from your ESP like Mailchimp, Klaviyo, or HubSpot. Note the total delivered count which excludes hard and soft bounces. Record the unique opens count for the most conservative measurement. Divide opens by delivered and multiply by 100. Compare your open rate against industry benchmarks for your sector to assess email health and subject line performance.",
+    realWorldExample: "A weekly newsletter sends to 50,000 subscribers with 8,500 recorded opens. The open rate is 17%. The average open rate across industries is approximately 20-25%, so this campaign is slightly below benchmark. Improving the subject line through A/B testing and segmenting the list to improve relevance could help raise the open rate toward 22-24%.",
+    whenToUse: [
+      "Evaluating subject line performance after each email campaign send",
+      "Monitoring sender reputation and deliverability health over time",
+      "A/B testing subject line variants to identify high-performing messaging",
+      "Assessing audience engagement trends across different list segments"
+    ],
+    benefits: [
+      "Provides immediate feedback on subject line effectiveness before measuring click performance",
+      "Helps identify deliverability issues when open rates drop suddenly",
+      "Serves as a leading indicator of list health and subscriber engagement"
+    ],
+    commonMistakes: [
+      "Using total opens instead of unique opens, which inflates the rate for repeat openers",
+      "Including Apple Mail Privacy Protection opens that may not represent real engagement",
+      "Comparing open rates across different send times without accounting for time zone differences"
+    ],
+    faqs: [
+      { question: "What is a good email open rate by industry?", answer: "Average open rates vary by industry. Nonprofits average around 25%, ecommerce around 15-20%, B2B SaaS around 20-25%, and media around 20%. Factors like list quality, send frequency, and subject line strategy all influence your open rate. Compare against your specific industry rather than general benchmarks." },
+      { question: "How has Apple Mail Privacy Protection affected open rates?", answer: "Apple's Mail Privacy Protection (MPP) automatically loads tracking pixels, inflating open rates for Apple Mail users. This affects approximately 30-50% of opens depending on your audience. Many marketers now prioritize click rates and conversion rates over open rates as more reliable engagement signals." },
+      { question: "What is a quick way to improve email open rates?", answer: "Common improvements include writing more specific and curiosity-driven subject lines, personalizing with the recipient's name or location, sending at optimal times based on engagement history, cleaning inactive subscribers regularly, and segmenting your list to send more relevant content to each group." }
+    ],
+    keywords: [
+      "email open rate",
+      "open rate",
+      "email marketing metrics",
+      "subject line performance",
+      "email campaign analytics",
+      "mailchimp open rate",
+      "newsletter open rate",
+      "email deliverability",
+      "email engagement",
+      "email performance",
+      "marketing email open rate",
+      "email list health"
+    ]
+  },
+  {
+    ...calc("email-click-rate-calculator", "marketing", "Email Click Rate Calculator", "Measure the percentage of delivered emails that receive at least one click.", [
+      { name: "emailClicks", label: "Email clicks", value: 1200 },
+      { name: "emailsDelivered", label: "Emails delivered", value: 50000 }
+    ], (v) => (v.emailClicks / Math.max(v.emailsDelivered, 1)) * 100, "(email clicks / emails delivered) x 100", "Click rate", "%"),
+    whatIsIt: "The Email Click Rate Calculator measures the percentage of delivered emails that received at least one click. Click rate is a stronger engagement signal than open rate because it requires active interest rather than passive viewing. It reflects how compelling your email content, offers, and calls-to-action are to subscribers who have already opened the message.",
+    howItWorks: "Enter the total number of delivered emails excluding bounces and the total number of unique clicks your email received. The calculator divides clicks by delivered emails and multiplies by 100. The result tells you what percentage of your list was motivated enough by your content to click through to your website, landing page, or offer.",
+    stepByStep: "Access your email campaign report in your email service provider dashboard. Record the total number of emails that were successfully delivered. Count the unique clicks, which counts each recipient only once regardless of how many links they clicked. Divide unique clicks by delivered emails and multiply by 100. Monitor this metric alongside open rate to understand both subject line and content effectiveness.",
+    realWorldExample: "A product launch email delivers to 50,000 subscribers and receives 1,200 unique clicks. The click rate is 2.4%. If the open rate was 17%, the click-to-open rate is approximately 14%, meaning 14% of people who opened the email also clicked. A click rate above 3% is considered strong for most ecommerce and B2B email campaigns.",
+    whenToUse: [
+      "Evaluating the effectiveness of email content, offers, and call-to-action placement",
+      "Comparing engagement across different email types like newsletters, promotions, and transactional emails",
+      "A/B testing CTA copy, button design, and link placement for higher engagement",
+      "Measuring the downstream impact of email campaigns on website traffic and conversions"
+    ],
+    benefits: [
+      "Measures true engagement beyond the subject line, showing content effectiveness",
+      "Less affected by Apple MPP privacy changes compared to open rate",
+      "Directly correlates with email-driven website traffic, leads, and revenue"
+    ],
+    commonMistakes: [
+      "Using total clicks instead of unique clicks, which overstates reach for multi-link emails",
+      "Not tracking click-to-open rate alongside click rate for a complete engagement picture",
+      "Setting arbitrary click rate targets without considering email type, audience, and offer strength"
+    ],
+    faqs: [
+      { question: "What is a good email click rate?", answer: "Average click rates vary by industry. Ecommerce typically sees 2-3%, B2B sees 2-4%, and media sees 3-5%. The click-to-open rate is often more meaningful, with 15-25% being typical across industries. A click rate above 5% is generally considered excellent regardless of sector." },
+      { question: "How does click rate differ from click-to-open rate?", answer: "Click rate (also called CTOR) measures clicks against total delivered emails. Click-to-open rate (CTOR) measures clicks against unique opens. CTOR tells you how engaging your content is to people who already opened, while click rate tells you overall campaign effectiveness. Both are useful but answer different questions." },
+      { question: "How many links should I include in an email?", answer: "There is no universal rule, but single-CTA emails typically achieve higher click-through rates per link. Multiple links spread engagement across destinations but can increase total click rate. Test both approaches. For promotional emails, one primary CTA with one or two supporting links is a common best practice." }
+    ],
+    keywords: [
+      "email click rate",
+      "email ctr",
+      "click to open rate",
+      "email campaign ctr",
+      "email marketing clicks",
+      "newsletter click rate",
+      "email conversion",
+      "email engagement rate",
+      "mailchimp click rate",
+      "email performance metric",
+      "marketing email clicks",
+      "email cta performance"
+    ]
+  },
+  {
+    ...calc("bounce-rate-calculator", "marketing", "Bounce Rate Calculator", "Calculate the percentage of visitors who leave after viewing only one page.", [
+      { name: "singlePageSessions", label: "Single-page sessions", value: 3500 },
+      { name: "totalSessions", label: "Total sessions", value: 20000 }
+    ], (v) => (v.singlePageSessions / Math.max(v.totalSessions, 1)) * 100, "(single-page sessions / total sessions) x 100", "Bounce rate", "%"),
+    whatIsIt: "The Bounce Rate Calculator measures the percentage of website sessions where a visitor left after viewing only one page without triggering any other interactions. Bounce rate is a critical user engagement metric that helps marketers evaluate landing page relevance, content quality, page load speed, and overall site usability. A high bounce rate often signals a disconnect between the visitor's expectation and the page experience.",
+    howItWorks: "Enter the number of sessions that included only a single pageview with no additional interactions like clicks, form fills, or scrolls. Enter the total number of sessions during the same period. The calculator divides single-page sessions by total sessions and multiplies by 100 to express the result as a percentage of sessions that bounced.",
+    stepByStep: "Open your analytics platform such as Google Analytics 4 or Plausible and navigate to the engagement or behavior section. Identify the bounce rate metric for your desired page or segment. Alternatively, export single-page session count and total session count for a specific page or date range. Divide single-page sessions by total sessions and multiply by 100. Segment by traffic source to identify which channels drive the most engaged visitors.",
+    realWorldExample: "A blog post receives 20,000 sessions in a month with 3,500 sessions being single-page visits with no interaction. The bounce rate is 17.5%. For content pages, a bounce rate under 40% is generally good, while 17.5% indicates highly relevant content that keeps visitors engaged. A product page with a bounce rate above 60% may need better copy, faster load times, or clearer calls to action.",
+    whenToUse: [
+      "Evaluating landing page relevance and content quality for specific pages",
+      "Comparing bounce rates across different traffic sources and marketing channels",
+      "Identifying pages with usability issues that cause visitors to leave immediately",
+      "Monitoring the impact of page speed improvements and design changes on engagement"
+    ],
+    benefits: [
+      "Reveals whether your content meets visitor expectations set by your ads and search listings",
+      "Helps identify technical and usability issues that drive visitors away",
+      "Provides a baseline metric for measuring the impact of page optimization efforts"
+    ],
+    commonMistakes: [
+      "Comparing bounce rates across different page types without adjusting for content norms",
+      "Treating all bounces as negative without considering single-page visits that fully satisfied the visitor",
+      "Not accounting for analytics configuration differences like event-based vs pageview-based bounce measurement"
+    ],
+    faqs: [
+      { question: "What is a good bounce rate for different page types?", answer: "Good bounce rates vary by page type. Blog posts: 40-60% is average. Product pages: 20-40% is strong. Landing pages: 20-50% depending on offer quality. Checkout pages: under 20% is ideal. Bounce rates above 80% on any page type warrant investigation into page load speed, content relevance, or technical issues." },
+      { question: "How does bounce rate differ from exit rate?", answer: "Bounce rate measures sessions that leave from the entry page without any interaction. Exit rate measures the percentage of sessions that end on a specific page regardless of how many pages were viewed before. A page can have a high exit rate but a low bounce rate if visitors are engaging with content before leaving." },
+      { question: "What causes high bounce rates?", answer: "Common causes include slow page load speed, poor mobile responsiveness, misleading ad or SEO content that sets wrong expectations, lack of clear calls to action, intrusive pop-ups, complex navigation, and low-quality or thin content that does not provide value to the visitor." }
+    ],
+    keywords: [
+      "bounce rate",
+      "website bounce rate",
+      "single page sessions",
+      "landing page bounce rate",
+      "google analytics bounce rate",
+      "page engagement",
+      "website engagement metric",
+      "content performance",
+      "user engagement rate",
+      "site exit rate",
+      "web analytics metric",
+      "seo bounce rate"
+    ]
+  },
+  {
+    ...calc("engagement-rate-calculator", "marketing", "Engagement Rate Calculator", "Calculate how often audiences interact with your content on social media.", [
+      { name: "totalEngagements", label: "Total engagements", value: 15000 },
+      { name: "totalReach", label: "Total reach", value: 300000 }
+    ], (v) => (v.totalEngagements / Math.max(v.totalReach, 1)) * 100, "(total engagements / total reach) x 100", "Engagement rate", "%"),
+    whatIsIt: "The Engagement Rate Calculator measures the percentage of people who interacted with your content after seeing it on social media. Engagement rate combines likes, comments, shares, saves, and clicks relative to reach or impressions. It is the most meaningful social media metric because it indicates how compelling and relevant your content is to your audience, transcending vanity metrics like follower count.",
+    howItWorks: "Enter the total number of engagements your post or campaign received including likes, comments, shares, saves, and link clicks. Enter the total reach the number of unique users who saw your content. The calculator divides engagements by reach and multiplies by 100. A higher percentage indicates content that resonates strongly with your audience and generates conversation and action.",
+    stepByStep: "Access your social media analytics dashboard for the platform you are analyzing Instagram, TikTok, LinkedIn, Facebook, or X. Note the total engagements for the post or period. Record the total reach for that same content. Divide engagements by reach and multiply by 100. Benchmark your result against your historical average and industry standards to gauge content performance.",
+    realWorldExample: "An Instagram post reaches 300,000 users and receives 15,000 total engagements including likes, comments, shares, and saves. The engagement rate is 5%. For Instagram, an engagement rate above 3% is considered strong, while below 1% suggests the content is not resonating. This 5% rate indicates highly engaging content that the algorithm is likely to favor in feed distribution.",
+    whenToUse: [
+      "Evaluating content performance across different social media platforms",
+      "Comparing engagement rates between content formats like video, image, and carousel",
+      "Identifying which topics and content styles resonate most with your audience",
+      "Reporting social media effectiveness to stakeholders and content strategy planning"
+    ],
+    benefits: [
+      "Measures meaningful audience interaction beyond passive views and follower counts",
+      "Helps identify content that drives conversation, sharing, and community growth",
+      "Provides a standardized metric for comparing performance across platforms and post types"
+    ],
+    commonMistakes: [
+      "Using follower count instead of reach as the denominator, which inflates rates for small pages",
+      "Counting all engagement types equally when shares and saves indicate deeper interest than likes",
+      "Comparing engagement rates across different platforms without adjusting for platform-specific norms"
+    ],
+    faqs: [
+      { question: "What is a good engagement rate on social media?", answer: "Good engagement rates vary by platform. Instagram: 1-3% is average, above 3% is strong. TikTok: 5-10% is common due to the algorithm. LinkedIn: 2-5% is strong. Facebook: 0.5-1% is average. X (Twitter): 0.5-1% is average. Compare against your own historical performance and platform-specific benchmarks for the most accurate assessment." },
+      { question: "How does engagement rate differ from reach and impressions?", answer: "Reach measures unique users who saw your content, impressions are total views including repeats, and engagement rate measures interactions as a percentage of reach. Reach tells you how many people saw your content, while engagement rate tells you how many cared enough to interact. Both are important for a complete content performance picture." },
+      { question: "What is the best way to improve social media engagement rate?", answer: "Common strategies include posting content that educates or entertains rather than just promotes, using strong visual hooks in the first 1-2 seconds of video content, asking questions and encouraging comments, posting consistently at times when your audience is most active, and replying quickly to comments to boost algorithmic distribution." }
+    ],
+    keywords: [
+      "engagement rate",
+      "social media engagement",
+      "instagram engagement",
+      "facebook engagement",
+      "tiktok engagement",
+      "linkedin engagement",
+      "content interaction rate",
+      "post performance",
+      "audience engagement",
+      "social media metric",
+      "engagement benchmark",
+      "organic reach engagement"
+    ]
+  },
+  {
+    ...calc("marketing-efficiency-ratio-calculator", "marketing", "Marketing Efficiency Ratio Calculator", "Measure total marketing revenue against total marketing spend to gauge overall efficiency.", [
+      { name: "totalMarketingRevenue", label: "Total marketing revenue", value: 100000 },
+      { name: "totalMarketingSpend", label: "Total marketing spend", value: 25000 }
+    ], (v) => v.totalMarketingRevenue / Math.max(v.totalMarketingSpend, 1), "total marketing revenue / total marketing spend", "MER", "x"),
+    whatIsIt: "The Marketing Efficiency Ratio Calculator measures the ratio of total marketing revenue to total marketing spend. MER, sometimes called blended ROAS, provides a holistic view of marketing performance by including all channels, campaigns, and costs in a single number. Unlike channel-specific ROAS, MER captures cross-channel effects, brand halo, and the full funnel impact of your marketing activities.",
+    howItWorks: "Enter your total revenue attributed to marketing across all channels and campaigns including direct, assisted, and brand impact. Enter your total marketing spend including ad platforms, creative production, tools, agency fees, content marketing costs, and team salaries. The calculator divides total revenue by total spend to show how many dollars you generate for every dollar spent on marketing.",
+    stepByStep: "Total your marketing-attributed revenue from your analytics and CRM platforms using your preferred attribution model. Sum all marketing costs including paid media, creative production, marketing tools and software, agency and consulting fees, content creation and distribution, and allocated team costs. Divide total revenue by total spend. A MER above 3.0 is generally healthy for most businesses, but benchmarks vary by industry and margin structure.",
+    realWorldExample: "A DTC brand generates $100,000 in total marketing-attributed revenue while spending $25,000 across all marketing activities including Meta ads, Google Ads, influencer partnerships, email marketing tools, and a content team. Their MER is 4.0x meaning every dollar spent on marketing returns four dollars in revenue. If their target MER is 3.5x, the overall marketing program is performing above expectations.",
+    whenToUse: [
+      "Quarterly marketing performance reviews with executive leadership",
+      "Evaluating overall marketing efficiency across all channels combined",
+      "Setting annual marketing budget targets based on desired revenue outcomes",
+      "Comparing marketing efficiency across different time periods and growth phases"
+    ],
+    benefits: [
+      "Provides a single holistic metric that captures total marketing performance",
+      "Accounts for cross-channel effects that individual channel ROAS misses",
+      "Helps leadership evaluate whether overall marketing investment is delivering expected returns"
+    ],
+    commonMistakes: [
+      "Using MER as a channel-level metric when it is designed for program-level evaluation",
+      "Excluding brand-building costs that contribute to revenue but lack direct attribution",
+      "Comparing MER across businesses with different attribution models and cost inclusion standards"
+    ],
+    faqs: [
+      { question: "What is a good MER for ecommerce businesses?", answer: "A good MER typically ranges from 3.0x to 5.0x for healthy ecommerce businesses. MER below 2.0x suggests the overall marketing program may not be efficient enough to support sustainable growth. MER above 6.0x could indicate underinvestment in marketing relative to market opportunity. The right target depends on your margins, growth stage, and business model." },
+      { question: "How is MER different from ROAS?", answer: "ROAS measures revenue per dollar of ad spend for a specific channel or campaign. MER measures total revenue per dollar of total marketing spend including all costs. MER is broader and more comprehensive. A campaign might show 5x ROAS on ad spend, but when you include creative, tools, and team costs, the MER might be 3x. Both metrics are valuable but answer different questions." },
+      { question: "Should MER include brand marketing costs?", answer: "Yes. MER is most useful when it includes all marketing costs, including brand marketing, content, PR, events, and sponsorships. Excluding brand costs understates true marketing investment and overstates efficiency. The purpose of MER is to evaluate total marketing performance, so include all costs for an honest assessment." }
+    ],
+    keywords: [
+      "mer",
+      "marketing efficiency ratio",
+      "blended roas",
+      "total marketing performance",
+      "marketing spend efficiency",
+      "revenue per ad dollar",
+      "full funnel roas",
+      "marketing revenue ratio",
+      "mer benchmark",
+      "total marketing roi",
+      "marketing mix efficiency",
+      "media efficiency"
     ]
   }
 ];
