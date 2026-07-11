@@ -4,6 +4,7 @@ import { Copy, RotateCcw, Share2 } from "lucide-react";
 const format = (value, unit) => {
   const number = Number.isFinite(value) ? value : 0;
   if (unit === "$") return `$${number.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+  if (unit === "₹") return `₹${number.toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
   if (unit === "%") return `${number.toLocaleString(undefined, { maximumFractionDigits: 2 })}%`;
   if (unit === "x") return `${number.toLocaleString(undefined, { maximumFractionDigits: 2 })}x`;
   return `${number.toLocaleString(undefined, { maximumFractionDigits: 2 })}${unit || ""}`;
@@ -48,7 +49,12 @@ export default function CalculatorTool({ calculator }) {
   };
 
   const handleCopy = async () => {
-    const text = `${calculator.title}: ${displayValue(result, calculator.unit)}`;
+    let text;
+    if (calculator.results) {
+      text = `${calculator.title}: ${calculator.results.map((r) => `${r.label}: ${displayValue(result[r.key], r.unit)}`).join(" | ")}`;
+    } else {
+      text = `${calculator.title}: ${displayValue(result, calculator.unit)}`;
+    }
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
@@ -113,16 +119,29 @@ export default function CalculatorTool({ calculator }) {
         </div>
       </div>
       <aside className="panel flex flex-col justify-between p-6">
-        <div>
-          <p className="eyebrow">{calculator.resultLabel}</p>
-          <p className="mt-4 text-5xl font-black text-white" aria-live="polite">
-            {displayValue(result, calculator.unit)}
-          </p>
-        </div>
+        {calculator.results ? (
+          <div className="grid gap-4 sm:grid-cols-2">
+            {calculator.results.map((r) => (
+              <div key={r.key} className="rounded-xl border border-line bg-panel p-5 sm:p-6">
+                <p className="eyebrow">{r.label}</p>
+                <p className="mt-4 text-5xl font-black text-white" aria-live="polite">
+                  {displayValue(result[r.key], r.unit)}
+                </p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>
+            <p className="eyebrow">{calculator.resultLabel}</p>
+            <p className="mt-4 text-5xl font-black text-white" aria-live="polite">
+              {displayValue(result, calculator.unit)}
+            </p>
+          </div>
+        )}
         <div className="mt-4 flex flex-wrap gap-2">
           <button
             onClick={handleCopy}
-            disabled={!Number.isFinite(result)}
+            disabled={!calculator.results && !Number.isFinite(result)}
             className="button-secondary gap-2 disabled:pointer-events-none disabled:opacity-50"
             aria-label="Copy result to clipboard"
           >

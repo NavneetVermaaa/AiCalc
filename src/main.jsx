@@ -16,6 +16,9 @@ const About = lazy(() => import("./pages/About.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.jsx"));
 const Terms = lazy(() => import("./pages/Terms.jsx"));
+const CookiePolicy = lazy(() => import("./pages/CookiePolicy.jsx"));
+const Disclaimer = lazy(() => import("./pages/Disclaimer.jsx"));
+const EditorialPolicy = lazy(() => import("./pages/EditorialPolicy.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 
 createRoot(document.getElementById("root")).render(
@@ -36,6 +39,9 @@ createRoot(document.getElementById("root")).render(
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
               <Route path="search" element={<SearchPage />} />
               <Route path="terms" element={<Terms />} />
+              <Route path="cookie-policy" element={<CookiePolicy />} />
+              <Route path="disclaimer" element={<Disclaimer />} />
+              <Route path="editorial-policy" element={<EditorialPolicy />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

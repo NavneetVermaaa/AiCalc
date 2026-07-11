@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback } from "react";
 import { BarChart3, Menu, Search, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { BRAND } from "../config/brand";
+import { categories } from "../data/calculators.js";
 
+const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const nav = [
-  ["AI", "/calculators/ai"],
-  ["Startup", "/calculators/startup"],
-  ["Marketing", "/calculators/marketing"],
+  ...categories.map((c) => [c.id === "ai" ? "AI" : capitalize(c.id), `/calculators/${c.id}`]),
   ["Blog", "/blog"]
 ];
 
@@ -109,13 +109,16 @@ export default function Layout({ children }) {
             <p className="text-xl font-black text-white">{BRAND.name}</p>
             <p className="mt-3 max-w-xl text-sm leading-6 text-slate-400">{BRAND.description}</p>
           </div>
-          {nav.slice(0, 3).map(([label, to]) => <Link key={to} to={to} className="text-sm font-semibold text-slate-300 hover:text-mint">{label} Calculators</Link>)}
+          {categories.map((c) => <Link key={c.id} to={`/calculators/${c.id}`} className="text-sm font-semibold text-slate-300 hover:text-mint">{c.title}</Link>)}
           <div className="flex flex-col gap-2 md:col-span-1">
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Company</p>
             <Link to="/about" className="text-sm text-slate-300 hover:text-mint">About</Link>
             <Link to="/contact" className="text-sm text-slate-300 hover:text-mint">Contact</Link>
             <Link to="/privacy-policy" className="text-sm text-slate-300 hover:text-mint">Privacy Policy</Link>
+            <Link to="/cookie-policy" className="text-sm text-slate-300 hover:text-mint">Cookie Policy</Link>
             <Link to="/terms" className="text-sm text-slate-300 hover:text-mint">Terms of Service</Link>
+            <Link to="/disclaimer" className="text-sm text-slate-300 hover:text-mint">Disclaimer</Link>
+            <Link to="/editorial-policy" className="text-sm text-slate-300 hover:text-mint">Editorial Policy</Link>
           </div>
         </div>
       </footer>

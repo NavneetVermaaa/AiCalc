@@ -30,6 +30,11 @@ export const categories = [
     id: "marketing",
     title: "Marketing Calculators",
     description: "ROAS, CPC, CPM, and conversion calculators for growth teams."
+  },
+  {
+    id: "finance",
+    title: "Finance Calculators",
+    description: "GST, EMI, loan, investment, inflation, percentage, and everyday math tools."
   }
 ];
 
@@ -1810,6 +1815,1227 @@ export const calculators = [
       "total marketing roi",
       "marketing mix efficiency",
       "media efficiency"
+    ]
+  },
+  {
+    ...calc("gst-calculator", "finance", "GST Calculator", "Calculate the GST amount and total price from your base amount and GST rate.", [
+      { name: "amount", label: "Amount", value: 10000 },
+      { name: "gstRate", label: "GST rate (%)", value: 18 }
+    ], (v) => {
+      const amount = Math.max(Number(v.amount) || 0, 0);
+      const gstRate = Math.max(Number(v.gstRate) || 0, 0);
+      return (amount * gstRate) / 100;
+    }, "GST = Amount x GST% / 100", "GST Amount", "₹"),
+    whatIsIt: "The GST Calculator computes the Goods and Services Tax amount and total price from your base amount and applicable GST rate. It supports any GST rate including 5%, 12%, 18%, and 28% slabs used in India. Businesses use it for accurate tax calculations on invoices, purchases, and quotations.",
+    howItWorks: "Enter the base price of your product or service and the applicable GST percentage. The calculator multiplies the base amount by the GST rate and divides by 100. The result is the GST component, which you add to the base amount to get the total price including tax.",
+    stepByStep: "Start with the base price of the item before tax. Determine the applicable GST rate for your product category. Multiply the base amount by the GST rate and divide by 100. The result is the GST amount you need to charge or claim.",
+    realWorldExample: "A business sells a laptop for Rs 10,000 before tax under the 18% GST slab. The GST amount is Rs 1,800, and the total price including GST is Rs 11,800. This matches the standard GST calculation used across India.",
+    whenToUse: [
+      "Preparing customer invoices that must show the GST component separately",
+      "Estimating input tax credit on business purchases",
+      "Quoting prices to clients in different GST slabs",
+      "Reconciling monthly GST returns with accounting records"
+    ],
+    benefits: [
+      "Eliminates manual GST calculation errors on invoices",
+      "Works with all GST slabs used in India",
+      "Provides clear tax breakdown for input tax credit claims"
+    ],
+    commonMistakes: [
+      "Applying GST on top of an already tax-inclusive price instead of the base price",
+      "Using the wrong GST slab rate for the product or service category",
+      "Forgetting that some items are exempt from GST or fall under reverse charge"
+    ],
+    faqs: [
+      { question: "What GST rates are supported?", answer: "This calculator supports any GST rate you enter. Common Indian GST slabs are 5% for essential items, 12% for standard goods, 18% for most services and goods, and 28% for luxury items. Enter the rate applicable to your specific product or service." },
+      { question: "Should I use the base price or MRP for GST calculation?", answer: "Always use the base price before tax. If you only have the MRP (maximum retail price), divide by 1.18 for 18% GST to find the base price, then enter that amount. The calculator will compute the correct GST component." },
+      { question: "Does this calculator handle CGST and SGST separately?", answer: "This calculator returns the total GST amount. For IGST (inter-state), the full amount applies. For intra-state transactions, divide the result by 2 to get CGST and SGST components separately." }
+    ],
+    keywords: [
+      "gst calculator",
+      "goods and service tax",
+      "gst india",
+      "18 percent gst",
+      "gst calculation",
+      "tax calculator india",
+      "gst rate",
+      "gst amount",
+      "cgst sgst calculator",
+      "invoice tax",
+      "gst slab",
+      "input tax credit",
+      "reverse charge gst",
+      "gst on services",
+      "gst on products"
+    ]
+  },
+  {
+    ...calc("emi-calculator", "finance", "EMI Calculator", "Calculate your monthly EMI, total interest, and total payment for a loan.", [
+      { name: "loanAmount", label: "Loan amount", value: 500000 },
+      { name: "interestRate", label: "Interest rate (%)", value: 9 },
+      { name: "years", label: "Loan term (years)", value: 5 }
+    ], (v) => {
+      const P = Math.max(Number(v.loanAmount) || 0, 0);
+      const annualRate = Math.max(Number(v.interestRate) || 0, 0);
+      const N = Math.max(Number(v.years) || 0, 0);
+      const months = N * 12;
+      if (P <= 0 || months <= 0) return { monthlyPayment: 0, totalPayment: 0, totalInterest: 0 };
+      if (annualRate <= 0) {
+        const monthlyPayment = P / months;
+        return { monthlyPayment, totalPayment: P, totalInterest: 0 };
+      }
+      const R = annualRate / 12 / 100;
+      const factor = Math.pow(1 + R, months);
+      const monthlyPayment = (P * R * factor) / (factor - 1);
+      const totalPayment = monthlyPayment * months;
+      const totalInterest = totalPayment - P;
+      return {
+        monthlyPayment: Number.isFinite(monthlyPayment) ? monthlyPayment : 0,
+        totalPayment: Number.isFinite(totalPayment) ? totalPayment : 0,
+        totalInterest: Number.isFinite(totalInterest) ? totalInterest : 0
+      };
+    }, "EMI = P x R x (1+R)^N / ((1+R)^N - 1)", "Monthly EMI", "₹/month"),
+    results: [
+      { key: "monthlyPayment", label: "Monthly EMI", unit: "₹/month" },
+      { key: "totalPayment", label: "Total Payment", unit: "₹" },
+      { key: "totalInterest", label: "Total Interest", unit: "₹" }
+    ],
+    whatIsIt: "The EMI Calculator estimates your equated monthly installment, total payment, and total interest for a loan. It uses the standard EMI formula that banks and financial institutions across India use for home loans, car loans, personal loans, and education loans.",
+    howItWorks: "Enter the loan amount, annual interest rate, and loan term in years. The calculator converts the annual rate to a monthly rate, computes the number of monthly payments, and applies the standard EMI formula. The result shows your monthly payment, total amount paid over the loan term, and the total interest cost.",
+    stepByStep: "Decide the loan amount you need to borrow. Check the annual interest rate offered by your lender. Choose the repayment tenure in years. The calculator returns your monthly EMI, the total amount you will repay, and the total interest you will pay over the loan term.",
+    realWorldExample: "A personal loan of Rs 5,00,000 at 9% annual interest for 5 years results in a monthly EMI of Rs 10,382. The total payment over 5 years is Rs 6,22,933, with total interest of Rs 1,22,933.",
+    whenToUse: [
+      "Comparing loan offers from different banks and lenders",
+      "Deciding how much loan you can afford based on monthly EMI",
+      "Planning prepayment strategy by understanding total interest cost",
+      "Choosing between shorter and longer loan tenures"
+    ],
+    benefits: [
+      "Shows the full cost of borrowing including principal and interest",
+      "Helps compare different loan combinations instantly",
+      "Supports informed decisions about loan tenure and prepayment"
+    ],
+    commonMistakes: [
+      "Ignoring processing fees and other charges that increase the effective interest rate",
+      "Choosing the longest tenure without considering total interest cost",
+      "Not checking whether floating or fixed interest rates apply"
+    ],
+    faqs: [
+      { question: "What is a good EMI-to-income ratio?", answer: "Most financial advisors recommend keeping your EMI below 30-40% of your monthly income. If your EMI exceeds this threshold, consider a longer tenure, a larger down payment, or a smaller loan amount to maintain financial stability." },
+      { question: "Can I prepay the loan to reduce interest?", answer: "Yes. Most lenders allow partial or full prepayment. Prepaying reduces the outstanding principal, which lowers the total interest cost. Check if your lender charges prepayment penalties before making extra payments." },
+      { question: "How does a floating rate affect my EMI?", answer: "With a floating rate, your EMI may change when the lender revises interest rates. Some lenders keep the EMI constant and adjust the tenure instead. This calculator uses a fixed rate assumption for estimation purposes." }
+    ],
+    keywords: [
+      "emi calculator",
+      "loan emi",
+      "monthly installment",
+      "emi formula",
+      "personal loan emi",
+      "home loan emi",
+      "car loan emi",
+      "education loan emi",
+      "emi calculation",
+      "loan repayment",
+      "total interest on loan",
+      "emi per lakh",
+      "loan amortization",
+      "emi schedule",
+      "bank loan calculator"
+    ]
+  },
+  {
+    ...calc("loan-calculator", "finance", "Loan Calculator", "Estimate your monthly payment, total payment, and total interest for any loan.", [
+      { name: "principal", label: "Principal amount", value: 500000 },
+      { name: "interestRate", label: "Interest rate (%)", value: 8 },
+      { name: "years", label: "Loan term (years)", value: 5 }
+    ], (v) => {
+      const P = Math.max(Number(v.principal) || 0, 0);
+      const annualRate = Math.max(Number(v.interestRate) || 0, 0);
+      const N = Math.max(Number(v.years) || 0, 0);
+      const months = N * 12;
+      if (P <= 0 || months <= 0) return { monthlyPayment: 0, totalPayment: 0, totalInterest: 0 };
+      if (annualRate <= 0) {
+        const monthlyPayment = P / months;
+        return { monthlyPayment, totalPayment: P, totalInterest: 0 };
+      }
+      const R = annualRate / 12 / 100;
+      const factor = Math.pow(1 + R, months);
+      const monthlyPayment = (P * R * factor) / (factor - 1);
+      const totalPayment = monthlyPayment * months;
+      const totalInterest = totalPayment - P;
+      return {
+        monthlyPayment: Number.isFinite(monthlyPayment) ? monthlyPayment : 0,
+        totalPayment: Number.isFinite(totalPayment) ? totalPayment : 0,
+        totalInterest: Number.isFinite(totalInterest) ? totalInterest : 0
+      };
+    }, "M = P x r x (1+r)^n / ((1+r)^n - 1)", "Monthly payment", "₹/month"),
+    results: [
+      { key: "monthlyPayment", label: "Monthly Payment", unit: "₹/month" },
+      { key: "totalPayment", label: "Total Payment", unit: "₹" },
+      { key: "totalInterest", label: "Total Interest", unit: "₹" }
+    ],
+    whatIsIt: "The Loan Calculator estimates your monthly loan payment, total repayment amount, and total interest across the full loan term. It works for any type of amortizing loan including personal loans, auto loans, home loans, and business loans. Understanding these three numbers helps you evaluate whether a loan fits your budget and how much it will cost in total.",
+    howItWorks: "Enter the principal amount you plan to borrow, the annual interest rate, and the loan term in years. The calculator applies the standard amortization formula to determine the fixed monthly payment. It then multiplies that payment by the number of months to find the total repayment, and subtracts the principal to reveal the total interest cost.",
+    stepByStep: "Determine the total amount you need to borrow. Get the annual interest rate from your lender. Choose a repayment term that balances affordable monthly payments with reasonable total interest. The calculator will show your monthly obligation, the full repayment amount, and the interest you will pay over the life of the loan.",
+    realWorldExample: "Borrowing Rs 5,00,000 at 8% annual interest for 5 years gives a monthly payment of Rs 10,138. The total payment over 5 years is Rs 6,08,281, of which Rs 1,08,281 is total interest. Understanding these figures helps you decide whether the loan is affordable and worth the interest cost.",
+    whenToUse: [
+      "Comparing loan terms across multiple lenders before applying",
+      "Determining the maximum loan amount you can comfortably repay",
+      "Evaluating whether a shorter tenure with higher payments saves enough interest",
+      "Planning your monthly budget around a new loan obligation"
+    ],
+    benefits: [
+      "Provides a complete picture of loan cost including principal and interest",
+      "Enables side-by-side comparison of different loan scenarios",
+      "Helps identify the optimal balance between tenure and monthly payment"
+    ],
+    commonMistakes: [
+      "Focusing only on the monthly payment without considering total interest cost",
+      "Ignoring the effect of a small rate difference over a long loan term",
+      "Not accounting for loan processing fees, insurance, or other charges"
+    ],
+    faqs: [
+      { question: "What is the difference between this and the EMI Calculator?", answer: "The Loan Calculator and EMI Calculator use the same formula. They both compute monthly payment, total payment, and total interest. The Loan Calculator emphasizes total cost analysis while the EMI Calculator focuses on monthly budgeting. You can use either one interchangeably." },
+      { question: "Does this calculator work for floating-rate loans?", answer: "This calculator assumes a fixed interest rate for the entire loan term. For floating-rate loans, use the current rate to get an estimate, but understand that your actual payments may change if the lender revises the rate. Consider adding a buffer to your estimated payment for floating-rate scenarios." },
+      { question: "How does loan term length affect total interest?", answer: "Longer loan terms result in lower monthly payments but significantly higher total interest. For example, a 3-year loan might have a monthly payment of Rs 15,667 with total interest of Rs 64,000, while a 5-year loan for the same amount has a lower monthly payment of Rs 10,138 but total interest of Rs 1,08,281." }
+    ],
+    keywords: [
+      "loan calculator",
+      "monthly payment calculator",
+      "loan repayment",
+      "principal and interest",
+      "loan amortization",
+      "personal loan calculator",
+      "auto loan calculator",
+      "home loan calculator",
+      "total loan cost",
+      "interest calculation",
+      "loan term comparison",
+      "borrowing cost",
+      "amortizing loan",
+      "loan emi calculator",
+      "simple loan calculator"
+    ]
+  },
+  {
+    ...calc("mortgage-calculator", "finance", "Mortgage Calculator", "Calculate your monthly mortgage payment, total payment, and total interest for a home loan.", [
+      { name: "homePrice", label: "Home price", value: 3000000 },
+      { name: "downPayment", label: "Down payment", value: 600000 },
+      { name: "interestRate", label: "Interest rate (%)", value: 7 },
+      { name: "years", label: "Loan term (years)", value: 30 }
+    ], (v) => {
+      const homePrice = Math.max(Number(v.homePrice) || 0, 0);
+      const downPayment = Math.max(Number(v.downPayment) || 0, 0);
+      const annualRate = Math.max(Number(v.interestRate) || 0, 0);
+      const N = Math.max(Number(v.years) || 0, 0);
+      const P = Math.max(homePrice - downPayment, 0);
+      const months = N * 12;
+      if (P <= 0 || months <= 0) return { monthlyPayment: 0, totalPayment: 0, totalInterest: 0 };
+      if (annualRate <= 0) {
+        const monthlyPayment = P / months;
+        return { monthlyPayment, totalPayment: P, totalInterest: 0 };
+      }
+      const R = annualRate / 12 / 100;
+      const factor = Math.pow(1 + R, months);
+      const monthlyPayment = (P * R * factor) / (factor - 1);
+      const totalPayment = monthlyPayment * months;
+      const totalInterest = totalPayment - P;
+      return {
+        monthlyPayment: Number.isFinite(monthlyPayment) ? monthlyPayment : 0,
+        totalPayment: Number.isFinite(totalPayment) ? totalPayment : 0,
+        totalInterest: Number.isFinite(totalInterest) ? totalInterest : 0
+      };
+    }, "M = P x r x (1+r)^n / ((1+r)^n - 1), where P = home price - down payment", "Monthly mortgage", "₹/month"),
+    results: [
+      { key: "monthlyPayment", label: "Monthly Mortgage", unit: "₹/month" },
+      { key: "totalPayment", label: "Total Payment", unit: "₹" },
+      { key: "totalInterest", label: "Total Interest", unit: "₹" }
+    ],
+    whatIsIt: "The Mortgage Calculator helps home buyers estimate their monthly mortgage payment, total repayment, and total interest for a home loan. It accounts for the down payment to calculate the exact loan amount, then applies the standard amortization formula to project costs across the full mortgage term.",
+    howItWorks: "Enter the home price, your down payment, the annual interest rate, and the loan term. The calculator subtracts the down payment from the home price to find the principal loan amount. It then applies the amortization formula to compute the monthly payment, total repayment, and total interest over the mortgage term.",
+    stepByStep: "Start with the total price of the home you are considering. Subtract your down payment to find the amount you need to borrow. Enter the interest rate offered by your lender and choose a loan term typically 15, 20, or 30 years. The calculator shows your monthly obligation and the total cost of the mortgage.",
+    realWorldExample: "A home priced at Rs 30,00,000 with a Rs 6,00,000 down payment leaves a loan principal of Rs 24,00,000. At 7% interest over 30 years, the monthly mortgage is Rs 15,966, the total payment is Rs 57,47,750, and the total interest is Rs 33,47,750.",
+    whenToUse: [
+      "Shopping for a home and evaluating different price ranges",
+      "Comparing mortgage offers from different banks and housing finance companies",
+      "Deciding how large a down payment to make",
+      "Choosing between a 15-year and 30-year mortgage term"
+    ],
+    benefits: [
+      "Shows the true long-term cost of a home purchase",
+      "Helps determine the minimum down payment needed for affordability",
+      "Enables comparison of different mortgage scenarios side by side"
+    ],
+    commonMistakes: [
+      "Not including property taxes, insurance, and maintenance in the total housing budget",
+      "Making the smallest down payment possible without considering the interest saved by a larger one",
+      "Choosing a mortgage term based only on monthly payment without considering total interest"
+    ],
+    faqs: [
+      { question: "What is a good down payment percentage?", answer: "A down payment of 20% or more is ideal because it eliminates the need for mortgage insurance and reduces your monthly payment. However, many lenders accept as little as 10-15% for home loans. A larger down payment reduces the loan principal and total interest significantly." },
+      { question: "Should I choose a 15-year or 30-year mortgage?", answer: "A 15-year mortgage has higher monthly payments but much lower total interest. A 30-year mortgage has lower monthly payments but significantly higher total interest. Choose 15 years if you can afford the payments and want to minimize interest. Choose 30 years if you need lower monthly payments for cash flow." },
+      { question: "Does this calculator include property taxes and insurance?", answer: "No. This calculator focuses on the principal and interest components of your mortgage. Property taxes, homeowner's insurance, and maintenance costs vary by location and property value. Add those separately for a complete housing budget." }
+    ],
+    keywords: [
+      "mortgage calculator",
+      "home loan calculator",
+      "monthly mortgage payment",
+      "house payment calculator",
+      "mortgage amortization",
+      "home loan emi",
+      "housing loan calculator",
+      "mortgage interest",
+      "down payment calculator",
+      "home buying calculator",
+      "mortgage term",
+      "15 year mortgage",
+      "30 year mortgage",
+      "home affordability",
+      "mortgage estimate"
+    ]
+  },
+  {
+    ...calc("sip-calculator", "finance", "SIP Calculator", "Estimate the future value of your systematic investment plan with monthly contributions.", [
+      { name: "monthlyInvestment", label: "Monthly investment", value: 5000 },
+      { name: "expectedReturn", label: "Expected return (%)", value: 12 },
+      { name: "years", label: "Investment period (years)", value: 10 }
+    ], (v) => {
+      const P = Math.max(Number(v.monthlyInvestment) || 0, 0);
+      const annualRate = Math.max(Number(v.expectedReturn) || 0, 0);
+      const N = Math.max(Number(v.years) || 0, 0);
+      const months = N * 12;
+      if (months <= 0) return { futureValue: 0, totalInvested: 0, totalReturns: 0 };
+      const totalInvested = P * months;
+      if (annualRate <= 0) return { futureValue: totalInvested, totalInvested, totalReturns: 0 };
+      const R = annualRate / 12 / 100;
+      const factor = Math.pow(1 + R, months);
+      const futureValue = P * ((factor - 1) / R) * (1 + R);
+      const totalReturns = futureValue - totalInvested;
+      return {
+        futureValue: Number.isFinite(futureValue) ? futureValue : 0,
+        totalInvested: Number.isFinite(totalInvested) ? totalInvested : 0,
+        totalReturns: Number.isFinite(totalReturns) ? totalReturns : 0
+      };
+    }, "FV = P x ((1+R)^N - 1) / R x (1+R)", "Future Value", "₹"),
+    results: [
+      { key: "futureValue", label: "Future Value", unit: "₹" },
+      { key: "totalInvested", label: "Total Invested", unit: "₹" },
+      { key: "totalReturns", label: "Total Returns", unit: "₹" }
+    ],
+    whatIsIt: "The SIP Calculator estimates the future value of a Systematic Investment Plan where you invest a fixed amount every month. It accounts for the power of compounding through monthly compounding and shows how your wealth grows over time. Mutual fund investors use it to project their investment corpus at retirement or goal dates.",
+    howItWorks: "Enter your monthly investment amount, expected annual return rate, and investment period in years. The calculator compounds returns monthly and applies the standard SIP future value formula. It also computes the total amount you invested and the returns generated, giving you a complete picture of your investment growth.",
+    stepByStep: "Decide how much you can invest each month. Estimate a realistic annual return rate based on the type of fund equity, debt, or hybrid. Choose your investment horizon in years. The calculator projects your total corpus, the amount you invested, and the returns earned through compounding.",
+    realWorldExample: "Investing Rs 5,000 per month in an equity mutual fund SIP with an expected 12% annual return for 10 years yields a future value of Rs 11,61,695. You invested Rs 6,00,000 total, and the returns are Rs 5,61,695 more than what you put in.",
+    whenToUse: [
+      "Planning for long-term financial goals like retirement or children's education",
+      "Comparing different monthly investment amounts to find the right commitment",
+      "Evaluating how increasing the investment period affects the final corpus",
+      "Deciding between lump sum and SIP investment approaches"
+    ],
+    benefits: [
+      "Demonstrates the power of compounding with regular monthly investments",
+      "Shows the clear relationship between investment amount, time, and returns",
+      "Helps set realistic financial goals with actionable monthly contribution targets"
+    ],
+    commonMistakes: [
+      "Assuming historical returns will continue unchanged in the future",
+      "Not increasing SIP contributions periodically to account for inflation",
+      "Stopping SIPs during market downturns instead of continuing to accumulate units at lower prices"
+    ],
+    faqs: [
+      { question: "What is a realistic expected return for SIP investments?", answer: "Historical returns for equity mutual funds in India range from 10-15% annually over long periods. Debt funds typically return 6-9%. For planning purposes, use 10-12% for equity SIPs and 7-8% for hybrid or debt SIPs. Past performance does not guarantee future returns." },
+      { question: "How does the investment period affect the final corpus?", answer: "The investment period has an exponential effect due to compounding. A Rs 5,000 monthly SIP at 12% grows to Rs 4,64,000 in 5 years, Rs 11,61,000 in 10 years, and Rs 49,95,000 in 20 years. The last 10 years generate more than the first 10 years combined." },
+      { question: "Should I start a SIP or invest a lump sum?", answer: "SIPs are generally recommended for regular income earners who want to build wealth gradually while averaging out market volatility. Lump sum investments may work better when you have a large amount available and markets are at reasonable valuations. Many investors use both strategies." }
+    ],
+    keywords: [
+      "sip calculator",
+      "systematic investment plan",
+      "sip return calculator",
+      "mutual fund sip",
+      "monthly investment calculator",
+      "sip future value",
+      "sip corpus calculator",
+      "equity sip",
+      "sip planning",
+      "sip compounding",
+      "monthly sip return",
+      "investment calculator",
+      "wealth creation",
+      "sip goal planner",
+      "sip maturity amount"
+    ]
+  },
+  {
+    ...calc("compound-interest-calculator", "finance", "Compound Interest Calculator", "Calculate how your investment grows with compound interest over time.", [
+      { name: "principal", label: "Principal amount", value: 10000 },
+      { name: "rate", label: "Annual interest rate (%)", value: 8 },
+      { name: "time", label: "Time period (years)", value: 5 },
+      { name: "compoundsPerYear", label: "Compounds per year", value: 12 }
+    ], (v) => {
+      const P = Math.max(Number(v.principal) || 0, 0);
+      const r = Math.max(Number(v.rate) || 0, 0) / 100;
+      const t = Math.max(Number(v.time) || 0, 0);
+      const n = Math.max(Number(v.compoundsPerYear) || 0, 1);
+      if (t <= 0) return { futureValue: P, totalInterest: 0 };
+      const exponent = n * t;
+      const factor = Math.pow(1 + r / n, exponent);
+      const futureValue = P * factor;
+      const totalInterest = futureValue - P;
+      return {
+        futureValue: Number.isFinite(futureValue) ? futureValue : 0,
+        totalInterest: Number.isFinite(totalInterest) ? totalInterest : 0
+      };
+    }, "A = P x (1 + r/n)^(n x t)", "Future Value", "₹"),
+    results: [
+      { key: "futureValue", label: "Future Value", unit: "₹" },
+      { key: "totalInterest", label: "Total Interest Earned", unit: "₹" }
+    ],
+    whatIsIt: "The Compound Interest Calculator shows how your money grows when interest is earned on both the initial principal and the accumulated interest from previous periods. Albert Einstein reportedly called compound interest the eighth wonder of the world. This calculator helps you understand the exponential growth potential of your investments.",
+    howItWorks: "Enter your initial principal, annual interest rate, time period, and how often interest compounds per year. The calculator applies the compound interest formula A = P(1 + r/n)^(nt), where P is principal, r is the annual rate, n is compounds per year, and t is time. The result shows both the future value and the total interest earned.",
+    stepByStep: "Start with your initial investment amount. Determine the annual interest rate your investment or savings account offers. Choose how frequently interest compounds daily, monthly, quarterly, or annually. Enter the number of years you plan to invest. The calculator shows your final balance and how much of it came from interest.",
+    realWorldExample: "Investing Rs 10,000 at 8% annual interest compounded monthly for 5 years grows to Rs 14,898. The total interest earned is Rs 4,898. With simple interest at the same rate, you would earn only Rs 4,000, so compounding gives you Rs 898 extra.",
+    whenToUse: [
+      "Comparing savings accounts and fixed deposits with different compounding frequencies",
+      "Projecting long-term investment growth for retirement planning",
+      "Understanding the impact of compound frequency on total returns",
+      "Teaching the power of compounding to students or new investors"
+    ],
+    benefits: [
+      "Visually demonstrates exponential growth versus linear growth",
+      "Helps compare different compounding frequencies side by side",
+      "Motivates early investing by showing the time value of money"
+    ],
+    commonMistakes: [
+      "Assuming compound interest grows linearly when it actually grows exponentially",
+      "Ignoring the effect of taxes on interest earned",
+      "Choosing annual compounding when more frequent compounding yields higher returns"
+    ],
+    faqs: [
+      { question: "What is the difference between simple and compound interest?", answer: "Simple interest is calculated only on the principal amount. Compound interest is calculated on both the principal and the accumulated interest from previous periods. Over time, compound interest produces significantly higher returns than simple interest, especially with longer time horizons." },
+      { question: "How does compounding frequency affect returns?", answer: "More frequent compounding yields higher returns because interest is calculated and added to the principal more often. Daily compounding gives the highest returns, followed by monthly, quarterly, and annual compounding. The difference becomes more significant with higher interest rates and longer time periods." },
+      { question: "What is the Rule of 72?", answer: "The Rule of 72 is a quick way to estimate how long it takes for an investment to double. Divide 72 by the annual interest rate. For example, at 8% interest, it takes approximately 72/8 = 9 years for your money to double with compound interest." }
+    ],
+    keywords: [
+      "compound interest calculator",
+      "compound interest formula",
+      "power of compounding",
+      "compound interest investment",
+      "interest on interest",
+      "compounding frequency",
+      "daily compounding",
+      "monthly compounding",
+      "annual compounding",
+      "exponential growth",
+      "investment growth calculator",
+      "compound returns",
+      "future value compound interest",
+      "rule of 72",
+      "compound interest explained"
+    ]
+  },
+  {
+    ...calc("simple-interest-calculator", "finance", "Simple Interest Calculator", "Calculate simple interest earned or paid on a principal amount over time.", [
+      { name: "principal", label: "Principal amount", value: 10000 },
+      { name: "rate", label: "Annual interest rate (%)", value: 8 },
+      { name: "time", label: "Time period (years)", value: 3 }
+    ], (v) => {
+      const P = Math.max(Number(v.principal) || 0, 0);
+      const R = Math.max(Number(v.rate) || 0, 0);
+      const T = Math.max(Number(v.time) || 0, 0);
+      return (P * R * T) / 100;
+    }, "SI = P x R x T / 100", "Simple Interest", "₹"),
+    whatIsIt: "The Simple Interest Calculator computes the interest earned or paid on a principal amount at a fixed annual rate over a specified time period. Simple interest is calculated only on the original principal, unlike compound interest which accumulates on both principal and prior interest. It is commonly used for short-term loans, savings instruments, and bond calculations.",
+    howItWorks: "Enter the principal amount, the annual interest rate as a percentage, and the time period in years. The calculator applies the formula SI = P x R x T / 100, multiplying the principal by the rate and time, then dividing by 100 to get the interest amount.",
+    stepByStep: "Identify the principal amount you are investing or borrowing. Determine the annual interest rate applicable to your instrument. Specify the time period in years. The calculator returns the simple interest amount without compounding effects.",
+    realWorldExample: "A fixed deposit of Rs 10,000 at 8% simple interest for 3 years earns Rs 2,400 in interest. The total amount at maturity is Rs 12,400. With compound interest at the same rate compounded annually, the total would be Rs 12,597, showing the higher returns from compounding.",
+    whenToUse: [
+      "Calculating interest on short-term loans and advances",
+      "Comparing simple interest instruments like certain bonds and debentures",
+      "Understanding the difference between simple and compound interest products",
+      "Computing late payment interest or penalty charges"
+    ],
+    benefits: [
+      "Simple to understand and calculate without complex formulas",
+      "Predictable interest amounts that do not change over time",
+      "Useful for short-term financial planning where compounding effects are minimal"
+    ],
+    commonMistakes: [
+      "Using simple interest for long-term investments where compounding would significantly increase returns",
+      "Confusing simple interest rate with effective annual rate for compound instruments",
+      "Forgetting to convert the time period to years when using months or days"
+    ],
+    faqs: [
+      { question: "When is simple interest used instead of compound interest?", answer: "Simple interest is typically used for short-term loans under one year, certain government bonds, late payment penalties, and some types of savings certificates. Most bank loans and long-term investments use compound interest because it more accurately reflects the time value of money." },
+      { question: "How does simple interest compare to compound interest over different periods?", answer: "For very short periods under one year, simple and compound interest produce nearly identical results. As the time period increases, compound interest grows exponentially while simple interest grows linearly. The difference becomes significant after 5-10 years." },
+      { question: "Can I use this calculator for loan interest?", answer: "Yes, but only for loans that use simple interest calculation. Most personal loans, home loans, and car loans use compound interest (amortized). This calculator is best suited for short-term loans, advances, and fixed-income instruments that explicitly use simple interest." }
+    ],
+    keywords: [
+      "simple interest calculator",
+      "simple interest formula",
+      "interest calculation",
+      "simple interest loan",
+      "simple interest vs compound interest",
+      "principal interest",
+      "interest rate calculator",
+      "simple interest earned",
+      "short term loan interest",
+      "fixed deposit interest",
+      "bond interest calculator",
+      "simple interest amount",
+      "annual interest",
+      "interest calculation formula",
+      "simple interest investment"
+    ]
+  },
+  {
+    ...calc("inflation-calculator", "finance", "Inflation Calculator", "Calculate how the purchasing power of money changes over time due to inflation.", [
+      { name: "currentPrice", label: "Current price", value: 1000 },
+      { name: "inflationRate", label: "Annual inflation rate (%)", value: 6 },
+      { name: "years", label: "Years", value: 10 }
+    ], (v) => {
+      const P = Math.max(Number(v.currentPrice) || 0, 0);
+      const r = Math.max(Number(v.inflationRate) || 0, 0) / 100;
+      const t = Math.max(Number(v.years) || 0, 0);
+      const futurePrice = P * Math.pow(1 + r, t);
+      return Number.isFinite(futurePrice) ? futurePrice : 0;
+    }, "Future price = Current price x (1 + inflation%/100)^years", "Future Price", "₹"),
+    whatIsIt: "The Inflation Calculator estimates how the price of goods and services will increase over time due to inflation. It shows the future cost of an item based on the current price and the expected annual inflation rate. This is essential for understanding how inflation erodes purchasing power and for planning long-term financial goals.",
+    howItWorks: "Enter the current price of an item or service, the expected annual inflation rate, and the number of years into the future. The calculator applies the compound inflation formula, raising the inflation factor to the power of the number of years. The result shows how much the same item would cost in the future at the given inflation rate.",
+    stepByStep: "Identify a product, service, or expense you want to project into the future. Determine the average annual inflation rate based on historical data or economic forecasts. Choose the number of years for the projection. The calculator shows the inflated future price, helping you understand how much more you will need to pay.",
+    realWorldExample: "A college textbook that costs Rs 1,000 today would cost approximately Rs 1,791 in 10 years at 6% annual inflation. If inflation averages 8%, the same textbook would cost Rs 2,159 showing how even small differences in inflation rate compound significantly over time.",
+    whenToUse: [
+      "Estimating future education costs for your children",
+      "Projecting retirement expenses adjusted for inflation",
+      "Planning long-term savings goals with realistic future cost estimates",
+      "Understanding how inflation impacts your purchasing power over time"
+    ],
+    benefits: [
+      "Reveals the true impact of inflation on long-term financial planning",
+      "Helps set realistic savings targets that account for rising costs",
+      "Shows why investing is necessary to outpace inflation"
+    ],
+    commonMistakes: [
+      "Using a single inflation rate for all expenses when different categories inflate at different rates",
+      "Ignoring inflation in retirement planning and underestimating future expenses",
+      "Assuming inflation will remain constant when it fluctuates year to year"
+    ],
+    faqs: [
+      { question: "What is a realistic inflation rate to use?", answer: "India's historical inflation has averaged 5-7% over the past decade. For long-term planning, use 5-6% as a conservative estimate. Education and healthcare costs often inflate at higher rates of 8-12%. Use different rates for different expense categories for more accurate projections." },
+      { question: "How does inflation affect my savings?", answer: "If your savings earn less interest than the inflation rate, your purchasing power decreases over time. For example, if you earn 4% on a fixed deposit but inflation is 6%, your real return is negative 2%. This is why investing in assets that potentially beat inflation is important for long-term wealth." },
+      { question: "Can I use this calculator for reverse inflation (past purchasing power)?", answer: "Yes. To calculate what something would have cost in the past, think of the future price as today's price and work backwards. For example, if an item costs Rs 1,000 today and inflation averaged 6%, it would have cost approximately Rs 558 ten years ago." }
+    ],
+    keywords: [
+      "inflation calculator",
+      "future price calculator",
+      "purchasing power",
+      "inflation rate",
+      "inflation impact",
+      "cost of living increase",
+      "inflation adjustment",
+      "money value over time",
+      "compound inflation",
+      "price increase calculator",
+      "retirement inflation",
+      "education cost inflation",
+      "inflation projection",
+      "real return calculator",
+      "inflation effect on savings"
+    ]
+  },
+  {
+    ...calc("salary-calculator", "finance", "Salary Calculator", "Calculate your net monthly salary, gross monthly earnings, and annual take-home pay.", [
+      { name: "annualSalary", label: "Annual salary", value: 600000 },
+      { name: "taxPercent", label: "Tax percentage (%)", value: 20 },
+      { name: "bonus", label: "Annual bonus", value: 50000 }
+    ], (v) => {
+      const annualSalary = Math.max(Number(v.annualSalary) || 0, 0);
+      const taxPercent = Math.max(Number(v.taxPercent) || 0, 0);
+      const bonus = Math.max(Number(v.bonus) || 0, 0);
+      const grossMonthly = annualSalary / 12;
+      const annualGross = annualSalary + bonus;
+      const annualNet = annualGross * (1 - taxPercent / 100);
+      const netMonthly = annualNet / 12;
+      return {
+        netMonthly: Number.isFinite(netMonthly) ? netMonthly : 0,
+        grossMonthly: Number.isFinite(grossMonthly) ? grossMonthly : 0,
+        annualNet: Number.isFinite(annualNet) ? annualNet : 0
+      };
+    }, "Net monthly = (annual salary + bonus) x (1 - tax%/100) / 12", "Net Monthly Salary", "₹/month"),
+    results: [
+      { key: "netMonthly", label: "Net Monthly Salary", unit: "₹/month" },
+      { key: "grossMonthly", label: "Gross Monthly Salary", unit: "₹/month" },
+      { key: "annualNet", label: "Annual Take-Home", unit: "₹" }
+    ],
+    whatIsIt: "The Salary Calculator estimates your net monthly salary, gross monthly earnings, and annual take-home pay based on your annual salary, tax rate, and bonus. It helps employees understand the difference between their gross CTC and actual in-hand salary after taxes and other deductions.",
+    howItWorks: "Enter your total annual salary, the effective tax percentage, and any annual bonus. The calculator divides the annual salary by 12 to get gross monthly pay. It adds the bonus to the annual salary, applies the tax rate, and divides by 12 to compute your net monthly salary. The annual take-home shows your total post-tax earnings.",
+    stepByStep: "Find your total annual cost to company from your offer letter or payslip. Determine your effective tax rate based on your tax bracket and applicable deductions. Add any guaranteed bonuses or variable pay components. The calculator shows your monthly in-hand salary and annual take-home after taxes.",
+    realWorldExample: "An employee with an annual salary of Rs 6,00,000, a 20% effective tax rate, and a Rs 50,000 annual bonus has a gross monthly salary of Rs 50,000. After tax, the net monthly salary is Rs 43,333, and the annual take-home is Rs 5,20,000.",
+    whenToUse: [
+      "Evaluating a new job offer by comparing net take-home pay",
+      "Planning your monthly budget based on actual in-hand salary",
+      "Understanding the tax impact of bonus and variable pay components",
+      "Comparing salary offers across different tax regimes"
+    ],
+    benefits: [
+      "Shows the actual in-hand salary after taxes, not just the CTC",
+      "Helps negotiate salary by understanding tax-efficient compensation structures",
+      "Clarifies the financial impact of bonuses and variable pay"
+    ],
+    commonMistakes: [
+      "Confusing cost to company with in-hand salary without accounting for tax deductions",
+      "Not considering provident fund and other statutory deductions beyond income tax",
+      "Using the marginal tax rate instead of the effective tax rate"
+    ],
+    faqs: [
+      { question: "What is the difference between CTC and in-hand salary?", answer: "CTC is the total cost your employer incurs including salary, bonuses, provident fund, insurance, and other benefits. In-hand salary is what you actually receive after tax deductions, PF contributions, and other statutory deductions. The difference can be 20-40% depending on your tax bracket and benefits structure." },
+      { question: "How do I calculate my effective tax rate?", answer: "Your effective tax rate is the total tax you pay divided by your total taxable income. Under the new tax regime in India, calculate your tax liability using the applicable slabs, subtract any rebates, and divide by your total income. For most salaried employees, the effective rate is lower than the marginal rate." },
+      { question: "Does this calculator include PF and other deductions?", answer: "This calculator focuses on tax deductions. PF contributions are typically 12% of basic salary and reduce your in-hand salary further. Consider this as an additional deduction when budgeting. The calculator provides a good estimate for tax-only scenarios." }
+    ],
+    keywords: [
+      "salary calculator",
+      "in hand salary calculator",
+      "net salary calculator",
+      "take home salary",
+      "monthly salary calculator",
+      "salary after tax",
+      "ctc to in hand",
+      "salary breakup",
+      "income tax calculator",
+      "annual salary calculator",
+      "paycheck calculator",
+      "gross vs net salary",
+      "salary deduction",
+      "bonus calculator",
+      "india salary calculator"
+    ]
+  },
+  {
+    ...calc("profit-margin-calculator", "finance", "Profit Margin Calculator", "Calculate your profit margin percentage from revenue and cost of goods sold.", [
+      { name: "revenue", label: "Total revenue", value: 50000 },
+      { name: "cost", label: "Total cost", value: 35000 }
+    ], (v) => {
+      const revenue = Math.max(Number(v.revenue) || 0, 0);
+      const cost = Math.max(Number(v.cost) || 0, 0);
+      if (revenue <= 0) return 0;
+      const profit = revenue - cost;
+      const margin = (profit / revenue) * 100;
+      return Number.isFinite(margin) ? Math.min(100, margin) : 0;
+    }, "Profit margin = (revenue - cost) / revenue x 100", "Profit Margin", "%"),
+    whatIsIt: "The Profit Margin Calculator shows the percentage of revenue that becomes profit after deducting all costs. It divides the profit by total revenue and expresses the result as a percentage. This metric is essential for evaluating pricing strategy, operational efficiency, and overall business profitability.",
+    howItWorks: "Enter your total revenue from sales and the total cost of delivering your product or service. The calculator subtracts costs from revenue to find profit, then divides profit by revenue and multiplies by 100. A higher percentage means more of each revenue dollar is retained as profit.",
+    stepByStep: "Sum up your total revenue from all sales during the period. Calculate the total cost including production, labor, materials, and overhead. Subtract costs from revenue to get profit. Divide profit by revenue and multiply by 100 for the margin percentage.",
+    realWorldExample: "A business generates Rs 50,000 in revenue with Rs 35,000 in total costs. The profit is Rs 15,000 and the profit margin is 30%. This means 30% of revenue remains as profit, while 70% covers the cost of delivering the product or service.",
+    whenToUse: [
+      "Evaluating the profitability of a specific product or service line",
+      "Comparing your margins against industry benchmarks",
+      "Assessing the impact of cost increases or price changes on profitability",
+      "Preparing financial statements and investor presentations"
+    ],
+    benefits: [
+      "Provides a clear profitability benchmark that is easy to compare across periods",
+      "Helps identify margin erosion before it becomes a serious problem",
+      "Supports pricing decisions by showing the relationship between price and profit"
+    ],
+    commonMistakes: [
+      "Including operating expenses like rent and marketing in cost of goods sold",
+      "Comparing profit margins across different industries without adjustment",
+      "Using net profit instead of gross profit for product-level margin analysis"
+    ],
+    faqs: [
+      { question: "What is a good profit margin?", answer: "Good profit margins vary widely by industry. Software and digital services often have margins of 60-80%. Retail typically operates at 20-50%. Manufacturing ranges from 10-30%. Compare your margin against industry averages for the most relevant benchmark." },
+      { question: "How is profit margin different from markup?", answer: "Profit margin is profit divided by revenue. Markup is profit divided by cost. For example, if something costs Rs 100 and sells for Rs 150, the profit margin is 33.3% (50/150) and the markup is 50% (50/100). They are related but different metrics." },
+      { question: "What causes profit margins to decrease?", answer: "Common causes include rising material or labor costs that cannot be passed to customers, increased competition forcing price reductions, changes in product mix toward lower-margin items, and operational inefficiencies that increase production costs." }
+    ],
+    keywords: [
+      "profit margin calculator",
+      "profit margin percentage",
+      "margin calculator",
+      "gross profit margin",
+      "net profit margin",
+      "profitability calculator",
+      "business margin",
+      "margin calculation",
+      "revenue vs cost",
+      "profit percentage",
+      "operating margin",
+      "markup vs margin",
+      "margin analysis",
+      "profitability ratio",
+      "financial ratio calculator"
+    ]
+  },
+  {
+    ...calc("percentage-calculator", "finance", "Percentage Calculator", "Find what percentage one number is of another, or calculate X percent of Y.", [
+      { name: "number", label: "Number", value: 200 },
+      { name: "percentage", label: "Percentage (%)", value: 15 }
+    ], (v) => {
+      const number = Math.max(Number(v.number) || 0, 0);
+      const pct = Math.max(Number(v.percentage) || 0, 0);
+      return (number * pct) / 100;
+    }, "Result = (number x percentage) / 100", "Result", ""),
+    whatIsIt: "The Percentage Calculator computes what X percent of Y equals. It multiplies the base number by the percentage and divides by 100. This is one of the most commonly used math operations for shopping discounts, tip calculations, data analysis, tax computations, and everyday math problems.",
+    howItWorks: "Enter the base number and the percentage you want to calculate. The calculator multiplies the number by the percentage and divides by 100. For example, to find 15% of 200, it computes (200 x 15) / 100 = 30.",
+    stepByStep: "Identify the base number you want to calculate a percentage of. Determine the percentage rate to apply. Multiply the base number by the percentage and divide by 100. The result is the percentage value of the base number.",
+    realWorldExample: "If a restaurant bill is Rs 2,000 and you want to leave a 15% tip, the tip amount is Rs 300. The total with tip is Rs 2,300. This simple percentage calculation is used daily in shopping, dining, and financial transactions.",
+    whenToUse: [
+      "Calculating tips at restaurants and service establishments",
+      "Computing sales tax amounts on purchases",
+      "Determining discount amounts during shopping sales",
+      "Analyzing data where percentages represent parts of a whole"
+    ],
+    benefits: [
+      "Handles the most common percentage calculation people use daily",
+      "Eliminates mental math errors in financial transactions",
+      "Works for any combination of numbers and percentages"
+    ],
+    commonMistakes: [
+      "Confusing percentage points with percent change when comparing two percentages",
+      "Forgetting to divide by 100 when converting between percentage and decimal form",
+      "Applying a percentage to the result of a previous percentage without considering compounding"
+    ],
+    faqs: [
+      { question: "How do I calculate what percentage one number is of another?", answer: "To find what percentage X is of Y, divide X by Y and multiply by 100. For example, 30 is 15% of 200 because 30/200 = 0.15, and 0.15 x 100 = 15%. Use the Percentage Increase Calculator for change-based calculations." },
+      { question: "What is the formula for reverse percentage?", answer: "To find the original number when you know the percentage result, divide the result by the percentage and multiply by 100. For example, if 30 is 15% of a number, the original number is 30/15 x 100 = 200." },
+      { question: "Can this calculator handle percentages over 100%?", answer: "Yes. Percentages over 100% are valid and common in growth and performance contexts. For example, 200% of 50 is 100. The calculator works correctly with any percentage value you enter." }
+    ],
+    keywords: [
+      "percentage calculator",
+      "what is x percent of y",
+      "find percentage",
+      "percentage of a number",
+      "online percentage calculator",
+      "percent calculation",
+      "percentage formula",
+      "calculate percentage",
+      "percentage math",
+      "x percent of y",
+      "percentage value",
+      "daily percentage calculator",
+      "tip calculator percentage",
+      "percentage tool",
+      "simple percentage"
+    ]
+  },
+  {
+    ...calc("percentage-increase-calculator", "finance", "Percentage Increase Calculator", "Calculate the percentage increase or decrease between two values.", [
+      { name: "oldValue", label: "Original value", value: 100 },
+      { name: "newValue", label: "New value", value: 150 }
+    ], (v) => {
+      const oldVal = Math.max(Number(v.oldValue) || 0, 0);
+      const newVal = Math.max(Number(v.newValue) || 0, 0);
+      if (oldVal <= 0) return 0;
+      const result = ((newVal - oldVal) / oldVal) * 100;
+      return Number.isFinite(result) ? result : 0;
+    }, "((new - old) / old) x 100", "Percentage Change", "%"),
+    whatIsIt: "The Percentage Increase Calculator measures how much a value has grown or declined relative to its original value. It computes the difference between the new and old values, divides by the original, and multiplies by 100. A positive result indicates growth, while a negative result indicates a decrease.",
+    howItWorks: "Enter the original value and the new value. The calculator subtracts the original from the new, divides by the original, and multiplies by 100. The result shows the percentage change, which can be positive for increases or negative for decreases.",
+    stepByStep: "Identify the original baseline value. Determine the new value after the change. Subtract the original from the new to find the absolute change. Divide the change by the original value and multiply by 100 to express it as a percentage.",
+    realWorldExample: "A company's revenue grew from Rs 100,000 to Rs 150,000 over a year. The percentage increase is 50%, meaning revenue grew by half of its original value. If revenue had dropped to Rs 75,000, the percentage change would be negative 25%.",
+    whenToUse: [
+      "Measuring sales or revenue growth across periods",
+      "Calculating price increases or decreases for financial analysis",
+      "Comparing growth rates between different investments or business units",
+      "Reporting performance metrics in business presentations"
+    ],
+    benefits: [
+      "Provides a standardized way to compare changes across different scales",
+      "Handles both increases and decreases in a single calculation",
+      "Supports data-driven decision making with clear percentage metrics"
+    ],
+    commonMistakes: [
+      "Using the new value as the denominator instead of the original value",
+      "Comparing percentage changes from different base values without context",
+      "Confusing percentage points with percentage change in rates"
+    ],
+    faqs: [
+      { question: "What is the difference between percentage increase and percentage points?", answer: "Percentage increase measures relative growth from a baseline. Percentage points measure the absolute difference between two percentages. For example, if a rate increases from 10% to 15%, the percentage increase is 50% (5/10 x 100), but the increase in percentage points is 5 points." },
+      { question: "Can this calculator handle negative percentage change?", answer: "Yes. If the new value is lower than the original, the result will be a negative percentage, indicating a decrease. The formula works the same way for both increases and decreases." },
+      { question: "What happens if the original value is zero?", answer: "If the original value is zero, the percentage change is mathematically undefined because division by zero is not possible. The calculator returns zero in this case. For meaningful results, ensure your original value is greater than zero." }
+    ],
+    keywords: [
+      "percentage increase calculator",
+      "percentage change calculator",
+      "percent increase",
+      "percent decrease",
+      "value change percentage",
+      "growth rate calculator",
+      "increase percentage formula",
+      "how to calculate percentage increase",
+      "percentage difference",
+      "relative change",
+      "percent change formula",
+      "year over year growth",
+      "price change percentage",
+      "percentage rise",
+      "percentage decline"
+    ]
+  },
+  {
+    ...calc("discount-calculator", "finance", "Discount Calculator", "Calculate the discount amount and final price after applying a percentage discount.", [
+      { name: "price", label: "Original price", value: 1000 },
+      { name: "discountPercent", label: "Discount (%)", value: 20 }
+    ], (v) => {
+      const price = Math.max(Number(v.price) || 0, 0);
+      const discountPercent = Math.max(Number(v.discountPercent) || 0, 0);
+      const discountAmount = (price * discountPercent) / 100;
+      const finalPrice = price - discountAmount;
+      return {
+        discountAmount: Number.isFinite(discountAmount) ? discountAmount : 0,
+        finalPrice: Number.isFinite(finalPrice) ? finalPrice : 0
+      };
+    }, "Discount = (discount% x price) / 100, Final = price - discount", "Discount Amount", "₹"),
+    results: [
+      { key: "discountAmount", label: "Discount Amount", unit: "₹" },
+      { key: "finalPrice", label: "Final Price", unit: "₹" }
+    ],
+    whatIsIt: "The Discount Calculator computes the amount saved and the final price after applying a percentage discount. It multiplies the original price by the discount percentage and divides by 100 to find the savings, then subtracts from the original to get the final price. Shoppers and retailers use it to quickly determine sale prices.",
+    howItWorks: "Enter the original price of the item and the discount percentage. The calculator computes the discount amount by multiplying the price by the discount rate and dividing by 100. It then subtracts the discount from the original price to show the final amount you pay.",
+    stepByStep: "Find the original price of the product before any discounts. Determine the discount percentage offered in the sale. Multiply the original price by the discount percentage and divide by 100. Subtract the discount amount from the original price to get the final price you pay.",
+    realWorldExample: "A pair of shoes priced at Rs 1,000 with a 20% discount saves you Rs 200. The final price after discount is Rs 800. This same calculation applies to all percentage-based discounts regardless of the total price.",
+    whenToUse: [
+      "Shopping during sale events to calculate your actual savings",
+      "Comparing discounted prices across different stores and offers",
+      "Determining if a bulk discount is better than a percentage discount",
+      "Setting sale prices for products in a retail business"
+    ],
+    benefits: [
+      "Shows both the savings amount and the final price for complete clarity",
+      "Prevents miscalculations during sale shopping",
+      "Helps compare value across different discount offers"
+    ],
+    commonMistakes: [
+      "Applying successive discounts on the original price instead of the reduced price",
+      "Confusing percentage discount with fixed amount discount when comparing offers",
+      "Forgetting that discounts may apply before or after tax, changing the final savings"
+    ],
+    faqs: [
+      { question: "How do I calculate a 20% discount in my head?", answer: "To calculate 20% off, divide the original price by 10 to get 10%, then multiply by 2 for 20%. Alternatively, move the decimal one place left and double it. For Rs 1,000, 10% is Rs 100, so 20% is Rs 200 off." },
+      { question: "What is the difference between percentage discount and fixed discount?", answer: "A percentage discount saves a percentage of the price, so higher-priced items get larger savings. A fixed discount saves the same amount regardless of price. For example, 20% off a Rs 5,000 item saves Rs 1,000, while a Rs 200 fixed discount saves only Rs 200." },
+      { question: "How do successive discounts work?", answer: "Successive discounts are applied one after another on the reduced price. For example, 10% off then 20% off a Rs 1,000 item first reduces it to Rs 900, then to Rs 720. The total discount is 28%, not 30%. Always apply discounts sequentially on the running total." }
+    ],
+    keywords: [
+      "discount calculator",
+      "percentage discount",
+      "sale price calculator",
+      "how much will i save",
+      "discount amount",
+      "final price calculator",
+      "shopping discount",
+      "percent off calculator",
+      "calculate discount",
+      "sale savings",
+      "discount formula",
+      "price after discount",
+      "discounted price",
+      "savings calculator",
+      "discount percentage"
+    ]
+  },
+  {
+    ...calc("profit-calculator", "finance", "Profit Calculator", "Calculate your profit or loss from buying and selling prices.", [
+      { name: "buyingPrice", label: "Buying price", value: 500 },
+      { name: "sellingPrice", label: "Selling price", value: 750 }
+    ], (v) => {
+      const buyingPrice = Math.max(Number(v.buyingPrice) || 0, 0);
+      const sellingPrice = Math.max(Number(v.sellingPrice) || 0, 0);
+      const profit = sellingPrice - buyingPrice;
+      const margin = sellingPrice > 0 ? (profit / sellingPrice) * 100 : 0;
+      return {
+        profit: Number.isFinite(profit) ? profit : 0,
+        margin: Number.isFinite(margin) ? margin : 0
+      };
+    }, "Profit = selling price - buying price, Margin = (profit / selling) x 100", "Profit", "₹"),
+    results: [
+      { key: "profit", label: "Profit / Loss", unit: "₹" },
+      { key: "margin", label: "Margin %", unit: "%" }
+    ],
+    whatIsIt: "The Profit Calculator computes the absolute profit or loss from a transaction and the corresponding profit margin percentage. Traders, resellers, and small business owners use it to quickly evaluate the financial outcome of buying and selling goods.",
+    howItWorks: "Enter the price you paid to acquire the item and the price you sold it for. The calculator subtracts the buying price from the selling price to find the profit. It also divides the profit by the selling price and multiplies by 100 to show the profit margin percentage.",
+    stepByStep: "Record the total cost of acquiring the item including purchase price and any associated fees. Note the selling price after completing the sale. Subtract the buying cost from the selling price. Divide the profit by the selling price and multiply by 100 for the margin.",
+    realWorldExample: "A reseller buys a smartphone for Rs 500 and sells it for Rs 750. The profit is Rs 250 and the profit margin is 33.3%. This means 33.3% of the selling price is profit. If the selling price drops below Rs 500, the result shows a loss.",
+    whenToUse: [
+      "Evaluating individual trade or resale profitability",
+      "Setting selling prices to achieve target profit margins",
+      "Tracking profit and loss across multiple inventory items",
+      "Assessing the financial impact of discounts on profitability"
+    ],
+    benefits: [
+      "Shows both absolute profit and margin percentage for complete analysis",
+      "Works for any currency and any scale of transaction",
+      "Provides immediate feedback on pricing decisions"
+    ],
+    commonMistakes: [
+      "Forgetting to include transaction fees, shipping costs, and taxes in the buying price",
+      "Calculating margin on cost instead of on selling price",
+      "Ignoring holding costs for inventory that takes time to sell"
+    ],
+    faqs: [
+      { question: "What is the difference between profit and margin?", answer: "Profit is the absolute difference between selling price and buying price. Margin is the profit expressed as a percentage of the selling price. Profit shows the actual money earned, while margin shows the efficiency of the transaction." },
+      { question: "What happens if there is a loss?", answer: "If the selling price is lower than the buying price, the profit value will be negative, indicating a loss. The margin will also be negative. This helps you quickly identify unprofitable transactions and adjust pricing strategies accordingly." },
+      { question: "Should I calculate margin on cost or on selling price?", answer: "This calculator uses the standard business convention of calculating margin on the selling price. Some industries calculate markup on cost instead. Markup on cost = profit / cost x 100. Both are valid but measure different things." }
+    ],
+    keywords: [
+      "profit calculator",
+      "buying selling calculator",
+      "profit and loss",
+      "trade profit",
+      "resale profit",
+      "profit margin",
+      "buying price selling price",
+      "calculate profit",
+      "trading profit calculator",
+      "business profit",
+      "profit calculation",
+      "selling price calculator",
+      "markup calculator",
+      "profit and margin",
+      "transaction profit"
+    ]
+  },
+  {
+    ...calc("sales-tax-calculator", "finance", "Sales Tax Calculator", "Calculate the sales tax amount and total price including tax.", [
+      { name: "price", label: "Price before tax", value: 2000 },
+      { name: "taxRate", label: "Tax rate (%)", value: 10 }
+    ], (v) => {
+      const price = Math.max(Number(v.price) || 0, 0);
+      const taxRate = Math.max(Number(v.taxRate) || 0, 0);
+      return (price * taxRate) / 100;
+    }, "Tax = price x tax% / 100", "Sales Tax", "₹"),
+    whatIsIt: "The Sales Tax Calculator computes the tax amount on a purchase and the total price including tax. It multiplies the pre-tax price by the tax rate percentage and divides by 100. Businesses and consumers use it to determine the final cost of goods and services subject to sales tax or VAT.",
+    howItWorks: "Enter the price of the item before tax and the applicable sales tax or VAT rate. The calculator multiplies the pre-tax price by the tax rate and divides by 100. The result is the tax amount you will pay on top of the base price.",
+    stepByStep: "Find the listed price of the item before any tax is applied. Determine the sales tax rate for your location and product category. Multiply the pre-tax price by the tax rate and divide by 100. The result is the tax amount added to your purchase.",
+    realWorldExample: "An item priced at Rs 2,000 before tax with a 10% sales tax rate incurs Rs 200 in tax. The total price including tax is Rs 2,200. Different states and countries have different tax rates, so always use the rate applicable to your location.",
+    whenToUse: [
+      "Estimating the final price of a purchase including applicable sales tax",
+      "Preparing invoices that show tax and subtotal separately",
+      "Budgeting for business purchases with varying tax rates",
+      "Comparing prices across jurisdictions with different tax rates"
+    ],
+    benefits: [
+      "Provides clear tax breakdown for transparent pricing",
+      "Works with any sales tax or VAT rate worldwide",
+      "Helps avoid surprises at checkout by estimating tax upfront"
+    ],
+    commonMistakes: [
+      "Applying the tax rate to a tax-inclusive price instead of the pre-tax price",
+      "Using the wrong tax rate for the product category or location",
+      "Forgetting that some products are exempt from sales tax"
+    ],
+    faqs: [
+      { question: "What is the difference between sales tax and VAT?", answer: "Sales tax is charged only at the final point of sale to the end consumer. VAT is charged at each stage of the supply chain, with businesses claiming credit for tax paid on inputs. Both use similar percentage-based calculations at the point of sale." },
+      { question: "How do I find the correct sales tax rate for my area?", answer: "Sales tax rates vary by country, state, and sometimes city. In the US, each state sets its own rate. In India, GST has replaced many individual taxes. Check your local tax authority website or consult a tax professional for the correct rate." },
+      { question: "Does this calculator work for tax-inclusive prices?", answer: "If you only know the tax-inclusive price, divide it by (1 + tax%/100) to find the pre-tax price, then use this calculator. For example, if the total is Rs 2,200 including 10% tax, the pre-tax price is Rs 2,200 / 1.10 = Rs 2,000." }
+    ],
+    keywords: [
+      "sales tax calculator",
+      "vat calculator",
+      "tax amount calculator",
+      "price before tax",
+      "tax inclusive price",
+      "tax exclusive price",
+      "sales tax rate",
+      "value added tax",
+      "gst vs sales tax",
+      "checkout tax",
+      "purchase tax",
+      "tax calculation",
+      "price after tax",
+      "tax percentage",
+      "indirect tax calculator"
+    ]
+  },
+  {
+    ...calc("currency-converter", "finance", "Currency Converter", "Convert between currencies using a static exchange rate without any API calls.", [
+      { name: "amount", label: "Amount", value: 100 },
+      { name: "exchangeRate", label: "Exchange rate", value: 83.5 }
+    ], (v) => {
+      const amount = Math.max(Number(v.amount) || 0, 0);
+      const rate = Math.max(Number(v.exchangeRate) || 0, 0);
+      return rate > 0 ? amount * rate : 0;
+    }, "Converted amount = amount x exchange rate", "Converted Amount", ""),
+    whatIsIt: "The Currency Converter converts an amount from one currency to another using a static exchange rate. It multiplies the base amount by the exchange rate to produce the converted value. This is useful for quick estimates when you know the current exchange rate and do not need live API data.",
+    howItWorks: "Enter the amount you want to convert and the current exchange rate. The calculator multiplies the amount by the rate to return the converted value. The exchange rate represents how much of the target currency one unit of the source currency buys.",
+    stepByStep: "Determine the amount you want to convert from your source currency. Look up the current exchange rate from a reliable source like a bank or financial website. Enter both values and the calculator returns the converted amount in the target currency.",
+    realWorldExample: "Converting USD 100 to Indian Rupees at an exchange rate of 83.5 gives Rs 8,350. If the rate changes to 84.0, the same USD 100 converts to Rs 8,400. Always use the most current rate available for accurate conversions.",
+    whenToUse: [
+      "Estimating the value of foreign currency before traveling",
+      "Calculating cross-border payment amounts for online purchases",
+      "Pricing products or services for international customers",
+      "Budgeting for expenses in a foreign currency"
+    ],
+    benefits: [
+      "No API dependency means it works offline instantly",
+      "Simple and fast for quick currency estimates",
+      "Works for any currency pair with the correct exchange rate"
+    ],
+    commonMistakes: [
+      "Using the buy rate instead of the sell rate or vice versa",
+      "Entering the exchange rate inverted (dividing instead of multiplying)",
+      "Not accounting for currency conversion fees charged by banks or services"
+    ],
+    faqs: [
+      { question: "Where can I find current exchange rates?", answer: "You can find current exchange rates from Google Finance, XE.com, your bank's website, or the central bank of your country. Interbank rates differ from retail rates offered to consumers, so use the rate applicable to your transaction type." },
+      { question: "Does this calculator account for conversion fees?", answer: "No. This calculator uses the exchange rate only. Banks and money transfer services typically add a margin on top of the interbank rate. For accurate cost estimates, add any applicable fees to the amount before converting." },
+      { question: "What is the difference between buy rate and sell rate?", answer: "The buy rate is what a currency exchange service pays to buy your foreign currency. The sell rate is what they charge to sell you foreign currency. The sell rate is always higher, and the difference is how they make profit. Use the sell rate when converting your currency to a foreign one." }
+    ],
+    keywords: [
+      "currency converter",
+      "exchange rate calculator",
+      "currency conversion",
+      "usd to inr",
+      "foreign exchange",
+      "convert currency",
+      "money converter",
+      "fx calculator",
+      "exchange rate tool",
+      "cross currency",
+      "currency calculator",
+      "forex calculator",
+      "currency exchange",
+      "international money",
+      "currency converter tool"
+    ]
+  },
+  {
+    ...calc("unit-converter", "finance", "Unit Converter", "Convert between units of length, weight, distance, and temperature using simple conversion factors.", [
+      { name: "value", label: "Value", value: 100 },
+      { name: "conversionFactor", label: "Conversion factor", value: 2.54 }
+    ], (v) => {
+      const value = Math.max(Number(v.value) || 0, 0);
+      const factor = Math.max(Number(v.conversionFactor) || 0, 0);
+      return factor > 0 ? value * factor : 0;
+    }, "Converted value = value x conversion factor", "Converted Value", ""),
+    whatIsIt: "The Unit Converter converts values between different units of measurement using simple multiplier factors. It supports length, weight, distance, and other linear conversions where a known conversion factor exists. For temperature conversions that are not linear, use the appropriate linear approximation or specialized tools.",
+    howItWorks: "Enter the numeric value you want to convert and the conversion factor. The calculator multiplies the value by the factor to produce the converted result. The conversion factor represents how many units of the target measurement equal one unit of the source measurement.",
+    stepByStep: "Determine the numeric value you want to convert. Look up the conversion factor between the source unit and target unit. For example, 1 inch = 2.54 centimeters. Enter the value and factor, and the calculator returns the converted measurement.",
+    realWorldExample: "Converting 100 inches to centimeters using a conversion factor of 2.54 gives 254 centimeters. The same factor works for any value. For weight, converting 10 kilograms to pounds uses a factor of 2.205, giving 22.05 pounds.",
+    whenToUse: [
+      "Converting measurements in recipes cooking with different unit systems",
+      "Converting product dimensions between imperial and metric systems",
+      "Calculating distances in different units for travel planning",
+      "Converting weights for shipping and logistics calculations"
+    ],
+    benefits: [
+      "Works offline with no API dependency",
+      "Handles any linear unit conversion with the correct factor",
+      "Fast and simple for everyday conversion needs"
+    ],
+    commonMistakes: [
+      "Using the wrong conversion factor direction by dividing instead of multiplying",
+      "Applying linear conversion factors to non-linear conversions like temperature",
+      "Rounding conversion factors too aggressively, reducing accuracy"
+    ],
+    faqs: [
+      { question: "What conversion factors should I use for common units?", answer: "Length: 1 inch = 2.54 cm, 1 foot = 0.3048 m, 1 mile = 1.609 km. Weight: 1 kg = 2.205 lbs, 1 oz = 28.35 g. Distance: 1 km = 0.621 miles. Volume: 1 liter = 0.264 gallons, 1 gallon = 3.785 liters." },
+      { question: "Does this work for temperature conversions?", answer: "Temperature conversions like Celsius to Fahrenheit use a formula rather than a simple multiplier: F = C x 9/5 + 32 and C = (F - 32) x 5/9. This converter uses a simple multiplier, so it is best suited for linear conversions where a single factor applies." },
+      { question: "How accurate is the unit converter?", answer: "Accuracy depends entirely on the conversion factor you enter. Using standard conversion factors like 2.54 for inches to centimeters gives exact results. For best accuracy, use conversion factors with at least 4 decimal places." }
+    ],
+    keywords: [
+      "unit converter",
+      "length converter",
+      "weight converter",
+      "distance converter",
+      "measurement converter",
+      "inches to cm",
+      "kg to lbs",
+      "miles to km",
+      "conversion factor",
+      "metric imperial conversion",
+      "unit conversion calculator",
+      "online unit converter",
+      "convert measurement",
+      "unit conversion tool",
+      "feet to meters"
+    ]
+  },
+  {
+    ...calc("time-calculator", "finance", "Time Calculator", "Calculate total time duration from hours and minutes.", [
+      { name: "hours", label: "Hours", value: 5 },
+      { name: "minutes", label: "Minutes", value: 30 }
+    ], (v) => {
+      const hours = Math.max(Number(v.hours) || 0, 0);
+      const minutes = Math.max(Number(v.minutes) || 0, 0);
+      return hours * 60 + minutes;
+    }, "Total minutes = hours x 60 + minutes", "Total Duration", " minutes"),
+    whatIsIt: "The Time Calculator converts hours and minutes into a total duration in minutes. It multiplies the hours by 60 and adds the remaining minutes. This is useful for calculating total work hours, travel time, project duration, or any scenario where time needs to be aggregated into a single unit.",
+    howItWorks: "Enter the number of hours and the additional minutes. The calculator multiplies the hours by 60 to convert them to minutes, then adds the minutes to get the total duration in minutes.",
+    stepByStep: "Count the total number of hours in your duration. Add any additional minutes that are not part of a full hour. The calculator converts the hours to minutes and adds them together for the total.",
+    realWorldExample: "A task that takes 5 hours and 30 minutes has a total duration of 330 minutes. This is useful for calculating billable hours, estimating project completion time, or tracking daily activity durations.",
+    whenToUse: [
+      "Calculating total billable hours for freelance or consulting work",
+      "Estimating travel time including layovers and connections",
+      "Tracking total time spent on project tasks and activities",
+      "Converting hours and minutes for payroll processing"
+    ],
+    benefits: [
+      "Quickly converts mixed time formats into a single unit",
+      "Eliminates manual calculation errors in time tracking",
+      "Useful for both professional and personal time management"
+    ],
+    commonMistakes: [
+      "Forgetting to convert remaining minutes when entering partial hours",
+      "Confusing AM/PM when calculating duration across noon or midnight",
+      "Not accounting for time zone differences in duration calculations"
+    ],
+    faqs: [
+      { question: "How do I convert minutes back to hours and minutes?", answer: "Divide the total minutes by 60 to get the hours. The remainder is the minutes. For example, 330 minutes / 60 = 5 hours with 30 minutes remaining, so the duration is 5 hours and 30 minutes." },
+      { question: "Can this calculator handle durations over 24 hours?", answer: "Yes. The calculator works for any number of hours. For example, 48 hours and 15 minutes gives 2,895 minutes. This is useful for tracking multi-day projects or extended travel times." },
+      { question: "How do I calculate time differences across days?", answer: "For durations spanning multiple days, calculate the total hours from start to end including all intervening days. Then enter the total hours into this calculator. For example, from Monday 2 PM to Wednesday 5 PM is 51 hours." }
+    ],
+    keywords: [
+      "time calculator",
+      "hours and minutes to minutes",
+      "duration calculator",
+      "time duration",
+      "hours to minutes",
+      "minute calculator",
+      "time conversion",
+      "total time calculator",
+      "work hours calculator",
+      "billable hours",
+      "time tracking",
+      "elapsed time",
+      "time converter",
+      "hour minute calculator",
+      "project duration"
+    ]
+  },
+  {
+    ...calc("date-difference-calculator", "finance", "Date Difference Calculator", "Calculate the number of days, months, and years between two dates.", [
+      { name: "startDay", label: "Start day", value: 1 },
+      { name: "startMonth", label: "Start month", value: 1 },
+      { name: "startYear", label: "Start year", value: 2024 },
+      { name: "endDay", label: "End day", value: 15 },
+      { name: "endMonth", label: "End month", value: 6 },
+      { name: "endYear", label: "End year", value: 2024 }
+    ], (v) => {
+      const sd = Math.max(Number(v.startDay) || 0, 1);
+      const sm = Math.max(Number(v.startMonth) || 0, 1);
+      const sy = Math.max(Number(v.startYear) || 0, 1);
+      const ed = Math.max(Number(v.endDay) || 0, 1);
+      const em = Math.max(Number(v.endMonth) || 0, 1);
+      const ey = Math.max(Number(v.endYear) || 0, 1);
+      const start = new Date(sy, sm - 1, sd);
+      const end = new Date(ey, em - 1, ed);
+      const diffMs = Math.abs(end - start);
+      const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const totalMonths = Math.floor(totalDays / 30.44);
+      const totalYears = Math.floor(totalDays / 365.25);
+      return {
+        totalDays: Number.isFinite(totalDays) ? totalDays : 0,
+        totalMonths: Number.isFinite(totalMonths) ? totalMonths : 0,
+        totalYears: Number.isFinite(totalYears) ? totalYears : 0
+      };
+    }, "Difference = end date - start date (in days, months, and years)", "Total Days", " days"),
+    results: [
+      { key: "totalDays", label: "Total Days", unit: " days" },
+      { key: "totalMonths", label: "Total Months", unit: " months" },
+      { key: "totalYears", label: "Total Years", unit: " years" }
+    ],
+    whatIsIt: "The Date Difference Calculator computes the exact number of days, months, and years between any two dates. It calculates the absolute difference regardless of which date is earlier. Event planners, project managers, and researchers use it to measure time spans accurately.",
+    howItWorks: "Enter the day, month, and year for both the start and end dates. The calculator creates Date objects internally, computes the absolute difference in milliseconds, and converts to days, months, and years using standard conversion values.",
+    stepByStep: "Enter the starting date using day, month, and year fields. Enter the ending date the same way. The calculator computes the total number of days between the dates, then converts to months (using 30.44 days per month) and years (using 365.25 days per year).",
+    realWorldExample: "From January 1, 2024 to June 15, 2024 is 166 days, approximately 5.45 months, and approximately 0.45 years. This information helps in planning project timelines, tracking milestones, and calculating age or tenure.",
+    whenToUse: [
+      "Calculating the exact age between two dates for applications and forms",
+      "Planning project timelines with specific start and end dates",
+      "Determining the length of employment or service periods",
+      "Computing the number of days until an event or deadline"
+    ],
+    benefits: [
+      "Shows the time difference in days, months, and years for complete clarity",
+      "Handles leap years automatically through the JavaScript Date object",
+      "Works for any date range without date picker dependency"
+    ],
+    commonMistakes: [
+      "Entering the month number incorrectly by confusing the date format",
+      "Using leap year assumptions that affect accuracy for specific date ranges",
+      "Calculating inclusive vs exclusive day counts incorrectly for legal or contractual purposes"
+    ],
+    faqs: [
+      { question: "Does this calculator account for leap years?", answer: "Yes. The JavaScript Date object handles leap years automatically. February 29 is a valid date in leap years, and the calculator correctly computes differences across leap year boundaries. The months and years conversion uses average values for approximation." },
+      { question: "Why do months and years show decimal values?", answer: "Months and years are calculated using average conversion factors (30.44 days per month, 365.25 days per year) because months have varying lengths. For exact month or year counts, refer to the day count and interpret it based on your specific date range and calendar context." },
+      { question: "How do I calculate age from a birth date?", answer: "Enter the birth date as the start date and the current date as the end date. The calculator will show the total days, months, and years between the dates. For exact age, use the total years figure and adjust for whether the birthday has occurred this year." }
+    ],
+    keywords: [
+      "date difference calculator",
+      "days between dates",
+      "date calculator",
+      "time between dates",
+      "calculate days between two dates",
+      "date duration",
+      "days counter",
+      "calendar calculator",
+      "date span",
+      "elapsed days",
+      "date math",
+      "day counter",
+      "date interval",
+      "months between dates",
+      "years between dates"
+    ]
+  },
+  {
+    ...calc("working-days-calculator", "finance", "Working Days Calculator", "Calculate the number of working days and weekend days between two dates.", [
+      { name: "totalDays", label: "Total calendar days", value: 260 },
+      { name: "workingDays", label: "Working days per week", value: 5 }
+    ], (v) => {
+      const totalDays = Math.max(Number(v.totalDays) || 0, 0);
+      const workingDaysPerWeek = Math.max(Number(v.workingDays) || 0, 0);
+      const weekendDaysPerWeek = Math.max(7 - workingDaysPerWeek, 0);
+      const weeks = totalDays / 7;
+      const workDays = weeks * workingDaysPerWeek;
+      const weekEndDays = weeks * weekendDaysPerWeek;
+      return {
+        workingDays: Number.isFinite(workDays) ? workDays : 0,
+        weekendDays: Number.isFinite(weekEndDays) ? weekEndDays : 0
+      };
+    }, "Working days = (total days / 7) x working days per week, Weekend = total - working", "Working Days", " days"),
+    results: [
+      { key: "workingDays", label: "Working Days", unit: " days" },
+      { key: "weekendDays", label: "Weekend Days", unit: " days" }
+    ],
+    whatIsIt: "The Working Days Calculator estimates the number of working days and weekend days in a given period. It uses the total calendar days and the number of working days per week to compute the breakdown. Project planners and HR professionals use it to estimate available work time.",
+    howItWorks: "Enter the total number of calendar days in your period and how many working days are in a week typically 5 for Monday to Friday. The calculator divides the total days by 7 to find the number of weeks, then multiplies by working days and weekend days separately.",
+    stepByStep: "Count the total number of calendar days from the start to the end of your period. Determine how many days per week are considered working days. The calculator estimates how many of those total days are working days and how many fall on weekends.",
+    realWorldExample: "A 260-calendar-day period with a 5-day work week has approximately 185.7 working days and 74.3 weekend days. This helps in planning project deadlines, calculating employee work schedules, and estimating available business days.",
+    whenToUse: [
+      "Estimating project completion time based on available working days",
+      "Planning employee work schedules and resource allocation",
+      "Calculating business days for contract and legal deadlines",
+      "Budgeting time for long-term projects and milestones"
+    ],
+    benefits: [
+      "Provides a realistic estimate of available work time",
+      "Accounts for different work week configurations",
+      "Helps avoid unrealistic deadlines that ignore weekends"
+    ],
+    commonMistakes: [
+      "Not accounting for public holidays that fall on working days",
+      "Using a 7-day work week when planning business activities",
+      "Assuming weekends are the only non-working days without considering half-days"
+    ],
+    faqs: [
+      { question: "Does this calculator account for public holidays?", answer: "No. This calculator only separates weekends from working days. Public holidays, company holidays, and personal leave days are not included. Subtract those separately for a more accurate estimate of available working days." },
+      { question: "What if my work week is different from Monday to Friday?", answer: "You can customize the working days per week field. If your work week is Sunday to Thursday, still enter 5 working days. The calculator works with any value from 1 to 6 working days per week." },
+      { question: "How accurate is the working days estimate?", answer: "This calculator provides an estimate based on the average distribution of days across weeks. For exact working day counts between specific dates, use the Date Difference Calculator to get the exact total days, then apply a manual adjustment for holidays." }
+    ],
+    keywords: [
+      "working days calculator",
+      "business days calculator",
+      "work days calculator",
+      "weekend calculator",
+      "working days count",
+      "business day counter",
+      "work schedule",
+      "working days per year",
+      "calendar days to working days",
+      "work week calculator",
+      "project planning days",
+      "working day estimate",
+      "weekdays calculator",
+      "working time calculator",
+      "days in period"
     ]
   }
 ];

@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Gauge, LineChart, Rocket } from "lucide-react";
+import { ArrowRight, Gauge, LineChart, Lock, Rocket, ShieldCheck, Wrench } from "lucide-react";
 import SEO from "../components/SEO.jsx";
 import CardLink from "../components/CardLink.jsx";
 import { BRAND } from "../config/brand";
 import { calculators, categories } from "../data/calculators.js";
 import { organizationSchema, webApplicationSchema } from "../utils/schema.js";
 
-const iconMap = { ai: Gauge, startup: Rocket, marketing: LineChart };
+const iconMap = { ai: Gauge, startup: Rocket, marketing: LineChart, finance: Wrench };
 
 export default function Home() {
   return (
