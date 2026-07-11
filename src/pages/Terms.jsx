@@ -56,6 +56,13 @@ export default function Terms() {
           </div>
 
           <div>
+            <h2 className="text-2xl font-bold text-white">Calculator accuracy</h2>
+            <p className="mt-3 leading-7 text-slate-400">
+              Our calculators use standard formulas and are tested for correctness. However, we make no guarantees that every calculation is accurate for every use case. Results may vary based on rounding, input precision, and assumptions inherent in each formula. Always verify critical calculations independently.
+            </p>
+          </div>
+
+          <div>
             <h2 className="text-2xl font-bold text-white">Limitation of liability</h2>
             <p className="mt-3 leading-7 text-slate-400">
               {BRAND.name} and its operators are not liable for any damages arising from the use or inability to use our calculators, guides, or content.
@@ -66,6 +73,20 @@ export default function Terms() {
             <h2 className="text-2xl font-bold text-white">Intellectual property</h2>
             <p className="mt-3 leading-7 text-slate-400">
               All content, design, and code on this site are owned by {BRAND.name} or used with permission. You may not reproduce, distribute, or create derivative works without prior written consent.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold text-white">Termination</h2>
+            <p className="mt-3 leading-7 text-slate-400">
+              We reserve the right to restrict, suspend, or terminate access to the site or any individual calculator at any time without prior notice. You may stop using the site at any time. Upon termination, all provisions of these terms that by their nature should survive will remain in effect.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold text-white">Governing law</h2>
+            <p className="mt-3 leading-7 text-slate-400">
+              These terms are governed by and construed in accordance with the laws of India. Any disputes arising from these terms shall be subject to the exclusive jurisdiction of the courts in India.
             </p>
           </div>
 

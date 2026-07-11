@@ -72,6 +72,26 @@ export default function PrivacyPolicy() {
           </div>
 
           <div>
+            <h2 className="text-2xl font-bold text-white">Information we do NOT collect</h2>
+            <p className="mt-3 leading-7 text-slate-400">
+              We do not collect or store your calculator inputs or results. All calculations happen in your browser. We do not request or store any personally identifiable information beyond what you voluntarily send us via email.
+            </p>
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-400">
+              <li>No names, addresses, or phone numbers</li>
+              <li>No financial account information</li>
+              <li>No login credentials or passwords</li>
+              <li>No browsing history beyond anonymous analytics</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold text-white">Children&apos;s privacy</h2>
+            <p className="mt-3 leading-7 text-slate-400">
+              Our services are not directed to children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, contact us and we will delete it promptly.
+            </p>
+          </div>
+
+          <div>
             <h2 className="text-2xl font-bold text-white">Your rights</h2>
             <p className="mt-3 leading-7 text-slate-400">
               Depending on your location, you may have rights under GDPR, CCPA, or similar regulations. These include the right to access, correct, or delete your data.

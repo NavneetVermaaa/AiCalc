@@ -54,6 +54,41 @@ export default function Home() {
         </div>
       </section>
       <section className="container-page py-12">
+        <div className="rounded-xl border border-line bg-panel p-6 sm:p-8">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="text-mint" size={22} />
+            <p className="eyebrow">Why trust Calcio</p>
+          </div>
+          <h2 className="mt-3 text-2xl font-black text-white">Built with transparency</h2>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="rounded-lg border border-line bg-ink p-4">
+              <p className="text-sm font-bold text-white">Free to use</p>
+              <p className="mt-1 text-xs leading-5 text-slate-400">Every calculator is free. No paywalls, no subscriptions, no credit card required.</p>
+            </div>
+            <div className="rounded-lg border border-line bg-ink p-4">
+              <p className="text-sm font-bold text-white">No sign-up</p>
+              <p className="mt-1 text-xs leading-5 text-slate-400">No accounts, no logins. All computation happens in your browser.</p>
+            </div>
+            <div className="rounded-lg border border-line bg-ink p-4">
+              <p className="text-sm font-bold text-white">Privacy first</p>
+              <p className="mt-1 text-xs leading-5 text-slate-400">We never store your inputs or results. Your data never leaves your device.</p>
+            </div>
+            <div className="rounded-lg border border-line bg-ink p-4">
+              <p className="text-sm font-bold text-white">Transparent formulas</p>
+              <p className="mt-1 text-xs leading-5 text-slate-400">Every formula is shown on the page. No hidden calculations or black-box math.</p>
+            </div>
+            <div className="rounded-lg border border-line bg-ink p-4">
+              <p className="text-sm font-bold text-white">Mobile friendly</p>
+              <p className="mt-1 text-xs leading-5 text-slate-400">All calculators work on any device&mdash;phone, tablet, or desktop.</p>
+            </div>
+            <div className="rounded-lg border border-line bg-ink p-4">
+              <p className="text-sm font-bold text-white">Regular updates</p>
+              <p className="mt-1 text-xs leading-5 text-slate-400">We update calculators when pricing or industry standards change.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="container-page py-12">
         <p className="eyebrow">Popular tools</p>
         <h2 className="mt-3 text-3xl font-black text-white">Calculator library</h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

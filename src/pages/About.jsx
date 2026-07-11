@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Calculator, FileText, Users } from "lucide-react";
+import { ArrowRight, Calculator, FileText, Lock, Users } from "lucide-react";
 import SEO from "../components/SEO.jsx";
 import { BRAND } from "../config/brand";
 import { calculators } from "../data/calculators.js";
@@ -80,6 +80,34 @@ export default function About() {
             <p className="mt-2 text-sm text-slate-400">In-depth articles on metrics, benchmarks, and business strategy.</p>
             <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-mint">Explore <ArrowRight size={16} className="transition group-hover:translate-x-1" /></span>
           </Link>
+        </div>
+      </section>
+
+      <section className="container-page py-12 lg:py-16">
+        <div className="panel p-6">
+          <h2 className="text-2xl font-black text-white">Built by Navneet Verma</h2>
+          <p className="mt-4 leading-7 text-slate-300">
+            Navneet is a frontend developer and automation enthusiast who created {BRAND.name} to help founders, marketers, and businesses make faster decisions using free calculators. Every tool on this site is designed with real-world use in mind&mdash;no fluff, no hidden costs.
+          </p>
+        </div>
+      </section>
+
+      <section className="container-page py-12 lg:py-16">
+        <div className="grid gap-8 md:grid-cols-2">
+          <div className="panel p-6">
+            <Lock className="text-mint" size={26} />
+            <h2 className="mt-4 text-xl font-bold text-white">Commitment to accuracy</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-400">
+              Every formula on {BRAND.name} is verified against authoritative sources before publication. We test each calculator with known values, review the displayed formula against standard references, and update calculations when industry standards change. If you find an error, we fix it.
+            </p>
+          </div>
+          <div className="panel p-6">
+            <Calculator className="text-mint" size={26} />
+            <h2 className="mt-4 text-xl font-bold text-white">Why choose {BRAND.name}</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-400">
+              {BRAND.name} is free, requires no sign-up, and works on any device. Every calculator shows its formula so you can verify the math. We do not store your data, sell information, or manipulate results. Our tools are maintained regularly and updated when pricing or standards change.
+            </p>
+          </div>
         </div>
       </section>
 

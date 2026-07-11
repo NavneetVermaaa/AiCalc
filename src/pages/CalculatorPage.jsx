@@ -36,6 +36,7 @@ export default function CalculatorPage() {
         <p className="eyebrow">{category.title}</p>
         <h1 className="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-5xl">{calculator.title}</h1>
         <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-300">{calculator.description}</p>
+        <p className="mt-3 text-xs text-slate-500">Last updated: {calculator.lastUpdated || "July 2026"}</p>
       </section>
       <CalculatorTool calculator={calculator} />
       <section className="container-page grid gap-6 py-10 lg:grid-cols-3">
@@ -129,6 +130,30 @@ export default function CalculatorPage() {
           </div>
         </aside>
       </section>
+      <section className="container-page py-10">
+        <div className="mx-auto max-w-3xl rounded-xl border border-line bg-panel p-5">
+          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Accuracy notice</p>
+          <p className="mt-2 text-sm leading-6 text-slate-400">
+            All calculations are for informational and educational purposes only. Results are estimates based on the inputs you provide. Verify critical numbers with a qualified professional before making decisions.
+          </p>
+        </div>
+      </section>
+
+      {calculator.references && calculator.references.length > 0 && (
+        <section className="container-page py-10">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-xl font-black text-white">References</h2>
+            <ul className="mt-4 space-y-2">
+              {calculator.references.map((ref) => (
+                <li key={ref.name}>
+                  <a href={ref.url} target="_blank" rel="noopener noreferrer" className="text-sm text-mint hover:underline">{ref.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       <FAQ faqs={calculator.faqs} />
       <section className="container-page py-10">
         <h2 className="text-2xl font-black text-white">Related calculators</h2>

@@ -21,7 +21,9 @@ const article1 = {
   category: "startup-metrics",
   categoryTitle: "Startup Metrics",
   date: "2026-06-23",
-  author: "Calcio Editorial",
+  publishedDate: "2026-06-23",
+  updatedDate: "2026-07-11",
+  author: "Navneet V",
   tags: ["CAC", "customer acquisition cost", "startup metrics", "SaaS metrics", "calculator"],
   faq: [
     {
@@ -65,15 +67,17 @@ const article1 = {
 
 const article2 = {
   published: true,
-  wordCount: 1643,
+  wordCount: 1688,
   readingTime: 9,
-  slug: "lifetime-value-guide",
-  title: "What Is Lifetime Value (LTV)? Complete Guide",
-  description: "A complete guide to Customer Lifetime Value (LTV) — what it is, how to calculate it, why it matters for startups, and strategies to increase LTV. Includes the LTV formula, examples, and a free calculator.",
+  slug: "ltv-cac-ratio-guide",
+  title: "LTV to CAC Ratio Explained: What Is a Good LTV:CAC for Startups?",
+  description: "Learn what LTV to CAC ratio means, how to calculate it, and what constitutes a good LTV:CAC for your startup. Includes benchmarks, examples, and a free LTV CAC ratio calculator.",
   category: "startup-metrics",
   categoryTitle: "Startup Metrics",
   date: "2026-06-23",
-  author: "Calcio Editorial",
+  publishedDate: "2026-06-23",
+  updatedDate: "2026-07-11",
+  author: "Navneet V",
   tags: ["LTV", "lifetime value", "customer value", "startup metrics", "SaaS metrics", "calculator"],
   faq: [
     {
@@ -125,7 +129,9 @@ const article3 = {
   category: "growth-analytics",
   categoryTitle: "Growth Analytics",
   date: "2026-06-23",
-  author: "Calcio Editorial",
+  publishedDate: "2026-06-23",
+  updatedDate: "2026-07-11",
+  author: "Navneet V",
   tags: ["ROAS", "ROI", "marketing metrics", "advertising", "growth analytics", "calculator"],
   faq: [
     {

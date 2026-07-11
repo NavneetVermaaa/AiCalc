@@ -45,8 +45,8 @@ export const articleSchema = (post) => ({
   "@type": "Article",
   headline: post.title,
   description: post.description,
-  datePublished: post.date,
-  dateModified: post.date,
-  author: { "@type": "Organization", name: post.author },
+  datePublished: post.publishedDate || post.date,
+  dateModified: post.updatedDate || post.date,
+  author: { "@type": "Person", name: post.author },
   publisher: organization
 });

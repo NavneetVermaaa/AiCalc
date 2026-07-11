@@ -9,6 +9,7 @@ const calc = (id, category, title, description, fields, compute, formula, result
   formula,
   resultLabel,
   unit,
+  lastUpdated: "July 2026",
   examples: [],
   useCases: [],
   faqs: [],
@@ -81,6 +82,10 @@ export const calculators = [
       { question: "Which OpenAI models does this calculator support?", answer: "The calculator works with any model tier. Adjust the per-1M-token prices for input and output based on the specific model you are using, such as GPT-4o, GPT-4 Turbo, or GPT-4." },
       { question: "Does the estimate include cached token pricing?", answer: "No. This calculator assumes all tokens are charged at full price. If you use OpenAI's caching feature, your actual costs will be lower. Subtract cached token volume from your estimates for a more accurate projection." },
       { question: "How are system prompt tokens counted?", answer: "System prompt tokens are part of the input token count. Make sure your input token estimate includes system prompts, few-shot examples, and any retrieval-augmented context passed with each request." }
+    ],
+    references: [
+      { name: "OpenAI Pricing", url: "https://openai.com/pricing" },
+      { name: "OpenAI API Reference", url: "https://platform.openai.com/docs/overview" }
     ]
   },
   {
@@ -125,6 +130,10 @@ export const calculators = [
       { question: "Which Claude models are covered?", answer: "This calculator supports Sonnet, Opus, and Haiku pricing tiers. Adjust the per-1M-token input and output prices to match your chosen model tier from Anthropic's current pricing page." },
       { question: "Does context caching affect the estimate?", answer: "Yes. Anthropic offers prompt caching at reduced rates. If you use caching, your input costs will be lower than the estimate. This calculator assumes all input tokens are charged at the standard rate." },
       { question: "How does Claude pricing compare to GPT-4?", answer: "Claude models typically offer competitive token pricing, especially for long-context tasks. Use this calculator alongside the OpenAI Cost Calculator to compare total monthly spend across providers." }
+    ],
+    references: [
+      { name: "Anthropic Pricing", url: "https://www.anthropic.com/pricing" },
+      { name: "Claude API Docs", url: "https://docs.anthropic.com/en/docs" }
     ]
   },
   {
@@ -169,6 +178,10 @@ export const calculators = [
       { question: "Does the Gemini calculator support multimodal pricing?", answer: "Yes, but you must estimate the token-equivalent cost of image and audio inputs. Gemini charges differently for multimodal inputs. Adjust your input token estimate higher if your requests include non-text content." },
       { question: "Is there a free tier available?", answer: "Google offers a free tier for Gemini API with rate limits. If you stay within the free quota, your cost will be lower than the estimate. This calculator assumes paid-tier pricing." },
       { question: "How does Gemini pricing compare to OpenAI and Claude?", answer: "Gemini Flash is typically the most cost-effective option among the three providers. Use this calculator alongside the OpenAI and Claude calculators to compare total monthly spend across providers." }
+    ],
+    references: [
+      { name: "Google AI Pricing", url: "https://ai.google.dev/pricing" },
+      { name: "Gemini API Docs", url: "https://ai.google.dev/gemini-api/docs" }
     ]
   },
   {

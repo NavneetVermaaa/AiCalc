@@ -45,10 +45,37 @@ export default function Contact() {
           <div className="panel p-6">
             <Mail className="text-mint" size={26} />
             <h2 className="mt-4 text-xl font-bold text-white">Email us</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-400">For support, feature requests, or general inquiries.</p>
+            <p className="mt-3 text-sm leading-6 text-slate-400">For all inquiries, feedback, and support.</p>
             <a href="mailto:navneet.v0000001@gmail.com" className="mt-4 inline-flex items-center gap-2 font-bold text-mint hover:text-sky">
               navneet.v0000001@gmail.com <ArrowRight size={16} />
             </a>
+            <p className="mt-4 text-sm leading-6 text-slate-400">We aim to respond within 1&ndash;2 business days.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="container-page py-12 lg:py-16">
+        <h2 className="text-3xl font-black text-white">How can we help?</h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="panel p-5">
+            <h3 className="font-bold text-white">Report a bug</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Found something broken? Include the calculator name and what went wrong.</p>
+          </div>
+          <div className="panel p-5">
+            <h3 className="font-bold text-white">Request a feature</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Have an idea for a new calculator or improvement? We would love to hear it.</p>
+          </div>
+          <div className="panel p-5">
+            <h3 className="font-bold text-white">Partnership inquiry</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Interested in collaborating? Reach out and tell us about your project.</p>
+          </div>
+          <div className="panel p-5">
+            <h3 className="font-bold text-white">Calculator request</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Need a calculator that does not exist yet? Describe it and we will consider building it.</p>
+          </div>
+          <div className="panel p-5">
+            <h3 className="font-bold text-white">Privacy inquiry</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Questions about your data or privacy rights? We are happy to answer them.</p>
           </div>
         </div>
       </section>
@@ -74,7 +101,7 @@ export default function Contact() {
       <section className="container-page py-12 lg:py-16">
         <div className="panel p-8 text-center">
           <h2 className="text-2xl font-black text-white">Explore our calculators</h2>
-          <p className="mt-3 text-slate-400">Browse 15+ free tools for AI, startup, and marketing metrics.</p>
+          <p className="mt-3 text-slate-400">Browse 60+ free tools across AI, startup, marketing, and finance calculators.</p>
           <Link to="/calculators/ai" className="button-primary mt-6 inline-flex">Browse calculators <ArrowRight size={17} /></Link>
         </div>
       </section>

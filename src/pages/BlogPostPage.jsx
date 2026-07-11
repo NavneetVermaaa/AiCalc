@@ -29,6 +29,12 @@ export default function BlogPostPage() {
           <p className="eyebrow">{post.categoryTitle}</p>
           <h1 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">{post.title}</h1>
           <p className="mt-4 text-lg leading-8 text-slate-300">{post.description}</p>
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 text-sm text-slate-400">
+            <span>By {post.author}</span>
+            <span>Published {new Date(post.publishedDate || post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
+            {(post.updatedDate && post.updatedDate !== (post.publishedDate || post.date)) && <span>Updated {new Date(post.updatedDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>}
+            <span>{post.readingTime} min read</span>
+          </div>
           <section id="overview" className="mt-10 leading-8 text-slate-300">
             <h2 className="text-2xl font-black text-white">Overview</h2>
             {post.body.map((paragraph) => <p key={paragraph} className="mt-4">{paragraph}</p>)}
