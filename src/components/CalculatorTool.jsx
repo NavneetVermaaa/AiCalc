@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Copy, RotateCcw, Share2 } from "lucide-react";
 
 const format = (value, unit) => {
@@ -16,8 +16,8 @@ const displayValue = (value, unit) => {
 };
 
 export default function CalculatorTool({ calculator }) {
-  const initial = Object.fromEntries(calculator.fields.map((field) => [field.name, field.value]));
-  const [values, setValues] = useState(initial);
+  const getInitial = () => Object.fromEntries(calculator.fields.map((field) => [field.name, field.value]));
+  const [values, setValues] = useState(getInitial);
   const [errors, setErrors] = useState({});
   const [copied, setCopied] = useState(false);
   const [shared, setShared] = useState(false);
@@ -29,7 +29,7 @@ export default function CalculatorTool({ calculator }) {
     return calculator.compute(numeric);
   }, [calculator, values]);
 
-  const handleChange = (name, raw) => {
+  const handleChange = useCallback((name, raw) => {
     const num = raw === "" ? 0 : Number(raw);
     setValues((current) => ({ ...current, [name]: isNaN(num) ? 0 : num }));
     if (raw === "") {
@@ -39,14 +39,14 @@ export default function CalculatorTool({ calculator }) {
     } else {
       setErrors((current) => ({ ...current, [name]: null }));
     }
-  };
+  }, []);
 
-  const handleReset = () => {
-    setValues(initial);
+  const handleReset = useCallback(() => {
+    setValues(getInitial());
     setErrors({});
     setCopied(false);
     setShared(false);
-  };
+  }, []);
 
   const handleCopy = async () => {
     let text;

@@ -1,7 +1,8 @@
+import { memo } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function CardLink({ to, title, description, meta }) {
+const CardLink = memo(function CardLink({ to, title, description, meta }) {
   return (
     <Link to={to} className="panel group block p-5 transition hover:-translate-y-1 hover:border-mint">
       {meta && <p className="eyebrow">{meta}</p>}
@@ -10,4 +11,6 @@ export default function CardLink({ to, title, description, meta }) {
       <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-mint">Open <ArrowRight size={16} className="transition group-hover:translate-x-1" /></span>
     </Link>
   );
-}
+});
+
+export default CardLink;

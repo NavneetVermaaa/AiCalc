@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { BarChart3, Menu, Search, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { BRAND } from "../config/brand";
-import { categories } from "../data/calculators.js";
+import { categories } from "../data/categories.js";
 
 const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const nav = [
