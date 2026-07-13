@@ -16,7 +16,8 @@ const calc = (id, category, title, description, fields, compute, formula, result
   keywords: []
 });
 
-export { categories } from "./categories.js";
+import { categories } from "./categories.js";
+export { categories };
 
 export const calculators = [
   {
