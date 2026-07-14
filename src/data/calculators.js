@@ -298,7 +298,11 @@ export const calculators = [
       { question: "What is Revenue Growth?", answer: "Revenue growth measures the increase or decrease in revenue between two periods. It shows whether a business is expanding, contracting, or holding steady." },
       { question: "How often should it be calculated?", answer: "Most startups review revenue growth monthly or quarterly. Annual reviews are also useful for high-level trend analysis and board reporting." },
       { question: "What is considered good growth?", answer: "Good growth depends on stage and market. Early-stage startups often aim for rapid growth, while mature companies may target steadier, more sustainable expansion." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "saas-unit-economics-guide",
+      title: "SaaS Unit Economics: The Complete Guide to Building a Profitable SaaS Business"
+    }
   },
   {
     ...calc(
@@ -350,7 +354,11 @@ export const calculators = [
       { question: "Difference between Gross Margin and Profit Margin", answer: "Gross margin focuses on revenue after direct costs, while profit margin includes all operating expenses, interest, and taxes. Profit margin is generally lower than gross margin." },
       { question: "Healthy gross margin", answer: "Healthy gross margin varies by industry. Software and digital services often have high margins, while physical goods businesses usually operate with lower margins due to production and shipping costs." },
       { question: "How to improve margin", answer: "You can improve margin by raising prices, reducing production costs, improving supplier terms, or increasing sales mix toward higher-margin offerings." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "saas-unit-economics-guide",
+      title: "SaaS Unit Economics: The Complete Guide to Building a Profitable SaaS Business"
+    }
   },
   {
     ...calc(
@@ -402,7 +410,11 @@ export const calculators = [
       { question: "What is Net Margin?", answer: "Net margin is the percentage of revenue that remains as net profit after all expenses, taxes, and one-time costs are deducted." },
       { question: "Good net margin", answer: "A good net margin depends on the business model. Software businesses often target double-digit net margins, while retail and physical-goods companies may operate with lower margins." },
       { question: "How investors use it", answer: "Investors use net margin to judge efficiency, scalability, and whether the company can convert revenue into durable profits over time." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "saas-unit-economics-guide",
+      title: "SaaS Unit Economics: The Complete Guide to Building a Profitable SaaS Business"
+    }
   },
   {
     ...calc(
@@ -454,7 +466,11 @@ export const calculators = [
       { question: "Good SaaS churn", answer: "Good churn varies by business model and price point. Monthly churn below 3% is often strong for SMB SaaS, while enterprise software can tolerate somewhat higher churn if account values are large." },
       { question: "Monthly vs annual churn", answer: "Monthly churn reflects short-term retention, while annual churn captures longer-term customer retention. Many companies track both to understand the full retention picture." },
       { question: "Reducing churn", answer: "Churn can often be reduced by improving onboarding, increasing product value, enhancing support, and resolving customer pain points before renewal time." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "mrr-guide",
+      title: "Monthly Recurring Revenue (MRR): How to Calculate, Track & Grow It"
+    }
   },
   {
     ...calc(
@@ -504,7 +520,11 @@ export const calculators = [
       { question: "Difference between MRR and ARR", answer: "MRR is monthly recurring revenue, while ARR is annual recurring revenue. ARR is usually MRR multiplied by 12, which makes it easier to compare annual revenue expectations." },
       { question: "How SaaS companies use MRR", answer: "SaaS companies use MRR to track recurring revenue growth, evaluate pricing changes, and estimate the impact of churn and expansion on future revenue." },
       { question: "Why investors monitor MRR", answer: "Investors monitor MRR because it shows the health of recurring revenue, the predictability of future cash flow, and the pace of customer growth." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "mrr-guide",
+      title: "Monthly Recurring Revenue (MRR): How to Calculate, Track & Grow It"
+    }
   },
   {
     ...calc(
@@ -552,7 +572,11 @@ export const calculators = [
       { question: "ARR vs Revenue", answer: "ARR reflects annualized recurring revenue, while total revenue includes one-time, non-recurring, and usage-based revenue. ARR is a narrower planning metric for recurring businesses." },
       { question: "ARR vs MRR", answer: "ARR is simply MRR multiplied by 12. The difference is time horizon: MRR is monthly, ARR is annualized." },
       { question: "Importance for SaaS", answer: "ARR helps SaaS companies communicate recurring revenue growth, forecast future cash flow, and demonstrate business predictability to investors and lenders." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "mrr-guide",
+      title: "Monthly Recurring Revenue (MRR): How to Calculate, Track & Grow It"
+    }
   },
   {
     ...calc("burn-rate-calculator", "startup", "Burn Rate Calculator", "Calculate monthly net burn from cash inflows and outflows.", [
@@ -583,7 +607,11 @@ export const calculators = [
       { question: "What is a healthy burn rate for a startup?", answer: "A healthy burn rate depends on your stage and cash reserves. Generally, a net burn that gives you 12-18 months of runway is considered healthy. Seed-stage startups should aim for leaner burn to extend runway between funding rounds." },
       { question: "Can burn rate be negative?", answer: "Yes. If your revenue exceeds your expenses, your net burn is negative meaning you are cash-flow positive. In that case, your runway is technically infinite since you are not consuming cash. The calculator will show a negative value in this scenario." },
       { question: "How often should founders calculate burn rate?", answer: "Monthly is the standard cadence for most startups. Calculate it at the end of each month alongside your runway projection. If you are in a rapid growth or cost-cutting phase, weekly burn tracking may be necessary." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "startup-burn-rate-guide",
+      title: "Startup Burn Rate: How to Calculate & Reduce Monthly Cash Consumption"
+    }
   },
   {
     ...calc("runway-calculator", "startup", "Runway Calculator", "Estimate how many months your startup can operate before cash reaches zero.", [
@@ -614,7 +642,11 @@ export const calculators = [
       { question: "What is the ideal runway for a startup?", answer: "Most VCs recommend 12-18 months of runway. Less than 6 months is considered dangerous and may force reactive decision-making. More than 24 months can indicate excessive fundraising or overly conservative spending." },
       { question: "How can I extend my runway?", answer: "You can extend runway by reducing operating expenses, increasing revenue, or raising additional capital. Common cost-cutting moves include reducing headcount, renegotiating vendor contracts, and deferring non-essential projects." },
       { question: "Does runway include planned fundraising?", answer: "No. Runway should be calculated based on your current cash and current burn rate. If you plan to raise funds, create a separate projection showing how the investment extends your runway. Never assume future funding in your runway calculation." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "startup-burn-rate-guide",
+      title: "Startup Burn Rate: How to Calculate & Reduce Monthly Cash Consumption"
+    }
   },
   {
     ...calc("cac-calculator", "startup", "CAC Calculator", "Calculate customer acquisition cost from sales and marketing spend.", [
@@ -645,7 +677,8 @@ export const calculators = [
       { question: "What is a good CAC for a SaaS business?", answer: "A good CAC depends on your ARPA and LTV. The general rule is that LTV should be at least 3x CAC. For a $180 ARPA customer, a CAC under $540 is healthy if your churn is below 5% monthly." },
       { question: "Should CAC include salaries or just ad spend?", answer: "CAC should include ALL sales and marketing costs: salaries, commissions, ad platforms, content production, CRM tools, and overhead. Using only ad spend dramatically understates your true acquisition cost." },
       { question: "How do I lower my CAC?", answer: "Common strategies include optimizing ad targeting, improving landing page conversion rates, building organic content channels, refining your sales process, and focusing on high-intent customer segments. Track CAC by channel to identify your most efficient acquisition path." }
-    ]
+    ],
+    relatedGuide: { slug: "customer-acquisition-cost-guide", title: "What Is Customer Acquisition Cost (CAC)? Complete Guide for Startups" }
   },
   {
     ...calc("ltv-calculator", "startup", "LTV Calculator", "Estimate customer lifetime value using ARPA, margin, and churn.", [
@@ -677,7 +710,11 @@ export const calculators = [
       { question: "What is a good LTV to CAC ratio?", answer: "An LTV to CAC ratio of 3:1 or higher is considered healthy for most SaaS businesses. A ratio below 1:1 means you spend more to acquire a customer than they generate in profit. Ratios above 5:1 suggest you may be underinvesting in growth." },
       { question: "How does gross margin affect LTV?", answer: "Gross margin directly impacts LTV. A higher margin means more of each dollar stays as profit, increasing lifetime value. If your margin drops from 82% to 60%, your LTV drops by roughly 27%. Always use gross profit, not revenue, when calculating LTV." },
       { question: "Why does churn have such a big impact on LTV?", answer: "LTV is inversely proportional to churn. Even small churn improvements have outsized effects. Reducing monthly churn from 4% to 3% increases LTV by 33%. This is why retention is often the most impactful growth lever in SaaS." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "ltv-cac-ratio-guide",
+      title: "LTV to CAC Ratio Explained: What Is a Good LTV:CAC for Startups?"
+    }
   },
   {
     ...calc("break-even-calculator", "startup", "Break-Even Calculator", "Find the revenue or units needed to cover fixed and variable costs.", [
@@ -709,7 +746,11 @@ export const calculators = [
       { question: "What is a good break-even period for a startup?", answer: "Most startups aim to break even within 18-24 months of launching. Hardware and manufacturing businesses typically have longer break-even periods due to upfront tooling costs. Service businesses can often break even in under 12 months." },
       { question: "How does pricing affect break-even units?", answer: "A small increase in price can significantly reduce the number of units needed to break even. For example, raising the price from $99 to $109 reduces the break-even point by approximately 10% assuming variable costs stay constant. This is why pricing strategy is critical." },
       { question: "What if my break-even point seems too high?", answer: "If your break-even units are unrealistic for your market size, you have three options: reduce fixed costs, increase your price, or lower variable costs through better supplier agreements or manufacturing efficiency. Recalculate each time you make a change." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "startup-burn-rate-guide",
+      title: "Startup Burn Rate: How to Calculate & Reduce Monthly Cash Consumption"
+    }
   },
 
   {
@@ -764,7 +805,11 @@ export const calculators = [
       { question: "What is a good customer retention rate for SaaS?", answer: "A monthly retention rate above 95% (or annual above 90%) is considered strong for most SaaS businesses. Rates vary by segment: enterprise software often achieves higher retention than SMB. Compare against your industry and business model benchmarks for an accurate assessment." },
       { question: "How does retention differ from churn?", answer: "Retention rate and churn rate are complementary metrics. Retention is the percentage of customers kept, while churn is the percentage lost. If retention is 85%, churn is 15%. Tracking both provides a complete picture of customer movement." },
       { question: "What actions improve customer retention?", answer: "Common retention levers include improving the onboarding experience, increasing product engagement through feature adoption, providing proactive customer support, and regularly communicating product value through success touches and business reviews." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "saas-metrics-handbook",
+      title: "The Complete SaaS Metrics Handbook: Every Metric You Need to Run a SaaS Business"
+    }
   },
   {
     ...calc(
@@ -812,7 +857,11 @@ export const calculators = [
       { question: "How is customer lifetime calculated from churn rate?", answer: "Customer lifetime is approximately 1 divided by the annual churn rate. For example, a 20% annual churn rate implies an average customer lifetime of 5 years. This relationship makes lifetime a useful proxy for understanding retention performance." },
       { question: "What is a good customer lifetime for SaaS?", answer: "Good customer lifetime varies by business model. Enterprise SaaS often sees lifetimes of 5-10 years, while SMB SaaS may see 2-4 years. The key benchmark is whether the lifetime is long enough to generate an LTV that exceeds CAC by at least 3x." },
       { question: "Does customer lifetime include the onboarding period?", answer: "Yes. Customer lifetime measures from the date of first payment to the date of churn. The onboarding period is included as part of the relationship. Short lifetimes often indicate poor onboarding or insufficient early value delivery." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "cac-payback-vs-ltv-cac-ratio",
+      title: "CAC Payback Period vs LTV:CAC Ratio — Which Metric Matters More?"
+    }
   },
   {
     ...calc(
@@ -864,7 +913,11 @@ export const calculators = [
       { question: "What is a good payback period for a SaaS business?", answer: "A payback period under 12 months is generally considered healthy for SaaS. Periods under 6 months indicate excellent capital efficiency. Periods above 18 months suggest the business model may need adjustment through higher pricing, lower CAC, or better margin." },
       { question: "How does payback period relate to LTV and CAC?", answer: "Payback period, LTV, and CAC are closely related unit economics. While LTV to CAC ratio shows overall return, payback period focuses on cash recovery timing. A business can have a good LTV to CAC ratio but a dangerously long payback period if growth is capital-intensive." },
       { question: "Can payback period be negative?", answer: "No. Payback period is always positive because both CAC and monthly gross profit are positive values. If monthly gross profit is zero or negative, the payback period is undefined because the customer never generates enough profit to cover acquisition costs." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "cac-payback-vs-ltv-cac-ratio",
+      title: "CAC Payback Period vs LTV:CAC Ratio — Which Metric Matters More?"
+    }
   },
   {
     ...calc(
@@ -914,7 +967,11 @@ export const calculators = [
       { question: "What is the difference between gross profit and net profit?", answer: "Gross profit subtracts only direct production costs from revenue. Net profit subtracts all operating expenses including marketing, salaries, rent, taxes, and interest. Gross profit shows product-level profitability, while net profit shows overall business profitability." },
       { question: "Can gross profit be negative?", answer: "Yes. If COGS exceeds revenue, gross profit is negative. This means you are selling products or services for less than they cost to produce. A negative gross profit is unsustainable and requires immediate attention through pricing increases or cost reduction." },
       { question: "How do subscription businesses calculate COGS?", answer: "For SaaS and subscription businesses, COGS typically includes cloud hosting fees, customer support costs, payment processing fees, and any third-party API costs. Salaries for engineering and product development are generally considered operating expenses, not COGS." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "saas-unit-economics-guide",
+      title: "SaaS Unit Economics: The Complete Guide to Building a Profitable SaaS Business"
+    }
   },
   {
     ...calc(
@@ -969,7 +1026,11 @@ export const calculators = [
       { question: "What is a good EBITDA margin?", answer: "EBITDA margin varies significantly by industry. Software companies often achieve EBITDA margins of 20-40%, while manufacturing and retail typically range from 10-20%. Compare your margin against industry benchmarks for a meaningful assessment of operating efficiency." },
       { question: "How is EBITDA different from net income?", answer: "Net income includes interest, taxes, depreciation, and amortization, while EBITDA excludes all four. EBITDA provides a clearer view of operational performance, while net income reflects the full impact of financing decisions, tax strategy, and non-cash charges." },
       { question: "Why do investors use EBITDA for valuation?", answer: "Investors use EBITDA because it normalizes for differences in capital structure, tax rates, and accounting policies across companies. Valuation multiples based on EBITDA allow for more direct comparisons of operating performance between potential acquisition targets." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "saas-unit-economics-guide",
+      title: "SaaS Unit Economics: The Complete Guide to Building a Profitable SaaS Business"
+    }
   },
   {
     ...calc(
@@ -1021,7 +1082,11 @@ export const calculators = [
       { question: "What is a healthy cash burn ratio for a startup?", answer: "Most investors consider a cash burn ratio of 12-18 months healthy. Above 18 months may indicate excessive fundraising, while below 6 months signals urgent action is needed. The ideal ratio depends on your stage, revenue growth rate, and path to profitability." },
       { question: "How does the cash burn ratio differ from runway?", answer: "The cash burn ratio and runway measure the same concept: months of operation remaining. Runway is calculated similarly using cash divided by monthly burn. The terms are often used interchangeably in startup financial planning." },
       { question: "What actions extend the cash burn ratio?", answer: "You can extend the ratio by reducing operating expenses, increasing revenue to lower net burn, or raising additional capital. Common expense reductions include headcount adjustments, renegotiating vendor contracts, and deferring non-critical projects." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "startup-burn-rate-guide",
+      title: "Startup Burn Rate: How to Calculate & Reduce Monthly Cash Consumption"
+    }
   },
   {
     ...calc(
@@ -1073,7 +1138,11 @@ export const calculators = [
       { question: "What is a good revenue per employee for SaaS?", answer: "Revenue per employee in SaaS typically ranges from $100,000 to $200,000 for established companies. Early-stage SaaS companies may show lower figures due to upfront investment in product development before revenue scales. Public SaaS companies often exceed $300,000 per employee." },
       { question: "How does revenue per employee relate to profitability?", answer: "Higher revenue per employee generally correlates with better profitability because the revenue must support fewer people. However, it is not a direct profitability measure since it does not account for other costs like cloud infrastructure, marketing spend, or cost of goods sold." },
       { question: "Should I include contractors in the employee count?", answer: "Yes. For an accurate comparison, include full-time equivalent contractors and outsourced staff who contribute meaningfully to operations. Excluding them inflates the metric and gives a misleading picture of true operational efficiency." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "saas-unit-economics-guide",
+      title: "SaaS Unit Economics: The Complete Guide to Building a Profitable SaaS Business"
+    }
   },
   {
     ...calc(
@@ -1125,7 +1194,11 @@ export const calculators = [
       { question: "What is a good ARPU for a SaaS business?", answer: "Good ARPU varies widely by market and business model. Enterprise SaaS often targets ARPU above $100 per month, while consumer SaaS may aim for $5 to $20 per month. The key is whether ARPU supports a healthy LTV to CAC ratio given your churn and margin profile." },
       { question: "How does ARPU differ from ARPA?", answer: "ARPU (Average Revenue Per User) divides revenue by all users including free tiers, while ARPA (Average Revenue Per Account) divides revenue by paying customers only. ARPA is typically higher than ARPU because it excludes non-paying users from the denominator." },
       { question: "Can ARPU decrease while total revenue grows?", answer: "Yes. If user growth outpaces revenue growth, ARPU will decline even as total revenue increases. This often happens during freemium or land-and-expand strategies. Monitor ARPU alongside total revenue to ensure user growth is not diluting per-user revenue." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "saas-unit-economics-guide",
+      title: "SaaS Unit Economics: The Complete Guide to Building a Profitable SaaS Business"
+    }
   },
   {
     ...calc(
@@ -1183,7 +1256,11 @@ export const calculators = [
       { question: "What is a good SaaS quick ratio?", answer: "A quick ratio above 4 is considered excellent, meaning the company is growing MRR more than 4x faster than losing it. A ratio between 2 and 4 is healthy. Below 2 indicates that growth is barely outpacing churn, and below 1 means the company is shrinking." },
       { question: "How often should the quick ratio be calculated?", answer: "The quick ratio should be calculated monthly alongside other core SaaS metrics. Monthly tracking reveals trends and seasonality. If your business has significant seasonal variations, compare the same month year over year for a more accurate trend assessment." },
       { question: "What is the difference between quick ratio and net MRR growth rate?", answer: "The quick ratio focuses on the balance between growth and loss drivers, while net MRR growth rate measures the percentage change in total MRR. Both are valuable: quick ratio shows the efficiency of growth, while net MRR growth rate shows the magnitude of growth." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "saas-quick-ratio-guide",
+      title: "SaaS Quick Ratio: Measuring Growth Efficiency Beyond MRR"
+    }
   },
   {
     ...calc(
@@ -1234,7 +1311,11 @@ export const calculators = [
       { question: "What does a Rule of 40 score below 40 mean?", answer: "A score below 40 suggests the company is either growing too slowly, not profitable enough, or struggling with both. Early-stage companies often score below 40 due to heavy growth investment. The key is to have a credible path to reaching 40 as the business matures." },
       { question: "Can the Rule of 40 apply to non-SaaS businesses?", answer: "The Rule of 40 was developed for SaaS companies but has been adopted by other subscription and recurring-revenue models. For non-recurring businesses, different health metrics may be more appropriate. The rule is most meaningful for companies with predictable recurring revenue streams." },
       { question: "How do high-growth startups score on the Rule of 40?", answer: "High-growth startups often sacrifice profitability for growth, scoring below 40. A company growing 80% with a negative 30% margin scores 50 and still passes. The rule acknowledges that rapid growth justifies lower near-term profitability as long as the combined score meets the threshold." }
-    ]
+    ],
+    relatedGuide: {
+      slug: "saas-unit-economics-guide",
+      title: "SaaS Unit Economics: The Complete Guide to Building a Profitable SaaS Business"
+    }
   },
   {
     ...calc("roas-calculator", "marketing", "ROAS Calculator", "Measure return on ad spend from campaign revenue and media spend.", [

@@ -126,7 +126,7 @@ export default function CalculatorPage() {
             {relatedLinks.slice(0, 3).map((item) => (
               <Link key={item.slug} className="button-secondary" to={`/calculator/${item.slug}`}>{item.title}</Link>
             ))}
-            <Link className="button-secondary" to="/blog">Related guides</Link>
+            {calculator.relatedGuide ? <Link className="button-secondary" to={`/blog/${calculator.relatedGuide.slug}`}>{calculator.relatedGuide.title}</Link> : <Link className="button-secondary" to="/blog">Related guides</Link>}
           </div>
         </aside>
       </section>

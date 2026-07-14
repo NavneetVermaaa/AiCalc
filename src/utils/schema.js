@@ -43,7 +43,7 @@ export const breadcrumbSchema = (items) => ({
 export const articleSchema = (post) => ({
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: post.title,
+  headline: post.metaTitle || post.title,
   description: post.description,
   datePublished: post.publishedDate || post.date,
   dateModified: post.updatedDate || post.date,

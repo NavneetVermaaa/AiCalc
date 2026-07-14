@@ -1,9 +1,15 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import App from "./App.jsx";
 import "./styles.css";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
 
 const Home = lazy(() => import("./pages/Home.jsx"));
 const CategoryPage = lazy(() => import("./pages/CategoryPage.jsx"));
@@ -25,6 +31,7 @@ createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Suspense fallback={<div className="min-h-screen bg-ink p-8 text-slate-200">Loading Calcio...</div>}>
           <Routes>
             <Route element={<App />}>
