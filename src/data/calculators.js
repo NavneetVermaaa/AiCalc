@@ -225,6 +225,7 @@ export const calculators = [
       "Net monthly savings",
       "$"
     ),
+    relatedGuide: { slug: "ai-agent-savings-guide", title: "AI Agent Savings Guide: How Much Can AI Agents Save Your Business (2026)" },
     whatIsIt: "The AI Agent Savings Calculator estimates the net cost savings from deploying AI agents that automate human tasks. It converts hours saved into dollar savings using loaded labor costs, then subtracts the agent's operating cost to give a clear net monthly figure.",
     howItWorks: "You enter the number of labor hours your AI agent saves per month, the fully loaded hourly cost of the human labor it replaces, and the monthly cost of running the agent (API fees, hosting, maintenance). The calculator multiplies hours by hourly rate and subtracts agent costs.",
     stepByStep: "Measure the hours your AI agent handles per month by tracking tasks it completes and comparing to human benchmarks. Determine the fully loaded hourly cost including salary, benefits, tools, and overhead. Enter the agent's total monthly cost and the calculator returns your net savings.",
