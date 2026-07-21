@@ -182,6 +182,7 @@ export const calculators = [
       "AI ROI",
       "%"
     ),
+    relatedGuide: { slug: "ai-roi-calculator-guide", title: "AI ROI Calculator Guide: How to Measure Return on AI Investments (2026)" },
     whatIsIt: "The AI ROI Calculator measures the return on investment from AI tools, agents, and automation initiatives. It combines cost savings, revenue lift, and AI subscription or operational costs into a single ROI percentage. This helps teams justify AI investments to stakeholders.",
     howItWorks: "You input the monthly savings from time or labor reduction, the monthly revenue increase attributed to AI, and the total monthly cost of the AI solution. The calculator subtracts costs from benefits and divides by costs to express ROI as a percentage.",
     stepByStep: "Add up the monthly labor and operational savings your AI tool produces. Estimate the additional revenue generated from AI-driven conversions, upselling, or improved service. Enter the full cost of the AI solution including API fees, subscriptions, and engineering overhead. The calculator returns your ROI percentage.",
