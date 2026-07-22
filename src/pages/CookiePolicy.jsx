@@ -14,7 +14,7 @@ const cookieSchema = {
 export default function CookiePolicy() {
   return (
     <>
-      <SEO title="Cookie Policy — How Calcio Uses Cookies and Tracking" description={`${BRAND.name} cookie policy. Learn about the cookies we use and how you can control them.`} path="/cookie-policy" schema={[cookieSchema]} />
+      <SEO title="Cookie Policy | Cookies Used by CalcioCalc" description={`${BRAND.name} cookie policy. Learn about the cookies we use and how you can control them.`} path="/cookie-policy" schema={[cookieSchema]} />
       <section className="container-page py-12 lg:py-20">
         <p className="eyebrow">Legal</p>
         <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">Cookie Policy</h1>

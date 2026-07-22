@@ -20,7 +20,7 @@ export default function About() {
   return (
     <>
       <SEO
-        title={`About ${BRAND.name} — Free Business Calculators for Founders, Marketers and Developers`}
+        title="About CalcioCalc — Free AI & Business Calculator Platform"
         description={`${BRAND.name} provides free AI, startup, finance and marketing calculators to help businesses and individuals make smarter decisions with accurate data.`}
         path="/about"
         schema={[aboutPageSchema]}

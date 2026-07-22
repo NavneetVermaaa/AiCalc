@@ -14,7 +14,7 @@ export default function CategoryPage() {
 
   return (
     <>
-      <SEO title={category.title} description={category.description} path={`/calculators/${category.id}`} schema={[breadcrumbSchema(crumbs)]} />
+      <SEO title={category.metaTitle || category.title} description={category.description} path={`/calculators/${category.id}`} schema={[breadcrumbSchema(crumbs)]} />
       <Breadcrumbs items={crumbs} />
       <section className="container-page py-12">
         <p className="eyebrow">Calculator category</p>

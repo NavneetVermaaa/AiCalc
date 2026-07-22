@@ -20,7 +20,7 @@ export default function PrivacyPolicy() {
   return (
     <>
       <SEO
-        title="Privacy Policy — How Calcio Handles Your Data"
+        title="Privacy Policy | How CalcioCalc Protects Your Data"
         description={`${BRAND.name} privacy policy. We respect your privacy and are transparent about how we collect, use, and protect your data.`}
         path="/privacy-policy"
         schema={[privacySchema]}
