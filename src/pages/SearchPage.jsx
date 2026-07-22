@@ -34,7 +34,7 @@ export default function SearchPage() {
 
   return (
     <>
-      <SEO title="Search" description="Search calculators and articles on Calcio." path="/search" />
+      <SEO title="Search — Find Calculators and Articles on Calcio" description="Search 60+ free business calculators and 20+ in-depth guides on AI costs, startup metrics, marketing ROI, and finance." path="/search" noindex />
       <section className="container-page py-12">
         <p className="eyebrow">Search</p>
         <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">Search</h1>

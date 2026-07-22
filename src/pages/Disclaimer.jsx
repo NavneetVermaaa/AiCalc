@@ -14,7 +14,7 @@ const disclaimerSchema = {
 export default function Disclaimer() {
   return (
     <>
-      <SEO title="Disclaimer" description={`${BRAND.name} disclaimer. Our calculators provide estimates for informational and educational purposes only.`} path="/disclaimer" schema={[disclaimerSchema]} />
+      <SEO title="Disclaimer — Calcio Calculator Accuracy and Usage Notice" description={`${BRAND.name} disclaimer. Our calculators provide estimates for informational and educational purposes only.`} path="/disclaimer" schema={[disclaimerSchema]} />
       <section className="container-page py-12 lg:py-20">
         <p className="eyebrow">Legal</p>
         <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">Disclaimer</h1>

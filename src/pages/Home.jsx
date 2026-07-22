@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <SEO
         title={`${BRAND.name} – Free Business, AI & Marketing Calculators`}
-        description={`${BRAND.name} provides free AI, startup, finance and marketing calculators with practical guides, formulas, examples and business insights.`}
+        description={`${BRAND.name} provides 60+ free AI, startup, finance and marketing calculators with practical guides, transparent formulas, step-by-step examples and business insights for founders and teams.`}
         schema={[organizationSchema, webApplicationSchema]}
       />
       <section className="container-page grid min-h-[calc(100vh-4rem)] items-center gap-10 py-12 lg:grid-cols-[1.05fr_0.95fr]">
@@ -38,6 +38,59 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <section className="container-page py-12">
+        <p className="eyebrow">What is {BRAND.name}</p>
+        <h2 className="mt-3 text-3xl font-black text-white">Free business calculators for smarter decisions</h2>
+        <p className="mt-4 max-w-3xl leading-7 text-slate-300">
+          {BRAND.name} is a free collection of 60+ online calculators covering AI costs, startup metrics, marketing performance, and everyday finance. Every calculator shows its formula, includes a step-by-step example, and provides real-world context so you understand not just the number but what it means for your business.
+        </p>
+        <p className="mt-4 max-w-3xl leading-7 text-slate-300">
+          Whether you are estimating OpenAI API costs, calculating your SaaS burn rate, measuring ROAS on ad campaigns, or figuring out a loan EMI — {BRAND.name} gives you instant answers with no sign-up, no paywalls, and no data collection.
+        </p>
+      </section>
+
+      <section className="container-page py-12">
+        <p className="eyebrow">Who it is for</p>
+        <h2 className="mt-3 text-3xl font-black text-white">Built for founders, marketers, developers and finance teams</h2>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="panel p-5">
+            <p className="font-bold text-white">SaaS founders and startup teams</p>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Track MRR, ARR, CAC, LTV, churn rate, burn rate, runway, quick ratio, and Rule of 40. Model unit economics before investor conversations.</p>
+          </div>
+          <div className="panel p-5">
+            <p className="font-bold text-white">AI developers and product teams</p>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Compare OpenAI, Claude, and Gemini API costs. Calculate AI ROI and agent savings. Budget accurately for production deployments.</p>
+          </div>
+          <div className="panel p-5">
+            <p className="font-bold text-white">Marketers and growth teams</p>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Optimise ROAS, CPC, CPM, CPA, conversion rates, and marketing ROI. Plan campaigns with data-driven budget allocation.</p>
+          </div>
+          <div className="panel p-5">
+            <p className="font-bold text-white">Small business owners and freelancers</p>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Calculate GST, loan EMIs, mortgage payments, profit margins, salary breakdowns, and everyday percentages.</p>
+          </div>
+          <div className="panel p-5">
+            <p className="font-bold text-white">Finance professionals and students</p>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Compound interest, SIP returns, inflation impact, EBITDA, and net profit margin calculations with transparent formulas.</p>
+          </div>
+          <div className="panel p-5">
+            <p className="font-bold text-white">Agencies and consultants</p>
+            <p className="mt-2 text-sm leading-6 text-slate-400">Client reporting, campaign budgeting, marketing efficiency ratios, and profitability analysis across multiple channels.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="container-page py-12">
+        <div className="rounded-xl border border-line bg-panel p-6 sm:p-8">
+          <p className="eyebrow">From calculators to strategy</p>
+          <h2 className="mt-3 text-2xl font-black text-white">Explore in-depth guides on the {BRAND.name} blog</h2>
+          <p className="mt-4 leading-7 text-slate-300">
+            Every calculator is backed by editorial content. Our blog covers AI pricing guides, SaaS metrics handbooks, startup finance tutorials, and marketing math explained step by step. Read the <Link to="/blog" className="text-mint underline underline-offset-2 hover:brightness-110">latest articles</Link> to deepen your understanding of the metrics that drive business growth.
+          </p>
+        </div>
+      </section>
+
       <section id="categories" className="container-page py-12">
         <div className="grid gap-5 md:grid-cols-3">
           {categories.map((category) => {

@@ -20,7 +20,7 @@ export default function BlogListPage() {
 
   return (
     <>
-      <SEO title="Calcio Blog" description="Guides for AI costs, startup finance, SaaS metrics, and marketing calculator strategy." path="/blog" schema={[blogSchema]} />
+      <SEO title="Calcio Blog — AI Pricing, SaaS Metrics & Marketing ROI Guides" description="Read in-depth guides on AI API pricing, SaaS startup metrics, marketing ROI calculations, and financial benchmarks. Free calculators included with every article." path="/blog" schema={[blogSchema]} />
       <section className="container-page py-12">
         <p className="eyebrow">Content hub</p>
         <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">Blog</h1>

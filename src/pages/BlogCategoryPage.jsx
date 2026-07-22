@@ -18,7 +18,7 @@ export default function BlogCategoryPage() {
 
   return (
     <>
-      <SEO title={`${category.title} Articles`} description={category.description} path={`/blog/category/${category.id}`} schema={[breadcrumbSchema(crumbs)]} />
+      <SEO title={`${category.title} Articles — Latest Guides and Tutorials`} description={`Explore our ${category.title.toLowerCase()} guides covering ${category.id === "ai-finance" ? "LLM API pricing, AI ROI, agent savings, prompt optimisation, and cost optimisation strategies" : category.id === "startup-metrics" ? "CAC, LTV, churn, MRR, ARR, burn rate, unit economics, and SaaS benchmarks by stage" : "ROAS, CPC, CPM, conversion rate, marketing ROI, and paid growth strategy"}. Free calculators included.`} path={`/blog/category/${category.id}`} schema={[breadcrumbSchema(crumbs)]} />
       <Breadcrumbs items={crumbs} />
       <section className="container-page py-12">
         <p className="eyebrow">Blog category</p>

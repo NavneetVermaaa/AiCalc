@@ -15,7 +15,7 @@ const editorialSchema = {
 export default function EditorialPolicy() {
   return (
     <>
-      <SEO title="Editorial Policy" description={`${BRAND.name} editorial policy. Transparency in how our calculator formulas and content are created, reviewed, and updated.`} path="/editorial-policy" schema={[editorialSchema]} />
+      <SEO title="Editorial Policy — How Calcio Creates and Reviews Content" description={`${BRAND.name} editorial policy. Transparency in how our calculator formulas and content are created, reviewed, and updated.`} path="/editorial-policy" schema={[editorialSchema]} />
       <section className="container-page py-12 lg:py-20">
         <p className="eyebrow">Editorial</p>
         <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">Editorial Policy</h1>

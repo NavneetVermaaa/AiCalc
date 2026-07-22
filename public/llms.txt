@@ -1,0 +1,49 @@
+# Calcio — Free Business, AI & Marketing Calculators
+
+> Calcio provides 60+ free online calculators for AI costs, startup metrics, marketing performance, and everyday finance. No sign-up required. All computation happens in your browser.
+
+## Key pages
+
+- Home: https://calciocalc.com/
+- AI Calculators: https://calciocalc.com/calculators/ai
+- Startup Calculators: https://calciocalc.com/calculators/startup
+- Marketing Calculators: https://calciocalc.com/calculators/marketing
+- Finance Calculators: https://calciocalc.com/calculators/finance
+- Blog: https://calciocalc.com/blog
+- About: https://calciocalc.com/about
+- Contact: https://calciocalc.com/contact
+
+## Popular calculators
+
+- OpenAI Cost Calculator: https://calciocalc.com/calculator/openai-cost-calculator
+- Claude Cost Calculator: https://calciocalc.com/calculator/claude-cost-calculator
+- Gemini Cost Calculator: https://calciocalc.com/calculator/gemini-cost-calculator
+- AI ROI Calculator: https://calciocalc.com/calculator/ai-roi-calculator
+- AI Agent Savings Calculator: https://calciocalc.com/calculator/ai-agent-savings-calculator
+- CAC Calculator: https://calciocalc.com/calculator/cac-calculator
+- LTV Calculator: https://calciocalc.com/calculator/ltv-calculator
+- MRR Calculator: https://calciocalc.com/calculator/mrr-calculator
+- Churn Rate Calculator: https://calciocalc.com/calculator/churn-rate-calculator
+- Burn Rate Calculator: https://calciocalc.com/calculator/burn-rate-calculator
+- Runway Calculator: https://calciocalc.com/calculator/runway-calculator
+- ROAS Calculator: https://calciocalc.com/calculator/roas-calculator
+- CPC Calculator: https://calciocalc.com/calculator/cpc-calculator
+- Conversion Rate Calculator: https://calciocalc.com/calculator/conversion-rate-calculator
+- GST Calculator: https://calciocalc.com/calculator/gst-calculator
+- EMI Calculator: https://calciocalc.com/calculator/emi-calculator
+- Compound Interest Calculator: https://calciocalc.com/calculator/compound-interest-calculator
+- Salary Calculator: https://calciocalc.com/calculator/salary-calculator
+- Percentage Calculator: https://calciocalc.com/calculator/percentage-calculator
+
+## Blog guides
+
+- What Is Customer Acquisition Cost (CAC)? Complete Guide for Startups: https://calciocalc.com/blog/customer-acquisition-cost-guide
+- LTV to CAC Ratio Explained: https://calciocalc.com/blog/ltv-cac-ratio-guide
+- ROAS vs ROI: What's the Difference?: https://calciocalc.com/blog/roas-vs-roi-guide
+- SaaS Benchmarks 2026: CAC, LTV, Churn & Growth Metrics by Stage: https://calciocalc.com/blog/saas-benchmarks-2026
+- OpenAI API Pricing Guide: https://calciocalc.com/blog/openai-api-pricing-guide
+- Claude API Pricing Guide: https://calciocalc.com/blog/claude-api-pricing-guide
+- Gemini API Pricing Guide: https://calciocalc.com/blog/gemini-api-pricing-guide
+- AI Cost Optimization Handbook: https://calciocalc.com/blog/ai-cost-optimization-handbook
+- SaaS Unit Economics: The Complete Guide: https://calciocalc.com/blog/saas-unit-economics-guide
+- Monthly Recurring Revenue (MRR): How to Calculate, Track & Grow It: https://calciocalc.com/blog/mrr-guide
