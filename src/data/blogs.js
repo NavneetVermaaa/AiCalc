@@ -1579,11 +1579,11 @@ const article12 = {
 
 const article13 = {
   published: true,
-  wordCount: 3050,
-  readingTime: 16,
+  wordCount: 2600,
+  readingTime: 13,
   slug: "claude-api-pricing-guide",
-  title: "Claude API Pricing Guide: Complete Cost Breakdown for Claude Models (2026)",
-  description: "Complete Claude API pricing guide covering Opus, Sonnet, and Haiku model costs, prompt caching, Batch API discounts, Extended Thinking, and real cost examples. Includes the Claude Cost Calculator.",
+  title: "Claude API Pricing Guide (2026): Haiku, Sonnet, Opus & Cost Optimization Explained",
+  description: "Complete Claude API pricing guide covering Haiku, Sonnet, and Opus model costs, prompt caching, batch processing, context windows, and cost optimization with real examples. Includes the Claude Cost Calculator.",
   category: "ai-finance",
   categoryTitle: "AI Finance",
   date: "2026-07-18",
@@ -1606,332 +1606,242 @@ const article13 = {
     { question: "What is the new tokenizer on Opus 4.7+ and Sonnet 5?", answer: "Claude Opus 4.7, Opus 4.8, Fable 5, and Sonnet 5 use a newer tokenizer that produces approximately 30% more tokens for the same text compared to the previous tokenizer. Account for this when budgeting — a prompt that was 10,000 tokens on Sonnet 4.6 may be ~13,000 tokens on Sonnet 5." }
   ],
   sections: [
-    { type: "text", content: "Last updated: July 2026. Anthropic updates model pricing periodically. Verify the latest rates at claude.com/pricing before making production budget decisions." },
-    { type: "text", content: "Whether you are estimating Claude API pricing for an AI agent, coding assistant, or content generation workflow, understanding per-model token costs is essential for keeping your application profitable. Claude API pricing follows a pay-per-token model with four tiers spanning from Haiku at $1 per 1M input tokens to Fable at $10 per 1M input tokens. Output tokens cost 5x the input rate across all models. Prompt caching reduces repeated input costs by up to 90% after the initial write, and the Batch API cuts everything by 50% for async workloads. Use the Claude Cost Calculator to estimate your monthly spend in seconds." },
+    { type: "claudeHero" },
+    { type: "text", content: "Claude pricing is straightforward on the surface and surprisingly nuanced once you start building with it. Anthropic separates consumer plans from API usage, so the way you pay depends on whether you are using Claude directly or integrating it into an app or workflow." },
+    { type: "text", content: "For individuals, Claude offers subscription-style access through consumer plans. For developers, the Claude API uses usage-based pricing with costs determined by model choice, input tokens, output tokens, prompt caching, and batch processing." },
+    { type: "text", content: "That structure makes Claude a strong fit for teams that care about writing quality, long-context reasoning, and efficient model routing. Haiku is the low-cost option, Sonnet is the balanced default, and Opus is the premium tier for the hardest tasks." },
+    { type: "text", content: "This guide explains Claude pricing in plain language. We'll cover Claude plans, API token pricing, Haiku vs Sonnet vs Opus, prompt caching, batch processing, context windows, real pricing examples, comparisons against OpenAI and Gemini, and practical ways to reduce your monthly bill." },
     {
       type: "takeaways",
       items: [
-        "Claude pricing spans four tiers: Haiku ($1/$5), Sonnet ($2–3/$10–15), Opus ($5/$25), and Fable ($10/$50) per 1M tokens",
-        "Output tokens cost 5x the input rate on every Claude model — controlling generation length is the highest-leverage cost lever",
-        "Prompt caching uses a write-once, read-cheaply model: writes cost 1.25x base input, reads cost 0.1x — profitable after one reuse",
-        "The Batch API offers a flat 50% discount on both input and output tokens for async workloads",
-        "Claude Sonnet 5 introductory pricing of $2/$10 runs through August 31, 2026, then reverts to $3/$15 standard pricing"
+        "Claude pricing depends on whether you are using the consumer product or the API.",
+        "The API is usage-based and charged primarily by input tokens, output tokens, caching, and batch usage.",
+        "Haiku is the cost-efficient model, Sonnet is the balanced default, and Opus is the premium reasoning and writing model.",
+        "Prompt caching can significantly reduce repeated-prefix costs in workflows that reuse the same instructions.",
+        "Batch processing is useful for non-urgent, high-volume jobs and can cut costs materially.",
+        "Claude is often strongest in long-context, writing-heavy, and reasoning-heavy workflows."
       ]
     },
-    { type: "heading", content: "Pricing at a Glance" },
+    { type: "heading", content: "Claude Pricing at a Glance" },
+    { type: "text", content: "Claude pricing works in two broad ways: consumer plans for people using Claude directly, and API pricing for developers building products." },
+    { type: "heading", content: "Claude App and Plans" },
+    { type: "text", content: "Claude's consumer plans are designed for people who want direct chat-style use, often for writing, thinking, studying, or day-to-day productivity. Those plans are typically subscription-based and are separate from API billing." },
+    { type: "text", content: "That makes the app best for direct use, while the API is better for automations, products, and custom workflows." },
+    { type: "heading", content: "Claude API" },
+    { type: "text", content: "The Claude API is billed by usage. The main billing unit is tokens, and the final cost depends on model choice, input volume, output volume, prompt caching, and batch processing." },
+    { type: "text", content: "This makes Claude easy to prototype with and harder to ignore at scale. Small projects may stay inexpensive, but high-volume systems can become costly if output is long or repeated context is not cached." },
     {
-      type: "benchmark",
-      caption: "Claude API Pricing at a Glance — Active Models",
-      headers: ["Model", "Input / 1M", "Output / 1M", "Cache Read / 1M", "Batch Input / 1M", "Best For"],
-      rows: [
-        ["Claude Fable 5", "$10.00", "$50.00", "$1.00", "$5.00", "Long-running agents, frontier research"],
-        ["Claude Opus 4.8", "$5.00", "$25.00", "$0.50", "$2.50", "Complex coding, enterprise, agentic workflows"],
-        ["Claude Sonnet 5*", "$2.00", "$10.00", "$0.20", "$1.00", "Production coding, agents, balanced workloads"],
-        ["Claude Sonnet 4.6", "$3.00", "$15.00", "$0.30", "$1.50", "Nuanced writing, instruction following"],
-        ["Claude Haiku 4.5", "$1.00", "$5.00", "$0.10", "$0.50", "High-volume chat, classification, extraction"]
-      ]
+      type: "realityCheck",
+      title: "A Claude subscription does not replace API billing",
+      content: "Consumer access and developer access are separate products, so API costs should be budgeted independently even if you already pay for Claude."
     },
-    { type: "text", content: "*Claude Sonnet 5 introductory pricing of $2/$10 per 1M tokens is valid through August 31, 2026. Standard pricing of $3/$15 per 1M tokens applies from September 1, 2026. Not sure which model to choose? Haiku 4.5 is the fastest and most affordable — ideal for high-volume tasks. Sonnet 5 is the best balance of speed and intelligence for most production workloads. Opus 4.8 delivers the highest capability for complex reasoning and coding. Reserve Fable 5 for long-running agentic tasks that need frontier intelligence." },
-    { type: "heading", content: "Key Takeaways" },
-    {
-      type: "takeaways",
-      items: [
-        "Claude pricing spans four tiers: Haiku ($1/$5), Sonnet ($2–3/$10–15), Opus ($5/$25), and Fable ($10/$50) per 1M tokens",
-        "Output tokens cost 5x the input rate on every Claude model — controlling generation length is the highest-leverage cost lever",
-        "Prompt caching uses a write-once, read-cheaply model: writes cost 1.25x base input, reads cost 0.1x — profitable after one reuse",
-        "The Batch API offers a flat 50% discount on both input and output tokens for async workloads",
-        "Claude Sonnet 5 introductory pricing of $2/$10 runs through August 31, 2026, then reverts to $3/$15 standard pricing"
-      ]
-    },
-    { type: "heading", content: "What Is Claude API Pricing?" },
-    {
-      type: "definition",
-      term: "Claude API Pricing",
-      definition: "A usage-based, pay-per-token pricing model where every API request is billed for the tokens you send (input) and the tokens Claude generates (output). No base fees or minimum commitments. Rates are set per model tier with automatic discounts for prompt caching and Batch API processing."
-    },
-    { type: "text", content: "A token is the basic unit of text a language model processes. One token roughly equals 0.75 words in English, so 1 million tokens represents approximately 750,000 words. Input tokens include your system prompt, user messages, tool definitions, and any images or documents. Output tokens include Claude's response, reasoning chains, and tool calls." },
-    { type: "text", content: "Note on the new tokenizer: Claude Opus 4.7, Opus 4.8, Fable 5, and Sonnet 5 use a newer tokenizer that produces approximately 30% more tokens for the same text compared to previous models. A prompt that was 10,000 tokens on Sonnet 4.6 may be roughly 13,000 tokens on Sonnet 5. Account for this when migrating between model families." },
-    { type: "text", content: "Use the Claude Cost Calculator to translate your expected usage into a monthly cost estimate before writing code." },
-    { type: "heading", content: "Who Should Care About Claude API Pricing?" },
-    { type: "text", content: "Developers building AI agents and coding assistants — Claude excels at agentic tasks and tool use. Understanding per-turn token costs is essential for architecting cost-efficient agent loops." },
-    { type: "text", content: "Startups and SaaS companies — Claude's 1M-token context window at standard pricing makes it ideal for long-context applications. The AI Budget Planning Guide explains how to forecast AI costs alongside your operating budget." },
-    { type: "text", content: "Product managers — Claude's tiered model line (Haiku, Sonnet, Opus, Fable) maps cleanly to task complexity. Pricing features directly at launch avoids costly model changes later." },
-    { type: "text", content: "Enterprise teams — Data residency options (US-only at 1.1x), volume discounts, and custom rate limits are available through Anthropic sales. The AI ROI Guide covers modeling returns at enterprise scale." },
-    { type: "text", content: "Agencies and consultancies — Claude's prompt caching and Batch API make high-volume content generation and document processing workflows cost-effective at agency margins." },
-    { type: "heading", content: "What Makes Claude Different?" },
-    { type: "text", content: "Claude stands apart from other LLM providers in several key ways that directly affect pricing and cost strategy." },
-    { type: "text", content: "First, Claude's prompt caching uses a write-once, read-cheaply model that is distinct from OpenAI's approach. Instead of free cache writes with a percentage discount on reads, Claude charges 1.25x the base input rate for a 5-minute cache write and 0.1x for reads. This means caching is profitable after a single reuse — the write premium of 25% is recouped on the first cache read (90% savings), and every subsequent read is pure savings. For workloads with stable system prompts reused thousands of times per day, this model delivers exceptional cost efficiency." },
-    { type: "text", content: "Second, Claude offers a 1M-token context window at standard pricing on Opus 4.6+ and Sonnet 4.6+ models. There is no premium pricing for long context — a 900K-token request costs the same per-token rate as a 9K-token request. This makes Claude uniquely cost-effective for document analysis, codebase understanding, and long-context RAG applications." },
-    { type: "text", content: "Third, Claude's Extended Thinking capability allows the model to show its internal reasoning process. Thinking tokens are billed as output tokens at standard rates and can be cached alongside other content. This transparency helps developers understand and optimize token usage in agentic workflows." },
-    { type: "text", content: "Fourth, Claude has a reputation for nuanced instruction following and careful writing that many developers find superior to alternatives for complex tasks. The practical implication for pricing is that Claude may produce shorter, more precise outputs for the same prompt compared to other models, reducing output token costs." },
-    { type: "heading", content: "How Claude Pricing Works" },
-    { type: "text", content: "Claude API billing has three core token dimensions and several additional cost layers. Input tokens are everything you send to the model: system prompt, user messages, tool definitions, documents, and images. Longer prompts cost more, making prompt compression a high-leverage optimization strategy." },
-    { type: "text", content: "Output tokens are everything Claude generates: responses, reasoning chains, tool calls, and structured data. Output tokens cost 5x the input rate across every Claude model tier. This is the single biggest line item on most bills — controlling generation length matters more than compressing prompts." },
-    { type: "text", content: "Cached tokens follow a write-and-read model. When you send a prompt with cache_control enabled, the API writes the eligible prefix to cache at 1.25x the standard input rate (5-minute TTL) or 2x (1-hour TTL). Subsequent requests that hit the cached prefix are billed at 0.1x the standard input rate — a 90% discount. Both automatic and explicit caching are supported." },
-    { type: "text", content: "Additional cost layers include web search ($10 per 1,000 searches), code execution ($0.05 per hour per container beyond 1,550 free hours per month), and Managed Agents runtime ($0.08 per session-hour plus token costs). Data residency for US-only inference adds a 1.1x multiplier." },
-    {
-      type: "proTip",
-      content: "Rule of Thumb — Use Haiku for classification and routing. Use Sonnet for production workloads. Use Opus for the hardest 10-15% of tasks. Cache your system prompts. Batch everything async. These five habits alone can reduce Claude API costs by 60-80%."
-    },
-    { type: "text", content: "To calculate per-request cost: divide your input and output tokens by 1,000,000, multiply by the model's per-million rates, and sum the results. A 2,000-token input on Haiku 4.5 costs 2,000 / 1,000,000 x $1 = $0.002. A 500-token output costs 500 / 1,000,000 x $5 = $0.0025. Total per request: $0.0045." },
-    { type: "text", content: "Now that you understand how Anthropic charges for Claude API usage, the next step is examining each cost component in detail — because optimizing input tokens, output tokens, and cache strategy has the biggest impact on your monthly bill." },
-    { type: "heading", content: "Input Tokens (Prompt)" },
-    { type: "text", content: "Input tokens are everything you send to Claude: system prompt, user messages, tool definitions, documents, and images. A typical production prompt includes a system prompt (200–800 tokens), user message (50–500 tokens), tool definitions (500–2,000 tokens), RAG context (2,000–50,000+ tokens), and conversation history that grows with each turn." },
-    { type: "text", content: "Claude's 1M-token context window on recent models means you can include entire documents in your prompt without chunking. The trade-off is that longer prompts cost more per request. A 100K-token document processed on Opus 4.8 costs $0.50 in input tokens alone. For repeated analysis of the same document, prompt caching reduces this to $0.05 per read after the initial write." },
-    { type: "text", content: "The biggest lever for reducing input costs is prompt compression — removing redundant instructions, consolidating tool definitions, and retrieving only the most relevant context. Claude's instruction-following strength also means you can write shorter system prompts than you might need with other models." },
-    { type: "heading", content: "Output Tokens (Completion)" },
-    { type: "text", content: "Output tokens are everything Claude generates. They cost 5x the input rate across every model, making them the dominant cost driver. A 1,000-token output on Opus 4.8 costs $0.025 compared to $0.005 for a 1,000-token input." },
-    {
-      type: "benchmark",
-      caption: "Typical Output Token Ranges by Claude Use Case",
-      headers: ["Use Case", "Typical Output Tokens"],
-      rows: [
-        ["Classification or extraction", "10–50"],
-        ["Simple chatbot reply", "100–300"],
-        ["Customer support response", "300–800"],
-        ["Code generation (single function)", "200–1,000"],
-        ["Document summary", "500–2,000"],
-        ["Full code review", "2,000–10,000"],
-        ["Extended Thinking reasoning chain", "1,000–8,000"]
-      ]
-    },
-    { type: "text", content: "Extended Thinking adds internal reasoning tokens before the visible response. These thinking tokens are billed as output tokens at standard rates. For complex analysis tasks, the thinking chain can be 3–5x longer than the visible answer. This is visible in the API response usage fields and should be factored into cost estimates for Opus and Sonnet workloads requiring deep reasoning." },
-    { type: "heading", content: "Prompt Caching" },
-    { type: "text", content: "Claude's prompt caching is the most cost-effective feature for production workloads with reusable prompt content. Unlike other providers, Anthropic uses a write-once, read-cheaply model that is profitable after a single cache reuse." },
-    { type: "text", content: "Two duration options are available. The 5-minute cache charges 1.25x the base input rate for writes and 0.1x for reads — a write premium of 25% followed by a 90% discount on every read. The 1-hour cache charges 2x for writes and 0.1x for reads — a write premium of 100% followed by the same 90% discount on reads. The 5-minute cache is the right default for most applications. Use the 1-hour cache when your prompts are reused less frequently than every 5 minutes but more than once per hour." },
-    { type: "text", content: "Both automatic and explicit caching are supported. Automatic caching requires a single cache_control field at the request level and works well for multi-turn conversations. Explicit breakpoints give fine-grained control over exactly which content blocks are cached." },
-    {
-      type: "benchmark",
-      caption: "Claude Prompt Caching Pricing Multipliers",
-      headers: ["Cache Operation", "Multiplier vs Base Input", "Example (Opus 4.8 $5 input)"],
-      rows: [
-        ["5-minute cache write", "1.25x", "$6.25 / MTok"],
-        ["1-hour cache write", "2.0x", "$10.00 / MTok"],
-        ["Cache read (hit)", "0.1x", "$0.50 / MTok"]
-      ]
-    },
-    { type: "text", content: "The math is straightforward: a 10,000-token system prompt written to the 5-minute cache costs 10,000 / 1,000,000 x $6.25 = $0.0625 on the first request. Every subsequent request within the cache window that reads the same prefix costs 10,000 / 1,000,000 x $0.50 = $0.005 — a 92% savings per request after the initial write." },
-    { type: "heading", content: "Batch Processing" },
-    { type: "text", content: "The Claude Batch API processes requests asynchronously and offers a 50% discount on both input and output tokens across all models. This is the single biggest cost lever for any workload where the user is not actively waiting for a response. Batch input and output rates are exactly half the standard rates." },
-    { type: "text", content: "Batch processing stacks with prompt caching. A cache-warm, batched request on Opus 4.8 costs 0.1x (cache read) x 0.5x (batch) = 0.05x of the standard input rate for cached portions. For workloads like nightly document enrichment, bulk classification, or evaluation pipelines, combining both features delivers the lowest possible per-token cost." },
-    { type: "heading", content: "Pricing by Claude Model" },
-    { type: "text", content: "Anthropic offers four active model tiers in 2026, each optimized for different workload profiles. All prices are per 1M tokens in USD." },
-    { type: "heading", content: "Claude Fable 5" },
-    { type: "text", content: "Fable 5 is Anthropic's frontier intelligence model, designed for long-running agentic tasks, complex research, and the most demanding reasoning workloads." },
-    {
-      type: "benchmark",
-      caption: "Claude Fable 5 Pricing",
-      headers: ["Category", "Rate"],
-      rows: [
-        ["Base input", "$10.00 / MTok"],
-        ["5m cache write", "$12.50 / MTok"],
-        ["1h cache write", "$20.00 / MTok"],
-        ["Cache read", "$1.00 / MTok"],
-        ["Output", "$50.00 / MTok"],
-        ["Batch input", "$5.00 / MTok"],
-        ["Batch output", "$25.00 / MTok"]
-      ]
-    },
-    { type: "heading", content: "Claude Opus 4.8" },
-    { type: "text", content: "Opus 4.8 is Anthropic's most capable production model, ideal for complex agentic coding, enterprise workflows, and tasks requiring deep reasoning. It supports a 1M-token context window at standard pricing." },
-    {
-      type: "benchmark",
-      caption: "Claude Opus 4.8 Pricing",
-      headers: ["Category", "Rate"],
-      rows: [
-        ["Base input", "$5.00 / MTok"],
-        ["5m cache write", "$6.25 / MTok"],
-        ["1h cache write", "$10.00 / MTok"],
-        ["Cache read", "$0.50 / MTok"],
-        ["Output", "$25.00 / MTok"],
-        ["Fast mode input", "$10.00 / MTok"],
-        ["Fast mode output", "$50.00 / MTok"],
-        ["Batch input", "$2.50 / MTok"],
-        ["Batch output", "$12.50 / MTok"]
-      ]
-    },
-    { type: "text", content: "Fast Mode on Opus 4.8 provides significantly faster output at 2x standard pricing. It is available as a research preview and is not compatible with the Batch API." },
-    { type: "heading", content: "Claude Opus 4.7, 4.6, 4.5" },
-    { type: "text", content: "Earlier Opus models share identical pricing with Opus 4.8: $5 input, $25 output. They differ in capabilities and context window support. Opus 4.6 and 4.5 support the same 1M-context window. All three use the same prompt caching and batch multipliers." },
-    { type: "heading", content: "Claude Sonnet 5" },
-    { type: "text", content: "Sonnet 5 is the recommended production model for most workloads. Introductory pricing of $2/$10 per 1M tokens is in effect through August 31, 2026, after which standard pricing of $3/$15 applies. Sonnet 5 uses the newer tokenizer." },
-    {
-      type: "benchmark",
-      caption: "Claude Sonnet 5 Pricing",
-      headers: ["Category", "Introductory (thru Aug 31)", "Standard (from Sep 1)"],
-      rows: [
-        ["Base input", "$2.00 / MTok", "$3.00 / MTok"],
-        ["5m cache write", "$2.50 / MTok", "$3.75 / MTok"],
-        ["1h cache write", "$4.00 / MTok", "$6.00 / MTok"],
-        ["Cache read", "$0.20 / MTok", "$0.30 / MTok"],
-        ["Output", "$10.00 / MTok", "$15.00 / MTok"],
-        ["Batch input", "$1.00 / MTok", "$1.50 / MTok"],
-        ["Batch output", "$5.00 / MTok", "$7.50 / MTok"]
-      ]
-    },
-    { type: "heading", content: "Claude Sonnet 4.6" },
-    { type: "text", content: "Sonnet 4.6 is the previous generation balanced model. It uses the older tokenizer and is priced at $3/$15 with standard 1M-context support." },
-    {
-      type: "benchmark",
-      caption: "Claude Sonnet 4.6 Pricing",
-      headers: ["Category", "Rate"],
-      rows: [
-        ["Base input", "$3.00 / MTok"],
-        ["5m cache write", "$3.75 / MTok"],
-        ["1h cache write", "$6.00 / MTok"],
-        ["Cache read", "$0.30 / MTok"],
-        ["Output", "$15.00 / MTok"],
-        ["Batch input", "$1.50 / MTok"],
-        ["Batch output", "$7.50 / MTok"]
-      ]
-    },
-    { type: "heading", content: "Claude Haiku 4.5" },
-    { type: "text", content: "Haiku 4.5 is the fastest and most affordable Claude model. It is ideal for high-volume classification, extraction, simple chat, and any task where speed matters more than deep reasoning." },
-    {
-      type: "benchmark",
-      caption: "Claude Haiku 4.5 Pricing",
-      headers: ["Category", "Rate"],
-      rows: [
-        ["Base input", "$1.00 / MTok"],
-        ["5m cache write", "$1.25 / MTok"],
-        ["1h cache write", "$2.00 / MTok"],
-        ["Cache read", "$0.10 / MTok"],
-        ["Output", "$5.00 / MTok"],
-        ["Batch input", "$0.50 / MTok"],
-        ["Batch output", "$2.50 / MTok"]
-      ]
-    },
-    { type: "heading", content: "How to Choose the Right Claude Model" },
+    { type: "heading", content: "Who Should Use Claude?" },
+    { type: "text", content: "Claude fits especially well when the work is writing-heavy, reasoning-heavy, or context-heavy. It also fits well for teams that value careful answers, long documents, and structured output." },
+    { type: "heading", content: "Simple Fit Table" },
     {
       type: "comparison",
-      caption: "Recommended Claude Models by Use Case",
-      headers: ["Use Case", "Recommended Model", "Why"],
+      caption: "Which Claude Option Is Right for You",
+      headers: ["If You Are...", "Choose...", "Why"],
       rows: [
-        ["Production coding and agents", "Sonnet 5 ($2/$10 intro)", "Best balance of speed, intelligence, and cost for most workloads"],
-        ["Complex agentic coding", "Opus 4.8 ($5/$25)", "Highest capability for multi-step tool use and reasoning"],
-        ["Frontier research and long agents", "Fable 5 ($10/$50)", "Maximum intelligence for the hardest problems"],
-        ["High-volume chat and support", "Haiku 4.5 ($1/$5)", "Fastest model; ideal for scale with simple tasks"],
-        ["Classification and extraction", "Haiku 4.5 ($1/$5)", "Cheapest capable tier; excellent for structured output"],
-        ["Nuanced writing and analysis", "Sonnet 4.6 ($3/$15)", "Superior instruction following for writing tasks"],
-        ["Document analysis (100K+ tokens)", "Opus 4.8 ($5/$25)", "1M-context at standard pricing; no premium for long context"],
-        ["Codebase understanding", "Opus 4.8 or Sonnet 5", "Long context + strong tool use for repository-level tasks"],
-        ["Batch document processing", "Haiku 4.5 ($0.50/$2.50 batch)", "Cheapest batch option at $0.50/M input"],
-        ["Agentic tool loops", "Sonnet 5 or Opus 4.8", "Strong function calling with efficient token usage"]
+        ["Writer or editor", "Claude App", "Strong fit for drafting and refinement."],
+        ["Student or researcher", "Claude App", "Good for reading, synthesis, and analysis."],
+        ["SaaS founder", "Claude API", "Usage-based pricing for product workflows."],
+        ["Internal AI builder", "Claude API", "Good for documents, support, and assistants."],
+        ["Coding team", "Sonnet or Opus", "Better for reasoning-heavy code workflows."],
+        ["Enterprise team", "Claude Team / Enterprise", "Shared controls and admin structure."]
       ]
     },
-    { type: "text", content: "The most cost-effective production strategy is a tiered routing approach: use Haiku 4.5 for classification and simple queries (60-70% of traffic), Sonnet 5 for production workloads (20-30%), and Opus 4.8 only for the hardest problems (5-10%). The OpenAI API Pricing Guide and LLM Cost Comparison Guide provide cross-provider analysis for multi-model architectures." },
-    { type: "heading", content: "Cost Formula" },
+    {
+      type: "commonMisconception",
+      myth: "A Claude subscription does not include API credits.",
+      reality: "Claude's consumer plans are for direct use, while the API is for developers building software, workflows, and automations.",
+      explanation: "This means you should not expect API credits from a consumer subscription. If you are building an application, budget for separate API costs on top of your plan."
+    },
+    { type: "text", content: "A simple decision framework works well here: Choose the Claude app if you want direct chat-style use. Choose a Claude plan if you want a stronger subscription experience. Choose the API if you are building products, workflows, or automations." },
+    { type: "text", content: "The best Claude option is the one that matches your workflow, not the one with the longest feature list." },
+    {
+      type: "comparison",
+      caption: "Best Claude Model by Use Case",
+      headers: ["Use Case", "Best Model", "Reason"],
+      rows: [
+        ["Customer Support", "Haiku", "Lowest cost."],
+        ["Content Writing", "Sonnet", "Best balance."],
+        ["Coding", "Sonnet", "Strong capability."],
+        ["Research", "Opus", "Highest reasoning."],
+        ["Legal Documents", "Opus", "Accuracy over cost."]
+      ]
+    },
+    { type: "divider" },
+    { type: "heading", content: "Claude API Pricing" },
+    { type: "text", content: "Claude's API is usage-based, so your bill grows with how much text you send, how much the model returns, and whether you use features like caching or batch processing." },
+    { type: "text", content: "That means the cheapest app is not the one with the most impressive prompt; it is the one that routes requests intelligently, keeps context under control, and avoids unnecessary output." },
+    { type: "text", content: "Anthropic's pricing docs and current 2026 guides show the same basic pattern: Haiku is lowest-cost, Sonnet is mid-tier, and Opus is premium." },
+    { type: "heading", content: "Official Pricing Logic" },
+    { type: "text", content: "The core billing pieces are simple. Input tokens are what you send. Output tokens are what the model generates. Cached prompt prefixes are cheaper when the same context repeats. Batch processing lowers cost for non-urgent work. Output often becomes the biggest cost driver because a user can ask a short question but still receive a long answer. That is why short responses, routing, and model selection often matter more than prompt refinement alone." },
+    {
+      type: "comparison",
+      caption: "Decision Table",
+      headers: ["Situation", "Better choice", "Why"],
+      rows: [
+        ["Simple FAQ bot", "Haiku", "Lower cost and enough quality for routine questions."],
+        ["High-volume support", "Haiku with caching", "Repeated instructions become cheaper."],
+        ["Complex reasoning", "Opus", "Better capability for harder tasks."],
+        ["Offline bulk tasks", "Batch mode", "Lower cost for non-urgent workloads."],
+        ["Writing workflows", "Sonnet", "Strong balance of quality and cost."]
+      ]
+    },
+    {
+      type: "commonMisconception",
+      myth: "The most expensive model is not always the safest choice.",
+      reality: "For repetitive or low-risk tasks, a cheaper model with tighter output control can produce better business value.",
+      explanation: "In practice, start with a cheaper model and only upgrade if your use case requires the advanced reasoning of a more expensive tier."
+    },
+    { type: "heading", content: "Haiku vs Sonnet vs Opus" },
+    {
+      type: "claudeModelCards",
+      cards: [
+        {
+          name: "Haiku",
+          description: "Cheaper for FAQ bots, extraction, routing, and fast support.",
+          bestFor: "FAQ bots, extraction, routing, and fast support",
+          strengths: ["Lowest-cost tier", "Efficient for volume"],
+          tradeoffs: ["Not ideal for the hardest reasoning tasks"]
+        },
+        {
+          name: "Sonnet",
+          description: "Cheaper for mainstream production workloads.",
+          bestFor: "Mainstream production workloads",
+          strengths: ["Strong balance of quality and cost"],
+          tradeoffs: ["More expensive than Haiku for very simple tasks"]
+        },
+        {
+          name: "Opus",
+          description: "Cheaper for premium, high-value tasks where quality matters most.",
+          bestFor: "Premium, high-value tasks where quality matters most",
+          strengths: ["Best fit for hard reasoning and writing"],
+          tradeoffs: ["Highest cost tier, so it can be overkill for routine work"]
+        }
+      ]
+    },
+    { type: "heading", content: "Prompt Caching" },
+    { type: "cacheIllustration" },
+    { type: "text", content: "Prompt caching is one of Claude's most important cost-saving features. If your app repeatedly sends the same system prompt, instructions, or reusable context, caching can reduce repeated-prefix costs significantly." },
+    { type: "heading", content: "Practical Example" },
+    { type: "text", content: "Think of an AI support bot that sends the same system prompt 2,000 times a day. If that prompt is cached, you stop paying full price for the same text over and over again." },
+    { type: "heading", content: "When to Use Caching" },
+    { type: "text", content: "Use caching when the same instructions appear repeatedly, when the same document context is reused often, or when your app has a stable prompt structure." },
+    { type: "heading", content: "When to Avoid Caching" },
+    { type: "text", content: "Avoid caching when prompts are highly variable, one-off, or so short that the savings are negligible. If there is no repetition, there may be little to cache." },
+    { type: "heading", content: "Batch Processing" },
+    { type: "batchIllustration" },
+    { type: "text", content: "Batch processing is the other major lever. For non-real-time tasks, batch-style workflows can lower cost for backfills, extraction jobs, summarization runs, and other offline processing." },
+    { type: "heading", content: "When to Use Batch" },
+    { type: "text", content: "Use batch for jobs that do not need an immediate answer: large document jobs, nightly processing, bulk enrichment, and dataset transformation." },
+    { type: "heading", content: "When to Avoid Batch" },
+    { type: "text", content: "Avoid batch when latency matters, such as live chat, realtime support, or interactive workflows. Batch saves money by giving up speed." },
+    { type: "heading", content: "Context Window" },
+    { type: "contextVisual" },
+    { type: "text", content: "Claude is often chosen for long-context work, which is one reason it shows up so often in document-heavy workflows. The ability to process more text in one request can be a major advantage for analysis, summarization, and large knowledge tasks." },
+    { type: "heading", content: "Thinking Models" },
+    { type: "text", content: "Claude is frequently used in reasoning-heavy workflows, even when the product does not market them in the same way as some other ecosystems. In practical terms, that means users should think in terms of 'when do I need deeper reasoning?' rather than assuming every task deserves the premium model." },
+    { type: "text", content: "Use Opus when the cost of a bad answer is high. Use Sonnet for balanced reasoning across most production work. Use Haiku when the task is simple enough that premium reasoning would be wasted." },
+    { type: "heading", content: "Real Pricing Examples" },
+    { type: "text", content: "A support bot that handles repetitive questions can stay affordable if it uses Haiku, caches repeated instructions, and keeps responses short. The savings come from every layer: cheaper model, less repeated context, and lower output volume." },
+    { type: "text", content: "A content workflow that produces long drafts may be better on Sonnet if quality matters, because it gives a stronger balance of cost and output quality than jumping straight to Opus." },
+    { type: "text", content: "A premium research assistant or executive writing tool may justify Opus because the additional model quality can reduce edits, rework, and poor outputs. In that case, model cost is only one part of the real business equation." },
+    { type: "heading", content: "Claude vs OpenAI vs Gemini" },
+    {
+      type: "comparison",
+      caption: "Visual Comparison",
+      headers: ["Provider", "Best for", "Strength", "Tradeoff"],
+      rows: [
+        ["Claude", "Writing, long context, careful reasoning", "Strong output quality and document handling.", "Premium tiers can get expensive."],
+        ["OpenAI", "Broad product ecosystem and ChatGPT familiarity", "Widely recognized workflow and model family.", "Not always the cheapest for every workload."],
+        ["Gemini", "Google-native workflows and Workspace fit", "Strong fit for Google ecosystem users.", "Best choice depends on model and routing."]
+      ]
+    },
+    {
+      type: "providerComparison",
+      title: "Which Provider Is Right for You?",
+      cards: [
+        {
+          provider: "claude",
+          title: "Claude",
+          cheaperFor: "Writing-heavy workflows, long-context reasoning, and careful instruction following",
+          pros: ["Exceptional output quality", "Strong document handling", "1M-token context at standard pricing"],
+          cons: ["Premium tiers can get expensive for high-volume use"]
+        },
+        {
+          provider: "openai",
+          title: "OpenAI",
+          cheaperFor: "Broad product integration and ChatGPT ecosystem familiarity",
+          pros: ["Widely recognized models", "Broad ecosystem and tooling", "Competitive smaller model pricing"],
+          cons: ["Some workloads cost more without careful routing"]
+        },
+        {
+          provider: "gemini",
+          title: "Gemini",
+          cheaperFor: "Google-native workflows and Workspace integration",
+          pros: ["Strong Google ecosystem fit", "Flash models offer high efficiency", "Competitive caching pricing"],
+          cons: ["Best choice depends heavily on workflow and routing patterns"]
+        }
+      ]
+    },
+    { type: "text", content: "Which Is Cheaper? The honest answer is that it depends on the model tier and workload. Claude's lower-cost model is often very competitive for high-volume tasks, while OpenAI and Gemini may be more cost-effective in other workflows depending on routing, caching, and output length." },
+    { type: "text", content: "Which Has Better Free Usage? Claude's consumer plans are attractive for direct use, especially for writing, thinking, and research-style workflows. OpenAI is often compared through ChatGPT, while Gemini is strongly tied to Google's ecosystem and Workspace-style usage." },
+    { type: "text", content: "Which Scales Better? Claude scales well when your app benefits from long context, repeated instructions, and careful caching. OpenAI and Gemini also scale well, but the best choice usually depends on the exact workflow and which model family gives the best total cost." },
+    { type: "text", content: "Which Is Better for Startups? Claude can be especially attractive for startups that care about writing quality, support automation, and document-heavy workflows. If the product is text-heavy and quality-sensitive, Sonnet can be a strong default, with Haiku for cheaper routing." },
+    { type: "text", content: "Which Is Better for Enterprise? Claude fits enterprise well when the organization values clarity, writing quality, and long-context analysis. OpenAI may be stronger where ChatGPT adoption is already embedded, while Gemini may fit better where Google Workspace is the center of operations." },
+    { type: "text", content: "Which Has the Best Cost-Performance Ratio? If the workload is simple and high-volume, Haiku often gives excellent value. If the workload is balanced and production-facing, Sonnet is usually the sweet spot. If the workload is hard and high-value, Opus may be worth the premium." },
+    { type: "text", content: "The right answer is not 'Claude, OpenAI, or Gemini?' in the abstract. It is 'Which model family gives the best result for this specific job at the lowest total cost?'" },
+    { type: "heading", content: "Common Mistakes" },
+    {
+      type: "mistakeCards",
+      cards: [
+        { icon: "warning", title: "Opus Overuse", description: "Using Opus for every request." },
+        { icon: "warning", title: "No Prompt Caching", description: "Ignoring prompt caching." },
+        { icon: "warning", title: "Long Outputs", description: "Letting outputs become unnecessarily long." },
+        { icon: "warning", title: "Repeated Context", description: "Resending identical context without reuse." },
+        { icon: "warning", title: "Wrong Model Routing", description: "Not routing simple tasks to Haiku." },
+        { icon: "warning", title: "Batch Misuse", description: "Using batch for jobs that actually need fast responses." },
+        { icon: "warning", title: "Premium Waste", description: "Paying for premium quality where basic quality is enough." }
+      ]
+    },
+    { type: "heading", content: "Hidden Costs" },
+    { type: "costStack" },
+    { type: "text", content: "Hidden costs are where many Claude bills become surprising. The model price may look manageable, but the final invoice can grow because of long context, repeated outputs, caching misses, batch mistakes, and overly premium model selection." },
+    { type: "text", content: "The main cost surprises usually come from: long context that gets resent on every request. Repeated system prompts that are not cached. Large outputs that grow beyond what the user needs. Retried requests that duplicate token usage. Premium models used for simple tasks. Batch jobs used for workflows that actually need realtime responses. The practical rule is simple: the cheapest request is the one you do not have to repeat." },
+    {
+      type: "practicalChecklist",
+      title: "Cost-Saving Checklist",
+      items: [
+        "Use Haiku before Sonnet.",
+        "Use Sonnet before Opus.",
+        "Keep outputs concise.",
+        "Cache repeated prompts and context.",
+        "Use Batch for offline work.",
+        "Monitor token usage and retries.",
+        "Route simple tasks to cheaper models first."
+      ]
+    },
+    { type: "heading", content: "How to Estimate Cost" },
+    { type: "text", content: "The easiest way to estimate Claude API cost is to break every request into input tokens, output tokens, cached context, and batch usage." },
     {
       type: "formula",
-      label: "Claude API Cost Formula",
-      formula: "Cost = (input_tokens / 1,000,000 x input_price) + (output_tokens / 1,000,000 x output_price)",
-      note: "With caching: replace input_price with cache_write_price (1.25x) for initial write, then cache_read_price (0.1x) for subsequent reads. With Batch API: multiply total by 0.5. Both discounts stack for async cached workloads."
+      label: "Monthly Cost",
+      formula: "(input tokens \u00d7 input rate) + (output tokens \u00d7 output rate) + cached context costs + batch-related costs",
+      note: "That formula does not need to be perfect to be useful. It simply gives you a realistic budget model before traffic grows."
     },
-    { type: "text", content: "Extended formula: Total = input_cost + cached_input_cost + output_cost + web_search_searches ($10/1K) + code_execution_hours ($0.05/hr beyond 1,550 free hrs/month) + data_residency_surcharge (x1.10 if US-only). The Claude Cost Calculator handles all of this automatically." },
-    { type: "heading", content: "Worked Examples" },
-    { type: "text", content: "Example 1: A customer support platform handling 50,000 conversations per day on Haiku 4.5. Each conversation averages 1,500 input tokens (system prompt + user message + knowledge base context) and 400 output tokens. With a 60% cache hit rate on the system prompt prefix, daily cost is approximately $16.50, or roughly $495 per month." },
-    {
-      type: "benchmark",
-      caption: "Monthly Cost Comparison Across Claude Tiers (50K conversations/day, 1.5K in / 400 out)",
-      headers: ["Model", "Monthly Cost (Standard)", "With Caching (60% hit)"],
-      rows: [
-        ["Haiku 4.5", "$525", "$495"],
-        ["Sonnet 4.6", "$1,575", "$1,485"],
-        ["Sonnet 5 (intro)", "$1,050", "$990"],
-        ["Opus 4.8", "$2,625", "$2,475"]
-      ]
-    },
-    { type: "text", content: "Example 2: A development team running 30,000 code reviews per month on Sonnet 5. Each review processes 25,000 input tokens (codebase context + diff) and generates 2,000 output tokens. At introductory pricing, cost per review is $0.07. Monthly total is $2,100. With Batch API for 50% of async reviews, monthly drops to approximately $1,575." },
-    { type: "text", content: "Example 3: An AI agent with 8 API calls per conversation on Opus 4.8, each with 4,000 input tokens and 1,200 output tokens. Per call: (4K / 1M x $5) + (1.2K / 1M x $25) = $0.02 + $0.03 = $0.05. Per conversation: $0.40. At 500 conversations per day: $200/day, $6,000/month. Caching the system prompt across agent turns reduces input costs significantly." },
+    { type: "text", content: "Comparing against OpenAI or Gemini? Read our OpenAI Pricing Guide and Gemini Pricing Guide." },
+    { type: "heading", content: "Final Takeaway" },
+    { type: "text", content: "Claude is especially compelling when your workflow depends on writing quality, long-context handling, or careful reasoning. It becomes even more attractive when caching and batch processing can reduce repeated cost at scale." },
+    { type: "text", content: "Not sure whether Claude, OpenAI, or Gemini is the better fit? Compare all three in our AI pricing hub, or estimate your expected costs with our AI Cost Calculator." },
     {
       type: "cta",
       slug: "claude-cost-calculator",
       title: "Estimate Your Claude API Costs",
       description: "Use our free Claude Cost Calculator to model your monthly spend across any model tier, with prompt caching and Batch API discounts included."
     },
-    { type: "heading", content: "Common Workload Cost Estimates" },
-    {
-      type: "benchmark",
-      caption: "Estimated Monthly Costs for Common Claude Workloads (Standard Pricing, No Caching)",
-      headers: ["Workload", "Calls/Day", "Avg In/Out", "Haiku 4.5", "Sonnet 5 (intro)", "Opus 4.8"],
-      rows: [
-        ["Simple chatbot", "10,000", "500 / 200", "$105", "$210", "$525"],
-        ["Customer support", "10,000", "2,000 / 800", "$420", "$840", "$2,100"],
-        ["Code review", "5,000", "25,000 / 2,000", "$975", "$1,950", "$4,875"],
-        ["Document analysis", "1,000", "50,000 / 2,000", "$450", "$900", "$2,250"],
-        ["AI agent (8 calls/conv)", "1,000", "4,000 / 1,200", "$540", "$1,080", "$2,700"],
-        ["Batch classification", "100,000", "500 / 50", "$165", "$330", "$825"],
-        ["RAG pipeline", "5,000", "10,000 / 500", "$450", "$900", "$2,250"]
-      ]
-    },
-    { type: "text", content: "Haiku 4.5 delivers the lowest cost per task by a wide margin. On the customer support workload, Haiku is 4x cheaper than Sonnet 5 and 20x cheaper than Opus 4.8. With prompt caching (60% hit rate) and Batch API (50% async), these estimates drop by 50–70%." },
-    { type: "heading", content: "Cost Benchmarks" },
-    {
-      type: "benchmark",
-      caption: "Per-Call Cost by Workload and Claude Tier",
-      headers: ["Workload", "In/Out Tokens", "Haiku 4.5", "Sonnet 5 (intro)", "Opus 4.8"],
-      rows: [
-        ["Classification", "200 / 50", "$0.00045", "$0.0009", "$0.00225"],
-        ["Chat reply", "500 / 200", "$0.0015", "$0.003", "$0.0075"],
-        ["Support answer", "2,000 / 800", "$0.006", "$0.012", "$0.03"],
-        ["Code review", "25,000 / 2,000", "$0.065", "$0.13", "$0.325"],
-        ["Long analysis", "100,000 / 10,000", "$0.30", "$0.60", "$1.50"]
-      ]
-    },
-    {
-      type: "comparison",
-      caption: "Claude vs OpenAI vs Gemini — Pricing Comparison",
-      headers: ["Provider", "Model", "Input / 1M", "Output / 1M", "Cached Input Discount", "Batch Discount"],
-      rows: [
-        ["Anthropic", "Haiku 4.5", "$1.00", "$5.00", "90% (0.1x read)", "50%"],
-        ["Anthropic", "Sonnet 5 (intro)", "$2.00", "$10.00", "90% (0.1x read)", "50%"],
-        ["Anthropic", "Opus 4.8", "$5.00", "$25.00", "90% (0.1x read)", "50%"],
-        ["OpenAI", "GPT-5.4 Mini", "$0.75", "$4.50", "90%", "50%"],
-        ["OpenAI", "GPT-5.4", "$2.50", "$15.00", "90%", "50%"],
-        ["Google", "Gemini 3.1 Pro", "$2.00", "$12.00", "75%", "50%"],
-        ["Google", "Gemini 2.5 Flash", "$0.25", "$1.50", "75%", "50%"]
-      ]
-    },
-    { type: "text", content: "Claude Sonnet 5 at introductory $2/$10 undercuts GPT-5.4's $2.50/$15 on both input and output while offering comparable or superior instruction-following quality. For a full provider comparison across every capability tier, see the LLM Cost Comparison Guide." },
-    { type: "heading", content: "Extended Thinking" },
-    { type: "text", content: "Extended Thinking allows Claude to produce internal reasoning chains before generating its final response. This is similar to OpenAI's o-series reasoning models but integrated directly into Opus and Sonnet models rather than requiring a separate model family." },
-    { type: "text", content: "Thinking tokens are billed as output tokens at standard rates. They are visible in the API response usage fields under output tokens. On Opus 4.5+ and Sonnet 4.6+, thinking blocks can be cached alongside other content when passed in subsequent tool use calls, making multi-step agentic workflows more cost-effective." },
-    { type: "text", content: "There is no premium for Extended Thinking — tokens are charged at the same output rate as standard completions. The additional cost comes purely from the volume of thinking tokens generated, which can be 3–5x the visible output for complex reasoning tasks." },
-    { type: "heading", content: "Enterprise Pricing and Considerations" },
-    { type: "text", content: "Enterprise customers can access custom rate limits beyond the standard Scale tier, volume discounts for high-usage commitments, dedicated support, and custom contractual terms. Contact Anthropic sales at sales@anthropic.com to discuss enterprise pricing." },
-    { type: "text", content: "Data residency is available for US-only inference at a 1.1x multiplier on all token pricing categories, including input, output, cache writes, and cache reads. This is set via the inference_geo parameter and ensures all inference stays within the United States." },
-    { type: "text", content: "Claude models are also available through Amazon Bedrock and Google Cloud Vertex AI, where pricing may differ. AWS Bedrock and Google Cloud have their own pricing structures, typically with regional endpoint options and potential additional premiums for data residency guarantees." },
-    { type: "heading", content: "Common Mistakes" },
-    {
-      type: "warning",
-      content: "The most expensive mistake is using Opus 4.8 for every task when Haiku 4.5 would suffice — a 20x cost difference on output. Other common errors include: ignoring prompt caching (leaving 90% input savings on the table), running async workloads synchronously (missing the 50% batch discount), not accounting for the new tokenizer when migrating from Sonnet 4.6 to Sonnet 5 (expect ~30% more tokens for the same text), confusing Claude.ai subscriptions with API pricing, and not setting spend caps in the Anthropic console."
-    },
-    { type: "text", content: "A less obvious mistake is underestimating output token usage for agentic workflows. Each tool call adds output tokens for the tool use block, and each subsequent turn re-sends the entire conversation history as input. Agent loops compound costs faster than most teams expect." },
-    { type: "heading", content: "Cost Optimization Tips" },
-    {
-      type: "proTip",
-      content: "Route by task complexity: Haiku 4.5 for classification and simple queries (60-70%), Sonnet 5 for production workloads (20-30%), Opus 4.8 only for the hardest problems (5-10%). This single change typically reduces costs by 60-80% compared to using Opus for everything."
-    },
-    { type: "text", content: "Implement prompt caching on every production workload. Structure your prompts with stable content first (system prompt, tool definitions, fixed context) and variable content last. Use the 5-minute cache for frequent reuse patterns and the 1-hour cache for less frequent but still regular reuse." },
-    { type: "text", content: "Batch all non-realtime workloads through the Batch API for the immediate 50% discount. Monitor cache hit rates using the cache_read_input_tokens and cache_creation_input_tokens fields in API responses. Track retry rates and set per-project budget alerts. Audit your model choices quarterly." },
-    { type: "text", content: "When migrating from Sonnet 4.6 to Sonnet 5, account for the ~30% tokenizer increase. A prompt that cost $0.03 on Sonnet 4.6 will cost approximately $0.026 on Sonnet 5 at introductory pricing (30% more tokens at 33% lower per-token price), making the migration cost-neutral or slightly beneficial." },
-    { type: "heading", content: "Real Business Example" },
-    { type: "text", content: "CodeAssist, a startup building an AI-powered code review assistant, processes 100,000 code reviews per month. Initially running everything on Opus 4.6 at $5/$25, their monthly bill was $32,500. After a cost audit, they implemented three changes." },
-    {
-      type: "benchmark",
-      caption: "CodeAssist Cost Optimization Results",
-      headers: ["Metric", "Before", "After", "Change"],
-      rows: [
-        ["Monthly API bill", "$32,500", "$7,800", "-76%"],
-        ["Model routing", "Opus 4.6 (100%)", "Haiku 4.5 (60%) + Sonnet 5 (30%) + Opus 4.8 (10%)", "—"],
-        ["Cache hit rate", "0%", "70%", "+70pp"],
-        ["Batch usage", "0%", "60%", "+60pp"],
-        ["Review quality score", "Baseline", "+2%", "Improved"]
-      ]
-    },
-    { type: "text", content: "The routing strategy sent simple formatting and style reviews to Haiku 4.5 ($1/$5), standard logic reviews to Sonnet 5 ($2/$10 intro), and only complex architectural reviews to Opus 4.8 ($5/$25). Combined with prompt caching (70% hit rate) and Batch API for non-urgent reviews (60% of volume), they reduced costs by 76% while slightly improving quality scores." },
-    { type: "heading", content: "FAQs" },
-    { type: "text", content: "See the FAQ section at the top of this article for answers to the most common questions about Claude API pricing." },
     { type: "heading", content: "Related Calculators" },
     {
       type: "relatedMetrics",
@@ -1943,28 +1853,19 @@ const article13 = {
         { name: "AI Agent Savings Calculator", description: "Estimate savings from AI agent automation.", to: "/calculator/ai-agent-savings-calculator" }
       ]
     },
-    { type: "heading", content: "Related Guides" },
-    { type: "text", content: "OpenAI API Pricing Guide: Complete Cost Breakdown for GPT Models (2026) — Complete cost breakdown for OpenAI GPT models. Gemini API Pricing Guide: Complete Cost Breakdown for Google AI Models (2026) — Google Gemini API pricing explained. AI ROI Calculator Guide — How to measure and maximize return on AI investments. LLM Cost Comparison Guide — Head-to-head pricing across OpenAI, Claude, Gemini, and DeepSeek. GPT Token Cost Explained — Deep dive into tokenization and cost mechanics. AI Agent Savings Guide: How Much Can AI Agents Save Your Business (2026) — Cost analysis for AI agent deployments. AI Budget Planning Guide — Framework for forecasting and managing AI spend. AI Cost Optimization Handbook — Complete pillar guide to optimizing AI costs. AI FAQ Hub — Quick answers to common AI pricing questions." },
-    { type: "heading", content: "Conclusion" },
-    { type: "text", content: "Claude API pricing in 2026 offers a clean four-tier structure from Haiku at $1/$5 to Fable at $10/$50. The 5x output-to-input price ratio means generation length is your primary cost driver. Prompt caching with the write-once, read-cheaply model is uniquely cost-effective for production workloads with reusable prefixes. The Batch API halves costs for any async workload." },
-    { type: "text", content: "What makes Claude different from other providers is the combination of 1M-token context at standard pricing, transparent Extended Thinking with no premium, and a caching model that becomes profitable after a single reuse. For teams building agentic workflows, coding assistants, or long-context applications, Claude's pricing structure aligns cost with capability in a way that rewards good architectural decisions." },
-    { type: "heading", content: "Actionable Cost Optimization Checklist" },
     {
-      type: "takeaways",
-      items: [
-        "Route by task complexity — Haiku for 60-70% of traffic, Sonnet for 20-30%, Opus for 5-10%",
-        "Enable prompt caching on every production workload — stable content first, variable content last",
-        "Use the Batch API for all non-realtime processing — instant 50% discount",
-        "Set per-project budget alerts in the Anthropic console before launching",
-        "Monitor cache_read_input_tokens and cache_creation_input_tokens to track cache effectiveness",
-        "Account for the ~30% tokenizer increase when migrating from Sonnet 4.6 to Sonnet 5",
-        "Audit monthly — run actual usage through the Claude Cost Calculator",
-        "Evaluate new models quarterly — Sonnet 5 introductory pricing expires August 31, 2026",
-        "Right-size context windows — Claude's 1M context is useful but costly at full length",
-        "Plan for scale — use the AI Budget Planning Guide to forecast growing AI spend"
-      ]
+      type: "methodology",
+      approach: "This guide is based on official Claude pricing and billing documentation, then interpreted through practical use-case analysis. The facts come from Anthropic's current pricing structure, while the recommendations come from cost-control patterns seen in real-world AI deployments.",
+      source: "Anthropic official pricing page and documentation",
+      date: "July 2026"
     },
-    { type: "text", content: "Run this checklist every quarter. Anthropic releases new models and adjusts pricing regularly. The model that was optimal three months ago may now have a cheaper, better successor. Start optimizing your Claude costs today: use the Claude Cost Calculator, compare with the OpenAI API Pricing Guide: Complete Cost Breakdown for GPT Models (2026), and bookmark the AI Cost Optimization Handbook for the complete cluster." }
+    {
+      type: "officialSources",
+      sources: [
+        { name: "Claude AI Pricing", url: "https://claude.com/pricing" },
+        { name: "Anthropic Documentation", url: "https://docs.anthropic.com/" }
+      ]
+    }
   ]
 };
 
@@ -2064,20 +1965,19 @@ const article11 = {
 
 const article14 = {
   published: true,
-  wordCount: 2850,
-  readingTime: 14,
+  wordCount: 2400,
+  readingTime: 12,
   slug: "gemini-api-pricing-guide",
-  title: "Gemini API Pricing Guide: Complete Cost Breakdown for Google AI Models (2026)",
-  metaTitle: "Gemini API Pricing Guide: Google AI Model Costs (2026)",
-  description: "Complete Gemini API pricing guide covering Gemini 2.5 Flash, 2.5 Pro, 3.1 Flash, 3.1 Pro, and 3.1 Ultra. Includes context caching, batch discounts, multimodal pricing, and the Gemini Cost Calculator.",
+  title: "Gemini Pricing Guide (2026): Gemini Plans, API Costs & Token Pricing Explained",
+  metaTitle: "Gemini Pricing Guide (2026): Plans, API Costs & Token Pricing",
+  description: "Complete Gemini pricing guide for 2026 covering Gemini plans, API token costs, Flash vs Pro, context caching, grounding, and practical cost optimization strategies.",
   category: "ai-finance",
   categoryTitle: "AI Finance",
   date: "2026-07-21",
   publishedDate: "2026-07-21",
   updatedDate: "2026-07-21",
-  pricingVerifiedDate: "July 2026",
   author: "Navneet V",
-  tags: ["Gemini pricing", "Gemini API cost", "Google AI pricing", "Gemini Flash pricing", "Gemini Pro pricing", "Gemini Ultra pricing", "Gemini cost calculator", "AI pricing guide", "Google Gemini API"],
+  tags: ["Gemini pricing", "Gemini plans", "Gemini API cost", "Flash vs Pro", "Google Gemini", "Gemini API pricing", "AI pricing guide", "Gemini cost calculator"],
   faq: [
     {
       question: "What is the cheapest Gemini model?",
@@ -2093,219 +1993,160 @@ const article14 = {
     },
     {
       question: "How does context caching work with Gemini?",
-      answer: "Gemini context caching lets you store repeated prompt prefixes at a reduced rate. Cached tokens are billed at 25% of the standard input rate across all Gemini models — a 75% discount. The cache TTL ranges from minutes to hours depending on the model and configuration."
+      answer: "Gemini context caching lets you store repeated prompt prefixes at a reduced rate. Cached tokens are billed at 25% of the standard input rate across all Gemini models — a 75% discount."
     },
     {
       question: "Does Gemini have a free tier or free credits?",
-      answer: "Yes. Google offers a free tier for the Gemini API through Google AI Studio with rate limits on requests per minute and tokens per day. The free tier is suitable for prototyping and low-volume testing. Paid-tier pricing applies once you exceed the free quotas."
+      answer: "Yes. Google offers a free tier for the Gemini API through Google AI Studio with rate limits. The free tier is suitable for prototyping and low-volume testing."
     },
     {
       question: "How does Gemini pricing compare to OpenAI and Claude?",
-      answer: "Gemini 2.5 Flash at $0.15/$0.60 is the cheapest model among Flash, GPT-5 Nano ($0.05/$0.40), and Claude Haiku 4.5 ($1.00/$5.00). Gemini 3.1 Flash at $0.25/$1.50 undercuts GPT-5.4 Mini ($0.75/$4.50) and Claude Haiku 4.5. At mid-tier, Gemini 3.1 Pro at $2.00/$12.00 is slightly cheaper than GPT-5.4 ($2.50/$15.00) and Claude Sonnet 4.6 ($3.00/$15.00) on both input and output."
-    },
-    {
-      question: "What context window do Gemini models support?",
-      answer: "Gemini 2.5 and 3.1 models support context windows of up to 1 million tokens at standard pricing. There is no premium for long-context requests — a 900K-token request costs the same per-token rate as a 9K-token request. This makes Gemini uniquely cost-effective for document analysis, codebase understanding, and long-context RAG pipelines."
-    },
-    {
-      question: "How does multimodal pricing work for Gemini?",
-      answer: "Gemini charges differently for multimodal inputs. Images are converted to token equivalents based on resolution and detail level — typically 258 to 1,066 tokens per image. Audio is billed per second at approximately 32 tokens per second of audio. Video is billed per frame. Text tokens within multimodal requests are charged at the standard per-model input rate."
+      answer: "Gemini 2.5 Flash at $0.15/$0.60 is the cheapest model among Flash, GPT-5 Nano ($0.05/$0.40), and Claude Haiku 4.5 ($1.00/$5.00). At mid-tier, Gemini 3.1 Pro at $2.00/$12.00 undercuts both GPT-5.4 and Claude Sonnet 4.6 on both input and output."
     },
     {
       question: "How can I reduce Gemini API costs?",
-      answer: "The most effective strategies are: use Gemini 2.5 Flash for 60-70% of traffic where quality permits, implement context caching for repeated prompt prefixes, batch all async workloads through the Batch API for 50% off, compress prompts to reduce token counts, right-size context windows, and take advantage of the free tier for development and testing."
+      answer: "Use Gemini 2.5 Flash for 60-70% of traffic, enable context caching for repeated prompts, batch async workloads for 50% off, compress prompts, right-size context windows, and use the free tier for development."
     },
     {
-      question: "What is the pricing for Gemini through Vertex AI?",
-      answer: "Vertex AI pricing for Gemini models differs from direct API pricing. Vertex AI typically adds a platform markup of 10-25% on top of base model pricing. However, Vertex AI offers committed-use discounts for high-volume workloads, enterprise support SLAs, and integration with the broader Google Cloud ecosystem. Enterprise customers should compare both pricing paths."
+      question: "What is the difference between Gemini Flash and Pro?",
+      answer: "Flash models are designed for speed, scale, and cost efficiency — ideal for high-volume workloads. Pro models deliver stronger reasoning, accuracy, and long-context handling for higher-stakes tasks."
     }
   ],
   sections: [
-    { type: "text", content: "Whether you are estimating Gemini API pricing for a chatbot, RAG pipeline, multimodal search app, or AI agent, understanding Google's per-model token costs is essential for keeping your AI application profitable. Google offers Gemini through two pricing paths — the direct Gemini API and Google Cloud Vertex AI — each with different rate structures and discount options. Gemini API pricing follows a pay-per-token model with rates ranging from $0.15 to $5.00 per 1M input tokens and $0.60 to $20.00 per 1M output tokens, depending on the model tier. The budget-friendly Gemini 2.5 Flash costs $0.15 input and $0.60 output. The flagship Gemini 3.1 Ultra costs $5.00 input and $20.00 output. Output tokens cost 4 to 6 times more than input tokens across all models. Context caching reduces repeated input costs by 75%, and the Batch API cuts everything by 50% for async workloads. Use the Gemini Cost Calculator to estimate your monthly spend in seconds." },
+    { type: "geminiLogo" },
+    { type: "text", content: "Google Gemini pricing is flexible, but it is not simple. Depending on whether you use the Gemini app, Google AI plans, or the Gemini API, the way you pay can look very different. For individuals, Gemini is often used through Google's consumer-facing plans, while developers pay through usage-based API pricing. The API is billed by tokens, with separate rates for input and output, and additional charges may apply for context caching, grounding with Google Search, and batch-style workloads. That makes Gemini a strong fit for both everyday productivity and scalable applications. Flash-Lite and Flash are efficient for lower-cost workflows, while Pro is better for harder reasoning, longer context, and more demanding tasks. This guide breaks down Gemini pricing in plain language. We'll cover Gemini plans, API token pricing, Flash vs Pro, context caching, grounding, hidden costs, and practical ways to estimate and reduce spend." },
+    { type: "heading", content: "Gemini Pricing Flow" },
+    { type: "heroIllustration" },
+    { type: "heading", content: "Key Takeaways" },
     {
       type: "takeaways",
       items: [
-        "Gemini 2.5 Flash at $0.15/$0.60 is the cheapest model — ideal for 60-70% of production traffic where its quality is sufficient",
-        "Output tokens cost 4-5x more than input tokens on every Gemini model; controlling generation length is your primary cost lever",
-        "Context caching provides a 75% discount on repeated input tokens across all Gemini models — enable it on every production workload",
-        "The Batch API delivers a flat 50% discount on both input and output for async workloads with no quality trade-off",
-        "Gemini supports 1M-token context windows at standard pricing with no premium for long context — a unique advantage for document-heavy applications"
+        "Gemini pricing depends on whether you use the consumer app, Google AI plans, or the Gemini API",
+        "The API is usage-based, with separate pricing for input tokens, output tokens, caching, and some tool-like features",
+        "Flash-Lite and Flash are built for efficiency, while Pro is better for harder tasks and longer context",
+        "Grounding with Google Search can improve freshness, but it also adds cost and should be used selectively",
+        "Context caching is one of the biggest cost-control levers for repeated prompts and long reusable instructions",
+        "Batch and offline workflows can lower costs for non-urgent jobs"
       ]
     },
-    { type: "heading", content: "What Is Gemini API Pricing?" },
+    { type: "heading", content: "Gemini Pricing at a Glance" },
+    { type: "text", content: "Gemini pricing works in two broad ways: consumer plans for people using Gemini directly, and API pricing for developers building products." },
+    { type: "heading", content: "Gemini App and Google AI Plans" },
+    { type: "text", content: "The consumer side of Gemini is designed for people who want direct access to Google's assistant-style product. These plans are typically subscription-based and are not billed per token in the same way as the API. That means the app is best for direct productivity use, while the API is better for automation, apps, and custom workflows." },
+    { type: "heading", content: "Gemini API" },
+    { type: "text", content: "The Gemini API is billed by usage. The main billing unit is tokens, and the final cost depends on model choice, input volume, output volume, caching, and optional extras such as grounding with Google Search. This makes the API easy to start with and hard to ignore once traffic grows. Small prototypes may stay inexpensive, but high-volume apps can scale quickly if output is long or context is repeatedly resent." },
     {
-      type: "definition",
-      term: "Gemini API Pricing",
-      definition: "A usage-based, pay-per-token pricing model where every API request is billed for the tokens you send (input) and the tokens the model generates (output). No base fees, no minimum commitments — you pay only for what you consume at per-million-token rates that vary by model tier. Google also offers a free tier with rate limits through Google AI Studio for prototyping and low-volume testing."
+      type: "realityCheck",
+      title: "Gemini App vs API Are Separate Products",
+      content: "A Gemini consumer subscription does not function like API credit. The app and the API are separate products, so developers should budget API use independently even if they already pay for a Gemini plan."
     },
-    { type: "text", content: "A token is the basic unit of text a language model processes. One token roughly equals 0.75 words in English, so 1 million tokens represents approximately 750,000 words of text. Both input and output are measured in tokens and billed at per-million rates that vary by model family and tier. Gemini pricing also includes context caching discounts, batch processing discounts, and free tier quotas that can significantly reduce effective costs for development and low-volume production use." },
-    { type: "text", content: "Developers building AI features on Google Cloud — every API call hits your per-unit economics. Choosing between Gemini 2.5 Flash at $0.15/M and Gemini 3.1 Ultra at $5.00/M input can mean the difference between a profitable feature and a loss leader. Startups and SaaS companies evaluating Gemini alongside OpenAI and Claude need accurate cost comparisons before committing to a provider. Product managers estimating AI feature costs benefit from understanding how Gemini's 1M-token context window at standard pricing changes the economics of document-heavy applications. Enterprise teams deploying AI at scale through Vertex AI should evaluate committed-use discounts and data residency options that differ from direct API pricing detailed in this guide." },
-    { type: "heading", content: "How Gemini Pricing Works" },
-    { type: "text", content: "Google bills Gemini API usage across three primary token dimensions. Input tokens are everything you send to the model: system prompt, user messages, retrieved RAG context, tool definitions, and images. Every input token is counted and billed at the model's input rate. Gemini charges the same per-token rate regardless of context window length — a 500K-token prompt costs the same per-token price as a 5K-token prompt. Longer prompts still cost more in absolute terms, making prompt compression a high-leverage optimization strategy for cost-sensitive workloads." },
-    { type: "text", content: "Output tokens are everything the model generates: responses, code, analysis, structured data, and tool calls. Output tokens cost 4 to 5 times more than input tokens across every Gemini model. This is the single biggest line item on most Gemini API bills because generation requires significantly more computation than reading input. Setting appropriate max output tokens and using stop sequences prevents runaway generation from inflating your costs without providing additional value to users." },
-    { type: "text", content: "Context cached tokens are input tokens that match a recently processed prompt prefix. Google's context caching stores the beginning of your prompts when they exceed a minimum token threshold. When you send the same prefix again within the cache TTL, those tokens are billed at 25% of the standard input rate — a 75% discount. Caching is especially valuable for applications with stable system prompts, tool definitions, and knowledge base prefixes reused across thousands of requests per day. Unlike some providers, Gemini's cache discount is a flat rate across all models with no tier-specific multipliers, making the savings predictable and easy to model." },
-    { type: "heading", content: "Pricing at a Glance" },
+    { type: "heading", content: "Who Should Use Gemini?" },
+    { type: "iconRow" },
+    { type: "text", content: "Gemini fits especially well if your work already lives inside Google's ecosystem. Students, Gmail users, Google Workspace teams, Android users, and developers building on Google AI all have a natural reason to start here." },
+    { type: "heading", content: "Simple Fit Table" },
     {
-      type: "benchmark",
-      caption: "Gemini API Pricing at a Glance — Active Models (July 2026)",
-      headers: ["Model", "Input / 1M", "Output / 1M", "Cached Input / 1M", "Batch Input / 1M", "Best For"],
+      type: "comparison",
+      caption: "Which Gemini Option Is Right for You",
+      headers: ["If You Are...", "Choose...", "Why"],
       rows: [
-        ["Gemini 3.1 Ultra", "$5.00", "$20.00", "$1.25", "$2.50", "Frontier reasoning, complex research, enterprise"],
-        ["Gemini 3.1 Pro", "$2.00", "$12.00", "$0.50", "$1.00", "Production default, general-purpose, tool use"],
-        ["Gemini 3.1 Flash", "$0.25", "$1.50", "$0.0625", "$0.125", "High-volume chat, classification, extraction"],
-        ["Gemini 2.5 Pro", "$1.25", "$5.00", "$0.3125", "$0.625", "Mid-tier production, balanced workloads"],
-        ["Gemini 2.5 Flash", "$0.15", "$0.60", "$0.0375", "$0.075", "Budget classification, simple chat at scale"]
+        ["Student", "Gemini App", "Good for study help and daily use"],
+        ["Gmail power user", "Gemini", "Fits naturally into Google workflows"],
+        ["Workspace team", "AI Pro / Enterprise", "Better for shared controls and team use"],
+        ["SaaS founder", "Gemini API", "Usage-based pricing for products"],
+        ["Internal AI builder", "Gemini API", "Scales well for company workflows"],
+        ["Android user", "Gemini", "Strong fit for mobile-first usage"]
       ]
     },
-    { type: "text", content: "Not sure which model to choose? Gemini 3.1 Flash offers the best price-to-quality ratio for most production workloads in 2026. For lightweight tasks like classification and high-volume chat, Gemini 2.5 Flash at $0.15/$0.60 is often sufficient. Reserve Gemini 3.1 Pro or 3.1 Ultra for complex reasoning, tool use, and tasks where output quality directly affects business outcomes. All Gemini models support 1M-token context windows at these standard rates with no premium for long-context usage." },
-    { type: "heading", content: "Gemini 2.5 Family Pricing" },
     {
-      type: "benchmark",
-      caption: "Gemini 2.5 Family Pricing",
-      headers: ["Model", "Input / 1M", "Cached Input / 1M", "Output / 1M", "Batch Input / 1M", "Batch Output / 1M"],
-      rows: [
-        ["Gemini 2.5 Pro", "$1.25", "$0.3125", "$5.00", "$0.625", "$2.50"],
-        ["Gemini 2.5 Flash", "$0.15", "$0.0375", "$0.60", "$0.075", "$0.30"]
-      ]
+      type: "commonMisconception",
+      myth: "A paid Gemini plan gives you API access or credits.",
+      reality: "A paid Gemini plan is not the same thing as API access.",
+      explanation: "Consumer plans are for direct use, while the API is for developers building software, automations, or internal tools."
     },
-    { type: "text", content: "The Gemini 2.5 family includes the Flash and Pro tiers launched in 2025 and remains widely used for cost-sensitive production workloads. Gemini 2.5 Flash at $0.15/$0.60 is Google's most affordable model and handles classification, extraction, high-volume chat, and simple RAG pipelines effectively. Gemini 2.5 Pro at $1.25/$5.00 offers stronger reasoning and instruction-following at a moderate price point. Both models support 1M-token context windows with standard pricing and the full context caching and batch discount stack." },
-    { type: "heading", content: "Gemini 3.1 Family Pricing" },
+    { type: "text", content: "Choose the Gemini app if you want direct chat-style use. Choose a Google AI plan if you want a stronger subscription experience. Choose the API if you are building products, workflows, or automations. The best Gemini option is the one that matches your workflow, not the one with the longest feature list." },
+    { type: "heading", content: "Gemini vs OpenAI Pricing" },
+    { type: "comparisonCards" },
+    { type: "text", content: "This is the comparison most readers are actually looking for. People searching Gemini pricing are often deciding between Gemini and OpenAI, so this section should answer that decision directly instead of making them leave the page." },
+    { type: "heading", content: "Which Is Cheaper?" },
+    { type: "text", content: "The honest answer is that it depends on the model tier and workload. Gemini's lower-cost models are often very competitive for high-volume tasks, while OpenAI can be attractive for other use cases depending on model choice and workflow design." },
+    { type: "heading", content: "Which Has Better Free Usage?" },
+    { type: "text", content: "Gemini tends to have a strong consumer-side story because it lives naturally inside Google's product ecosystem. That makes it especially attractive for people already using Gmail, Docs, Workspace, Android, and other Google products. OpenAI's consumer story is built differently around ChatGPT, so users often compare both based on workflow familiarity rather than raw pricing alone." },
+    { type: "heading", content: "Which Scales Better?" },
+    { type: "text", content: "Gemini scales well when your app uses repeated prompts, long-lived context, or workload patterns that benefit from caching and grounding control. OpenAI also scales well, but the better choice often comes down to the specific model, output length, and tool usage pattern." },
+    { type: "heading", content: "Which Is Better for Startups?" },
+    { type: "text", content: "For startups, Gemini can be very attractive if the product fits a Flash-style workflow and benefits from Google-native integrations. If your app is text-heavy, repetitive, or internal, the lower-cost tiers can help protect margins. OpenAI may still be the better fit for some startup teams, especially if they rely heavily on ChatGPT familiarity, reasoning workflows, or existing OpenAI-based tooling." },
+    { type: "heading", content: "Which Is Better for Enterprise?" },
+    { type: "text", content: "Gemini has a strong enterprise story because it ties naturally into Google Workspace and Google Cloud workflows. That matters for organizations already standardizing on Gmail, Docs, Sheets, Android, and Google's admin stack. OpenAI's enterprise appeal is different and often centered on ChatGPT adoption and product flexibility. The better enterprise fit usually depends on where the organization already lives operationally." },
+    { type: "heading", content: "Which Has the Best Cost-Performance Ratio?" },
+    { type: "text", content: "If the workload is simple and high-volume, Gemini Flash-Lite or Flash often gives excellent cost-performance value. If the workload is complex and requires deeper reasoning, Pro may be worth the premium. The right answer is not \"Gemini or OpenAI?\" in the abstract. It is \"Which model family gives the best result for this specific job at the lowest total cost?\"" },
+    { type: "headingIcon", icon: "api", content: "API Pricing" },
+    { type: "text", content: "Gemini's API is usage-based, so your bill grows with how much text you send, how much the model returns, and whether you use extras like caching or grounding. That means the cheapest app is not the one with the most advanced prompt; it is the one that routes requests intelligently, keeps context under control, and avoids unnecessary output. Google's official pricing pages show separate rates for input and output tokens, as well as pricing for context caching and grounding." },
+    { type: "heading", content: "Official Pricing Logic" },
+    { type: "text", content: "The core billing pieces are simple. Input tokens are what you send. Output tokens are what the model generates. Cached context is cheaper for repeated content. Grounding and other tool-like features can add separate charges. Output often becomes the biggest cost driver because a user can ask a short question but still receive a long answer. That is why short responses, routing, and model selection often matter more than prompt refinement alone." },
+    { type: "heading", content: "Best Model by Use Case" },
     {
-      type: "benchmark",
-      caption: "Gemini 3.1 Family Pricing",
-      headers: ["Model", "Input / 1M", "Cached Input / 1M", "Output / 1M", "Batch Input / 1M", "Batch Output / 1M"],
+      type: "comparison",
+      caption: "Best Gemini Model by Use Case",
+      headers: ["Use Case", "Recommended Model", "Why"],
       rows: [
-        ["Gemini 3.1 Ultra", "$5.00", "$1.25", "$20.00", "$2.50", "$10.00"],
-        ["Gemini 3.1 Pro", "$2.00", "$0.50", "$12.00", "$1.00", "$6.00"],
-        ["Gemini 3.1 Flash", "$0.25", "$0.0625", "$1.50", "$0.125", "$0.75"]
+        ["FAQ bot", "Flash-Lite", "Lowest-cost fit for predictable answers"],
+        ["Customer support", "Flash", "Good quality with strong efficiency"],
+        ["Content writing", "Flash", "Balanced output quality and cost"],
+        ["Coding assistant", "Pro", "Better for harder reasoning and code tasks"],
+        ["Financial analysis", "Pro", "Higher value when mistakes are costly"],
+        ["Document extraction", "Flash-Lite", "Efficient for repetitive structured tasks"]
       ]
     },
-    { type: "text", content: "The Gemini 3.1 family represents Google's latest model generation as of mid-2026. Gemini 3.1 Flash at $0.25/$1.50 is the default recommendation for most production workloads — it delivers significantly better quality than 2.5 Flash at only a modest price increase. Gemini 3.1 Pro at $2.00/$12.00 is the workhorse for complex tool use, multi-step reasoning, and agentic workflows. Gemini 3.1 Ultra at $5.00/$20.00 is Google's frontier intelligence model for the most demanding research, analysis, and enterprise workloads where cost is secondary to capability." },
-    { type: "heading", content: "Context Caching Pricing" },
+    { type: "headingIcon", icon: "lightning", content: "Flash vs Pro" },
+    { type: "divider" },
+    { type: "text", content: "Flash models are the best fit when you need speed, scale, and a good cost-to-performance balance. They are ideal for products that process lots of requests and can tolerate a small amount of variation in answer depth. Pro models are better when accuracy, reasoning quality, or very long context matters more than raw efficiency. They are often the right choice for higher-stakes workflows where the cost of a bad answer is greater than the model cost itself." },
+    { type: "text", content: "This is the section where readers usually want the practical answer: Flash for most production apps, Pro for the hard stuff. That simple framing works well because it mirrors how most teams actually budget AI usage." },
+    { type: "headingIcon", icon: "search", content: "Grounding" },
+    { type: "text", content: "Grounding is what makes Gemini's answers more connected to live Google Search results. In practice, it can improve freshness, factual relevance, and user trust when the task depends on current information. That makes grounding especially useful for search-driven assistants, news-like queries, product lookup, and workflows where up-to-date answers matter. It is less useful when the task is static, internal, or already well covered by your own database." },
+    { type: "heading", content: "When to Use Grounding" },
+    { type: "text", content: "Use grounding when the answer must reflect current information, when the user expects web-backed results, or when your workflow benefits from citations or live lookup." },
+    { type: "heading", content: "When to Avoid Grounding" },
+    { type: "text", content: "Avoid grounding when the answer is stable, repetitive, internal, or does not need freshness. If you use it on every request, your costs can climb without adding much value." },
+    { type: "heading", content: "Hidden Tradeoff" },
+    { type: "text", content: "Grounding improves freshness, but it is not free. It can create extra cost and extra complexity, so it should be used selectively instead of automatically." },
+    { type: "headingIcon", icon: "cache", content: "Caching and Batch" },
+    { type: "text", content: "Context caching is one of Gemini's most important cost-saving features. If your app repeatedly sends the same instructions, background context, or reused documents, caching can reduce repeated cost significantly." },
+    { type: "heading", content: "Practical Example" },
+    { type: "text", content: "Think of an AI support bot that sends the same system prompt 2,000 times a day. If that prompt is cached, you stop paying full price for the same text over and over again. That is the kind of improvement that does not sound dramatic on paper but becomes meaningful at scale. The more repetitive your workload, the more caching matters. Batch processing is the other major lever. For non-real-time tasks, batch-style workflows can reduce cost for backfills, extraction jobs, summarization runs, and other offline processing." },
+    { type: "headingIcon", icon: "warning", content: "Hidden Costs" },
+    { type: "text", content: "Hidden costs are where many Gemini bills become surprising. The model price may look small, but the final invoice can grow because of long context, grounding, long outputs, search usage, retries, and images or other multimodal features. The main cost surprises usually come from: long context that gets resent on every request, grounding requests that add search-related usage, large outputs that grow beyond what the user needs, search-heavy workflows that use live lookup too often, retries that duplicate token usage, and image or multimodal usage where relevant. The practical rule is simple: the cheapest request is the one you do not have to repeat." },
+    { type: "headingIcon", icon: "checklist", content: "Cost-Saving Checklist" },
     {
-      type: "benchmark",
-      caption: "Gemini Context Caching Pricing",
-      headers: ["Model", "Standard Input / 1M", "Cached Input / 1M", "Discount"],
-      rows: [
-        ["Gemini 3.1 Ultra", "$5.00", "$1.25", "75%"],
-        ["Gemini 3.1 Pro", "$2.00", "$0.50", "75%"],
-        ["Gemini 3.1 Flash", "$0.25", "$0.0625", "75%"],
-        ["Gemini 2.5 Pro", "$1.25", "$0.3125", "75%"],
-        ["Gemini 2.5 Flash", "$0.15", "$0.0375", "75%"]
+      type: "practicalChecklist",
+      title: "Cost-Saving Checklist",
+      items: [
+        "Use Flash before Pro",
+        "Keep outputs concise",
+        "Cache repeated prompts and context",
+        "Use Batch for offline work",
+        "Use Grounding only when freshness matters",
+        "Monitor token usage and retries",
+        "Route simple tasks to cheaper models first"
       ]
     },
-    { type: "text", content: "Context caching is Google's most impactful cost optimization for production workloads. When you enable caching on a prompt prefix, the first request writes the prefix to cache at the standard input rate, and all subsequent requests within the cache TTL that match the prefix are billed at 25% of the standard rate. Unlike other providers that use a premium write model, Google charges standard rates for cache writes and applies the discount on reads. In a typical RAG application with an 80% cache hit rate on the system prompt and knowledge base prefix, effective input cost drops by approximately 60%. For high-volume production systems, context caching alone can reduce total bills by 30% to 50% depending on the ratio of cached to uncached input tokens per request." },
-    { type: "heading", content: "Batch Processing" },
-    { type: "text", content: "The Gemini Batch API processes requests asynchronously and offers a 50% discount on both input and output tokens across all models. This is the single largest cost lever for any workload where the user does not need an immediate response. Batch processing is ideal for nightly data enrichment pipelines, bulk classification jobs, evaluation runs, content generation at scale, and any workload with a 24-hour tolerance. Batch pricing applies to both standard and cached tokens, so combining context caching with batch processing delivers the lowest possible effective rate — cached + batched input costs as little as 12.5% of the standard input rate." },
-    { type: "heading", content: "Multimodal and Embeddings Pricing" },
-    {
-      type: "benchmark",
-      caption: "Gemini Multimodal and Embeddings Pricing",
-      headers: ["Modality", "Model", "Rate", "Notes"],
-      rows: [
-        ["Text", "All Gemini models", "Per 1M tokens", "Standard input/output rates per model tier"],
-        ["Image (standard)", "Gemini 3.1 Flash", "258 tokens per image", "Low-detail mode for simple image understanding"],
-        ["Image (high-res)", "Gemini 3.1 Pro", "1,066 tokens per image", "Full-detail analysis of complex images"],
-        ["Audio", "Gemini 3.1 Flash/Pro", "32 tokens per second", "Speech and audio content processing"],
-        ["Video", "Gemini 3.1 Pro/Ultra", "258 tokens per frame", "Per-frame pricing for video understanding"],
-        ["Embeddings", "text-embedding-004", "$0.0001 per 1K tokens", "Text embedding for search and RAG"]
-      ]
-    },
-    { type: "text", content: "Gemini's multimodal pricing adds token-based costs for image, audio, and video inputs on top of the text token pricing. Images are converted to token equivalents based on resolution: standard mode uses approximately 258 tokens per image, while high-resolution mode uses approximately 1,066 tokens. Audio is billed at roughly 32 tokens per second of content, making a 5-minute audio clip equivalent to approximately 9,600 tokens. Video is billed per frame, which can add up quickly for long videos. For applications processing significant non-text content, multimodal costs can exceed text costs and should be modeled separately. Use the Gemini Cost Calculator to estimate multimodal workloads accurately." },
-    { type: "heading", content: "Vertex AI Pricing" },
-    { type: "text", content: "Google offers Gemini models through two pricing paths: the direct Gemini API and Google Cloud Vertex AI. Direct API pricing is what the tables in this guide reflect — straightforward per-token rates with caching and batch discounts. Vertex AI pricing includes a platform markup of approximately 10% to 25% on base model pricing but offers additional enterprise features including committed-use discounts for predictable high-volume workloads, dedicated throughput capacity, enterprise support SLAs with guaranteed uptime, data residency controls for compliance requirements, and integration with the broader Google Cloud ecosystem including BigQuery, Cloud Storage, and Cloud Run." },
-    { type: "text", content: "For startups and small teams, the direct Gemini API is more cost-effective and simpler to manage. For enterprise deployments exceeding $10,000 per month in API spend, Vertex AI's committed-use discounts and enterprise features often offset the platform markup. Use the Gemini Cost Calculator to model both pricing paths and compare effective rates for your specific workload volume and pattern." },
-    { type: "heading", content: "Cost Formula" },
+    { type: "headingIcon", icon: "calculator", content: "How to Estimate Cost" },
+    { type: "text", content: "The easiest way to estimate Gemini API cost is to break every request into input tokens, output tokens, cached context, and optional grounding or batch usage." },
     {
       type: "formula",
-      label: "Gemini API Cost Formula",
-      formula: "Cost = (input_tokens / 1,000,000 × input_price) + (output_tokens / 1,000,000 × output_price)",
-      note: "With context caching: multiply cached input tokens by 0.25× the standard input rate. With Batch API: multiply total by 0.5. Both discounts stack for async cached workloads. For multimodal requests, add image token equivalents (258 to 1,066 tokens per image) and audio token equivalents (32 tokens per second) to the input token count before applying the formula."
+      label: "Estimated Monthly Cost",
+      formula: "(input tokens \u00d7 input rate) + (output tokens \u00d7 output rate) + cached context costs + grounding or batch costs",
+      note: "That formula does not need to be perfect to be useful. It simply gives you a realistic budget model before traffic grows."
     },
-    { type: "text", content: "The extended formula including all cost dimensions: Total = input_cost + cached_input_cost (×0.25) + output_cost + multimodal_vision_tokens + multimodal_audio_tokens. If using Batch API, apply the 0.5 multiplier to the total. The Gemini Cost Calculator handles all of these dimensions automatically, including multimodal token conversions and the stacking of caching and batch discounts." },
-    { type: "heading", content: "Worked Examples" },
-    { type: "text", content: "Example 1: A customer support platform handling 50,000 conversations per day on Gemini 3.1 Flash. Each conversation averages 1,800 input tokens (system prompt + user question + knowledge base context) and 500 output tokens. With a 70% cache hit rate on the system prompt and knowledge base prefix, the daily cost calculation breaks down as follows. Uncached input: 50,000 × 30% × 1,800 = 27,000,000 tokens × ($0.25 / 1,000,000) = $6.75. Cached input: 50,000 × 70% × 1,800 = 63,000,000 tokens × ($0.0625 / 1,000,000) = $3.94. Output: 50,000 × 500 = 25,000,000 tokens × ($1.50 / 1,000,000) = $37.50. Total daily cost: approximately $48.19, or roughly $1,446 per month." },
-    {
-      type: "benchmark",
-      caption: "Monthly Cost Comparison Across Gemini Tiers (50K conversations/day, 1.8K in / 500 out)",
-      headers: ["Model", "Monthly Cost (Standard)", "With Caching (70% hit)"],
-      rows: [
-        ["Gemini 2.5 Flash", "$585", "$378"],
-        ["Gemini 3.1 Flash", "$975", "$630"],
-        ["Gemini 2.5 Pro", "$4,388", "$3,150"],
-        ["Gemini 3.1 Pro", "$7,013", "$5,040"],
-        ["Gemini 3.1 Ultra", "$17,063", "$12,600"]
-      ]
-    },
-    { type: "text", content: "Example 2: An AI agent application making 100,000 requests per month on Gemini 3.1 Pro. Each request averages 4,000 input tokens and 1,200 output tokens, with 8 tool-calling turns per conversation. Cost per request: (4,000 / 1,000,000 × $2.00) + (1,200 / 1,000,000 × $12.00) = $0.008 + $0.0144 = $0.0224. Per conversation with 8 turns: $0.179. Monthly cost at 12,500 conversations: approximately $2,240. With a 60% cache hit rate and Batch API for 50% of async traffic, effective monthly cost drops to approximately $1,120. Agent loops compound token costs because each turn re-sends conversation history as input — optimizing turn count and input compression has an outsized impact on total spend." },
+    { type: "heading", content: "SEO and Internal Linking" },
+    { type: "text", content: "The Gemini page should link back to the OpenAI guide in comparison sections, FAQ answers, and the comparison block. That gives you a natural two-page cluster instead of two isolated articles. Comparing against OpenAI? Read our OpenAI Pricing Guide. That mirrors the OpenAI page's \"Looking at Google's models? Read our Gemini Pricing Guide.\" structure and keeps the relationship clean." },
+    { type: "heading", content: "Final Takeaway" },
+    { type: "text", content: "Gemini is especially compelling when your workflow already lives inside Google's ecosystem, when you want strong Flash-style efficiency, or when caching and grounding can meaningfully improve your app. Not sure whether Gemini or OpenAI is the better fit? Compare both platforms in our OpenAI Pricing Guide, or estimate your expected costs with our AI Cost Calculator." },
     {
       type: "cta",
       slug: "gemini-cost-calculator",
       title: "Estimate Your Gemini API Costs",
-      description: "Use our free Gemini Cost Calculator to model your monthly spend across any model tier, with context caching and Batch API discounts included. Supports multimodal workloads and direct API vs Vertex AI comparisons."
+      description: "Use our free Gemini Cost Calculator to model your monthly spend across any model tier, with context caching and batch discounts included."
     },
-    { type: "heading", content: "Flash vs Pro vs Ultra: Which Model Should You Use?" },
-    {
-      type: "comparison",
-      caption: "Gemini Model Tiers by Use Case",
-      headers: ["Use Case", "Recommended Model", "Cost per 1K Requests", "Why"],
-      rows: [
-        ["Classification, routing, extraction", "Gemini 2.5 Flash ($0.15/$0.60)", "$0.15", "Cheapest capable tier; ideal at scale"],
-        ["High-volume customer support", "Gemini 3.1 Flash ($0.25/$1.50)", "$1.20", "Best cost-to-quality ratio for chat"],
-        ["Production RAG and tool use", "Gemini 3.1 Pro ($2.00/$12.00)", "$8.80", "Strong instruction following at fair price"],
-        ["Complex multi-step reasoning", "Gemini 3.1 Pro ($2.00/$12.00)", "$16.40", "Reliable reasoning without Ultra cost"],
-        ["Document analysis (100K+ tokens)", "Gemini 3.1 Pro ($2.00/$12.00)", "$224.00", "1M context at standard pricing"],
-        ["Frontier research and analysis", "Gemini 3.1 Ultra ($5.00/$20.00)", "$34.00", "Maximum capability for hard problems"],
-        ["Budget batch classification", "Gemini 2.5 Flash batch ($0.075/$0.30)", "$0.075", "Cheapest option at $0.075/M input"]
-      ]
-    },
-    { type: "text", content: "The most cost-effective production strategy is model routing: send 60-70% of traffic to Gemini 2.5 Flash or 3.1 Flash for simple tasks, route 20-30% of complex queries to Gemini 3.1 Pro, and reserve Gemini 3.1 Ultra for the hardest 5-10% of problems requiring maximum intelligence. Google's consistent API surface across model tiers makes routing straightforward to implement with minimal code changes." },
-    { type: "heading", content: "Gemini vs OpenAI vs Claude: Pricing Comparison" },
-    {
-      type: "comparison",
-      caption: "Gemini vs OpenAI vs Claude — Mid-Tier Model Pricing",
-      headers: ["Feature", "Gemini 3.1 Pro", "OpenAI GPT-5.4", "Claude Sonnet 4.6", "Best For"],
-      rows: [
-        ["Input price / 1M", "$2.00", "$2.50", "$3.00", "Budget: Gemini"],
-        ["Output price / 1M", "$12.00", "$15.00", "$15.00", "Budget: Gemini"],
-        ["Cached input discount", "75%", "90%", "90%", "Best rate: OpenAI/Claude"],
-        ["Batch discount", "50%", "50%", "50%", "All equal"],
-        ["Context window", "1M", "1.05M", "1M", "Comparable"],
-        ["Free tier", "Yes (rate-limited)", "No ($5 credits)", "No ($5 credits)", "Gemini"],
-        ["Cheapest model", "2.5 Flash ($0.15/$0.60)", "GPT-5 Nano ($0.05/$0.40)", "Haiku 4.5 ($1.00/$5.00)", "Cheap: OpenAI (Nano)"]
-      ]
-    },
-    { type: "text", content: "Pick Gemini when you need the cheapest budget-tier model before caching (Gemini 2.5 Flash at $0.15/$0.60 beats GPT-5 Nano on absolute quality at a slightly higher but still minimal price), the best mid-tier pricing (Gemini 3.1 Pro at $2.00/$12.00 undercuts both GPT-5.4 at $2.50/$15.00 and Claude Sonnet 4.6 at $3.00/$15.00), or a free tier for prototyping through Google AI Studio. Pick OpenAI when you need the widest model range or the most aggressive caching discounts. Pick Claude when your application requires nuanced instruction following or careful writing. For detailed head-to-head comparisons across every tier and use case, see the OpenAI API Pricing Guide and Claude API Pricing Guide." },
-    { type: "heading", content: "Common Cost Mistakes" },
-    {
-      type: "warning",
-      content: "The most expensive mistake is using Gemini 3.1 Ultra for every task when Gemini 2.5 Flash would suffice — a 33x cost difference on output. Other common errors include: ignoring context caching (leaving 75% input savings on the table), running async workloads synchronously (missing the 50% batch discount), underestimating multimodal token costs (a single high-res image adds ~1,066 tokens to every request), not accounting for free tier quotas that can reduce costs for low-volume development, and confusing Google AI Studio free tier limits with paid API pricing when scaling to production."
-    },
-    { type: "heading", content: "Cost Optimization Tips" },
-    {
-      type: "proTip",
-      content: "Route by task complexity: Gemini 2.5 Flash for classification and simple queries (60-70%), Gemini 3.1 Flash for production chat (20-25%), Gemini 3.1 Pro for complex reasoning (5-10%), and Gemini 3.1 Ultra only for the hardest problems (under 5%). This single change typically reduces costs by 60-80% compared to using Pro or Ultra for every request."
-    },
-    { type: "text", content: "Enable context caching on every production workload. Structure prompts with stable content first (system prompt, tool definitions, fixed instructions) and variable content last to maximize the cached prefix length. Batch all non-realtime workloads through the Batch API for the immediate 50% discount. Set per-project budget alerts in Google Cloud to prevent runaway agents or unexpected spikes from exceeding your monthly budget. Monitor cache hit rates through the API response metadata to verify your caching strategy is effective. Right-size your context window — Gemini's 1M-token support is useful but sending 100K tokens when 8K suffices adds unnecessary input cost. Compress prompts by removing redundant instructions and retrieving only the most relevant RAG context. Audit your model choices quarterly — Google releases new models and adjusts pricing regularly, and the model that was optimal three months ago may now have a cheaper, better successor." },
-    { type: "heading", content: "Real Business Example" },
-    { type: "text", content: "DocuMind, a YC-backed legal document analysis platform, processes 200,000 documents per month using Gemini models. Initially running everything on Gemini 3.1 Pro at $2.00/$12.00, their monthly API bill was $14,200. After a cost audit, they implemented three changes. First, they routed simple clause extraction and metadata parsing to Gemini 3.1 Flash ($0.25/$1.50), which handled 65% of their traffic. Second, they restructured prompts to achieve a 75% context cache hit rate on their 15,000-token legal system prompt. Third, they moved all nightly batch enrichment jobs to the Batch API for the 50% discount." },
-    {
-      type: "benchmark",
-      caption: "DocuMind Cost Optimization Results",
-      headers: ["Metric", "Before", "After", "Change"],
-      rows: [
-        ["Monthly API bill", "$14,200", "$3,550", "-75%"],
-        ["Model routing", "3.1 Pro (100%)", "3.1 Flash (65%) + 3.1 Pro (35%)", "—"],
-        ["Context cache hit rate", "0%", "75%", "+75pp"],
-        ["Batch API usage", "0%", "100% for nightly jobs", "+100pp"],
-        ["Document processing accuracy", "Baseline", "+1%", "Improved"]
-      ]
-    },
-    { type: "text", content: "The optimization was straightforward: move 65% of traffic to Gemini 3.1 Flash, restructure prompts for 75% cache hit rate, and batch all non-urgent processing. Monthly bill dropped 75% with a slight improvement in accuracy. Model routing, context caching, and batch processing are available to every team regardless of scale and represent the three highest-leverage cost optimization strategies for any Gemini API workload." },
-    { type: "heading", content: "FAQs" },
-    { type: "text", content: "See the FAQ section at the top of this article for answers to the most common questions about Gemini API pricing, including free tier availability, caching mechanics, multimodal pricing, and comparison against OpenAI and Claude." },
-    { type: "heading", content: "Official Pricing Sources" },
-    { type: "text", content: "All pricing data in this guide is verified as of July 2026. Google periodically updates Gemini API pricing. Verify the latest rates at the official sources before making production budget decisions. Google AI Studio Pricing at ai.google.dev/pricing. Google Vertex AI Pricing at cloud.google.com/vertex-ai/pricing. Gemini API Documentation at ai.google.dev/gemini-api/docs. Vertex AI Documentation at cloud.google.com/vertex-ai/docs." },
     { type: "heading", content: "Related Calculators" },
     {
       type: "relatedMetrics",
@@ -2317,25 +2158,19 @@ const article14 = {
         { name: "AI Agent Savings Calculator", description: "Estimate savings from AI agent automation.", to: "/calculator/ai-agent-savings-calculator" }
       ]
     },
-    { type: "heading", content: "Conclusion" },
-    { type: "text", content: "Gemini API pricing in 2026 spans a 33x range from $0.15 per 1M input tokens (Gemini 2.5 Flash) to $5.00/$20.00 (Gemini 3.1 Ultra). Google's pricing is competitive across every tier — Gemini 2.5 Flash is the cheapest budget model on the market by input price, Gemini 3.1 Flash offers the best value-to-quality ratio for production workloads, and Gemini 3.1 Pro undercuts comparable mid-tier models from OpenAI and Claude on both input and output. What makes Gemini unique is the combination of 1M-token context windows at standard pricing, a generous free tier for prototyping, and consistent 75% context caching discounts across all models. The three highest-leverage cost strategies are model routing (use Flash for most traffic), context caching (enable on every workload), and batch processing (50% off for async jobs). Start optimizing your Gemini costs today: use the Gemini Cost Calculator to model your workloads, compare with the OpenAI API Pricing Guide and Claude API Pricing Guide, and plan your AI budget with accurate per-task cost estimates." },
-    { type: "heading", content: "Actionable Cost Optimization Checklist" },
     {
-      type: "takeaways",
-      items: [
-        "Route by task complexity — Gemini 2.5 Flash for 60-70%, 3.1 Flash for 20-25%, Pro for 5-10%, Ultra for under 5%",
-        "Enable context caching on every production workload — stable content first, variable content last",
-        "Use the Batch API for all non-realtime processing — instant 50% discount on both input and output",
-        "Take advantage of the free tier through Google AI Studio for development and low-volume testing",
-        "Set per-project budget alerts in Google Cloud before deploying to production",
-        "Monitor cache hit rates through API response metadata to verify caching strategy effectiveness",
-        "Right-size context windows — 1M is available but costly at full length for high-volume workloads",
-        "Account for multimodal token costs separately from text token costs",
-        "Compare direct API vs Vertex AI pricing for workloads exceeding $10K/month",
-        "Audit model choices quarterly — Google releases new models and adjusts pricing regularly"
-      ]
+      type: "methodology",
+      approach: "This guide is based on official Google Gemini pricing documentation, then interpreted through practical use-case analysis. The facts come from Google's current pricing structure, while the recommendations come from cost-control patterns seen in real-world AI deployments.",
+      source: "Google AI Studio Pricing and Gemini API Documentation",
+      date: "July 2026"
     },
-    { type: "text", content: "Run this checklist every quarter. Google's AI pricing evolves rapidly, and the optimal model for your workload three months ago may now have a cheaper, more capable successor. The OpenAI API Pricing Guide: Complete Cost Breakdown for GPT Models (2026) and Claude API Pricing Guide: Complete Cost Breakdown for Claude Models (2026) provide parallel cost data for multi-provider comparison, and the upcoming AI ROI Calculator Guide and LLM Cost Optimization Guide will expand on the full cost management framework for AI-powered applications." }
+    {
+      type: "officialSources",
+      sources: [
+        { name: "Google AI Studio Pricing", url: "https://ai.google.dev/pricing" },
+        { name: "Gemini API Documentation", url: "https://ai.google.dev/gemini-api/docs" }
+      ]
+    }
   ]
 };
 
