@@ -5,17 +5,30 @@ import CardLink from "../components/CardLink.jsx";
 import { BRAND } from "../config/brand";
 import { calculators, categories } from "../data/calculators.js";
 import { getPublishedPosts } from "../data/blogs.js";
-import { organizationSchema, webApplicationSchema } from "../utils/schema.js";
+import { faqSchema, organizationSchema, webApplicationSchema, webSiteSchema } from "../utils/schema.js";
 
 const iconMap = { ai: Gauge, startup: Rocket, marketing: LineChart, finance: Wrench };
+
+const homepageFaqs = [
+  { question: "Is CalcioCalc really free?", answer: "Yes. Every calculator on CalcioCalc is completely free. No paywalls, no subscriptions, no credit card required. All computation happens in your browser with no data sent to any server." },
+  { question: "Do I need to create an account?", answer: "No. There are no accounts, logins, or sign-ups. You can use any calculator instantly without providing any personal information." },
+  { question: "How accurate are the calculators?", answer: "We test each calculator against known values and authoritative sources. All formulas are displayed so you can verify the math. We update calculations when pricing or standards change." },
+  { question: "Do you store my data or inputs?", answer: "No. All calculator inputs and results stay in your browser. We do not collect, store, or transmit any data you enter. Your privacy is built into every tool." },
+  { question: "What categories of calculators are available?", answer: "We cover AI cost estimation, startup and SaaS metrics, marketing ROI and growth analytics, and everyday finance — over 60 calculators across four categories." },
+  { question: "How often are calculators updated?", answer: "We update calculators whenever provider pricing changes, new industry benchmarks are published, or calculation standards evolve. Our blog also tracks notable changes." },
+  { question: "Where do the formulas and benchmarks come from?", answer: "Formulas follow standard financial and mathematical definitions. Benchmarks draw from published industry reports, provider pricing pages, and authoritative sources cited in each guide." },
+  { question: "Can I embed or share a calculator?", answer: "You can share any calculator by copying its URL. Direct embedding is not currently supported, but you can link to any page freely." },
+  { question: "How is CalcioCalc different from other calculator sites?", answer: "We show every formula and step-by-step working, require no sign-up, collect no data, and pair every calculator with an in-depth editorial guide. Our focus is on business and technical audiences, not general consumers." },
+  { question: "Can I use these calculators for commercial or business purposes?", answer: "Yes. Our calculators are designed for startups, agencies, SaaS businesses, finance teams, consultants, and enterprises. You can use the results for budgeting, forecasting, planning, and business analysis." }
+];
 
 export default function Home() {
   return (
     <>
       <SEO
-        title="Free AI, SaaS, Startup, Finance & Marketing Calculators | CalcioCalc"
-        description={`${BRAND.name} provides 60+ free AI, SaaS, startup, marketing and finance calculators with transparent formulas, practical examples and detailed guides. Calculate ROI, CAC, LTV, MRR, API costs, ROAS and more.`}
-        schema={[organizationSchema, webApplicationSchema]}
+        title="AI, SaaS, Startup, Finance & Marketing Calculators — Calcio"
+        description="Free AI, SaaS, startup, marketing and finance calculators with transparent formulas and practical examples. Calculate ROI, CAC, LTV, MRR, API costs, ROAS and more."
+        schema={[webSiteSchema, organizationSchema, webApplicationSchema, faqSchema(homepageFaqs)]}
       />
       <section className="container-page grid min-h-[calc(100vh-4rem)] items-center gap-10 py-12 lg:grid-cols-[1.05fr_0.95fr]">
         <div>

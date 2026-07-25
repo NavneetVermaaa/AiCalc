@@ -27,8 +27,8 @@ export default function Contact() {
   return (
     <>
       <SEO
-        title="Contact CalcioCalc — Get Support & Business Inquiries"
-        description={`Contact the ${BRAND.name} team. Get support, share feedback, or ask questions about our free business calculators.`}
+        title="Contact CalcioCalc — Support & Business Inquiries"
+        description={`Contact the ${BRAND.name} team for support, feedback or questions about 60+ free AI, SaaS, startup, marketing and finance calculators. We are here to help.`}
         path="/contact"
         schema={[contactPageSchema]}
       />

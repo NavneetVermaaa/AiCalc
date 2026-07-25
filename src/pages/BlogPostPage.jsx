@@ -12,8 +12,18 @@ import BenchmarkTable from "../components/BenchmarkTable.jsx";
 import ComparisonTable from "../components/ComparisonTable.jsx";
 import DefinitionCard from "../components/DefinitionCard.jsx";
 import RelatedMetrics from "../components/RelatedMetrics.jsx";
-import { getPost, getPublishedPosts, getPublishedRelatedPosts } from "../data/blogs.js";
-import { calculators } from "../data/calculators.js";
+import ExpertInsight from "../components/ExpertInsight.jsx";
+import RealityCheck from "../components/RealityCheck.jsx";
+import FounderNote from "../components/FounderNote.jsx";
+import DecisionFramework from "../components/DecisionFramework.jsx";
+import PracticalChecklist from "../components/PracticalChecklist.jsx";
+import CaseStudy from "../components/CaseStudy.jsx";
+import CommonMisconception from "../components/CommonMisconception.jsx";
+import Timeline from "../components/Timeline.jsx";
+import Methodology from "../components/Methodology.jsx";
+import OfficialSources from "../components/OfficialSources.jsx";
+import { getPost, getPublishedPosts, getPublishedPostsByCategory, getPublishedRelatedPosts } from "../data/blogs.js";
+import { calculators, calculatorsByCategory } from "../data/calculators.js";
 import { articleSchema, faqSchema } from "../utils/schema.js";
 
 const entityLinks = [
@@ -102,6 +112,36 @@ const sectionRenderers = {
   relatedMetrics(s, i) {
     return <RelatedMetrics key={i} items={s.items} />;
   },
+  expertInsight(s, i) {
+    return <ExpertInsight key={i} title={s.title} content={s.content} />;
+  },
+  realityCheck(s, i) {
+    return <RealityCheck key={i} title={s.title} content={s.content} />;
+  },
+  founderNote(s, i) {
+    return <FounderNote key={i} content={s.content} author={s.author} />;
+  },
+  decisionFramework(s, i) {
+    return <DecisionFramework key={i} title={s.title} options={s.options} />;
+  },
+  practicalChecklist(s, i) {
+    return <PracticalChecklist key={i} title={s.title} items={s.items} />;
+  },
+  caseStudy(s, i) {
+    return <CaseStudy key={i} company={s.company} situation={s.situation} numbers={s.numbers} decision={s.decision} outcome={s.outcome} lesson={s.lesson} />;
+  },
+  commonMisconception(s, i) {
+    return <CommonMisconception key={i} myth={s.myth} reality={s.reality} explanation={s.explanation} />;
+  },
+  timeline(s, i) {
+    return <Timeline key={i} title={s.title} events={s.events} />;
+  },
+  methodology(s, i) {
+    return <Methodology key={i} title={s.title} approach={s.approach} source={s.source} date={s.date} />;
+  },
+  officialSources(s, i) {
+    return <OfficialSources key={i} title={s.title} sources={s.sources} />;
+  },
 };
 
 export default function BlogPostPage() {
@@ -109,6 +149,10 @@ export default function BlogPostPage() {
   const post = getPost(slug);
   if (!post) return <Navigate to="/404" replace />;
   const related = getPublishedRelatedPosts(post);
+
+  const calcCategoryMap = { "ai-finance": "ai", "startup-metrics": "startup", "growth-analytics": "marketing" };
+  const relatedCalcs = calculatorsByCategory(calcCategoryMap[post.category] || "startup").slice(0, 3);
+  const relatedGuides = getPublishedPostsByCategory(post.category).filter((p) => p.slug !== post.slug).slice(0, 3);
 
   const hasSections = Array.isArray(post.sections);
   const sections = post.sections || [];
@@ -203,6 +247,36 @@ export default function BlogPostPage() {
             <span>{post.readingTime} min read</span>
           </div>
 
+          {(relatedGuides.length > 0 || relatedCalcs.length > 0) && (
+            <section className="mt-8 rounded-lg border border-line bg-panel/80 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-mint">Continue Exploring</p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                {relatedGuides.length > 0 && (
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Guides</p>
+                    <div className="mt-2 flex flex-col gap-1.5">
+                      {relatedGuides.map((guide) => (
+                        <Link key={guide.slug} to={`/blog/${guide.slug}`} className="text-sm text-slate-300 hover:text-mint transition-colors">{guide.title}</Link>
+                      ))}
+                      <Link to="/blog" className="text-sm font-semibold text-mint hover:brightness-110">View all guides</Link>
+                    </div>
+                  </div>
+                )}
+                {relatedCalcs.length > 0 && (
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Calculators</p>
+                    <div className="mt-2 flex flex-col gap-1.5">
+                      {relatedCalcs.map((calc) => (
+                        <Link key={calc.slug} to={`/calculator/${calc.slug}`} className="text-sm text-slate-300 hover:text-mint transition-colors">{calc.title}</Link>
+                      ))}
+                      <Link to={`/calculators/${calcCategoryMap[post.category] || "startup"}`} className="text-sm font-semibold text-mint hover:brightness-110">View all calculators</Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
+
           {hasSections
             ? sections.map((s, i) => {
                 const render = sectionRenderers[s.type];
@@ -214,7 +288,7 @@ export default function BlogPostPage() {
           <section className="mt-10">
             <h2 className="text-2xl font-black text-white">Related Calculators</h2>
             <div className="mt-5 grid gap-5 md:grid-cols-3">
-              {calculators.filter((_, index) => index % 3 === post.title.length % 3).slice(0, 3).map((item) => (
+              {relatedCalcs.map((item) => (
                 <CardLink key={item.slug} to={`/calculator/${item.slug}`} title={item.title} description={item.description} />
               ))}
             </div>

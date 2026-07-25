@@ -20,8 +20,8 @@ export default function Terms() {
   return (
     <>
       <SEO
-        title="Terms of Service | CalcioCalc Website Terms & Conditions"
-        description={`${BRAND.name} terms of service. By using our free business calculators and guides, you agree to these terms.`}
+        title="Terms of Service — CalcioCalc Website"
+        description={`${BRAND.name} terms of service. By using our free calculators and guides, you agree to these website terms and conditions.`}
         path="/terms"
         schema={[termsSchema]}
       />

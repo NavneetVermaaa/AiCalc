@@ -2,6 +2,14 @@ import { SITE_URL } from "../config/site";
 import { organization } from "../data/internalLinks";
 const siteUrl = SITE_URL;
 
+export const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "CalcioCalc",
+  url: siteUrl,
+  description: "Free AI, SaaS, startup, marketing and finance calculators with transparent formulas and practical guides."
+};
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",

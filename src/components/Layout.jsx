@@ -144,9 +144,9 @@ export default function Layout({ children }) {
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Resources</p>
             <Link to="/blog" className="text-sm text-slate-300 hover:text-mint">Blog</Link>
             <Link to="/blog" className="text-sm text-slate-300 hover:text-mint">Latest Guides</Link>
-            <Link to="/editorial-policy" className="text-sm text-slate-300 hover:text-mint">Formula Accuracy</Link>
+            <Link to="/editorial-policy" className="text-sm text-slate-300 hover:text-mint">Editorial Policy</Link>
             <Link to="/about" className="text-sm text-slate-300 hover:text-mint">About Us</Link>
-            <Link to="/contact" className="text-sm text-slate-300 hover:text-mint">Help Center</Link>
+            <Link to="/contact" className="text-sm text-slate-300 hover:text-mint">Contact</Link>
             <Link to="/search" className="text-sm text-slate-300 hover:text-mint">Search Tools</Link>
           </div>
         </div>

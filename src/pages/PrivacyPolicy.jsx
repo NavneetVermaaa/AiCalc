@@ -20,8 +20,8 @@ export default function PrivacyPolicy() {
   return (
     <>
       <SEO
-        title="Privacy Policy | How CalcioCalc Protects Your Data"
-        description={`${BRAND.name} privacy policy. We respect your privacy and are transparent about how we collect, use, and protect your data.`}
+        title="Privacy Policy — CalcioCalc Data Protection"
+        description={`${BRAND.name} respects your privacy. Read our policy on how we collect, use, and protect your data when using our free business calculators.`}
         path="/privacy-policy"
         schema={[privacySchema]}
       />
