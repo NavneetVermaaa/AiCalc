@@ -1,3 +1,16 @@
+const claudeStarIcon = (
+  <svg viewBox="0 0 48 48" className="h-9 w-9" fill="#d97757" aria-hidden="true">
+    <g transform="translate(24,24)">
+      <path d="M-3,-16 Q0,-22 3,-16 Q0,-4 0,0 Q0,-4 -3,-16Z" />
+      <path d="M-3,-16 Q0,-22 3,-16 Q0,-4 0,0 Q0,-4 -3,-16Z" transform="rotate(60)" />
+      <path d="M-3,-16 Q0,-22 3,-16 Q0,-4 0,0 Q0,-4 -3,-16Z" transform="rotate(120)" />
+      <path d="M-3,-16 Q0,-22 3,-16 Q0,-4 0,0 Q0,-4 -3,-16Z" transform="rotate(180)" />
+      <path d="M-3,-16 Q0,-22 3,-16 Q0,-4 0,0 Q0,-4 -3,-16Z" transform="rotate(240)" />
+      <path d="M-3,-16 Q0,-22 3,-16 Q0,-4 0,0 Q0,-4 -3,-16Z" transform="rotate(300)" />
+    </g>
+  </svg>
+);
+
 const defaultCards = [
   {
     icon: (
@@ -41,7 +54,9 @@ export default function ComparisonCards({ title, cards }) {
         {items.map((card, i) => (
           <div key={i} className="rounded-xl border border-line bg-panel/60 p-6">
             <div className="flex items-center gap-3">
-              {card.icon}
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center">
+                {card.title === "Claude" ? claudeStarIcon : card.icon}
+              </div>
               <span className="text-lg font-bold text-white">{card.title}</span>
             </div>
             <div className="mt-4 space-y-3">

@@ -26,6 +26,12 @@ import GeminiHero from "../components/GeminiHero.jsx";
 import ClaudeHero from "../components/ClaudeHero.jsx";
 import ClaudeModelCards from "../components/ClaudeModelCards.jsx";
 import ComparisonCards from "../components/ComparisonCards.jsx";
+import ComparisonHubHero from "../components/ComparisonHubHero.jsx";
+import QuickRecommendations from "../components/QuickRecommendations.jsx";
+import DecisionTree from "../components/DecisionTree.jsx";
+import Scorecards from "../components/Scorecards.jsx";
+import WorkloadMatrix from "../components/WorkloadMatrix.jsx";
+import SummaryCard from "../components/SummaryCard.jsx";
 import IconRow from "../components/IconRow.jsx";
 import { ICON_MAP } from "../components/SectionIcons.jsx";
 import { getPost, getPublishedPosts, getPublishedPostsByCategory, getPublishedRelatedPosts } from "../data/blogs.js";
@@ -252,6 +258,24 @@ const sectionRenderers = {
       icon: providerIcons[card.provider]
     }));
     return <ComparisonCards key={i} title={s.title} cards={cards} />;
+  },
+  comparisonHubHero(s, i) {
+    return <ComparisonHubHero key={i} />;
+  },
+  quickRecommendation(s, i) {
+    return <QuickRecommendations key={i} title={s.title} items={s.items} />;
+  },
+  decisionTree(s, i) {
+    return <DecisionTree key={i} title={s.title} steps={s.steps} />;
+  },
+  scorecards(s, i) {
+    return <Scorecards key={i} title={s.title} categories={s.categories} />;
+  },
+  workloadMatrix(s, i) {
+    return <WorkloadMatrix key={i} title={s.title} rows={s.rows} />;
+  },
+  summaryCard(s, i) {
+    return <SummaryCard key={i} title={s.title} summaries={s.summaries} />;
   },
   cacheIllustration(s, i) {
     return (
