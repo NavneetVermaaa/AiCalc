@@ -33,6 +33,13 @@ import Scorecards from "../components/Scorecards.jsx";
 import WorkloadMatrix from "../components/WorkloadMatrix.jsx";
 import SummaryCard from "../components/SummaryCard.jsx";
 import IconRow from "../components/IconRow.jsx";
+import SaaSMetricsPyramid from "../components/SaaSMetricsPyramid.jsx";
+import MetricDependencyFlow from "../components/MetricDependencyFlow.jsx";
+import StageRoadmap from "../components/StageRoadmap.jsx";
+import KPIMatrix from "../components/KPIMatrix.jsx";
+import DashboardToolsGrid from "../components/DashboardToolsGrid.jsx";
+import FounderCaseStudies from "../components/FounderCaseStudies.jsx";
+import GlossaryTable from "../components/GlossaryTable.jsx";
 import { ICON_MAP } from "../components/SectionIcons.jsx";
 import { getPost, getPublishedPosts, getPublishedPostsByCategory, getPublishedRelatedPosts } from "../data/blogs.js";
 import { calculators, calculatorsByCategory } from "../data/calculators.js";
@@ -361,6 +368,27 @@ const sectionRenderers = {
         </svg>
       </figure>
     );
+  },
+  saasMetricsPyramid(s, i) {
+    return <SaaSMetricsPyramid key={i} layers={s.layers} />;
+  },
+  metricDependencyFlow(s, i) {
+    return <MetricDependencyFlow key={i} title={s.title} steps={s.steps} />;
+  },
+  stageRoadmap(s, i) {
+    return <StageRoadmap key={i} caption={s.caption} stages={s.stages} />;
+  },
+  kpiMatrix(s, i) {
+    return <KPIMatrix key={i} caption={s.caption} rows={s.rows} />;
+  },
+  dashboardToolsGrid(s, i) {
+    return <DashboardToolsGrid key={i} title={s.title} tools={s.tools} />;
+  },
+  founderCaseStudies(s, i) {
+    return <FounderCaseStudies key={i} title={s.title} studies={s.studies} />;
+  },
+  glossaryTable(s, i) {
+    return <GlossaryTable key={i} title={s.title} entries={s.entries} />;
   },
 };
 
