@@ -16,14 +16,14 @@ const winnerColors = {
 };
 
 function getWinnerStyle(winner) {
-  return winnerColors[winner] || "text-mint font-semibold";
+  return winnerColors[winner] || "text-accent font-semibold";
 }
 
 export default function Scorecards({ title, categories }) {
   const items = categories || defaultCategories;
   return (
     <div className="my-8">
-      {title && <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-mint">{title}</p>}
+      {title && <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{title}</p>}
       <div className="overflow-x-auto">
         <table className="w-full min-w-[320px] border-collapse text-sm">
           <thead>

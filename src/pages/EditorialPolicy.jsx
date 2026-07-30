@@ -58,7 +58,7 @@ export default function EditorialPolicy() {
           <div>
             <h2 className="text-2xl font-bold text-white">How users can report issues</h2>
             <p className="mt-3 leading-7 text-slate-400">
-              We encourage users to report any issues they find. You can report inaccuracies, bugs, or concerns by emailing <a href="mailto:navneet.v0000001@gmail.com" className="text-mint hover:underline">navneet.v0000001@gmail.com</a> or visiting our <Link to="/contact" className="text-mint hover:underline">contact page</Link>. Please include the calculator name, a description of the issue, and any supporting references.
+              We encourage users to report any issues they find. You can report inaccuracies, bugs, or concerns by emailing <a href="mailto:navneet.v0000001@gmail.com" className="text-accent hover:underline">navneet.v0000001@gmail.com</a> or visiting our <Link to="/contact" className="text-accent hover:underline">contact page</Link>. Please include the calculator name, a description of the issue, and any supporting references.
             </p>
           </div>
 
@@ -72,7 +72,7 @@ export default function EditorialPolicy() {
           <div>
             <h2 className="text-2xl font-bold text-white">Contact</h2>
             <p className="mt-3 leading-7 text-slate-400">
-              Questions about this policy? <Link to="/contact" className="text-mint hover:underline">Contact us</Link>.
+              Questions about this policy? <Link to="/contact" className="text-accent hover:underline">Contact us</Link>.
             </p>
           </div>
         </div>

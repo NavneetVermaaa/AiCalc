@@ -59,7 +59,7 @@ export default function CookiePolicy() {
               We may use Google AdSense or other advertising platforms in the future. These platforms may set cookies to deliver personalized advertisements based on your browsing history and interests. This practice is called interest-based advertising.
             </p>
             <p className="mt-3 leading-7 text-slate-400">
-              You will be notified before any advertising cookies are placed. The Google AdSense privacy policy can be found at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-mint hover:underline">policies.google.com/privacy</a>.
+              You will be notified before any advertising cookies are placed. The Google AdSense privacy policy can be found at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">policies.google.com/privacy</a>.
             </p>
           </div>
 
@@ -69,10 +69,10 @@ export default function CookiePolicy() {
               You can control and manage cookies in your browser settings. Most browsers allow you to block or delete cookies. Below are links to instructions for popular browsers:
             </p>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-400">
-              <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" className="text-mint hover:underline">Google Chrome</a></li>
-              <li><a href="https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences" target="_blank" rel="noopener noreferrer" className="text-mint hover:underline">Mozilla Firefox</a></li>
-              <li><a href="https://support.apple.com/en-in/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-mint hover:underline">Safari</a></li>
-              <li><a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge" target="_blank" rel="noopener noreferrer" className="text-mint hover:underline">Microsoft Edge</a></li>
+              <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Google Chrome</a></li>
+              <li><a href="https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Mozilla Firefox</a></li>
+              <li><a href="https://support.apple.com/en-in/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Safari</a></li>
+              <li><a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Microsoft Edge</a></li>
             </ul>
             <p className="mt-3 leading-7 text-slate-400">
               Disabling cookies may affect how certain features of the website work.
@@ -96,7 +96,7 @@ export default function CookiePolicy() {
           <div>
             <h2 className="text-2xl font-bold text-white">Contact</h2>
             <p className="mt-3 leading-7 text-slate-400">
-              Questions about this policy? Email us at <a href="mailto:navneet.v0000001@gmail.com" className="text-mint hover:underline">navneet.v0000001@gmail.com</a>.
+              Questions about this policy? Email us at <a href="mailto:navneet.v0000001@gmail.com" className="text-accent hover:underline">navneet.v0000001@gmail.com</a>.
             </p>
           </div>
         </div>

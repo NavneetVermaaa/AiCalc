@@ -1,7 +1,7 @@
 export default function BenchmarkTable({ caption, headers, rows }) {
   return (
     <div className="mt-6 overflow-x-auto">
-      {caption && <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-mint">{caption}</p>}
+      {caption && <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{caption}</p>}
       <table className="w-full min-w-[500px] border-collapse text-sm">
         <thead>
           <tr className="border-b border-line">

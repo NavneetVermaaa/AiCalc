@@ -1,7 +1,7 @@
 export default function KPIMatrix({ caption, rows }) {
   return (
     <div className="my-8 overflow-x-auto">
-      {caption && <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-mint">{caption}</p>}
+      {caption && <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{caption}</p>}
       <div className="min-w-[500px]">
         {rows.map((row, i) => (
           <div key={i} className="mb-3 rounded-lg border border-line bg-panel/60 p-4">

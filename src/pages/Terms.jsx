@@ -107,7 +107,7 @@ export default function Terms() {
           <div>
             <h2 className="text-2xl font-bold text-white">Contact</h2>
             <p className="mt-3 leading-7 text-slate-400">
-              For questions about these terms, <Link to="/contact" className="text-mint hover:underline">contact us</Link>.
+              For questions about these terms, <Link to="/contact" className="text-accent hover:underline">contact us</Link>.
             </p>
           </div>
         </div>

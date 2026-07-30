@@ -7,15 +7,24 @@ export default {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
       },
       colors: {
-        ink: "#080b12",
-        panel: "#0e1420",
-        line: "#223044",
-        mint: "#52f0b8",
-        sky: "#67d8ff",
-        amber: "#f8bf55"
+        ink: '#0b1220',
+        panel: '#111827',
+        line: '#293548',
+        accent: {
+          light: '#14B8A6',
+          DEFAULT: '#10B981',
+          dark: '#059669',
+        },
+        mint: '#10B981',
+        content: {
+          primary: '#F8FAFC',
+          muted: '#94A3B8',
+        },
+        sky: '#0ea5e9',
+        amber: '#f59e0b',
       },
       boxShadow: {
-        glow: "0 20px 80px rgba(82, 240, 184, 0.14)"
+        clean: "0 18px 45px rgba(2, 6, 23, 0.28)"
       }
     }
   },

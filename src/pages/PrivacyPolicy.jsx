@@ -66,8 +66,8 @@ export default function PrivacyPolicy() {
               We use the following third-party services. Each has its own privacy policy governing data handling.
             </p>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-400">
-              <li><strong className="text-white">Vercel:</strong> Hosting platform. See <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-mint hover:underline">Vercel Privacy Policy</a>.</li>
-              <li><strong className="text-white">Google AdSense:</strong> May use cookies for personalized ads. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-mint hover:underline">Google Privacy Policy</a>.</li>
+              <li><strong className="text-white">Vercel:</strong> Hosting platform. See <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Vercel Privacy Policy</a>.</li>
+              <li><strong className="text-white">Google AdSense:</strong> May use cookies for personalized ads. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Google Privacy Policy</a>.</li>
             </ul>
           </div>
 
@@ -97,7 +97,7 @@ export default function PrivacyPolicy() {
               Depending on your location, you may have rights under GDPR, CCPA, or similar regulations. These include the right to access, correct, or delete your data.
             </p>
             <p className="mt-3 leading-7 text-slate-400">
-              To exercise your rights, email us at <a href="mailto:calcio.tools@gmail.com" className="text-mint hover:underline">calcio.tools@gmail.com</a>.
+              To exercise your rights, email us at <a href="mailto:calcio.tools@gmail.com" className="text-accent hover:underline">calcio.tools@gmail.com</a>.
             </p>
           </div>
 
@@ -118,7 +118,7 @@ export default function PrivacyPolicy() {
           <div>
             <h2 className="text-2xl font-bold text-white">Contact</h2>
             <p className="mt-3 leading-7 text-slate-400">
-              Questions about this policy? <Link to="/contact" className="text-mint hover:underline">Contact us</Link>.
+              Questions about this policy? <Link to="/contact" className="text-accent hover:underline">Contact us</Link>.
             </p>
           </div>
         </div>

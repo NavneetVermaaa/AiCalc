@@ -78,7 +78,7 @@ export default function Disclaimer() {
           <div>
             <h2 className="text-2xl font-bold text-white">Contact</h2>
             <p className="mt-3 leading-7 text-slate-400">
-              Questions about this disclaimer? Email us at <a href="mailto:navneet.v0000001@gmail.com" className="text-mint hover:underline">navneet.v0000001@gmail.com</a>.
+              Questions about this disclaimer? Email us at <a href="mailto:navneet.v0000001@gmail.com" className="text-accent hover:underline">navneet.v0000001@gmail.com</a>.
             </p>
           </div>
         </div>

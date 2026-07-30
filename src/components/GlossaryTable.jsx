@@ -1,7 +1,7 @@
 export default function GlossaryTable({ title, entries }) {
   return (
     <div className="my-8">
-      {title && <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-mint">{title}</p>}
+      {title && <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{title}</p>}
       <div className="overflow-x-auto">
         <table className="w-full min-w-[400px] border-collapse text-sm">
           <thead>

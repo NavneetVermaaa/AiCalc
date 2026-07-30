@@ -43,10 +43,10 @@ export default function Contact() {
       <section className="container-page py-12 lg:py-16">
         <div className="mx-auto max-w-lg">
           <div className="panel p-6">
-            <Mail className="text-mint" size={26} />
+            <Mail className="text-accent" size={26} />
             <h2 className="mt-4 text-xl font-bold text-white">Email us</h2>
             <p className="mt-3 text-sm leading-6 text-slate-400">For all inquiries, feedback, and support.</p>
-            <a href="mailto:navneet.v0000001@gmail.com" className="mt-4 inline-flex items-center gap-2 font-bold text-mint hover:text-sky">
+            <a href="mailto:navneet.v0000001@gmail.com" className="mt-4 inline-flex items-center gap-2 font-bold text-accent hover:text-sky">
               navneet.v0000001@gmail.com <ArrowRight size={16} />
             </a>
             <p className="mt-4 text-sm leading-6 text-slate-400">We aim to respond within 1&ndash;2 business days.</p>

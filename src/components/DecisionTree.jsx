@@ -14,14 +14,14 @@ const answerColors = {
 };
 
 function getAnswerStyle(provider) {
-  return answerColors[provider] || "text-mint border-mint/30 bg-mint/5";
+  return answerColors[provider] || "text-accent border-accent/30 bg-accent/5";
 }
 
 export default function DecisionTree({ title, steps }) {
   const items = steps || defaultSteps;
   return (
     <div className="my-8 rounded-xl border border-line bg-panel/60 p-6 sm:p-8">
-      {title && <p className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-mint">{title}</p>}
+      {title && <p className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{title}</p>}
       <div className="flex flex-col items-center gap-1">
         {items.map((step, i) => (
           <div key={i} className="flex flex-col items-center">

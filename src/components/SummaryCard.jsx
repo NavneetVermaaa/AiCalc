@@ -21,7 +21,7 @@ export default function SummaryCard({ title, summaries }) {
   const items = summaries || defaultSummaries;
   return (
     <div className="my-8 rounded-xl border border-line bg-panel/60 p-6">
-      {title && <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-mint">{title}</p>}
+      {title && <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{title}</p>}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, i) => (
           <div key={i} className="flex items-center gap-3 rounded-lg border border-line/50 bg-panel/40 p-4">

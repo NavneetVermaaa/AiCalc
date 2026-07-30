@@ -82,7 +82,7 @@ function SmartText({ text }) {
       }
 
       result.push(
-        <Link key={key++} to={matched.to} className="text-mint underline underline-offset-2 hover:brightness-110 decoration-mint/40">
+        <Link key={key++} to={matched.to} className="text-accent underline underline-offset-2 hover:brightness-110 decoration-accent/40">
           {matched.name}
         </Link>
       );
@@ -461,7 +461,7 @@ export default function BlogPostPage() {
   return (
     <>
       <div className="fixed inset-x-0 top-0 z-50 h-1 bg-line/40">
-        <div className="h-full bg-mint transition-[width] duration-150 ease-out" style={{ width: `${progress}%` }} />
+        <div className="h-full bg-accent transition-[width] duration-150 ease-out" style={{ width: `${progress}%` }} />
       </div>
       <SEO title={post.metaTitle || post.title} description={post.description} path={`/blog/${post.slug}`} type="article" schema={[articleSchema(post), faqSchema(post.faq)]} noindex={!post.published} />
       <article className="container-page grid gap-8 py-12 lg:grid-cols-[260px_1fr]">
@@ -469,13 +469,16 @@ export default function BlogPostPage() {
           <p className="eyebrow">{post.readingTime} min read</p>
           {tocItems.length > 0 && (
             <>
-              <h2 className="mt-4 font-black text-white">Table of contents</h2>
-              <nav className="mt-4 grid gap-2 text-sm">
+              <p className="mt-4 font-black text-white">Table of contents</p>
+              <a href="#article-content" className="sr-only focus:not-sr-only focus:mt-3 focus:inline-flex focus:rounded-md focus:bg-accent focus:px-3 focus:py-2 focus:text-sm focus:font-bold focus:text-ink">
+                Skip table of contents
+              </a>
+              <nav className="mt-4 grid gap-2 text-sm" aria-label="Table of contents">
                 {tocItems.map((item) => (
                   <a
                     key={item.id}
                     href={`#${item.id}`}
-                    className={`transition-colors ${activeId === item.id ? "font-semibold text-mint" : "text-slate-300 hover:text-mint"}`}
+                    className={`rounded-sm transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-ink ${activeId === item.id ? "font-semibold text-accent" : "text-slate-300 hover:text-accent"}`}
                   >
                     {activeId === item.id ? "\u2713 " : "\u25CB "}{item.label}
                   </a>
@@ -484,29 +487,29 @@ export default function BlogPostPage() {
             </>
           )}
         </aside>
-        <div>
+        <div id="article-content">
           <p className="eyebrow">{post.categoryTitle}</p>
           <h1 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">{post.title}</h1>
           <p className="mt-4 text-lg leading-8 text-slate-300">{post.description}</p>
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 text-sm text-slate-400">
             <span>By {post.author}</span>
             <span>Published {new Date(post.publishedDate || post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
-            {(post.updatedDate && post.updatedDate !== (post.publishedDate || post.date)) && <span className="rounded border border-mint/20 bg-mint/5 px-2 py-0.5 font-medium text-mint">Updated {new Date(post.updatedDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>}
+            {(post.updatedDate && post.updatedDate !== (post.publishedDate || post.date)) && <span className="rounded border border-accent/20 bg-accent/5 px-2 py-0.5 font-medium text-accent">Updated {new Date(post.updatedDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>}
             <span>{post.readingTime} min read</span>
           </div>
 
           {(relatedGuides.length > 0 || relatedCalcs.length > 0) && (
             <section className="mt-8 rounded-lg border border-line bg-panel/80 p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-mint">Continue Exploring</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Continue Exploring</p>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 {relatedGuides.length > 0 && (
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Guides</p>
                     <div className="mt-2 flex flex-col gap-1.5">
                       {relatedGuides.map((guide) => (
-                        <Link key={guide.slug} to={`/blog/${guide.slug}`} className="text-sm text-slate-300 hover:text-mint transition-colors">{guide.title}</Link>
+                        <Link key={guide.slug} to={`/blog/${guide.slug}`} className="text-sm text-slate-300 hover:text-accent transition-colors">{guide.title}</Link>
                       ))}
-                      <Link to="/blog" className="text-sm font-semibold text-mint hover:brightness-110">View all guides</Link>
+                      <Link to="/blog" className="text-sm font-semibold text-accent hover:brightness-110">View all guides</Link>
                     </div>
                   </div>
                 )}
@@ -515,9 +518,9 @@ export default function BlogPostPage() {
                     <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Calculators</p>
                     <div className="mt-2 flex flex-col gap-1.5">
                       {relatedCalcs.map((calc) => (
-                        <Link key={calc.slug} to={`/calculator/${calc.slug}`} className="text-sm text-slate-300 hover:text-mint transition-colors">{calc.title}</Link>
+                        <Link key={calc.slug} to={`/calculator/${calc.slug}`} className="text-sm text-slate-300 hover:text-accent transition-colors">{calc.title}</Link>
                       ))}
-                      <Link to={`/calculators/${calcCategoryMap[post.category] || "startup"}`} className="text-sm font-semibold text-mint hover:brightness-110">View all calculators</Link>
+                      <Link to={`/calculators/${calcCategoryMap[post.category] || "startup"}`} className="text-sm font-semibold text-accent hover:brightness-110">View all calculators</Link>
                     </div>
                   </div>
                 )}

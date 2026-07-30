@@ -6,8 +6,8 @@ export default function CommonMisconception({ myth, reality, explanation }) {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber">Myth</p>
           <p className="mt-2 text-sm leading-6 text-slate-400">{myth}</p>
         </div>
-        <div className="bg-mint/5 p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-mint">Reality</p>
+        <div className="bg-accent/5 p-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Reality</p>
           <p className="mt-2 text-sm leading-6 text-white">{reality}</p>
         </div>
       </div>

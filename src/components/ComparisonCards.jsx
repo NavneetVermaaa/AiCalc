@@ -49,7 +49,7 @@ export default function ComparisonCards({ title, cards }) {
   const gridCols = items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3";
   return (
     <div className="my-8">
-      {title && <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-mint">{title}</p>}
+      {title && <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{title}</p>}
       <div className={`grid gap-6 ${gridCols}`}>
         {items.map((card, i) => (
           <div key={i} className="rounded-xl border border-line bg-panel/60 p-6">

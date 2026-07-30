@@ -14,7 +14,7 @@ export default function PricingFlowHero({ logo, left, right, caption }) {
       <svg className="mt-2 h-6 w-4 text-slate-500" viewBox="0 0 16 24" fill="none" aria-label="Arrow down">
         <path d="M8 0v20M1 13l7 7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
-      <span className="mt-2 rounded-lg border border-mint/30 bg-mint/5 px-4 py-2 text-sm font-medium text-mint">{data.final}</span>
+      <span className="mt-2 rounded-lg border border-accent/30 bg-accent/5 px-4 py-2 text-sm font-medium text-accent">{data.final}</span>
     </div>
   );
 

@@ -11,7 +11,7 @@ export default function WorkloadMatrix({ title, rows }) {
   const items = rows || defaultRows;
   return (
     <div className="my-8">
-      {title && <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-mint">{title}</p>}
+      {title && <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{title}</p>}
       <div className="overflow-x-auto">
         <table className="w-full min-w-[400px] border-collapse text-sm">
           <thead>

@@ -146,7 +146,7 @@ export default function CalculatorPage() {
             <ul className="mt-4 space-y-2">
               {calculator.references.map((ref) => (
                 <li key={ref.name}>
-                  <a href={ref.url} target="_blank" rel="noopener noreferrer" className="text-sm text-mint hover:underline">{ref.name}</a>
+                  <a href={ref.url} target="_blank" rel="noopener noreferrer" className="text-sm text-accent hover:underline">{ref.name}</a>
                 </li>
               ))}
             </ul>

@@ -15,7 +15,7 @@ const badgeColors = {
 };
 
 function getBadgeStyle(provider) {
-  if (provider === "OpenAI or Claude") return "border-mint/30 bg-mint/5 text-mint";
+  if (provider === "OpenAI or Claude") return "border-accent/30 bg-accent/5 text-accent";
   if (provider === "Depends on workload") return "border-slate-500/30 bg-slate-500/10 text-slate-300";
   for (const [key, val] of Object.entries(badgeColors)) {
     if (provider.includes(key)) return val;
@@ -27,7 +27,7 @@ export default function QuickRecommendations({ title, items }) {
   const list = items || defaultItems;
   return (
     <div className="my-8 rounded-xl border border-line bg-panel/60 p-6">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-mint">{title || "Quick Recommendation"}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{title || "Quick Recommendation"}</p>
       <p className="mt-2 text-sm text-slate-400">If you only have 30 seconds:</p>
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((item, i) => (

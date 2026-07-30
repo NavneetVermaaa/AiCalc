@@ -25,7 +25,7 @@ export default function BlogListPage() {
         <p className="eyebrow">Content hub</p>
         <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">Blog</h1>
         <div className="mt-6 grid gap-4 md:grid-cols-[1fr_auto]">
-          <input className="min-h-12 rounded-md border border-line bg-panel px-4 text-white outline-none focus:border-mint" placeholder="Search 100 planned articles..." value={query} onChange={(event) => setQuery(event.target.value)} />
+          <input className="min-h-12 rounded-md border border-line bg-panel px-4 text-white outline-none focus:border-accent" placeholder="Search 100 planned articles..." value={query} onChange={(event) => setQuery(event.target.value)} />
           <div className="flex flex-wrap gap-2">
             {blogCategories.map((category) => <Link key={category.id} className="button-secondary" to={`/blog/category/${category.id}`}>{category.title}</Link>)}
           </div>

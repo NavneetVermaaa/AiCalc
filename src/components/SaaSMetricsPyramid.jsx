@@ -12,7 +12,7 @@ export default function SaaSMetricsPyramid({ layers }) {
               }`}
             >
               <div className="flex items-center justify-between gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-mint">{layer.name}</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-accent">{layer.name}</span>
                 <span className="text-right text-[10px] leading-tight text-slate-500">{layer.metrics}</span>
               </div>
               {layer.description && (

@@ -40,7 +40,7 @@ export default function SearchPage() {
         <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">Search</h1>
         <div className="mt-6">
           <input
-            className="min-h-12 w-full rounded-md border border-line bg-panel px-4 text-white outline-none focus:border-mint"
+            className="min-h-12 w-full rounded-md border border-line bg-panel px-4 text-white outline-none focus:border-accent"
             placeholder="Search calculators and articles..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}

@@ -4,8 +4,8 @@ export default function Methodology({ title, approach, source, date }) {
   return (
     <div className="panel mt-6 p-5">
       <div className="flex items-center gap-2">
-        <BookOpen size={16} className="text-mint" />
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-mint">{title || "Methodology"}</p>
+        <BookOpen size={16} className="text-accent" />
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{title || "Methodology"}</p>
       </div>
       <div className="mt-4 grid gap-3 text-sm leading-6 text-slate-300">
         {source && (

@@ -1,7 +1,7 @@
 export default function MetricDependencyFlow({ title, steps }) {
   return (
     <div className="my-8 rounded-xl border border-line bg-panel/60 p-5 sm:p-6">
-      {title && <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-mint">{title}</p>}
+      {title && <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{title}</p>}
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
         {steps.map((step, i) => (
           <span key={i} className="flex items-center gap-2 sm:gap-3">
