@@ -2,6 +2,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import SEO from "../components/SEO.jsx";
 import Breadcrumbs from "../components/Breadcrumbs.jsx";
 import CalculatorTool from "../components/CalculatorTool.jsx";
+import CurrencyConverterTool from "../components/CurrencyConverterTool.jsx";
 import FAQ from "../components/FAQ.jsx";
 import CardLink from "../components/CardLink.jsx";
 import { calculatorsByCategory, getCalculator, getCategory } from "../data/calculators.js";
@@ -38,7 +39,11 @@ export default function CalculatorPage() {
         <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-300">{calculator.description}</p>
         <p className="mt-3 text-xs text-slate-500">Last updated: {calculator.lastUpdated || "July 2026"}</p>
       </section>
-      <CalculatorTool calculator={calculator} />
+      {calculator.slug === "currency-converter" ? (
+        <CurrencyConverterTool calculator={calculator} />
+      ) : (
+        <CalculatorTool calculator={calculator} />
+      )}
       <section className="container-page grid gap-6 py-10 lg:grid-cols-3">
         <article className="panel p-6 lg:col-span-2">
           {calculator.whatIsIt && (

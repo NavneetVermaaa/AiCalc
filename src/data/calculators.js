@@ -2823,7 +2823,7 @@ export const calculators = [
     ]
   },
   {
-    ...calc("currency-converter", "finance", "Currency Converter", "Convert between currencies using a static exchange rate without any API calls.", [
+    ...calc("currency-converter", "finance", "Currency Converter", "Convert between 160+ currencies instantly using live exchange rates from ExchangeRate-API.", [
       { name: "amount", label: "Amount", value: 100 },
       { name: "exchangeRate", label: "Exchange rate", value: 83.5 }
     ], (v) => {
@@ -2831,47 +2831,61 @@ export const calculators = [
       const rate = Math.max(Number(v.exchangeRate) || 0, 0);
       return rate > 0 ? amount * rate : 0;
     }, "Converted amount = amount x exchange rate", "Converted Amount", ""),
-    whatIsIt: "The Currency Converter converts an amount from one currency to another using a static exchange rate. It multiplies the base amount by the exchange rate to produce the converted value. This is useful for quick estimates when you know the current exchange rate and do not need live API data.",
-    howItWorks: "Enter the amount you want to convert and the current exchange rate. The calculator multiplies the amount by the rate to return the converted value. The exchange rate represents how much of the target currency one unit of the source currency buys.",
-    stepByStep: "Determine the amount you want to convert from your source currency. Look up the current exchange rate from a reliable source like a bank or financial website. Enter both values and the calculator returns the converted amount in the target currency.",
-    realWorldExample: "Converting USD 100 to Indian Rupees at an exchange rate of 83.5 gives Rs 8,350. If the rate changes to 84.0, the same USD 100 converts to Rs 8,400. Always use the most current rate available for accurate conversions.",
+    whatIsIt: "The Currency Converter is a free online tool that converts amounts between 160+ world currencies using live exchange rates from ExchangeRate-API. Select your source and target currencies, enter an amount, and get the exact converted value based on current market rates. The tool also shows the real-time exchange rate and the timestamp of the last rate update.",
+    howItWorks: "Select the source currency (From) and the target currency (To) from the dropdown lists. Enter the amount you want to convert. The calculator fetches the latest exchange rate from ExchangeRate-API and multiplies your amount by the rate to return the converted value. The display shows both the total converted amount and the per-unit exchange rate (1 base currency = X target currency).",
+    stepByStep: "Choose your source currency from the From dropdown. Enter the amount you wish to convert. Select your target currency from the To dropdown. The converter automatically fetches the latest rate and displays the converted amount. Use the Swap button to quickly reverse the currency pair. Rates update automatically when you change the source currency.",
+    realWorldExample: "Converting USD 100 to Indian Rupees with a live rate of 83.50 gives Rs 8,350. If the rate moves to 84.00 later in the day, the same USD 100 converts to Rs 8,400. The live rate ensures you always get the most current conversion without manually looking up exchange rates.",
     whenToUse: [
-      "Estimating the value of foreign currency before traveling",
+      "Checking real-time currency values before international travel",
       "Calculating cross-border payment amounts for online purchases",
       "Pricing products or services for international customers",
-      "Budgeting for expenses in a foreign currency"
+      "Budgeting for expenses in a foreign currency",
+      "Comparing exchange rates offered by different money transfer services",
+      "Estimating freelance or remote work payments in different currencies"
     ],
     benefits: [
-      "No API dependency means it works offline instantly",
-      "Simple and fast for quick currency estimates",
-      "Works for any currency pair with the correct exchange rate"
+      "Live exchange rates from ExchangeRate-API — no manual rate entry needed",
+      "Supports 160+ currencies from around the world",
+      "Popular currencies section for quick access to frequently used pairs",
+      "Swap button to instantly reverse the conversion direction",
+      "Always shows the last updated timestamp for rate transparency"
     ],
     commonMistakes: [
-      "Using the buy rate instead of the sell rate or vice versa",
-      "Entering the exchange rate inverted (dividing instead of multiplying)",
-      "Not accounting for currency conversion fees charged by banks or services"
+      "Confusing the buy rate and sell rate when comparing with bank quotes",
+      "Not accounting for currency conversion fees charged by banks or services",
+      "Assuming the interbank rate is the same as the retail rate offered to consumers"
     ],
     faqs: [
-      { question: "Where can I find current exchange rates?", answer: "You can find current exchange rates from Google Finance, XE.com, your bank's website, or the central bank of your country. Interbank rates differ from retail rates offered to consumers, so use the rate applicable to your transaction type." },
-      { question: "Does this calculator account for conversion fees?", answer: "No. This calculator uses the exchange rate only. Banks and money transfer services typically add a margin on top of the interbank rate. For accurate cost estimates, add any applicable fees to the amount before converting." },
-      { question: "What is the difference between buy rate and sell rate?", answer: "The buy rate is what a currency exchange service pays to buy your foreign currency. The sell rate is what they charge to sell you foreign currency. The sell rate is always higher, and the difference is how they make profit. Use the sell rate when converting your currency to a foreign one." }
+      { question: "How often are the exchange rates updated?", answer: "ExchangeRate-API updates rates once every 24 hours from reliable financial data sources. The last updated timestamp is displayed below the conversion result so you know exactly how current the rates are." },
+      { question: "Does this calculator account for conversion fees?", answer: "No. This calculator uses the interbank exchange rate only. Banks, money transfer services, and card networks typically add a margin on top of the interbank rate. For accurate cost estimates, add any applicable fees to the amount before converting." },
+      { question: "What is the difference between buy rate and sell rate?", answer: "The buy rate is what a currency exchange service pays to buy your foreign currency. The sell rate is what they charge to sell you foreign currency. The sell rate is always higher, and the difference is how they make profit. Use the sell rate when converting your currency to a foreign one." },
+      { question: "How many currencies are supported?", answer: "This converter supports over 160 currencies from around the world, including all major currencies (USD, EUR, GBP, JPY, INR, AUD, CAD, CHF, CNY, SGD) and many minor and exotic currencies. The complete list is available in the dropdown menus." },
+      { question: "Can I convert between any two currencies?", answer: "Yes. Select any supported currency as the source and any other supported currency as the target. The converter fetches the appropriate exchange rate automatically. If the source and target are the same currency, the converted amount equals the input amount." }
     ],
     keywords: [
       "currency converter",
-      "exchange rate calculator",
-      "currency conversion",
+      "live exchange rate",
+      "forex converter",
       "usd to inr",
+      "euro to dollar",
+      "pound to rupee",
+      "yen to usd",
+      "currency exchange",
       "foreign exchange",
-      "convert currency",
       "money converter",
       "fx calculator",
-      "exchange rate tool",
-      "cross currency",
-      "currency calculator",
+      "exchange rate calculator",
+      "currency conversion tool",
+      "live currency rates",
+      "currency calculator online",
+      "international money converter",
+      "cross currency calculator",
       "forex calculator",
-      "currency exchange",
-      "international money",
+      "world currencies",
       "currency converter tool"
+    ],
+    references: [
+      { name: "ExchangeRate-API Documentation", url: "https://www.exchangerate-api.com/docs" }
     ]
   },
   {
