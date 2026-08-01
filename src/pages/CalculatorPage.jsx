@@ -5,6 +5,14 @@ import CalculatorTool from "../components/CalculatorTool.jsx";
 import CurrencyConverterTool from "../components/CurrencyConverterTool.jsx";
 import FAQ from "../components/FAQ.jsx";
 import CardLink from "../components/CardLink.jsx";
+import BenchmarkTable from "../components/BenchmarkTable.jsx";
+import PracticalChecklist from "../components/PracticalChecklist.jsx";
+import AuthorBlock from "../components/AuthorBlock.jsx";
+import Methodology from "../components/Methodology.jsx";
+import OfficialSources from "../components/OfficialSources.jsx";
+import FormulaExplanation from "../components/FormulaExplanation.jsx";
+import WorkedExample from "../components/WorkedExample.jsx";
+import InterpretationCard from "../components/InterpretationCard.jsx";
 import { calculatorsByCategory, getCalculator, getCategory } from "../data/calculators.js";
 import { getInternalLinks } from "../data/internalLinks.js";
 import { breadcrumbSchema, faqSchema, webApplicationSchema } from "../utils/schema.js";
@@ -63,19 +71,47 @@ export default function CalculatorPage() {
           <h2 className="mt-8 text-2xl font-black text-white">Formula</h2>
           <p className="mt-4 rounded-md border border-line bg-ink p-4 font-mono text-sm leading-6 text-slate-300">{calculator.formula}</p>
 
-          {calculator.stepByStep && (
+          {(calculator.formulaSteps || calculator.formulaVariables) && (
             <>
-              <h2 className="mt-8 text-2xl font-black text-white">Step-by-step example</h2>
-              <p className="mt-4 leading-7 text-slate-300">{calculator.stepByStep}</p>
+              <h2 className="mt-8 text-2xl font-black text-white">How the calculation works</h2>
+              <FormulaExplanation steps={calculator.formulaSteps} variables={calculator.formulaVariables} />
             </>
           )}
 
-          {calculator.realWorldExample && (
+          {calculator.workedExample && (
             <>
-              <h2 className="mt-8 text-2xl font-black text-white">Real-world example</h2>
-              <div className="mt-4 rounded-md border border-line bg-ink p-4 leading-7 text-slate-300">
-                <p>{calculator.realWorldExample}</p>
-              </div>
+              <h2 className="mt-8 text-2xl font-black text-white">Worked example</h2>
+              <WorkedExample scenario={calculator.workedExample.scenario} inputs={calculator.workedExample.inputs} steps={calculator.workedExample.steps} result={calculator.workedExample.result} />
+            </>
+          )}
+
+          {calculator.interpretation && calculator.interpretation.levels && calculator.interpretation.levels.length > 0 && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Interpretation guide</h2>
+              <InterpretationCard title={calculator.interpretation.title} levels={calculator.interpretation.levels} />
+            </>
+          )}
+
+          {calculator.benchmarks && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Benchmarks</h2>
+              <BenchmarkTable caption={calculator.benchmarks.caption} headers={calculator.benchmarks.headers} rows={calculator.benchmarks.rows} />
+            </>
+          )}
+
+          {calculator.commonMistakes && calculator.commonMistakes.length > 0 && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Common mistakes</h2>
+              <ul className="mt-4 grid gap-3 text-slate-300">
+                {calculator.commonMistakes.map((item) => <li key={item}>- {item}</li>)}
+              </ul>
+            </>
+          )}
+
+          {calculator.practicalTips && calculator.practicalTips.length > 0 && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Practical tips</h2>
+              <PracticalChecklist title="Practical tips" items={calculator.practicalTips} />
             </>
           )}
 
@@ -97,15 +133,6 @@ export default function CalculatorPage() {
             </>
           )}
 
-          {calculator.commonMistakes && calculator.commonMistakes.length > 0 && (
-            <>
-              <h2 className="mt-8 text-2xl font-black text-white">Common mistakes</h2>
-              <ul className="mt-4 grid gap-3 text-slate-300">
-                {calculator.commonMistakes.map((item) => <li key={item}>- {item}</li>)}
-              </ul>
-            </>
-          )}
-
           {calculator.examples && calculator.examples.length > 0 && (
             <>
               <h2 className="mt-8 text-2xl font-black text-white">Examples</h2>
@@ -123,6 +150,22 @@ export default function CalculatorPage() {
               </ul>
             </>
           )}
+
+          {calculator.stepByStep && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Step-by-step example</h2>
+              <p className="mt-4 leading-7 text-slate-300">{calculator.stepByStep}</p>
+            </>
+          )}
+
+          {calculator.realWorldExample && (
+            <>
+              <h2 className="mt-8 text-2xl font-black text-white">Real-world example</h2>
+              <div className="mt-4 rounded-md border border-line bg-ink p-4 leading-7 text-slate-300">
+                <p>{calculator.realWorldExample}</p>
+              </div>
+            </>
+          )}
         </article>
         <aside className="panel h-fit p-6">
           <h2 className="text-xl font-black text-white">Internal links</h2>
@@ -135,35 +178,56 @@ export default function CalculatorPage() {
           </div>
         </aside>
       </section>
-      <section className="container-page py-10">
-        <div className="mx-auto max-w-3xl rounded-xl border border-line bg-panel p-5">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Accuracy notice</p>
-          <p className="mt-2 text-sm leading-6 text-slate-400">
-            All calculations are for informational and educational purposes only. Results are estimates based on the inputs you provide. Verify critical numbers with a qualified professional before making decisions.
-          </p>
-        </div>
-      </section>
 
-      {calculator.references && calculator.references.length > 0 && (
+      <FAQ faqs={calculator.faqs} />
+
+      {calculator.relatedGuides && calculator.relatedGuides.length > 0 && (
         <section className="container-page py-10">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="text-xl font-black text-white">References</h2>
-            <ul className="mt-4 space-y-2">
-              {calculator.references.map((ref) => (
-                <li key={ref.name}>
-                  <a href={ref.url} target="_blank" rel="noopener noreferrer" className="text-sm text-accent hover:underline">{ref.name}</a>
-                </li>
-              ))}
-            </ul>
+          <h2 className="text-2xl font-black text-white">Related guides</h2>
+          <div className="mt-5 grid gap-5 md:grid-cols-3">
+            {calculator.relatedGuides.map((guide) => (
+              <CardLink key={guide.slug} to={`/blog/${guide.slug}`} title={guide.title} meta="Guide" />
+            ))}
           </div>
         </section>
       )}
 
-      <FAQ faqs={calculator.faqs} />
       <section className="container-page py-10">
         <h2 className="text-2xl font-black text-white">Related calculators</h2>
         <div className="mt-5 grid gap-5 md:grid-cols-3">
           {related.map((item) => <CardLink key={item.slug} to={`/calculator/${item.slug}`} title={item.title} description={item.description} meta="Related" />)}
+        </div>
+      </section>
+
+      {(calculator.methodology || (calculator.references && calculator.references.length > 0)) && (
+        <section className="container-page grid gap-6 py-10 lg:grid-cols-2">
+          {calculator.methodology && (
+            <Methodology
+              title="Methodology"
+              approach={calculator.methodology.approach}
+              source={calculator.methodology.source}
+              date={calculator.methodology.date}
+              rounding={calculator.methodology.rounding}
+              units={calculator.methodology.units}
+              exclusions={calculator.methodology.exclusions}
+              limitations={calculator.methodology.limitations}
+            />
+          )}
+          {calculator.references && calculator.references.length > 0 && (
+            <OfficialSources title="Official references" sources={calculator.references} />
+          )}
+        </section>
+      )}
+
+      <section className="container-page py-10">
+        <div className="mx-auto max-w-3xl rounded-xl border border-line bg-panel p-5">
+          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Accuracy notice</p>
+          <p className="mt-2 text-sm leading-6 text-slate-400">
+            {calculator.disclaimer || "All calculations are for informational and educational purposes only. Results are estimates based on the inputs you provide. Verify critical numbers with a qualified professional before making decisions."}
+          </p>
+        </div>
+        <div className="mx-auto mt-6 max-w-3xl">
+          <AuthorBlock />
         </div>
       </section>
     </>

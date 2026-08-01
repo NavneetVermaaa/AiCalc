@@ -48,6 +48,13 @@ export const breadcrumbSchema = (items) => ({
   }))
 });
 
+const author = {
+  "@type": "Person",
+  name: "Navneet Verma",
+  jobTitle: "AI Automation Developer & Web Engineer",
+  description: "AI Automation Developer & Web Engineer specializing in AI APIs, workflow automation, SaaS tools, developer resources, and cost optimization. Builds practical calculators and technical resources that help businesses understand pricing, automation, and operational efficiency."
+};
+
 export const articleSchema = (post) => ({
   "@context": "https://schema.org",
   "@type": "Article",
@@ -55,6 +62,6 @@ export const articleSchema = (post) => ({
   description: post.description,
   datePublished: post.publishedDate || post.date,
   dateModified: post.updatedDate || post.date,
-  author: { "@type": "Person", name: post.author },
+  author,
   publisher: organization
 });

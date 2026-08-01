@@ -40,6 +40,7 @@ import KPIMatrix from "../components/KPIMatrix.jsx";
 import DashboardToolsGrid from "../components/DashboardToolsGrid.jsx";
 import FounderCaseStudies from "../components/FounderCaseStudies.jsx";
 import GlossaryTable from "../components/GlossaryTable.jsx";
+import AuthorBlock from "../components/AuthorBlock.jsx";
 import { ICON_MAP } from "../components/SectionIcons.jsx";
 import { getPost, getPublishedPosts, getPublishedPostsByCategory, getPublishedRelatedPosts } from "../data/blogs.js";
 import { calculators, calculatorsByCategory } from "../data/calculators.js";
@@ -497,6 +498,7 @@ export default function BlogPostPage() {
             {(post.updatedDate && post.updatedDate !== (post.publishedDate || post.date)) && <span className="rounded border border-accent/20 bg-accent/5 px-2 py-0.5 font-medium text-accent">Updated {new Date(post.updatedDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>}
             <span>{post.readingTime} min read</span>
           </div>
+          <AuthorBlock />
 
           {(relatedGuides.length > 0 || relatedCalcs.length > 0) && (
             <section className="mt-8 rounded-lg border border-line bg-panel/80 p-5">

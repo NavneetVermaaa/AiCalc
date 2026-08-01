@@ -17,6 +17,7 @@ const calc = (id, category, title, description, fields, compute, formula, result
 });
 
 import { categories } from "./categories.js";
+import { calculatorContent } from "./calculatorContent.js";
 export { categories };
 
 export const calculators = [
@@ -3132,6 +3133,19 @@ export const calculators = [
   }
 ];
 
-export const getCalculator = (slug) => calculators.find((item) => item.slug === slug);
+export const getCalculator = (slug) => {
+  const calculator = calculators.find((item) => item.slug === slug);
+  if (!calculator) return undefined;
+  const extra = calculatorContent[slug] || {};
+  return {
+    ...calculator,
+    ...extra,
+    faqs: [...(extra.faqs || []), ...(calculator.faqs || [])],
+    references: extra.references || calculator.references || [],
+    relatedGuides: extra.relatedGuides || (calculator.relatedGuide ? [{ slug: calculator.relatedGuide.slug, title: calculator.relatedGuide.title }] : []),
+    examples: extra.examples || calculator.examples || [],
+    useCases: extra.useCases || calculator.useCases || []
+  };
+};
 export const getCategory = (id) => categories.find((item) => item.id === id);
 export const calculatorsByCategory = (id) => calculators.filter((item) => item.category === id);
