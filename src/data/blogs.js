@@ -197,7 +197,7 @@ const article1 = {
       items: [
         { name: "CAC Calculator", description: "Compute your customer acquisition costs instantly.", to: "/calculator/cac-calculator" },
         { name: "LTV Calculator", description: "Calculate lifetime value to benchmark against your CAC.", to: "/calculator/ltv-calculator" },
-        { name: "Payback Period Calculator", description: "Measure how fast you recover acquisition costs.", to: "/calculator/cac-payback-calculator" },
+        { name: "Payback Period Calculator", description: "Measure how fast you recover acquisition costs.", to: "/calculator/payback-period-calculator" },
         { name: "Churn Rate Calculator", description: "Track churn to understand CAC payback risk.", to: "/calculator/churn-rate-calculator" },
         { name: "Revenue Growth Rate Calculator", description: "Measure growth efficiency alongside CAC.", to: "/calculator/revenue-growth-rate-calculator" }
       ]
@@ -1215,7 +1215,7 @@ const article6 = {
     {
       type: "relatedMetrics",
       items: [
-        { name: "Payback Period Calculator", description: "Measure how fast you recover acquisition costs.", to: "/calculator/cac-payback-calculator" },
+        { name: "Payback Period Calculator", description: "Measure how fast you recover acquisition costs.", to: "/calculator/payback-period-calculator" },
         { name: "CAC Calculator", description: "Compute your customer acquisition costs instantly.", to: "/calculator/cac-calculator" },
         { name: "LTV Calculator", description: "Calculate lifetime value to benchmark against your CAC.", to: "/calculator/ltv-calculator" },
         { name: "Churn Rate Calculator", description: "Track churn to understand CAC payback risk.", to: "/calculator/churn-rate-calculator" },
@@ -1228,11 +1228,11 @@ const article6 = {
     { type: "text", content: "The relationship between CAC payback period and LTV:CAC ratio evolves as a startup matures. A pre-revenue company may have no meaningful LTV:CAC ratio because it lacks enough data to calculate lifetime value, making CAC payback period the only actionable metric. As the company accumulates 12 to 24 months of retention data, LTV:CAC becomes increasingly reliable and should gradually become the primary metric for strategic decisions. The transition from prioritizing payback to prioritizing LTV:CAC is a natural evolution that mirrors the company's own transition from survival mode to growth mode where long-term planning becomes more relevant than short-term cash management." },
     {
       type: "cta",
-      slug: "cac-payback-calculator",
+      slug: "payback-period-calculator",
       title: "Calculate Your CAC Payback Period",
       description: "Enter your CAC and monthly gross profit to see exactly how many months it takes to recover every customer you acquire — segmented by channel, plan, or cohort.",
       buttonText: "Open the Payback Period Calculator",
-      to: "/calculator/cac-payback-calculator"
+      to: "/calculator/payback-period-calculator"
     },
     {
       type: "methodology",

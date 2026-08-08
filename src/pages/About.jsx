@@ -5,7 +5,7 @@ import { BRAND } from "../config/brand";
 import { calculators } from "../data/calculators.js";
 import { organizationSchema } from "../utils/schema.js";
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://calciocalc.com";
+const SITE_URL = import.meta.env.VITE_SITE_URL || "https://www.calciocalc.com";
 
 const aboutPageSchema = {
   "@context": "https://schema.org",

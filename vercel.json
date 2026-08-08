@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/blog/lifetime-value-guide", "destination": "/blog/ltv-cac-ratio-guide", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
     { "source": "/robots.txt", "destination": "/robots.txt" },
