@@ -2357,6 +2357,18 @@ const article12 = {
     },
     { type: "text", content: "For more comparisons, see the Claude API Pricing Guide: Complete Cost Breakdown for Claude Models (2026), Gemini API Pricing Guide: Complete Cost Breakdown for Google AI Models (2026), and LLM Cost Comparison Guide for head-to-head pricing across OpenAI, Claude, Gemini, and DeepSeek." },
     {
+      type: "benchmark",
+      caption: "OpenAI API Pricing vs Competitor Equivalents — per 1M Tokens (July 2026)",
+      headers: ["Tier", "OpenAI", "Anthropic Claude", "Google Gemini", "Best For"],
+      rows: [
+        ["Budget", "$0.05 / $0.40 (GPT-5 Nano)", "$1.00 / $5.00 (Haiku 4.5)", "$0.15 / $0.60 (Gemini 2.5 Flash)", "Classification, routing, extraction"],
+        ["Efficient mid", "$0.75 / $4.50 (GPT-5.4 Mini)", "$3.00 / $15.00 (Sonnet 4.6)", "$0.25 / $1.50 (Gemini 3.1 Flash)", "High-volume production chat"],
+        ["Premium", "$2.50 / $15.00 (GPT-5.4)", "$5.00 / $25.00 (Opus 4.8)", "$2.00 / $12.00 (Gemini 3.1 Pro)", "Complex reasoning and tool use"],
+        ["Cache discount", "90% on cached input (GPT-5.x)", "90% reads after 1.25x write", "75% flat on all models", "Repeated or stable prompts"],
+        ["Batch discount", "50% on async requests", "50% on async requests", "50% on async requests", "Non-realtime workloads"]
+      ]
+    },
+    {
       type: "methodology",
       approach: "This guide is based on official pricing and billing documentation, then interpreted through practical use-case analysis. The facts come from OpenAI's current pricing structure, while the recommendations come from cost-control patterns seen in real-world AI deployments.",
       source: "OpenAI official pricing page and billing help center",
@@ -2646,6 +2658,19 @@ const article13 = {
         { name: "Gemini Cost Calculator", description: "Model Google AI API costs side by side.", to: "/calculator/gemini-cost-calculator" },
         { name: "AI ROI Calculator", description: "Measure the return on your AI investment after optimizing costs.", to: "/calculator/ai-roi-calculator" },
         { name: "AI Agent Savings Calculator", description: "Estimate savings from AI agent automation.", to: "/calculator/ai-agent-savings-calculator" }
+      ]
+    },
+    {
+      type: "benchmark",
+      caption: "Claude API Pricing vs Competitor Equivalents — per 1M Tokens (July 2026)",
+      headers: ["Tier", "Anthropic Claude", "OpenAI", "Google Gemini", "Best For"],
+      rows: [
+        ["Budget", "$1.00 / $5.00 (Haiku 4.5)", "$0.05 / $0.40 (GPT-5 Nano)", "$0.15 / $0.60 (Gemini 2.5 Flash)", "High-volume classification, extraction, simple chat"],
+        ["Mid", "$3.00 / $15.00 (Sonnet 4.6)", "$0.75 / $4.50 (GPT-5.4 Mini)", "$0.25 / $1.50 (Gemini 3.1 Flash)", "Production chat, content generation"],
+        ["Premium", "$5.00 / $25.00 (Opus 4.8)", "$2.50 / $15.00 (GPT-5.4)", "$2.00 / $12.00 (Gemini 3.1 Pro)", "Complex agentic coding, enterprise work"],
+        ["Opus 4.8 Fast Mode", "$10.00 / $50.00 per 1M at 2x output speed", "—", "—", "Latency-critical agentic workloads"],
+        ["Cache discount", "90% reads after 1.25x write", "90% on cached input", "75% flat on all models", "Repeated or stable prompts"],
+        ["Batch discount", "50% on async requests", "50% on async requests", "50% on async requests", "Non-realtime workloads"]
       ]
     },
     {
@@ -3049,6 +3074,18 @@ const article14 = {
         { name: "Claude Cost Calculator", description: "Forecast Claude API spend for direct comparison.", to: "/calculator/claude-cost-calculator" },
         { name: "AI ROI Calculator", description: "Measure the return on your AI investment after optimizing costs.", to: "/calculator/ai-roi-calculator" },
         { name: "AI Agent Savings Calculator", description: "Estimate savings from AI agent automation.", to: "/calculator/ai-agent-savings-calculator" }
+      ]
+    },
+    {
+      type: "benchmark",
+      caption: "Gemini API Pricing vs Competitor Equivalents — per 1M Tokens (July 2026)",
+      headers: ["Tier", "Google Gemini", "OpenAI", "Anthropic Claude", "Best For"],
+      rows: [
+        ["Budget", "$0.15 / $0.60 (Gemini 2.5 Flash)", "$0.05 / $0.40 (GPT-5 Nano)", "$1.00 / $5.00 (Haiku 4.5)", "High-volume classification, simple chat"],
+        ["Efficient mid", "$0.25 / $1.50 (Gemini 3.1 Flash)", "$0.75 / $4.50 (GPT-5.4 Mini)", "$3.00 / $15.00 (Sonnet 4.6)", "Production chat, content generation"],
+        ["Premium", "$2.00 / $12.00 (Gemini 3.1 Pro)", "$2.50 / $15.00 (GPT-5.4)", "$5.00 / $25.00 (Opus 4.8)", "Complex reasoning, long context"],
+        ["Cache discount", "75% flat on all models, no write premium", "90% on cached input", "90% reads after 1.25x write", "Repeated or stable prompts"],
+        ["Batch discount", "50% on async requests", "50% on async requests", "50% on async requests", "Non-realtime workloads"]
       ]
     },
     {
@@ -4618,6 +4655,19 @@ const article21 = {
       description: "Run your real token volumes through the OpenAI Cost Calculator — then repeat the exercise with the Claude and Gemini cost calculators to compare providers on your exact workload, not sticker prices."
     },
     { type: "heading", content: "Methodology" },
+    {
+      type: "benchmark",
+      caption: "Provider Pricing Comparison — Representative Models by Tier (July 2026)",
+      headers: ["Tier", "OpenAI", "Anthropic Claude", "Google Gemini", "Best For"],
+      rows: [
+        ["Budget input/1M", "$0.05 (GPT-5 Nano)", "$1.00 (Haiku 4.5)", "$0.15 (2.5 Flash)", "Classification, routing, extraction"],
+        ["Mid input/1M", "$0.75 (GPT-5.4 Mini)", "$2.00 (Sonnet 5)", "$0.25 (3.1 Flash)", "Production chat, content gen"],
+        ["Premium input/1M", "$2.50 (GPT-5.4)", "$3.00 (Sonnet 4.6)", "$2.00 (3.1 Pro)", "Complex reasoning, tool use"],
+        ["Flagship input/1M", "$5.00 (GPT-5.6 Sol)", "$5.00 (Opus 4.8)", "$5.00 (3.1 Ultra)", "Frontier research, agentic tasks"],
+        ["Cache discount", "90% (GPT-5.x text)", "90% reads (after 1.25x write)", "75% flat all models", "Varies by provider"],
+        ["Batch discount", "50% all models", "50% all models", "50% all models", "Async workloads"]
+      ]
+    },
     {
       type: "methodology",
       approach: "Recommendations are based on practical workload analysis, especially around routing, caching, batch usage, output length, and long-context behavior.",
