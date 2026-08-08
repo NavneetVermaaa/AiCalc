@@ -3,7 +3,8 @@ import { calculators, categories } from "../src/data/calculators.js";
 import { blogCategories, getPublishedPosts } from "../src/data/blogs.js";
 
 const siteUrl = (process.env.VITE_SITE_URL || "https://www.calciocalc.com").replace(/\/+$/, "");
-const TODAY = new Date().toISOString().slice(0, 10);
+const now = new Date();
+const TODAY = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 
 const MONTHS = {
   january: "01", february: "02", march: "03", april: "04", may: "05", june: "06",
@@ -62,7 +63,7 @@ for (const post of getPublishedPosts()) {
   routes.push({
     path: `/blog/${post.slug}`,
     priority: "0.8",
-    lastmod: clampToToday(monthToLastmod(post.updated || post.publishedDate || post.date)) || TODAY
+    lastmod: clampToToday(monthToLastmod(post.updatedDate || post.publishedDate || post.date)) || TODAY
   });
 }
 

@@ -1687,9 +1687,9 @@ const article9 = {
   description: "Learn how SaaS businesses actually make money. Master unit economics including gross margin, CAC, LTV, churn, burn rate, and the Rule of 40. Free calculators included.",
   category: "startup-metrics",
   categoryTitle: "Startup Metrics",
-  date: "2026-08-11",
-  publishedDate: "2026-08-11",
-  updatedDate: "2026-08-11",
+  date: "2026-08-09",
+  publishedDate: "2026-08-09",
+  updatedDate: "2026-08-09",
   author: "Navneet V",
   tags: ["SaaS unit economics", "SaaS metrics", "gross margin", "CAC", "LTV", "churn", "Rule of 40", "burn rate", "startup profitability", "calculator"],
   faq: [
