@@ -86,7 +86,7 @@ ${unique.map((route) => `  <url><loc>${siteUrl}${route.path}</loc><lastmod>${rou
 writeFileSync("dist/sitemap.xml", xml);
 
 const count = (predicate) => unique.filter(predicate).length;
-console.log(`Sitemap written: ${unique.length} URLs (${unique.length - routes.length} duplicates removed if any)`);
+console.log(`Sitemap written (base: ${siteUrl}): ${unique.length} URLs (${unique.length - routes.length} duplicates removed if any)`);
 console.log(`  static: ${STATIC_ROUTES.length}`);
 console.log(`  calculator category hubs: ${categories.length}`);
 console.log(`  calculators: ${calculators.length}`);
