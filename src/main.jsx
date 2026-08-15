@@ -1,8 +1,9 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation, useParams } from "react-router-dom";
 import App from "./App.jsx";
+import { calculators } from "./data/calculators.js";
 import "./styles.css";
 
 function ScrollToTop() {
@@ -13,7 +14,10 @@ function ScrollToTop() {
 
 const Home = lazy(() => import("./pages/Home.jsx"));
 const CategoryPage = lazy(() => import("./pages/CategoryPage.jsx"));
-const CalculatorPage = lazy(() => import("./pages/CalculatorPage.jsx"));
+const CalculatorAiPage = lazy(() => import("./pages/CalculatorAiPage.jsx"));
+const CalculatorStartupPage = lazy(() => import("./pages/CalculatorStartupPage.jsx"));
+const CalculatorMarketingPage = lazy(() => import("./pages/CalculatorMarketingPage.jsx"));
+const CalculatorFinancePage = lazy(() => import("./pages/CalculatorFinancePage.jsx"));
 const BlogListPage = lazy(() => import("./pages/BlogListPage.jsx"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage.jsx"));
 const BlogCategoryPage = lazy(() => import("./pages/BlogCategoryPage.jsx"));
@@ -27,6 +31,20 @@ const Disclaimer = lazy(() => import("./pages/Disclaimer.jsx"));
 const EditorialPolicy = lazy(() => import("./pages/EditorialPolicy.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 
+const CALCULATOR_PAGES = {
+  ai: CalculatorAiPage,
+  startup: CalculatorStartupPage,
+  marketing: CalculatorMarketingPage,
+  finance: CalculatorFinancePage
+};
+
+function CalculatorRouter() {
+  const { slug } = useParams();
+  const calculator = calculators.find((item) => item.slug === slug);
+  const Page = calculator ? CALCULATOR_PAGES[calculator.category] || CalculatorFinancePage : CalculatorFinancePage;
+  return <Page />;
+}
+
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HelmetProvider>
@@ -37,7 +55,7 @@ createRoot(document.getElementById("root")).render(
             <Route element={<App />}>
               <Route index element={<Home />} />
               <Route path="calculators/:category" element={<CategoryPage />} />
-              <Route path="calculator/:slug" element={<CalculatorPage />} />
+              <Route path="calculator/:slug" element={<CalculatorRouter />} />
               <Route path="blog" element={<BlogListPage />} />
               <Route path="blog/category/:category" element={<BlogCategoryPage />} />
               <Route path="blog/:slug" element={<BlogPostPage />} />

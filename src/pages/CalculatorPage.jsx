@@ -17,10 +17,11 @@ import { calculatorsByCategory, getCalculator, getCategory } from "../data/calcu
 import { getInternalLinks } from "../data/internalLinks.js";
 import { breadcrumbSchema, faqSchema, webApplicationSchema } from "../utils/schema.js";
 
-export default function CalculatorPage() {
+export default function CalculatorPage({ prose = {} }) {
   const { slug } = useParams();
-  const calculator = getCalculator(slug);
-  if (!calculator) return <Navigate to="/404" replace />;
+  const meta = getCalculator(slug);
+  if (!meta) return <Navigate to="/404" replace />;
+  const calculator = { ...meta, ...(prose[slug] || {}) };
   const category = getCategory(calculator.category);
   const related = calculatorsByCategory(calculator.category).filter((item) => item.slug !== calculator.slug).slice(0, 3);
   const crumbs = [
