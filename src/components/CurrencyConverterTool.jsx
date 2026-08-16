@@ -5,8 +5,17 @@ import { currencies, getCurrencyFlag, popularCurrencyCodes } from "../data/curre
 const API_BASE = "https://open.er-api.com/v6/latest";
 
 const formatCurrency = (value) => {
-  if (!Number.isFinite(value)) return "0.00";
-  return value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  let safeValue = Number.isFinite(value) ? value : 0;
+  if (safeValue < 0 && safeValue > -0.005) safeValue = 0;
+  return safeValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+};
+
+const sanitizeAmount = (raw) => {
+  if (typeof raw !== "string") return "";
+  let cleaned = raw.replace(/[eE+-]/g, "").replace(/[^0-9.]/g, "");
+  const dot = cleaned.indexOf(".");
+  if (dot !== -1) cleaned = cleaned.slice(0, dot + 1) + cleaned.slice(dot + 1).replace(/\./g, "");
+  return cleaned;
 };
 
 const formatTimestamp = (dateStr) => {
@@ -262,7 +271,12 @@ export default function CurrencyConverterTool({ calculator }) {
                 min="0"
                 value={amount}
                 placeholder="100"
-                onChange={(e) => setAmount(e.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "-" || event.key === "+" || event.key === "e" || event.key === "E") {
+                    event.preventDefault();
+                  }
+                }}
+                onChange={(e) => setAmount(sanitizeAmount(e.target.value))}
               />
             </div>
           </div>

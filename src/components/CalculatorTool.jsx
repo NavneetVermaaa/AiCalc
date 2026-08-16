@@ -2,7 +2,8 @@ import { useCallback, useMemo, useState } from "react";
 import { Copy, RotateCcw, Share2 } from "lucide-react";
 
 const format = (value, unit) => {
-  const number = Number.isFinite(value) ? value : 0;
+  let number = Number.isFinite(value) ? value : 0;
+  if (number < 0 && number > -0.005) number = 0;
   if (unit === "$") return `$${number.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
   if (unit === "\u20b9" || unit === "\u00e2\u201a\u00b9") return `Rs.${number.toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
   if (unit === "%") return `${number.toLocaleString(undefined, { maximumFractionDigits: 2 })}%`;
@@ -13,6 +14,24 @@ const format = (value, unit) => {
 const displayValue = (value, unit) => {
   if (!Number.isFinite(value)) return "-";
   return format(value, unit);
+};
+
+const sanitizeInput = (raw, max) => {
+  if (typeof raw !== "string") return "";
+  let cleaned = raw.replace(/[eE+-]/g, "").replace(/[^0-9.]/g, "");
+  const dot = cleaned.indexOf(".");
+  if (dot !== -1) cleaned = cleaned.slice(0, dot + 1) + cleaned.slice(dot + 1).replace(/\./g, "");
+  if (max !== undefined && max !== null) {
+    const numeric = Number(cleaned);
+    if (Number.isFinite(numeric) && numeric > max) cleaned = String(max);
+  }
+  return cleaned;
+};
+
+const blockNegativeKeys = (event) => {
+  if (event.key === "-" || event.key === "+" || event.key === "e" || event.key === "E") {
+    event.preventDefault();
+  }
 };
 
 const resultSizeStyle = (value) => {
@@ -48,12 +67,13 @@ export default function CalculatorTool({ calculator }) {
     return calculator.compute(numeric);
   }, [calculator, exampleResult, isReady, values]);
 
-  const handleChange = useCallback((name, raw) => {
-    setValues((current) => ({ ...current, [name]: raw }));
+  const handleChange = useCallback((name, raw, max) => {
+    const cleaned = sanitizeInput(raw, max);
+    setValues((current) => ({ ...current, [name]: cleaned }));
     setTouched((current) => ({ ...current, [name]: true }));
-    if (raw === "") {
+    if (cleaned === "") {
       setErrors((current) => ({ ...current, [name]: "This field is required" }));
-    } else if (isNaN(Number(raw))) {
+    } else if (isNaN(Number(cleaned))) {
       setErrors((current) => ({ ...current, [name]: "Must be a valid number" }));
     } else {
       setErrors((current) => ({ ...current, [name]: null }));
@@ -139,7 +159,8 @@ export default function CalculatorTool({ calculator }) {
                 placeholder={String(field.value)}
                 aria-invalid={!!(touched[field.name] && errors[field.name])}
                 aria-describedby={touched[field.name] && errors[field.name] ? `${field.name}-error` : undefined}
-                onChange={(event) => handleChange(field.name, event.target.value)}
+                onKeyDown={blockNegativeKeys}
+                onChange={(event) => handleChange(field.name, event.target.value, field.max)}
               />
               {touched[field.name] && errors[field.name] && (
                 <p id={`${field.name}-error`} className="mt-1 text-xs text-red-300" role="alert">

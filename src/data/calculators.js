@@ -1597,7 +1597,8 @@ export const calculators = [
   {
     "name": "taxPercent",
     "label": "Tax percentage (%)",
-    "value": 20
+    "value": 20,
+    "max": 100
   },
   {
     "name": "bonus",
@@ -1607,7 +1608,7 @@ export const calculators = [
 ],
     "compute": (v) => {
       const annualSalary = Math.max(Number(v.annualSalary) || 0, 0);
-      const taxPercent = Math.max(Number(v.taxPercent) || 0, 0);
+      const taxPercent = Math.min(Math.max(Number(v.taxPercent) || 0, 0), 100);
       const bonus = Math.max(Number(v.bonus) || 0, 0);
       const grossMonthly = annualSalary / 12;
       const annualGross = annualSalary + bonus;
@@ -1728,12 +1729,13 @@ export const calculators = [
   {
     "name": "discountPercent",
     "label": "Discount (%)",
-    "value": 20
+    "value": 20,
+    "max": 100
   }
 ],
     "compute": (v) => {
       const price = Math.max(Number(v.price) || 0, 0);
-      const discountPercent = Math.max(Number(v.discountPercent) || 0, 0);
+      const discountPercent = Math.min(Math.max(Number(v.discountPercent) || 0, 0), 100);
       const discountAmount = (price * discountPercent) / 100;
       const finalPrice = price - discountAmount;
       return {
