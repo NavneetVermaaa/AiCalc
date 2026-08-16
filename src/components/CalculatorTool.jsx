@@ -15,6 +15,14 @@ const displayValue = (value, unit) => {
   return format(value, unit);
 };
 
+const resultSizeStyle = (value) => {
+  const length = String(value).length;
+  if (length >= 19) return { fontSize: "clamp(1.125rem, 5cqw, 1.5rem)" };
+  if (length >= 15) return { fontSize: "clamp(1.125rem, 6cqw, 1.75rem)" };
+  if (length >= 12) return { fontSize: "clamp(1.125rem, 7cqw, 2.25rem)" };
+  return { fontSize: "clamp(1.125rem, 9cqw, 3rem)" };
+};
+
 export default function CalculatorTool({ calculator }) {
   const getInitial = () => Object.fromEntries(calculator.fields.map((field) => [field.name, ""]));
   const getExampleValues = () => Object.fromEntries(calculator.fields.map((field) => [field.name, field.value]));
@@ -151,9 +159,9 @@ export default function CalculatorTool({ calculator }) {
         {calculator.results ? (
           <div className="grid gap-4 sm:grid-cols-2">
             {calculator.results.map((r) => (
-              <div key={r.key} className="rounded-lg border border-line bg-ink p-5 sm:p-6">
+              <div key={r.key} className="result-box rounded-lg border border-line bg-ink p-5 sm:p-6">
                 <p className="eyebrow">{r.label}</p>
-                <p className={`mt-4 text-5xl font-black ${isReady ? "text-white" : "text-slate-400"}`} aria-live="polite">
+                <p className={`mt-4 result-value font-black ${isReady ? "text-white" : "text-slate-400"}`} style={resultSizeStyle(displayValue(result[r.key], r.unit))} aria-live="polite">
                   <span className="sr-only">{isReady ? "Calculated result: " : "Example result: "}</span>
                   {displayValue(result[r.key], r.unit)}
                 </p>
@@ -161,9 +169,9 @@ export default function CalculatorTool({ calculator }) {
             ))}
           </div>
         ) : (
-          <div>
+          <div className="result-box min-w-0">
             <p className="eyebrow">{calculator.resultLabel}</p>
-            <p className={`mt-4 text-5xl font-black ${isReady ? "text-white" : "text-slate-400"}`} aria-live="polite">
+            <p className={`mt-4 result-value font-black ${isReady ? "text-white" : "text-slate-400"}`} style={resultSizeStyle(displayValue(result, calculator.unit))} aria-live="polite">
               <span className="sr-only">{isReady ? "Calculated result: " : "Example result: "}</span>
               {displayValue(result, calculator.unit)}
             </p>

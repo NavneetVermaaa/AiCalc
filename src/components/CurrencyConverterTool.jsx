@@ -310,9 +310,9 @@ export default function CurrencyConverterTool({ calculator }) {
                 Enter an amount to see the live conversion.
               </p>
             )}
-            <div>
+            <div className="result-box min-w-0">
               <p className="eyebrow">Converted Amount</p>
-              <p className={`mt-4 break-all text-5xl font-black leading-tight ${isReady ? "text-white" : "text-slate-400"}`} aria-live="polite">
+              <p className={`mt-4 result-value font-black ${isReady ? "text-white" : "text-slate-400"}`} aria-live="polite">
                 <span className="sr-only">{isReady ? "Calculated result: " : "Example result: "}</span>
                 {formattedResult} {toFlag && <span aria-hidden="true">{toFlag}</span>} {toCurrency}
               </p>
