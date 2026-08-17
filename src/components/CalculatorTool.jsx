@@ -1,19 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
 import { Copy, RotateCcw, Share2 } from "lucide-react";
-
-const format = (value, unit) => {
-  let number = Number.isFinite(value) ? value : 0;
-  if (number < 0 && number > -0.005) number = 0;
-  if (unit === "$") return `$${number.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-  if (unit === "\u20b9" || unit === "\u00e2\u201a\u00b9") return `Rs.${number.toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
-  if (unit === "%") return `${number.toLocaleString(undefined, { maximumFractionDigits: 2 })}%`;
-  if (unit === "x") return `${number.toLocaleString(undefined, { maximumFractionDigits: 2 })}x`;
-  return `${number.toLocaleString(undefined, { maximumFractionDigits: 2 })}${unit || ""}`;
-};
+import { formatValue } from "../utils/format.js";
 
 const displayValue = (value, unit) => {
-  if (!Number.isFinite(value)) return "-";
-  return format(value, unit);
+  if (!Number.isFinite(value)) return { display: "-", exact: "-", compacted: false };
+  return formatValue(value, unit);
 };
 
 const sanitizeInput = (raw, max) => {
@@ -92,9 +83,9 @@ export default function CalculatorTool({ calculator }) {
   const handleCopy = async () => {
     let text;
     if (calculator.results) {
-      text = `${calculator.title}: ${calculator.results.map((r) => `${r.label}: ${displayValue(result[r.key], r.unit)}`).join(" | ")}`;
+      text = `${calculator.title}: ${calculator.results.map((r) => `${r.label}: ${displayValue(result[r.key], r.unit).exact}`).join(" | ")}`;
     } else {
-      text = `${calculator.title}: ${displayValue(result, calculator.unit)}`;
+      text = `${calculator.title}: ${displayValue(result, calculator.unit).exact}`;
     }
     try {
       await navigator.clipboard.writeText(text);
@@ -179,25 +170,37 @@ export default function CalculatorTool({ calculator }) {
         )}
         {calculator.results ? (
           <div className="grid gap-4 sm:grid-cols-2">
-            {calculator.results.map((r) => (
-              <div key={r.key} className="result-box rounded-lg border border-line bg-ink p-5 sm:p-6">
-                <p className="eyebrow">{r.label}</p>
-                <p className={`mt-4 result-value font-black ${isReady ? "text-white" : "text-slate-400"}`} style={resultSizeStyle(displayValue(result[r.key], r.unit))} aria-live="polite">
-                  <span className="sr-only">{isReady ? "Calculated result: " : "Example result: "}</span>
-                  {displayValue(result[r.key], r.unit)}
-                </p>
-              </div>
-            ))}
+            {calculator.results.map((r) => {
+              const formatted = displayValue(result[r.key], r.unit);
+              return (
+                <div key={r.key} className="result-box rounded-lg border border-line bg-ink p-5 sm:p-6">
+                  <p className="eyebrow">{r.label}</p>
+                  <p className={`mt-4 result-value font-black ${isReady ? "text-white" : "text-slate-400"}`} style={resultSizeStyle(formatted.display)} title={formatted.compacted ? formatted.exact : undefined} aria-live="polite">
+                    <span className="sr-only">{isReady ? "Calculated result: " : "Example result: "}</span>
+                    {formatted.display}
+                  </p>
+                  {formatted.compacted && (
+                    <p className="result-exact mt-1.5 text-sm text-slate-400">Exact value: {formatted.exact}</p>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        ) : (
-          <div className="result-box min-w-0">
-            <p className="eyebrow">{calculator.resultLabel}</p>
-            <p className={`mt-4 result-value font-black ${isReady ? "text-white" : "text-slate-400"}`} style={resultSizeStyle(displayValue(result, calculator.unit))} aria-live="polite">
-              <span className="sr-only">{isReady ? "Calculated result: " : "Example result: "}</span>
-              {displayValue(result, calculator.unit)}
-            </p>
-          </div>
-        )}
+        ) : (() => {
+          const formatted = displayValue(result, calculator.unit);
+          return (
+            <div className="result-box min-w-0">
+              <p className="eyebrow">{calculator.resultLabel}</p>
+              <p className={`mt-4 result-value font-black ${isReady ? "text-white" : "text-slate-400"}`} style={resultSizeStyle(formatted.display)} title={formatted.compacted ? formatted.exact : undefined} aria-live="polite">
+                <span className="sr-only">{isReady ? "Calculated result: " : "Example result: "}</span>
+                {formatted.display}
+              </p>
+              {formatted.compacted && (
+                <p className="result-exact mt-1.5 text-sm text-slate-400">Exact value: {formatted.exact}</p>
+              )}
+            </div>
+          );
+        })()}
         <div className="mt-4 flex flex-wrap gap-2">
           <button
             onClick={handleCopy}

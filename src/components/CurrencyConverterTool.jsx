@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeftRight, Copy, RotateCcw, Share2 } from "lucide-react";
 import { currencies, getCurrencyFlag, popularCurrencyCodes } from "../data/currencies.js";
+import { getCompactScale } from "../utils/format.js";
 
 const API_BASE = "https://open.er-api.com/v6/latest";
 
@@ -233,6 +234,8 @@ export default function CurrencyConverterTool({ calculator }) {
   const formattedRate = exchangeRate !== null ? formatCurrency(exchangeRate) : "—";
   const formattedReverse = reverseRate !== null ? formatCurrency(reverseRate) : "—";
   const formattedResult = convertedAmount !== null ? formatCurrency(convertedAmount) : "—";
+  const compactScale = convertedAmount !== null ? getCompactScale(convertedAmount, toCurrency === "INR") : null;
+  const compactResult = compactScale ? `${compactScale.text}${compactScale.suffix}` : null;
   const fromFlag = getCurrencyFlag(fromCurrency);
   const toFlag = getCurrencyFlag(toCurrency);
 
@@ -326,10 +329,13 @@ export default function CurrencyConverterTool({ calculator }) {
             )}
             <div className="result-box min-w-0">
               <p className="eyebrow">Converted Amount</p>
-              <p className={`mt-4 result-value font-black ${isReady ? "text-white" : "text-slate-400"}`} aria-live="polite">
+              <p className={`mt-4 result-value font-black ${isReady ? "text-white" : "text-slate-400"}`} title={compactScale ? formattedResult : undefined} aria-live="polite">
                 <span className="sr-only">{isReady ? "Calculated result: " : "Example result: "}</span>
-                {formattedResult} {toFlag && <span aria-hidden="true">{toFlag}</span>} {toCurrency}
+                {compactResult || formattedResult} {toFlag && <span aria-hidden="true">{toFlag}</span>} {toCurrency}
               </p>
+              {compactResult && (
+                <p className="result-exact mt-1.5 text-sm text-slate-400">Exact value: {formattedResult}</p>
+              )}
             </div>
             {exchangeRate !== null && (
               <div className="mt-4 space-y-1">
