@@ -370,6 +370,65 @@ const sectionRenderers = {
       </figure>
     );
   },
+  cacCostDiagram(s, i) {
+    return (
+      <figure key={i} className="cac-diagram my-8 flex justify-center">
+        <svg width="100%" viewBox="0 0 680 380" role="img" className="max-w-xl">
+          <title>Fully-loaded CAC vs simple CAC</title>
+          <desc>Diagram showing ad spend, creative production, software, and agency fees combining into fully-loaded CAC at $100 per customer, compared against simple CAC using ad spend alone at $80 per customer.</desc>
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </marker>
+          </defs>
+
+          <g className="node c-gray">
+            <rect x="50" y="40" width="130" height="56" rx="8" strokeWidth="0.5"/>
+            <text className="th" x="115" y="58" textAnchor="middle">Ad spend</text>
+            <text className="ts" x="115" y="76" textAnchor="middle">$40,000</text>
+          </g>
+          <g className="node c-gray">
+            <rect x="200" y="40" width="130" height="56" rx="8" strokeWidth="0.5"/>
+            <text className="th" x="265" y="58" textAnchor="middle">Creative</text>
+            <text className="ts" x="265" y="76" textAnchor="middle">$5,000</text>
+          </g>
+          <g className="node c-gray">
+            <rect x="350" y="40" width="130" height="56" rx="8" strokeWidth="0.5"/>
+            <text className="th" x="415" y="58" textAnchor="middle">Software</text>
+            <text className="ts" x="415" y="76" textAnchor="middle">$3,000</text>
+          </g>
+          <g className="node c-gray">
+            <rect x="500" y="40" width="130" height="56" rx="8" strokeWidth="0.5"/>
+            <text className="th" x="565" y="58" textAnchor="middle">Agency fees</text>
+            <text className="ts" x="565" y="76" textAnchor="middle">$2,000</text>
+          </g>
+
+          <line x1="115" y1="96" x2="115" y2="150" stroke="var(--t)" strokeWidth="0.5" opacity="0.4"/>
+          <line x1="265" y1="96" x2="265" y2="150" stroke="var(--t)" strokeWidth="0.5" opacity="0.4"/>
+          <line x1="415" y1="96" x2="415" y2="150" stroke="var(--t)" strokeWidth="0.5" opacity="0.4"/>
+          <line x1="565" y1="96" x2="565" y2="150" stroke="var(--t)" strokeWidth="0.5" opacity="0.4"/>
+          <line x1="115" y1="150" x2="565" y2="150" stroke="var(--t)" strokeWidth="0.5" opacity="0.4"/>
+          <line x1="340" y1="150" x2="340" y2="178" className="arr" markerEnd="url(#arrow)"/>
+
+          <g className="node c-teal">
+            <rect x="240" y="180" width="200" height="56" rx="8" strokeWidth="0.5"/>
+            <text className="th" x="340" y="198" textAnchor="middle">Fully-loaded CAC</text>
+            <text className="ts" x="340" y="216" textAnchor="middle">$50,000 \u00F7 500 = $100</text>
+          </g>
+
+          <path d="M115 96 L115 260 L340 260 L340 278" fill="none" className="leader" markerEnd="url(#arrow)"/>
+
+          <g className="node c-amber">
+            <rect x="240" y="280" width="200" height="56" rx="8" strokeWidth="0.5"/>
+            <text className="th" x="340" y="298" textAnchor="middle">Simple CAC</text>
+            <text className="ts" x="340" y="316" textAnchor="middle">$40,000 \u00F7 500 = $80</text>
+          </g>
+
+          <text className="ts" x="40" y="355" textAnchor="start">teal = full cost basis \u00B7 amber = ad spend only (understates true cost)</text>
+        </svg>
+      </figure>
+    );
+  },
   saasMetricsPyramid(s, i) {
     return <SaaSMetricsPyramid key={i} layers={s.layers} />;
   },

@@ -57,3 +57,41 @@ a {
     @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-line bg-ink px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-ink;
   }
 }
+
+.cac-diagram {
+  --t: #94a3b8;
+}
+
+.cac-diagram .node rect {
+  fill: rgba(148, 163, 184, 0.08);
+  stroke-width: 1;
+}
+
+.cac-diagram .c-gray rect {
+  stroke: #64748b;
+}
+
+.cac-diagram .c-teal rect {
+  stroke: #52f0b8;
+}
+
+.cac-diagram .c-amber rect {
+  stroke: #d97757;
+}
+
+.cac-diagram .th {
+  fill: #e2e8f0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cac-diagram .ts {
+  fill: #94a3b8;
+  font-size: 11px;
+}
+
+.cac-diagram .arr,
+.cac-diagram .leader {
+  stroke: #52f0b8;
+  stroke-width: 1.5;
+}
